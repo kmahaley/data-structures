@@ -34,6 +34,7 @@ public class DependencyService {
 
 //        StringUtilities.getDuplicateInArrayWindow(DataUtilities.getIntegerArray(), 4);
 //        StringUtilities.isStringUnique(DataUtilities.getString());
-        StringUtilities.stringURLify("Mr John Smith apple banana",26);
+//        StringUtilities.stringURLify("Mr John Smith apple banana     ",26);
+        StringUtilities.isPermutationPalindrome("apaa");
     }
 }

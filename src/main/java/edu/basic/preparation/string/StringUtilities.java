@@ -118,6 +118,33 @@ public final class StringUtilities {
             }
         }
         System.out.println(new String(finalArray));
+
+    }
+
+
+    /**
+     * Permutation of string is palindrome or not
+     *
+     * @param str String value
+     */
+    public static void isPermutationPalindrome(String str){
+
+        Map<Character, Integer> map = new HashMap<>();
+        for(int i =0;i< str.length();i++){
+            if(map.containsKey(str.charAt(i))){
+                map.put(str.charAt(i),map.get(str.charAt(i))+1);
+            } else {
+                map.put(str.charAt(i),1);
+            }
+        }
+
+        System.out.println(map);
+        int count =0;
+        for (Map.Entry<Character, Integer> entry : map.entrySet()){
+            if(entry.getValue()%2 ==1)
+                count++;
+        }
+        System.out.println("permutation of string is palindrome : "+ (count<=1));
     }
 }
 
