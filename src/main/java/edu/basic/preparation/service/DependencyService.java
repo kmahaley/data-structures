@@ -1,6 +1,5 @@
 package edu.basic.preparation.service;
 
-import edu.basic.preparation.data.DataUtilities;
 import edu.basic.preparation.data.Node;
 import edu.basic.preparation.list.MyList;
 import edu.basic.preparation.string.StringUtilities;
@@ -34,6 +33,7 @@ public class DependencyService {
     public void stringFunctionality(){
 
 //        StringUtilities.getDuplicateInArrayWindow(DataUtilities.getIntegerArray(), 4);
-        StringUtilities.isStringUnique(DataUtilities.getString());
+//        StringUtilities.isStringUnique(DataUtilities.getString());
+        StringUtilities.stringURLify("Mr John Smith apple banana",26);
     }
 }

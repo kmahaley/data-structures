@@ -39,14 +39,17 @@ public final class StringUtilities {
     /**
      * Is string unique without any data structures
      *
-     * @param str
+     * @param str string
      */
     public static void isStringUnique(String str) {
-
+        str ="appl";
+        boolean isUnique = true;
         final char[] chars = str.toCharArray();
+
+        //Method 1
         Arrays.sort(chars);
         int k = 0;
-        boolean isUnique = true;
+
         for (int i = 1; i < str.length(); i++) {
             if (chars[k] != chars[i]) {
                 k++;
@@ -55,11 +58,66 @@ public final class StringUtilities {
                 break;
             }
         }
+
+        //Method 2
+//        int[] intArray = new int[128];
+//        for (char ch : chars) {
+//            intArray[(int) ch]++;
+//        }
+//        for (int i = 0; i < intArray.length; i++) {
+//            if (intArray[i] > 1) {
+//                isUnique = false;
+//            }
+//        }
+
         if (isUnique) {
             System.out.println("String has unique characters");
         } else {
             System.out.println("String has no unique characters");
         }
+
+    }
+
+
+    /**
+     * Make string urlify for eg. "Mr John Smith apple banana" -> "Mr%20John%20Smith%20apple%20banana"
+     * @param str string
+     * @param trueLength actual string length
+     */
+    public static void stringURLify(String str, int trueLength) {
+        final int length = str.length();
+        final char[] charArray = str.toCharArray();
+        int spaceCounter = 0;
+        //count spaces
+        for (int i = 0; i < length; i++) {
+            if (charArray[i] == ' ') {
+                spaceCounter++;
+            }
+        }
+        //remove trailing spaces
+        for (int i = length - 1; i >= trueLength; i--) {
+            if (charArray[i] == ' ') {
+                spaceCounter--;
+            }
+        }
+        System.out.println("no of space : " + spaceCounter);
+        //final array size
+        int finalLength = trueLength + spaceCounter * 2;
+        char[] finalArray = new char[finalLength];
+
+        finalLength = finalLength - 1;
+        for (int i = trueLength - 1; i >= 0; i--) {
+            if (charArray[i] == ' ') {
+                finalArray[finalLength] = '0';
+                finalArray[finalLength - 1] = '2';
+                finalArray[finalLength - 2] = '%';
+                finalLength = finalLength - 3;
+            } else {
+                finalArray[finalLength] = charArray[i];
+                finalLength--;
+            }
+        }
+        System.out.println(new String(finalArray));
     }
 }
 
