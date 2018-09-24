@@ -1,7 +1,11 @@
 package edu.basic.preparation.service;
 
+import static edu.basic.preparation.data.DataUtilities.getDuplicatedElementList;
+import static edu.basic.preparation.data.DataUtilities.getListForBasicOperation;
 import edu.basic.preparation.data.Node;
 import edu.basic.preparation.list.MyList;
+import static edu.basic.preparation.list.MyList.printFromNode;
+import static edu.basic.preparation.list.MyList.removeDuplicates;
 import edu.basic.preparation.string.StringUtilities;
 import org.springframework.stereotype.Service;
 
@@ -11,23 +15,27 @@ import org.springframework.stereotype.Service;
 @Service
 public class DependencyService {
 
-    public void list(){
-        MyList myList = new MyList();
-        myList.add(10);
-        myList.add(40);
-        myList.add(70);
-        myList.add(90);
-        myList.addAtFront(5);
-        myList.addInMiddle(75,4);
-        myList.add(10);
-        myList.add(10);
-        myList.print();
-//        final Node reverseHead = myList.reverse();
-//        myList.print(reverseHead);
-//        myList.delete(10);
-//        myList.print();
-        final Node middleElement = myList.middleElement();
+    public void listFunctionality(){
+        final MyList listForBasicOperation = getListForBasicOperation();
+        System.out.println("********* basic list operation ***********");
+        listForBasicOperation.print();
+
+        final Node middleElement = listForBasicOperation.middleElement();
         System.out.println("Middle : "+ middleElement.getKey());
+
+        System.out.println("********* delete list node operation ***********");
+        listForBasicOperation.delete(10);
+        listForBasicOperation.print();
+
+        System.out.println("********* reverse list operation ***********");
+        final Node reverseHead = listForBasicOperation.reverse();
+        printFromNode(reverseHead);
+
+        System.out.println("********* remove duplicate elements *******");
+        final MyList duplicatedElementList = getDuplicatedElementList();
+        System.out.print("original list : ");
+        printFromNode(duplicatedElementList.getHead());
+        removeDuplicates(duplicatedElementList.getHead());
     }
 
     public void stringFunctionality(){

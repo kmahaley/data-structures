@@ -76,7 +76,7 @@ public class MyList {
         System.out.println();
     }
 
-    public void print(Node start){
+    public static void printFromNode(Node start){
         Node current = start;
         while(current != null){
             System.out.print(current.getKey()+" - ");
@@ -118,5 +118,24 @@ public class MyList {
             }
             return slow;
         }
+    }
+
+    public static void removeDuplicates(Node head){
+        if(head == null)
+            return;
+        Node prev = head, current = head.getNext();
+        Node next = null;
+        while (current != null){
+            if(prev.getKey() == current.getKey()){
+                next = current.getNext();
+                current.setNext(null);
+                current = next;
+                prev.setNext(current);
+            } else {
+                prev = prev.getNext();
+                current = current.getNext();
+            }
+        }
+        printFromNode(head);
     }
 }
