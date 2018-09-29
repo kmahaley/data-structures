@@ -2,8 +2,10 @@ package edu.basic.preparation.service;
 
 import static edu.basic.preparation.data.DataUtilities.getDuplicatedElementList;
 import static edu.basic.preparation.data.DataUtilities.getListForBasicOperation;
+import static edu.basic.preparation.data.DataUtilities.getTwoIntersectedList;
 import edu.basic.preparation.data.Node;
 import edu.basic.preparation.list.MyList;
+import static edu.basic.preparation.list.MyList.findIntersectedNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.list.MyList.removeDuplicates;
 import edu.basic.preparation.string.StringUtilities;
@@ -36,6 +38,10 @@ public class DependencyService {
         System.out.print("original list : ");
         printFromNode(duplicatedElementList.getHead());
         removeDuplicates(duplicatedElementList.getHead());
+
+        System.out.println("********* find intersected node from list *******");
+        Node intersection = findIntersectedNode(getTwoIntersectedList());
+        printFromNode(intersection);
     }
 
     public void stringFunctionality(){

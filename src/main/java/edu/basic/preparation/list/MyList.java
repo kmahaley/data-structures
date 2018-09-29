@@ -1,5 +1,7 @@
 package edu.basic.preparation.list;
 
+import java.util.List;
+
 import edu.basic.preparation.data.Node;
 import lombok.Data;
 
@@ -137,5 +139,44 @@ public class MyList {
             }
         }
         printFromNode(head);
+    }
+
+
+    public static Node findIntersectedNode(List<Node> twoIntersectedList) {
+        Node big = twoIntersectedList.get(0), small = twoIntersectedList.get(1);
+        int lengthOne = length(big);
+        int lengthTwo = length(small);
+
+
+        int diff = lengthOne - lengthTwo;
+        if(diff < 0) {
+            big = twoIntersectedList.get(1);
+            small = twoIntersectedList.get(0);
+        }
+        for(int i=1; i <= Math.abs(diff); i++){
+            big = big.getNext();
+        }
+
+        while (big != null && small != null){
+            if(big == small){
+                return big;
+            }
+            small = small.getNext();
+            big = big.getNext();
+        }
+
+        return null;
+    }
+
+    public static int length(Node temp){
+        if(temp == null)
+            return 0;
+        int count = 1;
+        while (temp.getNext() != null) {
+            temp = temp.getNext();
+            count++;
+
+        }
+        return count;
     }
 }

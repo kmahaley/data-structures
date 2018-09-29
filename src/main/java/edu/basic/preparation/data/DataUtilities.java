@@ -1,5 +1,8 @@
 package edu.basic.preparation.data;
 
+import java.util.Arrays;
+import java.util.List;
+
 import edu.basic.preparation.list.MyList;
 
 /**
@@ -39,5 +42,25 @@ public final class DataUtilities {
         myList.add(10);
         myList.add(10);
         return myList;
+    }
+
+    public static List<Node> getTwoIntersectedList(){
+        Node intersected = new Node(50);
+        intersected.setNext(new Node(60));
+        intersected.getNext().setNext(new Node(70));
+        intersected.getNext().getNext().setNext(new Node(80));
+
+        MyList myList1 = new MyList();
+        myList1.setHead(new Node(1));
+        myList1.getHead().setNext(new Node(4));
+        myList1.getHead().getNext().setNext(new Node(12));
+        myList1.getHead().getNext().getNext().setNext(new Node(7));
+        myList1.getHead().getNext().getNext().getNext().setNext(intersected);
+
+        MyList myList2 = new MyList();
+        myList2.setHead(new Node(41));
+        myList2.getHead().setNext(intersected);
+
+        return Arrays.asList(myList1.getHead(), myList2.getHead());
     }
 }
