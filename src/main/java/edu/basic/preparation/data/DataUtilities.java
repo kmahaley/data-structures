@@ -59,8 +59,18 @@ public final class DataUtilities {
 
         MyList myList2 = new MyList();
         myList2.setHead(new Node(41));
-        myList2.getHead().setNext(intersected);
+        myList2.getHead().setNext(new Node(100));
 
         return Arrays.asList(myList1.getHead(), myList2.getHead());
+    }
+
+    public static  Node getListForPairwiseSwap(){
+        MyList myList = new MyList();
+        myList.add(1);
+        myList.add(2);
+        myList.add(3);
+        myList.add(4);
+        myList.add(5);
+        return myList.getHead();
     }
 }

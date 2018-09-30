@@ -141,7 +141,6 @@ public class MyList {
         printFromNode(head);
     }
 
-
     public static Node findIntersectedNode(List<Node> twoIntersectedList) {
         Node big = twoIntersectedList.get(0), small = twoIntersectedList.get(1);
         int lengthOne = length(big);
@@ -178,5 +177,19 @@ public class MyList {
 
         }
         return count;
+    }
+
+    public static Node reverseListInPairs(Node head) {
+        if(head == null)
+            return null;
+        Node temp = head;
+
+        while (temp != null && temp.getNext() !=null){
+            int k = temp.getKey();
+            temp.setKey(temp.getNext().getKey());
+            temp.getNext().setKey(k);
+            temp = temp.getNext().getNext();
+        }
+        return head;
     }
 }

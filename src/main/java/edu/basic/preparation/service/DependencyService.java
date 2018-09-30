@@ -2,12 +2,14 @@ package edu.basic.preparation.service;
 
 import static edu.basic.preparation.data.DataUtilities.getDuplicatedElementList;
 import static edu.basic.preparation.data.DataUtilities.getListForBasicOperation;
+import static edu.basic.preparation.data.DataUtilities.getListForPairwiseSwap;
 import static edu.basic.preparation.data.DataUtilities.getTwoIntersectedList;
 import edu.basic.preparation.data.Node;
 import edu.basic.preparation.list.MyList;
 import static edu.basic.preparation.list.MyList.findIntersectedNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.list.MyList.removeDuplicates;
+import static edu.basic.preparation.list.MyList.reverseListInPairs;
 import edu.basic.preparation.string.StringUtilities;
 import org.springframework.stereotype.Service;
 
@@ -41,7 +43,17 @@ public class DependencyService {
 
         System.out.println("********* find intersected node from list *******");
         Node intersection = findIntersectedNode(getTwoIntersectedList());
-        printFromNode(intersection);
+        if (intersection == null) {
+            System.out.println("No intersecting node");
+        } else {
+            printFromNode(intersection);
+        }
+
+        System.out.println("********* pairwise swap of node in list *******");
+        final Node listForPairwiseSwap = getListForPairwiseSwap();
+        printFromNode(listForPairwiseSwap);
+        final Node pairwiseSwapNode = reverseListInPairs(listForPairwiseSwap);
+        printFromNode(pairwiseSwapNode);
     }
 
     public void stringFunctionality(){
