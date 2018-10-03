@@ -61,9 +61,9 @@ public class MyStack {
         int size = a.length;
         Stack<Integer> stack = new Stack<>();
 
-        for (int i = 0; i < size; i++) {
+        for (int current : a) {
 
-            while (!stack.isEmpty() && stack.peek() >= a[i]) {
+            while (!stack.isEmpty() && stack.peek() >= current) {
                 stack.pop();
             }
 
@@ -73,7 +73,59 @@ public class MyStack {
                 System.out.print(stack.peek() + " ");
             }
 
+            stack.push(current);
+        }
+        System.out.println();
+    }
+
+    /**
+     * Find next smallest number
+     * example {1, 3, 0, 2, 5}
+     * ANS => 1->0, 3->0, 0->-1 ...
+     *
+     * @param a array
+     */
+    public static void nextSmallestElement(int a[]) {
+        int length = a.length;
+        Stack<Integer> stack = new Stack<>();
+
+        stack.push(a[0]);
+        for (int i = 1; i < length; i++) {
+
+            while (!stack.isEmpty() && stack.peek() >= a[i]) {
+                System.out.print(stack.pop() + " -> " + a[i]+", ");
+            }
+
             stack.push(a[i]);
+        }
+        while (!stack.isEmpty()){
+            System.out.print(stack.pop() +" -> -1, ");
+        }
+        System.out.println();
+    }
+
+    /**
+     * Find next smallest number
+     * example {1, 3, 0, 2, 5}
+     * ANS => 1->3, 3->5, 0->-2 ...
+     *
+     * @param a array
+     */
+    public static void nextGreatestElement(int a[]) {
+        int length = a.length;
+        Stack<Integer> stack = new Stack<>();
+
+        stack.push(a[0]);
+        for (int i = 1; i < length; i++) {
+
+            while (!stack.isEmpty() && stack.peek() <= a[i]) {
+                System.out.print(stack.pop() + " -> " + a[i]+", ");
+            }
+
+            stack.push(a[i]);
+        }
+        while (!stack.isEmpty()){
+            System.out.print(stack.pop() +" -> -1, ");
         }
         System.out.println();
     }

@@ -15,6 +15,8 @@ import static edu.basic.preparation.list.MyList.removeDuplicates;
 import static edu.basic.preparation.list.MyList.reverseListInPairs;
 import edu.basic.preparation.queue.MyQueue;
 import static edu.basic.preparation.stack.MyStack.nearestSmallerNumberOnLeft;
+import static edu.basic.preparation.stack.MyStack.nextGreatestElement;
+import static edu.basic.preparation.stack.MyStack.nextSmallestElement;
 import edu.basic.preparation.string.StringUtilities;
 import org.springframework.stereotype.Service;
 
@@ -97,6 +99,14 @@ public class DependencyService {
 //        System.out.println(stackUsingTwoQueue.toString());
 //        System.out.println(stackUsingTwoQueue.pop() +" - "+stackUsingTwoQueue.pop());
 
-        nearestSmallerNumberOnLeft(nearestSmallerNumberOnLeftData());
+        final int[] input = nearestSmallerNumberOnLeftData();
+
+        System.out.println("Input array : "+Arrays.toString(input));
+        System.out.println("********* nearest smaller number on left *******");
+        nearestSmallerNumberOnLeft(input);
+        System.out.println("********* next nearest smaller number *******");
+        nextSmallestElement(input);
+        System.out.println("********* next nearest greater number *******");
+        nextGreatestElement(input);
     }
 }
