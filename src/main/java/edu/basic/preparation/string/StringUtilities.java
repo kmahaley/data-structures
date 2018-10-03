@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author km185223
+ * @author Kartik Mahaley
  */
 public final class StringUtilities {
 

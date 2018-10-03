@@ -7,7 +7,7 @@ import edu.basic.preparation.list.MyList;
 
 /**
  *
- * @author km185223
+ * @author Kartik Mahaley
  */
 public final class DataUtilities {
 
@@ -72,5 +72,8 @@ public final class DataUtilities {
         myList.add(4);
         myList.add(5);
         return myList.getHead();
+    }
+
+    private DataUtilities() {
     }
 }
