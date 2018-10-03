@@ -74,6 +74,10 @@ public final class DataUtilities {
         return myList.getHead();
     }
 
+    public static int[] nearestSmallerNumberOnLeftData(){
+        return new int[] {1,3,0,2,5};
+    }
+
     private DataUtilities() {
     }
 }

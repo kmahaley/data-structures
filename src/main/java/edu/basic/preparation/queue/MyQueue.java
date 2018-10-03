@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 /**
  *
  */
-public class Queue {
+public class MyQueue {
 
     public static class QueueUsingTwoStacks {
 
@@ -43,7 +43,7 @@ public class Queue {
             if (!stack1.isEmpty()) {
                 return stack1.pop();
             }
-            throw new NoSuchElementException("Queue Empty");
+            throw new NoSuchElementException("MyQueue Empty");
         }
 
         @Override

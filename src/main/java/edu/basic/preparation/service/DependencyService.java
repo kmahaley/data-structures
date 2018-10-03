@@ -6,14 +6,15 @@ import static edu.basic.preparation.data.DataUtilities.getDuplicatedElementList;
 import static edu.basic.preparation.data.DataUtilities.getListForBasicOperation;
 import static edu.basic.preparation.data.DataUtilities.getListForPairwiseSwap;
 import static edu.basic.preparation.data.DataUtilities.getTwoIntersectedList;
+import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
 import edu.basic.preparation.data.Node;
 import edu.basic.preparation.list.MyList;
 import static edu.basic.preparation.list.MyList.findIntersectedNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.list.MyList.removeDuplicates;
 import static edu.basic.preparation.list.MyList.reverseListInPairs;
-import edu.basic.preparation.queue.Queue;
-import edu.basic.preparation.stack.MyStack;
+import edu.basic.preparation.queue.MyQueue;
+import static edu.basic.preparation.stack.MyStack.nearestSmallerNumberOnLeft;
 import edu.basic.preparation.string.StringUtilities;
 import org.springframework.stereotype.Service;
 
@@ -70,7 +71,7 @@ public class DependencyService {
 
     public void queueFunctionality() {
 
-        Queue.QueueUsingTwoStacks queueUsingTwoStacks = new Queue.QueueUsingTwoStacks();
+        MyQueue.QueueUsingTwoStacks queueUsingTwoStacks = new MyQueue.QueueUsingTwoStacks();
         queueUsingTwoStacks.enQueue(10);
         queueUsingTwoStacks.enQueue(20);
         queueUsingTwoStacks.enQueue(30);
@@ -87,13 +88,15 @@ public class DependencyService {
     }
 
     public void stackFunctionality() {
-        MyStack.StackUsingTwoQueue stackUsingTwoQueue = new MyStack.StackUsingTwoQueue();
-        stackUsingTwoQueue.push(10);
-        stackUsingTwoQueue.push(20);
-        stackUsingTwoQueue.push(30);
-        stackUsingTwoQueue.push(40);
-        stackUsingTwoQueue.push(50);
-        System.out.println(stackUsingTwoQueue.toString());
-        System.out.println(stackUsingTwoQueue.pop() +" - "+stackUsingTwoQueue.pop());
+//        MyStack.StackUsingTwoQueue stackUsingTwoQueue = new MyStack.StackUsingTwoQueue();
+//        stackUsingTwoQueue.push(10);
+//        stackUsingTwoQueue.push(20);
+//        stackUsingTwoQueue.push(30);
+//        stackUsingTwoQueue.push(40);
+//        stackUsingTwoQueue.push(50);
+//        System.out.println(stackUsingTwoQueue.toString());
+//        System.out.println(stackUsingTwoQueue.pop() +" - "+stackUsingTwoQueue.pop());
+
+        nearestSmallerNumberOnLeft(nearestSmallerNumberOnLeftData());
     }
 }
