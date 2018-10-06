@@ -2,6 +2,7 @@ package edu.basic.preparation.data;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Stack;
 
 import edu.basic.preparation.list.MyList;
 
@@ -76,6 +77,32 @@ public final class DataUtilities {
 
     public static int[] nearestSmallerNumberOnLeftData(){
         return new int[] {1,3,0,2,5};
+    }
+
+    public static Stack<Integer> basicStack(){
+        Stack<Integer> stack = new Stack<>();
+        stack.push(34);
+        stack.push(3);
+        stack.push(31);
+        stack.push(92);
+        stack.push(98);
+        stack.push(23);
+
+        return stack;
+    }
+
+    public static TreeNode constructTree() {
+
+        TreeNode root = new TreeNode(20);
+        root.left = new TreeNode(15);
+        root.right = new TreeNode(25);
+        root.left.left = new TreeNode(10);
+        root.left.right = new TreeNode(18);
+        root.left.right.left = new TreeNode(16);
+        root.left.right.right = new TreeNode(19);
+        root.left.right.left.right = new TreeNode(17);
+
+        return root;
     }
 
     private DataUtilities() {

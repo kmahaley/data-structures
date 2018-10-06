@@ -129,4 +129,25 @@ public class MyStack {
         }
         System.out.println();
     }
+
+    /**
+     * Reverse a stack using auxiliary stack
+     *
+     * @param stack input stack
+     */
+    public static void reverseStack(Stack<Integer> stack) {
+
+        Stack<Integer> auxStack = new Stack<>();
+
+        while (!stack.isEmpty()) {
+            int temp = stack.pop();
+
+            while (!auxStack.isEmpty() && auxStack.peek()> temp){
+                stack.push(auxStack.pop());
+            }
+             auxStack.push(temp);
+        }
+        System.out.println(auxStack);
+    }
+
 }

@@ -1,7 +1,10 @@
 package edu.basic.preparation.service;
 
 import java.util.Arrays;
+import java.util.Stack;
 
+import static edu.basic.preparation.data.DataUtilities.basicStack;
+import static edu.basic.preparation.data.DataUtilities.constructTree;
 import static edu.basic.preparation.data.DataUtilities.getDuplicatedElementList;
 import static edu.basic.preparation.data.DataUtilities.getListForBasicOperation;
 import static edu.basic.preparation.data.DataUtilities.getListForPairwiseSwap;
@@ -14,10 +17,14 @@ import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.list.MyList.removeDuplicates;
 import static edu.basic.preparation.list.MyList.reverseListInPairs;
 import edu.basic.preparation.queue.MyQueue;
+import static edu.basic.preparation.queue.MyQueue.priorityQueue;
 import static edu.basic.preparation.stack.MyStack.nearestSmallerNumberOnLeft;
 import static edu.basic.preparation.stack.MyStack.nextGreatestElement;
 import static edu.basic.preparation.stack.MyStack.nextSmallestElement;
+import static edu.basic.preparation.stack.MyStack.reverseStack;
 import edu.basic.preparation.string.StringUtilities;
+import static edu.basic.preparation.tree.BinaryTree.inOrder;
+import static edu.basic.preparation.tree.BinaryTree.inOrderList;
 import org.springframework.stereotype.Service;
 
 /**
@@ -87,6 +94,8 @@ public class DependencyService {
         final int four = queueUsingTwoStacks.deQueue();
 
         System.out.println(Arrays.asList(first, second, third, four));
+
+        priorityQueue();
     }
 
     public void stackFunctionality() {
@@ -101,12 +110,23 @@ public class DependencyService {
 
         final int[] input = nearestSmallerNumberOnLeftData();
 
-        System.out.println("Input array : "+Arrays.toString(input));
+        System.out.println("Input array : " + Arrays.toString(input));
         System.out.println("********* nearest smaller number on left *******");
         nearestSmallerNumberOnLeft(input);
         System.out.println("********* next nearest smaller number *******");
         nextSmallestElement(input);
         System.out.println("********* next nearest greater number *******");
         nextGreatestElement(input);
+        System.out.println("********* reverse a stack using auxiliary stack *******");
+        final Stack<Integer> stack = basicStack();
+        reverseStack(stack);
+    }
+
+
+    public void binaryTreeFunctionality() {
+        System.out.println("********* inorder tree traversal *******");
+        inOrder(constructTree());
+        System.out.println(inOrderList);
+        System.out.println("********* preorder tree traversal *******");
     }
 }
