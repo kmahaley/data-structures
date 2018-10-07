@@ -61,4 +61,21 @@ public class BinaryTree {
         }
         return sizeOfTree(start.left) + 1 + sizeOfTree(start.right);
     }
+
+    public static int findMax(TreeNode current) {
+        if (current == null) {
+            return -1;
+        }
+        int maxLeft = findMax(current.left);
+        int maxRight = findMax(current.right);
+
+        if (current.key > maxLeft && current.key > maxRight) {
+            return current.key;
+        } else if (maxLeft > current.key && maxLeft > maxRight) {
+            return maxLeft;
+        } else {
+            return maxRight;
+        }
+    }
+
 }

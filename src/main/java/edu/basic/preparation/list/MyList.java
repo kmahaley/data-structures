@@ -13,13 +13,13 @@ public class MyList {
 
     private Node head;
 
-    public void add(int value){
+    public void add(int value) {
         Node newNode = new Node(value);
-        if(head == null){
+        if (head == null) {
             head = newNode;
         } else {
             Node current = head;
-            while(current.getNext() != null){
+            while (current.getNext() != null) {
                 current = current.getNext();
             }
             current.setNext(newNode);
@@ -29,7 +29,7 @@ public class MyList {
 
     public void addAtFront(int value) {
         Node newNode = new Node(value);
-        if(head == null){
+        if (head == null) {
             head = newNode;
         } else {
             newNode.setNext(head);
@@ -38,13 +38,13 @@ public class MyList {
 
     }
 
-    public void addInMiddle(int value, int afterLocation){
+    public void addInMiddle(int value, int afterLocation) {
         Node newNode = new Node(value);
-        if(head == null){
+        if (head == null) {
             head = newNode;
         } else {
             Node current = head;
-            for(int i=1; i<afterLocation;i++){
+            for (int i = 1; i < afterLocation; i++) {
                 current = current.getNext();
             }
             newNode.setNext(current.getNext());
@@ -69,32 +69,33 @@ public class MyList {
         }
     }
 
-    public void print(){
+    public void print() {
         Node current = head;
-        while(current != null){
-            System.out.print(current.getKey()+" - ");
+        while (current != null) {
+            System.out.print(current.getKey() + " - ");
             current = current.getNext();
         }
         System.out.println();
     }
 
-    public static void printFromNode(Node start){
+    public static void printFromNode(Node start) {
         Node current = start;
-        while(current != null){
-            System.out.print(current.getKey()+" - ");
+        while (current != null) {
+            System.out.print(current.getKey() + " - ");
             current = current.getNext();
         }
         System.out.println();
     }
 
-    public void delete(int value){
-        if(head == null)
+    public void delete(int value) {
+
+        if (head == null) {
             return;
-        else{
+        } else {
             Node current = head;
             Node prev = null;
-            while(current != null){
-                if(current.getKey() != value){
+            while (current != null) {
+                if (current.getKey() != value) {
                     prev = current;
                     current = current.getNext();
                 } else {
@@ -112,7 +113,9 @@ public class MyList {
         } else {
             Node fast = head;
             Node slow = head;
-            while (fast.getNext().getNext() != null && fast.getNext() != null) {
+            while (fast
+                    .getNext()
+                    .getNext() != null && fast.getNext() != null) {
                 fast = fast
                         .getNext()
                         .getNext();
@@ -122,13 +125,14 @@ public class MyList {
         }
     }
 
-    public static void removeDuplicates(Node head){
-        if(head == null)
+    public static void removeDuplicates(Node head) {
+        if (head == null) {
             return;
+        }
         Node prev = head, current = head.getNext();
         Node next = null;
-        while (current != null){
-            if(prev.getKey() == current.getKey()){
+        while (current != null) {
+            if (prev.getKey() == current.getKey()) {
                 next = current.getNext();
                 current.setNext(null);
                 current = next;
@@ -148,16 +152,16 @@ public class MyList {
 
 
         int diff = lengthOne - lengthTwo;
-        if(diff < 0) {
+        if (diff < 0) {
             big = twoIntersectedList.get(1);
             small = twoIntersectedList.get(0);
         }
-        for(int i=1; i <= Math.abs(diff); i++){
+        for (int i = 1; i <= Math.abs(diff); i++) {
             big = big.getNext();
         }
 
-        while (big != null && small != null){
-            if(big == small){
+        while (big != null && small != null) {
+            if (big == small) {
                 return big;
             }
             small = small.getNext();
@@ -167,9 +171,10 @@ public class MyList {
         return null;
     }
 
-    public static int length(Node temp){
-        if(temp == null)
+    public static int length(Node temp) {
+        if (temp == null) {
             return 0;
+        }
         int count = 1;
         while (temp.getNext() != null) {
             temp = temp.getNext();
@@ -180,15 +185,22 @@ public class MyList {
     }
 
     public static Node reverseListInPairs(Node head) {
-        if(head == null)
+        if (head == null) {
             return null;
+        }
         Node temp = head;
 
-        while (temp != null && temp.getNext() !=null){
+        while (temp != null && temp.getNext() != null) {
             int k = temp.getKey();
-            temp.setKey(temp.getNext().getKey());
-            temp.getNext().setKey(k);
-            temp = temp.getNext().getNext();
+            temp.setKey(temp
+                    .getNext()
+                    .getKey());
+            temp
+                    .getNext()
+                    .setKey(k);
+            temp = temp
+                    .getNext()
+                    .getNext();
         }
         return head;
     }

@@ -93,13 +93,13 @@ public class MyStack {
         for (int i = 1; i < length; i++) {
 
             while (!stack.isEmpty() && stack.peek() >= a[i]) {
-                System.out.print(stack.pop() + " -> " + a[i]+", ");
+                System.out.print(stack.pop() + " -> " + a[i] + ", ");
             }
 
             stack.push(a[i]);
         }
-        while (!stack.isEmpty()){
-            System.out.print(stack.pop() +" -> -1, ");
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() + " -> -1, ");
         }
         System.out.println();
     }
@@ -119,13 +119,13 @@ public class MyStack {
         for (int i = 1; i < length; i++) {
 
             while (!stack.isEmpty() && stack.peek() <= a[i]) {
-                System.out.print(stack.pop() + " -> " + a[i]+", ");
+                System.out.print(stack.pop() + " -> " + a[i] + ", ");
             }
 
             stack.push(a[i]);
         }
-        while (!stack.isEmpty()){
-            System.out.print(stack.pop() +" -> -1, ");
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() + " -> -1, ");
         }
         System.out.println();
     }
@@ -142,10 +142,10 @@ public class MyStack {
         while (!stack.isEmpty()) {
             int temp = stack.pop();
 
-            while (!auxStack.isEmpty() && auxStack.peek()> temp){
+            while (!auxStack.isEmpty() && auxStack.peek() > temp) {
                 stack.push(auxStack.pop());
             }
-             auxStack.push(temp);
+            auxStack.push(temp);
         }
         System.out.println(auxStack);
     }

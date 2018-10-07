@@ -9,6 +9,7 @@ import lombok.Data;
 public class Node {
 
     private int key;
+
     private Node next;
 
     public Node(int key) {
