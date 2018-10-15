@@ -48,6 +48,7 @@ public class BinaryTree {
         }
     }
 
+    //horizontal distance of nodes from root
     public static Map<Integer, LinkedList<Integer>> horizontalDistance(TreeNode root) {
         if (root == null) {
             return null;
@@ -81,6 +82,7 @@ public class BinaryTree {
     }
 
 
+    //Diagonal traversal needs horizontal distance
     public static void diagonalTraversal(Map<Integer, LinkedList<Integer>> map) {
 
         final Iterator<Integer> iterator = map
@@ -105,6 +107,7 @@ public class BinaryTree {
 
     }
 
+    //is tree BST left < root < right
     public static boolean isBST(TreeNode current, int min, int max) {
         if (current == null) {
             return true;
@@ -117,6 +120,7 @@ public class BinaryTree {
         return isBST(current.left, min, current.key) && isBST(current.right, current.key, max);
     }
 
+    // add nodes to determine size of the tree
     public static int sizeOfTree(TreeNode start) {
         if (start == null) {
             return 0;
@@ -124,6 +128,7 @@ public class BinaryTree {
         return sizeOfTree(start.left) + 1 + sizeOfTree(start.right);
     }
 
+    //Maximum in the tree
     public static int findMax(TreeNode current) {
         if (current == null) {
             return -1;
@@ -140,6 +145,7 @@ public class BinaryTree {
         }
     }
 
+    //to keep track of horizontal distance of the node
     public static class DistanceTreeNode {
         TreeNode node;
         int dis;
