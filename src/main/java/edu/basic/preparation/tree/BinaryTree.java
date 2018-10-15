@@ -1,9 +1,14 @@
 package edu.basic.preparation.tree;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import edu.basic.preparation.data.TreeNode;
+import org.apache.commons.collections4.CollectionUtils;
 
 /**
  */
@@ -43,9 +48,66 @@ public class BinaryTree {
         }
     }
 
+    public static Map<Integer, LinkedList<Integer>> horizontalDistance(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        LinkedList<DistanceTreeNode> nodes = new LinkedList<>();
+        nodes.add(new DistanceTreeNode(root, 0));
+        Map<Integer, LinkedList<Integer>> map = new HashMap<>();
+
+        while (!nodes.isEmpty()) {
+            final DistanceTreeNode polled = nodes.poll();
+            final TreeNode current = polled.node;
+            final int dis = polled.dis;
+            if (map.containsKey(dis)) {
+                final LinkedList<Integer> nodeList = map.get(dis);
+                nodeList.add(current.key);
+                map.put(dis, nodeList);
+            } else {
+                final LinkedList<Integer> list = new LinkedList<>();
+                list.add(current.key);
+                map.put(dis, list);
+            }
+            if (current.left != null) {
+                nodes.add(new DistanceTreeNode(current.left, dis - 1));
+            }
+            if (current.right != null) {
+                nodes.add(new DistanceTreeNode(current.right, dis + 1));
+            }
+        }
+        return map;
+
+    }
+
+
+    public static void diagonalTraversal(Map<Integer, LinkedList<Integer>> map) {
+
+        final Iterator<Integer> iterator = map
+                .keySet()
+                .iterator();
+        while (iterator.hasNext()){
+            int tempDistance = iterator.next();
+            while (map.containsKey(tempDistance)) {
+
+                final LinkedList<Integer> integerLinkedList = map.get(tempDistance);
+
+                if (CollectionUtils.isNotEmpty(integerLinkedList)) {
+                    System.out.print(integerLinkedList.poll() + " - ");
+                    map.put(tempDistance, integerLinkedList);
+                } else {
+                    iterator.remove();
+                }
+                tempDistance++;
+            }
+            System.out.println();
+        }
+
+    }
+
     public static boolean isBST(TreeNode current, int min, int max) {
         if (current == null) {
-            return false;
+            return true;
         }
 
         if (current.key < min || current.key > max) {
@@ -78,4 +140,13 @@ public class BinaryTree {
         }
     }
 
+    public static class DistanceTreeNode {
+        TreeNode node;
+        int dis;
+
+        public DistanceTreeNode(TreeNode node, int dis) {
+            this.node = node;
+            this.dis = dis;
+        }
+    }
 }

@@ -1,6 +1,8 @@
 package edu.basic.preparation.service;
 
 import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.Map;
 import java.util.Stack;
 
 import static edu.basic.preparation.data.DataUtilities.basicStack;
@@ -23,7 +25,9 @@ import static edu.basic.preparation.stack.MyStack.nextGreatestElement;
 import static edu.basic.preparation.stack.MyStack.nextSmallestElement;
 import static edu.basic.preparation.stack.MyStack.reverseStack;
 import edu.basic.preparation.string.StringUtilities;
+import static edu.basic.preparation.tree.BinaryTree.diagonalTraversal;
 import static edu.basic.preparation.tree.BinaryTree.findMax;
+import static edu.basic.preparation.tree.BinaryTree.horizontalDistance;
 import static edu.basic.preparation.tree.BinaryTree.inOrder;
 import static edu.basic.preparation.tree.BinaryTree.inOrderList;
 import static edu.basic.preparation.tree.BinaryTree.isBST;
@@ -130,11 +134,18 @@ public class DependencyService {
         System.out.println("********* inorder tree traversal *******");
         inOrder(constructTree());
         System.out.println(inOrderList);
+
         System.out.println("********* is tree BST *******");
         System.out.println(isBST(constructTree(), Integer.MIN_VALUE, Integer.MAX_VALUE));
         System.out.println("********* Size of the tree *******");
         System.out.println(sizeOfTree(constructTree()));
         System.out.println("********* find maximum of the tree *******");
         System.out.println(findMax(constructTree()));
+
+        System.out.println("********* Horizontal distance *******");
+        final Map<Integer, LinkedList<Integer>> integerListMap = horizontalDistance(constructTree());
+        integerListMap.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
+        diagonalTraversal(integerListMap);
+
     }
 }

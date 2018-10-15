@@ -26,7 +26,7 @@ public class Application implements CommandLineRunner {
     public void run(String... args) throws IOException {
 
         dependencyService.binaryTreeFunctionality();
-    }
 
+    }
 
 }
