@@ -18,6 +18,7 @@ public class MyStack {
         Queue<Integer> queue2;
 
         public StackUsingTwoQueue() {
+            //you can use ArrayDeque<>() too
             queue1 = new LinkedList<>();
             queue2 = new LinkedList<>();
         }
@@ -131,23 +132,72 @@ public class MyStack {
     }
 
     /**
-     * Reverse a stack using auxiliary stack
+     * Reverse a stack using recursion
      *
      * @param stack input stack
      */
-    public static void reverseStack(Stack<Integer> stack) {
+    public static void sortStack(Stack<Integer> stack) {
 
-        Stack<Integer> auxStack = new Stack<>();
-
-        while (!stack.isEmpty()) {
-            int temp = stack.pop();
-
-            while (!auxStack.isEmpty() && auxStack.peek() > temp) {
-                stack.push(auxStack.pop());
-            }
-            auxStack.push(temp);
+        if (!stack.isEmpty()) {
+            int x = stack.pop();
+            sortStack(stack);
+            insertIntoSortedStack(stack, x);
         }
-        System.out.println(auxStack);
     }
 
+    private static void insertIntoSortedStack(Stack<Integer> st, int x) {
+        if (st.isEmpty() || x > st.peek()) {
+            st.push(x);
+        } else {
+            int a = st.pop();
+            insertIntoSortedStack(st, x);
+            st.push(a);
+        }
+    }
+
+    /**
+     * Reverse stack using recursive option
+     *
+     * @param st stack
+     */
+    public static void reverseStack(Stack<Integer> st) {
+        if (!st.isEmpty()) {
+            int x = st.pop();
+            reverseStack(st);
+            insertAtBottom(st, x);
+        }
+    }
+
+    private static void insertAtBottom(Stack<Integer> st, int x) {
+        if (st.isEmpty()) {
+            st.push(x);
+        } else {
+            int a = st.pop();
+            insertAtBottom(st, x);
+            st.push(a);
+        }
+    }
+
+
+    /**
+     * length of valid parenthesis
+     *
+     * @param str "()(()))))"
+     * @return size
+     */
+    public static int longestParenthesisString(String str) {
+
+        final char[] toCharArray = str.toCharArray();
+        Stack<Character> st = new Stack<>();
+        String newStr = "";
+
+        for (int i = 0; i < str.length(); i++) {
+            if (!st.isEmpty() && st.peek() == '(' && toCharArray[i] == ')') {
+                newStr = newStr + st.pop() + toCharArray[i];
+            } else {
+                st.push(toCharArray[i]);
+            }
+        }
+        return newStr.length();
+    }
 }

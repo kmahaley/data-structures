@@ -130,7 +130,7 @@ public class MyList {
             return;
         }
         Node prev = head, current = head.getNext();
-        Node next = null;
+        Node next;
         while (current != null) {
             if (prev.getKey() == current.getKey()) {
                 next = current.getNext();
@@ -145,8 +145,17 @@ public class MyList {
         printFromNode(head);
     }
 
+    /**
+     * Intersection of two linked list
+     *
+     * @param twoIntersectedList list with two nodes
+     * @return intersecting node
+     */
     public static Node findIntersectedNode(List<Node> twoIntersectedList) {
         Node big = twoIntersectedList.get(0), small = twoIntersectedList.get(1);
+        if(big == null || small == null){
+            return null;
+        }
         int lengthOne = length(big);
         int lengthTwo = length(small);
 
@@ -171,6 +180,9 @@ public class MyList {
         return null;
     }
 
+    /**
+     * Length of the linked list
+     */
     public static int length(Node temp) {
         if (temp == null) {
             return 0;
@@ -203,5 +215,16 @@ public class MyList {
                     .getNext();
         }
         return head;
+    }
+
+    public static Node recursiveReverseLinkedList(Node head, Node prev){
+        if(head == null)
+            return prev;
+
+        final Node next = head.getNext();
+        head.setNext(prev);
+        prev = head;
+        head = next;
+        return recursiveReverseLinkedList(head, prev);
     }
 }

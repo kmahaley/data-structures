@@ -105,6 +105,35 @@ public final class DataUtilities {
         return root;
     }
 
+    public static TreeNode constructDiagonalTraversal() {
+        TreeNode root = new TreeNode(8);
+        root.left = new TreeNode(3);
+        root.right = new TreeNode(10);
+        root.left.left = new TreeNode(1);
+        root.left.right = new TreeNode(6);
+        root.right.right = new TreeNode(14);
+        root.right.right.left = new TreeNode(13);
+        root.left.right.left = new TreeNode(4);
+        root.left.right.right = new TreeNode(7);
+
+        return root;
+    }
+
+    public static TreeNode constructTreeWithSumPath() {
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(28);
+        root.right = new TreeNode(13);
+
+        root.right.left = new TreeNode(14);
+        root.right.right = new TreeNode(15);
+
+        root.right.left.left = new TreeNode(21);
+        root.right.left.right = new TreeNode(22);
+        root.right.right.left = new TreeNode(23);
+        root.right.right.right = new TreeNode(24);
+        return root;
+    }
+
     private DataUtilities() {
     }
 }

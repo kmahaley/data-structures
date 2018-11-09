@@ -2,13 +2,12 @@ package edu.basic.preparation.tree;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 
 import edu.basic.preparation.data.TreeNode;
-import org.apache.commons.collections4.CollectionUtils;
 
 /**
  */
@@ -48,17 +47,25 @@ public class BinaryTree {
         }
     }
 
-    //horizontal distance of nodes from root
+    /**
+     * horizontal distance of nodes from root
+     *
+     * bottom view is last node from listOfNodes
+     * top view is first node from listOfNodes
+     *
+     * @param root node
+     * @return Map of distance and nodes <key listOfNodes> ie. < 0, <1,2,3> > etc
+     */
     public static Map<Integer, LinkedList<Integer>> horizontalDistance(TreeNode root) {
         if (root == null) {
             return null;
         }
-        LinkedList<DistanceTreeNode> nodes = new LinkedList<>();
-        nodes.add(new DistanceTreeNode(root, 0));
+        LinkedList<DistanceTreeNode> nodeQueue = new LinkedList<>();
+        nodeQueue.add(new DistanceTreeNode(root, 0));
         Map<Integer, LinkedList<Integer>> map = new HashMap<>();
 
-        while (!nodes.isEmpty()) {
-            final DistanceTreeNode polled = nodes.poll();
+        while (!nodeQueue.isEmpty()) {
+            final DistanceTreeNode polled = nodeQueue.poll();
             final TreeNode current = polled.node;
             final int dis = polled.dis;
             if (map.containsKey(dis)) {
@@ -71,10 +78,10 @@ public class BinaryTree {
                 map.put(dis, list);
             }
             if (current.left != null) {
-                nodes.add(new DistanceTreeNode(current.left, dis - 1));
+                nodeQueue.add(new DistanceTreeNode(current.left, dis - 1));
             }
             if (current.right != null) {
-                nodes.add(new DistanceTreeNode(current.right, dis + 1));
+                nodeQueue.add(new DistanceTreeNode(current.right, dis + 1));
             }
         }
         return map;
@@ -82,29 +89,46 @@ public class BinaryTree {
     }
 
 
-    //Diagonal traversal needs horizontal distance
-    public static void diagonalTraversal(Map<Integer, LinkedList<Integer>> map) {
+    //Geek for geeks solution
+    /**
+     * all right child will have same slope which is denoted by slope
+     * @param root node
+     * @param slope slope
+     * @param diagonalPrint diagonal nodes map
+     */
+    public static void diagonalPrintUtil(TreeNode root, int slope, HashMap<Integer, Vector<Integer>> diagonalPrint) {
+        // Base case
+        if (root == null) {
+            return;
+        }
+        // get the list at the particular slope value
+        Vector<Integer> list = diagonalPrint.get(slope);
 
-        final Iterator<Integer> iterator = map
-                .keySet()
-                .iterator();
-        while (iterator.hasNext()){
-            int tempDistance = iterator.next();
-            while (map.containsKey(tempDistance)) {
-
-                final LinkedList<Integer> integerLinkedList = map.get(tempDistance);
-
-                if (CollectionUtils.isNotEmpty(integerLinkedList)) {
-                    System.out.print(integerLinkedList.poll() + " - ");
-                    map.put(tempDistance, integerLinkedList);
-                } else {
-                    iterator.remove();
-                }
-                tempDistance++;
-            }
-            System.out.println();
+        // list is null then create a vector and store the data
+        if (list == null) {
+            list = new Vector<>();
+            list.add(root.key);
+        } else {
+            list.add(root.key);
         }
 
+        // Store all nodes of same line together as a vector
+        diagonalPrint.put(slope, list);
+
+        // Increase the vertical slope if left child
+        diagonalPrintUtil(root.left, slope + 1, diagonalPrint);
+
+        // Vertical slope remains same for right child
+        diagonalPrintUtil(root.right, slope, diagonalPrint);
+    }
+
+    // Print diagonal traversal of given binary tree
+    public static void diagonalPrint(TreeNode root) {
+        // create a map of vectors to store Diagonal elements
+        HashMap<Integer, Vector<Integer>> diagonalPrint = new HashMap<>();
+        diagonalPrintUtil(root, 0, diagonalPrint);
+
+        diagonalPrint.forEach((k, v) -> System.out.println(v));
     }
 
     //is tree BST left < root < right
@@ -154,5 +178,138 @@ public class BinaryTree {
             this.node = node;
             this.dis = dis;
         }
+    }
+
+    /**
+     * Maximum sum to longest path to leaf
+     *
+     * @param root tree node
+     * @return max sum
+     */
+    public static int longRootToLeafPath(TreeNode root) {
+        int maxSum = Integer.MIN_VALUE;
+        int maxLength = 0;
+
+        return longRootToLeafPathUtil(root, maxLength, maxSum, 0, 0);
+
+    }
+
+    /**
+     * evaluate maximum sum
+     *
+     * @param root node
+     * @param maxLength max length
+     * @param maxSum max sum
+     * @param len current length
+     * @param sum current sum
+     *
+     * @return max sum
+     */
+    public static int longRootToLeafPathUtil(
+            TreeNode root,
+            int maxLength,
+            int maxSum,
+            int len,
+            int sum) {
+
+        if (root == null) {
+            if (len > maxLength) {
+                maxSum = sum;
+                maxLength = len;
+
+            } else if (maxLength == len && sum > maxSum) {
+                maxSum = sum;
+            }
+            return maxSum;
+        }
+        int left = longRootToLeafPathUtil(root.left, maxLength, maxSum, len + 1, sum + root.key);
+        int right = longRootToLeafPathUtil(root.right, maxLength, maxSum, len + 1, sum + root.key);
+
+        return left > right ? left : right;
+    }
+
+    /**
+     * Path from root to leaf exists with given sum or not
+     *
+     * @param root node
+     * @param sum sum
+     * @return true is path exists equals to sum
+     */
+    public static boolean isPathExistsWithSum(TreeNode root, int sum) {
+        if (root == null) {
+            return sum == 0;
+        }
+        sum = sum - root.key;
+        boolean isExists = false;
+        if (root.left == null && root.right == null) {
+            return sum == 0;
+        }
+        //as soon as you get true, compare with other part of the tree and return
+        if (root.left != null) {
+            isExists = isExists || isPathExistsWithSum(root.left, sum);
+        }
+        if (root.right != null) {
+            isExists = isExists || isPathExistsWithSum(root.right, sum);
+        }
+
+        return isExists;
+    }
+
+
+    /**
+     * Print all paths from root to leaf
+     *
+     * @param root node
+     * @param list list to keep path
+     * @param index index at which element will be added
+     */
+    public static void allPathsFromRootToLeaf(TreeNode root, List<Integer> list, int index) {
+        if (root == null) {
+            return;
+        }
+
+        list.add(index, root.key);
+        index++;
+        //condition for leaf node
+        if (root.left == null && root.right == null) {
+            printList(list, index);
+        }
+
+        allPathsFromRootToLeaf(root.left, list, index);
+        allPathsFromRootToLeaf(root.right, list, index);
+    }
+
+    /**
+     * find all paths from root to nodes with maximum given sum
+     *
+     * @param root node
+     * @param sum current sum
+     * @param maxSum expected max sum
+     * @param list list to keep track of node till now
+     * @param index index of current node
+     */
+    public static void allPathsFromRootWithGivenSum(TreeNode root, int sum, int maxSum,List<Integer> list, int index) {
+        if (root == null) {
+            return;
+        }
+
+        sum = sum + root.key;
+        list.add(index, root.key);
+        index++;
+
+        //condition for maxSum
+        if (sum == maxSum) {
+            printList(list, index);
+        }
+
+        allPathsFromRootWithGivenSum(root.left, sum, maxSum,list, index);
+        allPathsFromRootWithGivenSum(root.right, sum, maxSum,list, index);
+    }
+
+    private static void printList(List<Integer> list, int index) {
+        for (int i = 0; i < index ; i++) {
+            System.out.print(list.get(i) +" ");
+        }
+        System.out.println();
     }
 }

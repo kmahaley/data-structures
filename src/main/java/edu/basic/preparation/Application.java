@@ -1,31 +1,22 @@
 package edu.basic.preparation;
 
-import java.io.IOException;
-
 import edu.basic.preparation.service.DependencyService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.CommandLineRunner;
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 /**
  * @author kartik mahaley
  */
-@SpringBootApplication
-public class Application implements CommandLineRunner {
-
-    @Autowired
-    private DependencyService dependencyService;
+public class Application {
 
     public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+        final DependencyService dependencyService = new DependencyService();
 
-    }
+//        dependencyService.binaryTreeFunctionality();
 
-    @Override
-    public void run(String... args) throws IOException {
+//        dependencyService.listFunctionality();
+//        dependencyService.queueFunctionality();
+        dependencyService.stackFunctionality();
 
-        dependencyService.binaryTreeFunctionality();
+
 
     }
 
