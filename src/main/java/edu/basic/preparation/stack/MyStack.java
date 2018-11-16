@@ -145,6 +145,12 @@ public class MyStack {
         }
     }
 
+    /**
+     * Insert into sorted stack
+     *
+     * @param st stack
+     * @param x insert element in sorted stack
+     */
     private static void insertIntoSortedStack(Stack<Integer> st, int x) {
         if (st.isEmpty() || x > st.peek()) {
             st.push(x);
@@ -168,6 +174,12 @@ public class MyStack {
         }
     }
 
+    /**
+     * Insert element at bottom
+     *
+     * @param st stack
+     * @param x insert current at bottom
+     */
     private static void insertAtBottom(Stack<Integer> st, int x) {
         if (st.isEmpty()) {
             st.push(x);
@@ -199,5 +211,32 @@ public class MyStack {
             }
         }
         return newStr.length();
+    }
+
+    /**
+     * recursively remove middle element
+     *
+     * @param st stack
+     * @param size stack size
+     * @param index index of current
+     */
+    public static void deleteMiddleElement(Stack<Integer> st, int size, int index) {
+        if (st.isEmpty()) {
+            return;
+        }
+        Integer a = null;
+        final int stackSize = size / 2;
+
+        if (index >= stackSize) {
+            a = st.pop();
+        } else {
+            return;
+        }
+
+        deleteMiddleElement(st, size, index - 1);
+
+        if (index != stackSize && a != null) {
+            st.push(a);
+        }
     }
 }

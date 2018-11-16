@@ -1,18 +1,13 @@
 package edu.basic.preparation.service;
 
 import java.util.Arrays;
-import java.util.List;
+import java.util.Stack;
 
+import static edu.basic.preparation.data.DataUtilities.basicStack;
 import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
 import edu.basic.preparation.queue.MyQueue;
-import static edu.basic.preparation.stack.MyStack.longestParenthesisString;
-import edu.basic.preparation.string.StringUtilities;
-import static edu.basic.preparation.string.StringUtilities.alternatingParityPermutations;
-import static edu.basic.preparation.string.StringUtilities.closest;
-import static edu.basic.preparation.string.StringUtilities.countMatches;
-import static edu.basic.preparation.string.StringUtilities.fileReader;
-import static edu.basic.preparation.string.StringUtilities.missingWords;
-import static edu.basic.preparation.string.StringUtilities.missingWordsInInitialString;
+import static edu.basic.preparation.stack.MyStack.deleteMiddleElement;
+import static edu.basic.preparation.string.StringUtilities.permutationOfArray;
 import org.springframework.stereotype.Service;
 
 /**
@@ -66,33 +61,45 @@ public class DependencyService {
 //        StringUtilities.getDuplicateInArrayWindow(DataUtilities.getIntegerArray(), 4);
 //        StringUtilities.isStringUnique(DataUtilities.getString());
 //        StringUtilities.stringURLify("Mr John Smith apple banana     ",26);
-        StringUtilities.isPermutationPalindrome("apaa");
+//        StringUtilities.isPermutationPalindrome("apaa");
+//
+//        final List<Integer> hackerrank = closest("abc", Arrays.asList(0, 2));
+//        System.out.println(hackerrank);
+//
+//        System.out.println(" --------------------------- ");
+//
+//        final List<String> missingWordList = missingWords("I like cheese", "I");
+//        missingWordList.forEach(str -> System.out.println(str));
+//
+//        System.out.println(" -------------Island problem-------------- ");
+//        List<String>  s1 = Arrays.asList("0100","1001","0011", "0011");
+//        List<String>  s2 = Arrays.asList("0101","1001","0011","0011");
+//        final int countMatches = countMatches(s1, s2);
+//        System.out.println(countMatches);
+//
+//
+//        System.out.println(" -------------File reader-------------- ");
+//        fileReader("fileName.txt");
+//
+//        System.out.println(" ------------Missing words--------------- ");
+//        final List<String> stringList =
+//                missingWordsInInitialString("i love mango and apple", "love and");
+//        System.out.println(stringList);
+//
+//        System.out.println(" --------------------------- ");
+//        alternatingParityPermutations(4);
 
-        final List<Integer> hackerrank = closest("abc", Arrays.asList(0, 2));
-        System.out.println(hackerrank);
+//        System.out.println(" -------------Permutation of string-------------- ");
+//        permutationOfString("","123");
 
-        System.out.println(" --------------------------- ");
+//        System.out.println(" -------------Recursively reverse string-------------- ");
+//        reverseString("","apple");
+//
+//        System.out.println(" -------------Substrings of the string-------------- ");
+//        subStringsOfString("abcd");
 
-        final List<String> missingWordList = missingWords("I like cheese", "I");
-        missingWordList.forEach(str -> System.out.println(str));
-
-        System.out.println(" --------------------------- ");
-        List<String>  s1 = Arrays.asList("0100","1001","0011", "0011");
-        List<String>  s2 = Arrays.asList("0101","1001","0011","0011");
-        final int countMatches = countMatches(s1, s2);
-        System.out.println(countMatches);
-
-
-        System.out.println(" --------------------------- ");
-        fileReader("fileName.txt");
-
-        System.out.println(" --------------------------- ");
-        final List<String> stringList =
-                missingWordsInInitialString("i love mango and apple", "love and");
-        System.out.println(stringList);
-
-        System.out.println(" --------------------------- ");
-        alternatingParityPermutations(4);
+        System.out.println(" -------------Permutations of the array-------------- ");
+        permutationOfArray(Arrays.asList(1,2,3,4), 0);
     }
 
     public void queueFunctionality() {
@@ -165,9 +172,15 @@ public class DependencyService {
 //        reverseStack(stackOriginal);
 //        System.out.println(stackOriginal);
 
+//        System.out.println("********* Longest parenthesis sequence *******");
+//        int size = longestParenthesisString(")()())");
+//        System.out.println(size);
+
         System.out.println("********* Longest parenthesis sequence *******");
-        int size = longestParenthesisString(")()())");
-        System.out.println(size);
+        final Stack<Integer> integerStack = basicStack();
+        System.out.println(integerStack);
+        deleteMiddleElement(integerStack, integerStack.size(), integerStack.size()-1);
+        System.out.println(integerStack);
     }
 
 
