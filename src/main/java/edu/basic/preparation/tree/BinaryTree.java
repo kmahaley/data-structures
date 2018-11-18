@@ -1,10 +1,12 @@
 package edu.basic.preparation.tree;
 
+import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 import java.util.Vector;
 
 import edu.basic.preparation.data.TreeNode;
@@ -311,5 +313,131 @@ public class BinaryTree {
             System.out.print(list.get(i) +" ");
         }
         System.out.println();
+    }
+
+
+    /**
+     * check if binary tree is full binary tree, each node with 0 or 2 children
+     *
+     * @param root node
+     *
+     * @return true if node has 0 or 2 children
+     */
+    public static boolean isFullBinaryTreeRecursive(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        if (root.left == null && root.right == null) {
+            return true;
+        }
+        if (root.left != null && root.right != null) {
+            return isFullBinaryTreeRecursive(root.left) && isFullBinaryTreeRecursive(root.right);
+        }
+        return false;
+    }
+
+    /**
+     * check if node has just left or right node then return false
+     *
+     * @param root node
+     * @return true or false
+     */
+    public static boolean isFullBinaryTreeIterative(TreeNode root) {
+
+        if(root == null)
+            return true;
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            final TreeNode polled = queue.poll();
+
+            if(polled.left != null && polled.right != null){
+                queue.add(polled.left);
+                queue.add(polled.right);
+            } else if (polled.left != null || polled.right != null){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * 1. left == null && right != null  --> false
+     * 2. all nodes first after half filled or leaf node should be leaf node
+     * 3. else all true
+     *
+     * @param root node
+     * @return true or false
+     */
+    public static boolean isCompleteBinaryTreeIterative(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        Queue<TreeNode> queue = new ArrayDeque<>();
+        queue.add(root);
+        boolean isNonCompleteNode = false;
+        while (!queue.isEmpty()) {
+
+            final TreeNode poll = queue.poll();
+
+            if (isNonCompleteNode && (poll.left != null || poll.right != null)) {
+                return false;
+            }
+
+            if (poll.left == null && poll.right != null) {
+                return false;
+            }
+
+            //Left not null
+            if (poll.left != null) {
+                queue.add(poll.left);
+            } else {
+                isNonCompleteNode = true;
+            }
+            // right not null
+            if (poll.right != null) {
+                queue.add(poll.right);
+            } else {
+                isNonCompleteNode = true;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Get number of nodes in a binary tree.
+     * every leftNodeIndex = 2*index+1 and rightNodeIndex = 2*index+2
+     * index of node should always be less than number of nodes in binary tree
+     *
+     * @param root node
+     */
+    public static void isCompleteBinaryTreeRecursive(TreeNode root) {
+
+        final int sizeOfTree = sizeOfTree(root);
+        if (isCompleteBinaryTreeRecursiveHelper(root, 0, sizeOfTree)) {
+            System.out.println("Tree is complete");
+        } else {
+            System.out.println("Tree is not complete");
+        }
+    }
+
+    /* This function checks if the binary tree is complete or not */
+    public static boolean isCompleteBinaryTreeRecursiveHelper(TreeNode root, int index, int numberOfNodes) {
+        // An empty tree is complete
+        if (root == null) {
+            return true;
+        }
+
+        // If index assigned to current node is more than
+        // number of nodes in tree, then tree is not complete
+        if (index >= numberOfNodes) {
+            return false;
+        }
+
+        // Recursive call for left and right subtrees
+        return (isCompleteBinaryTreeRecursiveHelper(root.left, 2 * index + 1, numberOfNodes)
+                && isCompleteBinaryTreeRecursiveHelper(root.right, 2 * index + 2, numberOfNodes));
+
     }
 }
