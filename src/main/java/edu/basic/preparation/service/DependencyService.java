@@ -1,13 +1,15 @@
 package edu.basic.preparation.service;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Stack;
 
 import static edu.basic.preparation.data.DataUtilities.basicStack;
 import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
 import edu.basic.preparation.queue.MyQueue;
 import static edu.basic.preparation.stack.MyStack.deleteMiddleElement;
-import static edu.basic.preparation.string.StringUtilities.permutationOfArray;
+import static edu.basic.preparation.string.StringUtilities.optimalUtilization;
 import org.springframework.stereotype.Service;
 
 /**
@@ -98,8 +100,37 @@ public class DependencyService {
 //        System.out.println(" -------------Substrings of the string-------------- ");
 //        subStringsOfString("abcd");
 
-        System.out.println(" -------------Permutations of the array-------------- ");
-        permutationOfArray(Arrays.asList(1,2,3,4), 0);
+//        System.out.println(" -------------Permutations of the array-------------- ");
+//        permutationOfArray(Arrays.asList(1,2,3,4), 0);
+
+//        System.out.println(" -------------Permutations of the string-------------- ");
+//        final List<String> strings = transformString("a1b2");
+//        System.out.println(strings);
+
+
+        final List<List<Integer>> lists = optimalUtilization(23, foregrd(), backgrd());
+        System.out.println(lists);
+
+    }
+
+    private List<List<Integer>> foregrd() {
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<>(Arrays.asList(1, 13)));
+        result.add(new ArrayList<>(Arrays.asList(2, 8)));
+        result.add(new ArrayList<>(Arrays.asList(3, 2)));
+        result.add(new ArrayList<>(Arrays.asList(4, 9)));
+        result.add(new ArrayList<>(Arrays.asList(4, 19)));
+        return result;
+    }
+
+    private List<List<Integer>> backgrd() {
+        List<List<Integer>> result = new ArrayList<>();
+        result.add(new ArrayList<>(Arrays.asList(1, 1)));
+        result.add(new ArrayList<>(Arrays.asList(2, 2)));
+        result.add(new ArrayList<>(Arrays.asList(3, 15)));
+        result.add(new ArrayList<>(Arrays.asList(4, 10)));
+        result.add(new ArrayList<>(Arrays.asList(4, 20)));
+        return result;
     }
 
     public void queueFunctionality() {

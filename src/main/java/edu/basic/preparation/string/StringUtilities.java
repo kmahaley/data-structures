@@ -10,10 +10,12 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
+import java.util.Set;
 import java.util.TreeMap;
 
 /**
@@ -818,6 +820,175 @@ public final class StringUtilities {
     }
 
 
+    /**
+     * 1. From list of all locations of steak houses, take one location at a time. Calculate the distance from origin
+     * (0,0)
+     * 2. Create the list of these distances in ascending order and maintain the list of locations of steak houses in
+     * similar way
+     * i.e nearestSteakHouses
+     * example: distances = {2,3,5,8,13}  and nearestSteakHouse ={{1,0}, {2,3}, {3,1}, {-1,-2}, {0,4} }
+     * 3. After we analyse all steakhouse locations, select required number of steak house locations requested by the
+     * user.
+     */
+    public static List<List<Integer>> nearestXsteakHouses(
+            int totalSteakhouses,
+            List<List<Integer>> allLocations,
+            int numSteakhouses) {
+
+        List<Double> distances = new ArrayList<>();
+        ArrayList<ArrayList<Integer>> closestSteakHouses = new ArrayList<ArrayList<Integer>>();
+
+
+        for (int i = 0; i < allLocations.size(); i++) {
+            ArrayList<Integer> current = (ArrayList<Integer>) allLocations.get(i);
+
+            if (current != null) {
+                Double dist = Math.pow(current.get(0), 2) + Math.pow(current.get(1), 2);
+
+                if (distances.isEmpty()) {
+
+                    distances.add(dist);
+                    closestSteakHouses.add(current);
+
+                } else {
+                    int p = 0;
+                    while (p < distances.size() && dist > distances.get(p)) {
+                        p++;
+                    }
+                    distances.add(p, dist);
+                    closestSteakHouses.add(p, current);
+                }
+
+            }
+
+        }
+
+        List<List<Integer>> result = new ArrayList<>();
+        for (int j = 0; j < numSteakhouses; j++) {
+            result.add(closestSteakHouses.get(j));
+        }
+
+        return result;
+    }
+
+    /**
+     * 1. From given list of foreground applications and list of background applications, get memory utilized by each
+     * combination
+     * of foreground and background application.
+     * memory utilized =10
+     * pair with id = {1,2}
+     * 2. If total memory of each pair is less than or equal to device memory,
+     * a. that pair's memory is added into a list in descending order
+     * b. and the pair is maintained according to above order in another list
+     *
+     * example: device memory = 10
+     * memories : {10, 10, 8, 7} list of pairs with ids :{ {1,2}, {2,1}, {3,4}, {1,3} }
+     *
+     * 3. Create resultant list of pairs from above step which matches device capacity or nearest to device capacity
+     *
+     * result: { {1,2}, {2,1} }
+     */
+    public static List<List<Integer>> optimalUtilization(
+            int deviceCapacity,
+            List<List<Integer>> foregroundAppList,
+            List<List<Integer>> backgroundAppList) {
+
+        List<List<Integer>> result = new ArrayList<>();
+        List<Integer> memories = new ArrayList<>();
+
+        for (int i = 0; i < foregroundAppList.size(); i++) {
+            ArrayList<Integer> foreGrd = (ArrayList<Integer>) foregroundAppList.get(i);
+
+
+            for (int j = 0; j < backgroundAppList.size(); j++) {
+                ArrayList<Integer> backGrd = (ArrayList<Integer>) backgroundAppList.get(j);
+
+                if (foreGrd != null && backGrd != null) {
+                    int memory = foreGrd.get(1) + backGrd.get(1);
+
+                    if (memory <= deviceCapacity) {
+
+                        List<Integer> ids = new ArrayList<>();
+                        ids.add(foreGrd.get(0));
+                        ids.add(backGrd.get(0));
+                        //Add first pair
+                        if (memories.isEmpty()) {
+                            memories.add(memory);
+                            result.add(ids);
+
+                        } else {
+                            // Add pairs in descending order
+                            int p = 0;
+                            while (p < memories.size() && memory < memories.get(p)) {
+                                p++;
+                            }
+                            memories.add(p, memory);
+                            result.add(p, ids);
+                        }
+                    }
+
+
+                }
+            }
+        }
+
+        int indexField = 0;
+        List<List<Integer>> finalResult = new ArrayList<>();
+
+        while (indexField < result.size()) {
+            if (memories.get(indexField) == deviceCapacity) {
+                finalResult.add(result.get(indexField));
+            }
+            indexField++;
+        }
+
+        return finalResult;
+
+    }
+
+
+    /**
+     * Permutation of string
+     *
+     * @param str a1b1
+     * @return [a1b2, a1B2, A1b2, A1B2]
+     */
+    public static List<String> transformString(String str) {
+
+        Set<String> set = new HashSet<>();
+
+        List<String> mainList = new ArrayList<String>();
+
+        if(str != null && str != ""){
+            transformStringHelper(0, str, set);
+        } else {
+            set.add(str);
+        }
+        mainList.addAll(set);
+        return mainList;
+
+    }
+
+    //Recursion
+    private static void transformStringHelper(int index, String oldString, Set<String> set) {
+
+        if (index >= oldString.length()) {
+            return;
+        }
+
+        final char current = oldString.charAt(index);
+        set.add(oldString);
+
+        if (Character.isLetter(current)) {
+            final String newString = oldString.substring(0, index) + Character.toUpperCase(current) + oldString.substring(index + 1);
+
+            if (!set.contains(newString)) {
+                set.add(newString);
+                transformStringHelper(0, newString, set);
+            }
+        }
+        transformStringHelper(index + 1, oldString, set);
+    }
 }
 
 
