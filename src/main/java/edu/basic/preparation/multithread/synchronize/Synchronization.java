@@ -2,6 +2,9 @@ package edu.basic.preparation.multithread.synchronize;
 
 import lombok.Data;
 
+/**
+ * multi threading using synchronized keyword
+ */
 @Data
 public class Synchronization {
 

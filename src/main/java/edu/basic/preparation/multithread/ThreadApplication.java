@@ -1,6 +1,6 @@
 package edu.basic.preparation.multithread;
 
-import edu.basic.preparation.multithread.synchronize.Synchronization;
+import edu.basic.preparation.multithread.executors.ExecutorServiceDemo;
 
 public class ThreadApplication {
 
@@ -19,9 +19,12 @@ public class ThreadApplication {
 //        t3.start();
 //        t4.start();
 
-        Synchronization synchronization = new Synchronization();
-        synchronization.doWork();
+//        Synchronization synchronization = new Synchronization();
+//        synchronization.doWork();
+//
+//        System.out.println(synchronization.getCount());
 
-        System.out.println(synchronization.getCount());
+        ExecutorServiceDemo demo = new ExecutorServiceDemo();
+        demo.produceFactorials();
     }
 }
