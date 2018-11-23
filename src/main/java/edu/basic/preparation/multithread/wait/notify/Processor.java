@@ -4,25 +4,31 @@ import java.util.Scanner;
 
 import lombok.Data;
 
+/**
+ * wait and notify can be used only inside synchronised blocks
+ */
 @Data
 public class Processor {
 
+    volatile Object lock = new Object();
+
     public void producer() throws InterruptedException {
-        synchronized (this) {
+
+        synchronized (lock) {
             System.out.println("Inside producer");
-            wait();
-            System.out.println("resumed");
+            lock.wait();
+            System.out.println("producer resumed");
         }
     }
 
     public void consumer() throws InterruptedException {
         Scanner scanner = new Scanner(System.in);
         Thread.sleep(2000);
-        synchronized (this) {
+        synchronized (lock) {
             System.out.println("Press enter : ...");
             scanner.nextLine();
             System.out.println("Pressed entered");
-            notify();
+            lock.notify();
             Thread.sleep(5000);
         }
     }
