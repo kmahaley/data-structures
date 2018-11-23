@@ -1,5 +1,8 @@
 package edu.basic.preparation.multithread.producer.consumer;
 
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
 public class Application {
 
     public static void main(String[] args) throws InterruptedException {
@@ -7,21 +10,22 @@ public class Application {
         Processors processors = new Processors();
 
 //       Producer-consumers using threads
-        Thread t1 = new Thread(() -> processors.produce());
-        Thread t2 = new Thread(() -> processors.consume());
-
-        t1.start();
-        t2.start();
-
-        t1.join();
-        t2.join();
+//        Thread t1 = new Thread(() -> processors.produce());
+//        Thread t2 = new Thread(() -> processors.consume());
+//
+//        t1.start();
+//        t2.start();
+//
+//        t1.join();
+//        t2.join();
 
 
 //        Producer-consumers using executors
-//        ExecutorService service = Executors.newFixedThreadPool(2);
-//        service.submit(() -> processors.produce());
-//        service.submit(() -> processors.consume());
-//
-//        service.shutdown();
+        ProcessorsBlockingQueue processorsBlockingQueue = new ProcessorsBlockingQueue();
+        ExecutorService service = Executors.newFixedThreadPool(2);
+        service.submit(() -> processorsBlockingQueue.produce());
+        service.submit(() -> processorsBlockingQueue.consume());
+
+        service.shutdown();
     }
 }

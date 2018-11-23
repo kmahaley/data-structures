@@ -3,6 +3,10 @@ package edu.basic.preparation.multithread.producer.consumer;
 import java.util.LinkedList;
 import java.util.Random;
 
+/**
+ * Producer and consumer using non thread safe class
+ * hence wait, notify and synchronized is required
+ */
 public class Processors {
 
     final int SIZE = 10;
