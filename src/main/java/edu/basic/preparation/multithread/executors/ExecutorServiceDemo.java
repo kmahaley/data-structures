@@ -2,17 +2,18 @@ package edu.basic.preparation.multithread.executors;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Demo of executor service
  */
 public class ExecutorServiceDemo {
 
-    public void produceFactorials() {
+    public void produceFactorials(){
 
         ExecutorService executorService = Executors.newFixedThreadPool(4);
 
-        for (int i = 1; i < 30; i++) {
+        for (int i = 1; i < 30 ; i++) {
             executorService.execute(new ProduceFactorial(i));
         }
         System.out.println("Submitted all tasks");
@@ -20,10 +21,10 @@ public class ExecutorServiceDemo {
         executorService.shutdown();
 
         System.out.println("Shut down");
+        boolean awaitTermination = false;
         try {
-            Thread.sleep(3000);
+            awaitTermination = executorService.awaitTermination(2, TimeUnit.SECONDS);
             executorService.shutdownNow();
-//            awaitTermination = executorService.awaitTermination(5, TimeUnit.SECONDS);
 
 
         } catch (InterruptedException e) {
@@ -37,7 +38,7 @@ public class ExecutorServiceDemo {
         long no;
 
         public ProduceFactorial(long n) {
-            this.no = n;
+           this.no = n;
         }
 
         @Override
@@ -46,13 +47,11 @@ public class ExecutorServiceDemo {
 
             try {
                 long fact = 1;
-                for (int i = 1; i <= no; i++) {
+                for (int i = 1; i <= no ; i++) {
                     fact = fact * i;
                 }
                 Thread.sleep(1000);
-                System.out.println(Thread
-                        .currentThread()
-                        .getName() + " - " + no + " - " + fact);
+                System.out.println(Thread.currentThread().getName()+ " - " +no +" - "+fact);
             } catch (InterruptedException e) {
                 System.out.println("Time up -------");
             }
