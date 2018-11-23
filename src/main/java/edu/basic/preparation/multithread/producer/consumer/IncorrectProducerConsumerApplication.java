@@ -5,10 +5,10 @@ import java.util.concurrent.ArrayBlockingQueue;
 import java.util.concurrent.BlockingQueue;
 
 /**
- * Non optimal solution
+ * Incorrect way to implement producer and consumer
  * queue can be full or empty
  */
-public class App {
+public class IncorrectProducerConsumerApplication {
 
     public static BlockingQueue<Integer> queue = new ArrayBlockingQueue(20);
 

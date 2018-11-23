@@ -3,7 +3,7 @@ package edu.basic.preparation.multithread.producer.consumer;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Application {
+public class ProducerConsumerApplication {
 
     public static void main(String[] args) throws InterruptedException {
 

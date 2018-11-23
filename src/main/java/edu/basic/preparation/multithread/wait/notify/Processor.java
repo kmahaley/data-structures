@@ -22,8 +22,10 @@ public class Processor {
     }
 
     public void consumer() throws InterruptedException {
+
         Scanner scanner = new Scanner(System.in);
         Thread.sleep(2000);
+
         synchronized (lock) {
             System.out.println("Press enter : ...");
             scanner.nextLine();

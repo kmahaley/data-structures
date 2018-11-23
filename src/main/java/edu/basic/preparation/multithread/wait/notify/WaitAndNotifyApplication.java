@@ -1,6 +1,6 @@
 package edu.basic.preparation.multithread.wait.notify;
 
-public class Application {
+public class WaitAndNotifyApplication {
 
     public static void main(String[] args) throws InterruptedException {
 

@@ -21,9 +21,8 @@ public class ExecutorServiceDemo {
         executorService.shutdown();
 
         System.out.println("Shut down");
-        boolean awaitTermination = false;
         try {
-            awaitTermination = executorService.awaitTermination(2, TimeUnit.SECONDS);
+            executorService.awaitTermination(2, TimeUnit.SECONDS);
             executorService.shutdownNow();
 
 
@@ -47,6 +46,7 @@ public class ExecutorServiceDemo {
 
             try {
                 long fact = 1;
+
                 for (int i = 1; i <= no ; i++) {
                     fact = fact * i;
                 }

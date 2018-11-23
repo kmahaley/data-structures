@@ -3,15 +3,19 @@ package edu.basic.preparation.multithread.synchronize;
 import lombok.Data;
 
 /**
- * multi threading using synchronized method
+ * Locking mechanism using object lock
  */
 @Data
-public class Synchronization {
-
+public class SynchronizedLock {
     private int count;
 
-    public synchronized void incrementCount() {
-        count++;
+    private Object lock = new Object();
+
+    public void incrementCount() {
+
+        synchronized (lock){
+            count++;
+        }
     }
 
     public void doWork() {
@@ -35,7 +39,7 @@ public class Synchronization {
 
         @Override
         public void run() {
-            for (int i = 0; i < 2000; i++) {
+            for (int i = 0; i < 3000; i++) {
 
                 incrementCount();
             }
