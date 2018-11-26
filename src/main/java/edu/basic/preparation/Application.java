@@ -18,12 +18,11 @@ public class Application {
 
 //        dependencyService.stackFunctionality();
 
-        dependencyService.stringFunctionality();
+//        dependencyService.stringFunctionality();
 
+        dependencyService.graphFunctionality();
 
     }
-
-
 
 
 }

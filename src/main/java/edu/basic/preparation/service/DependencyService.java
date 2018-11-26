@@ -6,7 +6,9 @@ import java.util.List;
 import java.util.Stack;
 
 import static edu.basic.preparation.data.DataUtilities.basicStack;
+import static edu.basic.preparation.data.DataUtilities.constructGraph;
 import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
+import static edu.basic.preparation.graph.Graph.graphDFS;
 import edu.basic.preparation.queue.MyQueue;
 import static edu.basic.preparation.stack.MyStack.deleteMiddleElement;
 import static edu.basic.preparation.string.StringUtilities.optimalUtilization;
@@ -246,4 +248,11 @@ public class DependencyService {
     }
 
 
+    public void graphFunctionality(){
+//        System.out.println("********* BFS traversal in graph *******");
+//        graphBFS(0, constructGraph());
+
+        System.out.println("********* DFS traversal in graph *******");
+        graphDFS(constructGraph());
+    }
 }

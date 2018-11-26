@@ -1,7 +1,10 @@
 package edu.basic.preparation.data;
 
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import edu.basic.preparation.list.MyList;
@@ -134,6 +137,24 @@ public final class DataUtilities {
         return root;
     }
 
+
+    public static Map<Integer, List<Integer>> constructGraph(){
+
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        graph.put(0, Arrays.asList(1, 2, 3));
+        graph.put(1, Arrays.asList(4, 5));
+        graph.put(2, Arrays.asList(6));
+        graph.put(3, Arrays.asList(7, 8));
+        graph.put(4, new LinkedList<>());
+        graph.put(5, new LinkedList<>());
+        graph.put(6, Arrays.asList(12));
+        graph.put(7, new LinkedList<>());
+        graph.put(8, Arrays.asList(9));
+        graph.put(9, new LinkedList<>());
+        graph.put(12, new LinkedList<>());
+
+        return graph;
+    }
     private DataUtilities() {
     }
 }
