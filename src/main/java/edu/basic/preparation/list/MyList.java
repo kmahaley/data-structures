@@ -87,24 +87,67 @@ public class MyList {
         System.out.println();
     }
 
+    /**
+     * This will delete node with given value
+     *
+     * @param value value
+     */
     public void delete(int value) {
 
         if (head == null) {
             return;
-        } else {
-            Node current = head;
-            Node prev = null;
-            while (current != null) {
-                if (current.getKey() != value) {
-                    prev = current;
-                    current = current.getNext();
-                } else {
-                    prev.setNext(current.getNext());
-                    current.setNext(null);
-                    current = prev.getNext();
-                }
+        }
+        //if element is first to be deleted
+        if(head.getKey() == value){
+            head = head.getNext();
+            return;
+        }
+
+        Node current = head;
+        Node prev = null;
+        while (current != null) {
+
+            if (current.getKey() != value) {
+                prev = current;
+                current = current.getNext();
+            } else {
+                prev.setNext(current.getNext());
+                current.setNext(null);
+                current = prev.getNext();
+                break;
             }
         }
+
+    }
+
+    /**
+     * Just delete single element
+     *
+     * @param head head
+     * @param element to be deleted
+     */
+    public static void deleteOneNode(Node head, int element){
+
+        if(head == null){
+            return;
+        }
+
+        if(head.getKey() == element){
+            head = head.getNext();
+            return;
+        }
+        Node temp = head, prev = null;
+        //Search until you get the element
+        while (temp != null && temp.getKey() != element){
+            prev = temp;
+            temp = temp.getNext();
+        }
+        //element not in the list
+        if(temp == null)
+            return;
+
+        prev.setNext(temp.getNext());
+
     }
 
     public Node middleElement() {
@@ -113,12 +156,8 @@ public class MyList {
         } else {
             Node fast = head;
             Node slow = head;
-            while (fast
-                    .getNext()
-                    .getNext() != null && fast.getNext() != null) {
-                fast = fast
-                        .getNext()
-                        .getNext();
+            while (fast.getNext().getNext() != null && fast.getNext() != null) {
+                fast = fast.getNext().getNext();
                 slow = slow.getNext();
             }
             return slow;
@@ -207,6 +246,16 @@ public class MyList {
         return getLengthRecursive(temp.getNext(), length + 1);
     }
 
+    /**
+     * Length of the linked list
+     */
+    public static int getLengthRecursive2(Node temp) {
+        if (temp == null) {
+            return 0;
+        }
+        return 1 + getLengthRecursive2(temp.getNext());
+    }
+
     public static Node reverseListInPairs(Node head) {
         if (head == null) {
             return null;
@@ -237,5 +286,27 @@ public class MyList {
         prev = head;
         head = next;
         return recursiveReverseLinkedList(head, prev);
+    }
+
+    public static boolean searchRecursive(Node head, int data) {
+        if (head == null) {
+            return false;
+        }
+        if (head.getKey() == data) {
+            return true;
+        }
+        return searchRecursive(head.getNext(), data);
+
+    }
+
+    public static int getElementIndexPosition(Node head, int data, int index) {
+
+        if (head == null) {
+            return -1;
+        }
+        if (head.getKey() == data) {
+            return index;
+        }
+        return getElementIndexPosition(head.getNext(), data, index + 1);
     }
 }

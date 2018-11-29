@@ -6,13 +6,12 @@ import java.util.List;
 import java.util.Stack;
 
 import static edu.basic.preparation.data.DataUtilities.basicStack;
-import static edu.basic.preparation.data.DataUtilities.getListForBasicOperation;
 import static edu.basic.preparation.data.DataUtilities.getListForPairwiseSwap;
 import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
-import edu.basic.preparation.list.MyList;
+import static edu.basic.preparation.list.MyList.getElementIndexPosition;
 import static edu.basic.preparation.list.MyList.getLengthRecursive;
-import static edu.basic.preparation.list.MyList.length;
 import static edu.basic.preparation.list.MyList.printFromNode;
+import static edu.basic.preparation.list.MyList.searchRecursive;
 import edu.basic.preparation.queue.MyQueue;
 import static edu.basic.preparation.stack.MyStack.deleteMiddleElement;
 import static edu.basic.preparation.string.StringUtilities.optimalUtilization;
@@ -25,15 +24,19 @@ import org.springframework.stereotype.Service;
 public class DependencyService {
 
     public void listFunctionality() {
-        final MyList listForBasicOperation = getListForBasicOperation();
-        System.out.println("********* basic list operation ***********");
+//        final MyList listForBasicOperation = getListForBasicOperation();
+//        System.out.println("********* basic list operation ***********");
 //        listForBasicOperation.print();
 
         System.out.println("********* basic list operation and get length iterative and recursive ***********");
         printFromNode(getListForPairwiseSwap());
         final int lengthRecursive = getLengthRecursive(getListForPairwiseSwap(), 0);
-        final int length = length(getListForPairwiseSwap());
-        System.out.println(length +" - "+ lengthRecursive);
+//        final int length = length(getListForPairwiseSwap());
+//        System.out.println(length +" - "+ lengthRecursive);
+
+        System.out.println("********* search in list ***********");
+        System.out.println(getElementIndexPosition(getListForPairwiseSwap(), 12, 1));
+        System.out.println(searchRecursive(getListForPairwiseSwap(), 1));
 
 //        final Node middleElement = listForBasicOperation.middleElement();
 //        System.out.println("Middle : " + middleElement.getKey());
