@@ -309,4 +309,36 @@ public class MyList {
         }
         return getElementIndexPosition(head.getNext(), data, index + 1);
     }
+
+
+    /**
+     *
+     * @param head start
+     * @param pos nth node from last
+     * @return nth node
+     */
+    public static int getNthNodeFromLinkedList(Node head, int pos) {
+
+        if (head == null) {
+            return -1;
+        }
+
+        Node slow = head, fast = head;
+        int i = 1;
+
+        while (fast != null && i < pos) {
+            fast = fast.getNext();
+            i++;
+        }
+
+        if (fast == null) {
+            return -1;
+        }
+        while (fast.getNext() != null) {
+            slow = slow.getNext();
+            fast = fast.getNext();
+        }
+        return slow.getKey();
+
+    }
 }
