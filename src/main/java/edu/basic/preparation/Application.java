@@ -12,7 +12,7 @@ public class Application {
 
 //        dependencyService.binaryTreeFunctionality();
 
-//        dependencyService.listFunctionality();
+        dependencyService.listFunctionality();
 
 //        dependencyService.queueFunctionality();
 
@@ -20,7 +20,7 @@ public class Application {
 
 //        dependencyService.stringFunctionality();
 
-        dependencyService.graphFunctionality();
+//        dependencyService.graphFunctionality();
 
     }
 

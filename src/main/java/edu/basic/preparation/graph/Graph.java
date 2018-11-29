@@ -67,4 +67,54 @@ public class Graph {
 
         }
     }
+
+    /**
+     * If direct graph contains cycle return true
+     *
+     * @param graph
+     *
+     * @return if cycle return true
+     */
+    public static boolean isCycleInDirectedGraph(Map<Integer, List<Integer>> graph) {
+
+
+        final Set<Integer> toBeVisited = graph.keySet();
+        final Set<Integer> visited = new HashSet<>();
+        final Set<Integer> inProcess = new HashSet<>();
+
+
+        while (! toBeVisited.isEmpty()) {
+//            toBeVisited.
+//            if (isCycleUtil(key, new HashSet<Integer>(), new HashSet<Integer>(), graph)) {
+//                return true;
+//            }
+        }
+
+        return false;
+
+    }
+
+    private static boolean isCycleUtil(
+            Integer key,
+            HashSet<Integer> visited,
+            HashSet<Integer> ancestor,
+            Map<Integer, List<Integer>> graph) {
+
+        if (visited.contains(key)) {
+            return false;
+        }
+
+
+        visited.add(key);
+        ancestor.add(key);
+        final List<Integer> children = graph.get(key);
+        for (Integer child : children) {
+            if (isCycleUtil(child, visited, ancestor, graph)) {
+                return true;
+            }
+        }
+
+        return false;
+
+    }
 }

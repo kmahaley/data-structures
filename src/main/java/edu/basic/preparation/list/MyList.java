@@ -196,6 +196,17 @@ public class MyList {
         return count;
     }
 
+
+    /**
+     * Length of the linked list
+     */
+    public static int getLengthRecursive(Node temp, int length) {
+        if (temp == null) {
+            return length;
+        }
+        return getLengthRecursive(temp.getNext(), length + 1);
+    }
+
     public static Node reverseListInPairs(Node head) {
         if (head == null) {
             return null;

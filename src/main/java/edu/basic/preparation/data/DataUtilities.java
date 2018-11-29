@@ -155,6 +155,19 @@ public final class DataUtilities {
 
         return graph;
     }
+
+
+    public static Map<Integer, List<Integer>> constructDirectedCyclicGraph(){
+
+        Map<Integer, List<Integer>> graph = new HashMap<>();
+        graph.put(0, Arrays.asList(1, 2));
+        graph.put(1, Arrays.asList(2));
+        graph.put(2, Arrays.asList(0, 3));
+        graph.put(3, new LinkedList<>());
+
+        return graph;
+    }
+
     private DataUtilities() {
     }
 }
