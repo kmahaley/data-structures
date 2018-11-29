@@ -331,14 +331,45 @@ public class MyList {
             i++;
         }
 
+        //pos is greater than length of the linked list
         if (fast == null) {
             return -1;
         }
+        //move fast and slow step by steps
         while (fast.getNext() != null) {
             slow = slow.getNext();
             fast = fast.getNext();
         }
         return slow.getKey();
 
+    }
+
+    public static Node deleteAllOccurencesOfNode(Node head, int element) {
+
+        if (head == null) {
+            return null;
+        }
+
+        Node prev = null, curr = head;
+
+        while (curr != null) {
+            if (curr.getKey() == element) {
+                Node next = curr.getNext();
+                //if first node is to be deleted
+                if(prev == null){
+                    curr.setNext(null);
+                    curr = next;
+                    head = curr;
+                } else {
+                    prev.setNext(next);
+                    curr = next;
+                }
+
+            } else {
+                prev = curr;
+                curr = curr.getNext();
+            }
+        }
+        return head;
     }
 }

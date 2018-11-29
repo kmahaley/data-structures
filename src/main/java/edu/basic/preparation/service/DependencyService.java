@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Stack;
 
 import static edu.basic.preparation.data.DataUtilities.basicStack;
-import static edu.basic.preparation.data.DataUtilities.getListForPairwiseSwap;
+import static edu.basic.preparation.data.DataUtilities.getDuplicatedNodesList;
 import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
-import static edu.basic.preparation.list.MyList.getLengthRecursive;
-import static edu.basic.preparation.list.MyList.getNthNodeFromLinkedList;
+import edu.basic.preparation.data.Node;
+import static edu.basic.preparation.list.MyList.deleteAllOccurencesOfNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import edu.basic.preparation.queue.MyQueue;
 import static edu.basic.preparation.stack.MyStack.deleteMiddleElement;
@@ -27,14 +27,20 @@ public class DependencyService {
 //        System.out.println("********* basic list operation ***********");
 //        listForBasicOperation.print();
 
-        System.out.println("********* basic list operation and get length iterative and recursive ***********");
-        printFromNode(getListForPairwiseSwap());
-        final int lengthRecursive = getLengthRecursive(getListForPairwiseSwap(), 0);
+//        System.out.println("********* basic list operation and get length iterative and recursive ***********");
+//        printFromNode(getListForPairwiseSwap());
+//        final int lengthRecursive = getLengthRecursive(getListForPairwiseSwap(), 0);
 //        final int length = length(getListForPairwiseSwap());
 //        System.out.println(length +" - "+ lengthRecursive);
 
-        System.out.println("********* get nth node from last ***********");
-        System.out.println(getNthNodeFromLinkedList(getListForPairwiseSwap(), 5));
+//        System.out.println("********* get nth node from last ***********");
+//        System.out.println(getNthNodeFromLinkedList(getListForPairwiseSwap(), 5));
+
+        System.out.println("********* delete all occurences from list ***********");
+        final Node duplicatedNodesList = getDuplicatedNodesList();
+        printFromNode(duplicatedNodesList);
+        final Node newHead = deleteAllOccurencesOfNode(duplicatedNodesList, 10);
+        printFromNode(newHead);
 
 //        System.out.println("********* search in list ***********");
 //        System.out.println(getElementIndexPosition(getListForPairwiseSwap(), 12, 1));

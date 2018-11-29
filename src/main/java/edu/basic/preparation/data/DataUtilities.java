@@ -35,6 +35,21 @@ public final class DataUtilities {
         return myList;
     }
 
+    public static Node getDuplicatedNodesList(){
+        Node head = new Node(10);
+        head.setNext(new Node(10));
+        head.getNext().setNext(new Node(10));
+        head.getNext().getNext().setNext(new Node(40));
+        head.getNext().getNext().getNext().setNext(new Node(80));
+        head.getNext().getNext().getNext().getNext().setNext(new Node(60));
+        head.getNext().getNext().getNext().getNext().getNext().setNext(new Node(20));
+        head.getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(10));
+        head.getNext().getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(90));
+        head.getNext().getNext().getNext().getNext().getNext().getNext().getNext().getNext().setNext(new Node(10));
+
+        return head;
+    }
+
     public static  MyList getListForBasicOperation(){
         MyList myList = new MyList();
         myList.add(10);
