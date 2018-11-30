@@ -3,7 +3,6 @@ package edu.basic.preparation.queue;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -113,8 +112,7 @@ public class MyQueue {
 
     public static void priorityQueue() {
         // Creating empty priority queue
-        PriorityQueue<String> pQueue =
-                new PriorityQueue<String>();
+        PriorityQueue<String> pQueue = new PriorityQueue<String>();
 
         // Adding items to the pQueue using add()
         pQueue.add("C");
@@ -128,47 +126,38 @@ public class MyQueue {
 
         // Printing all elements
         System.out.println("The queue elements:");
-        Iterator itr = pQueue.iterator();
-        while (itr.hasNext())
-            System.out.println(itr.next());
+        pQueue.forEach(element -> System.out.println(element));
 
         // Removing the top priority element (or head) and
         // printing the modified pQueue using poll()
-        pQueue.poll();
-        System.out.println("After removing an element" +
-                "with poll function:");
-        Iterator<String> itr2 = pQueue.iterator();
-        while (itr2.hasNext())
-            System.out.println(itr2.next());
+        System.out.println("Priority element is : "+pQueue.poll());
+
+        System.out.println("After removing an element with poll function: ");
+        pQueue.forEach(element -> System.out.println(element));
 
         // Removing Java using remove()
         pQueue.remove("Java");
-        System.out.println("after removing Java with" +
-                " remove function:");
-        Iterator<String> itr3 = pQueue.iterator();
-        while (itr3.hasNext())
-            System.out.println(itr3.next());
+        System.out.println("after removing Java with remove function:");
+        pQueue.forEach(element -> System.out.println(element));
 
         // Check if an element is present using contains()
-        boolean b = pQueue.contains("C");
-        System.out.println ( "Priority queue contains C " +
-                "or not?: " + b);
+        System.out.println ( "Priority queue contains C or not?: " + pQueue.contains("C"));
 
         // Getting objects from the queue using toArray()
         // in an array and print the array
-        Object[] arr = pQueue.toArray();
+        String[] arr = (String[]) pQueue.toArray();
         System.out.println ( "Value in array: ");
         for (int i = 0; i<arr.length; i++)
-            System.out.println ( "Value: " + arr[i].toString()) ;
+            System.out.println ( "Value: " + arr[i]) ;
     }
 
 
-
     //TreeSet sorted according to length of the string
-    public static void setImplementation() {
+    public static void treeSet() {
         final Map<String, Integer> map = createMap();
 
         Set<String> set = new TreeSet<>(new StringLengthComparator());
+
         map.forEach((k,v) -> set.add(k));
 
         set.forEach(x -> System.out.println(x));
@@ -178,7 +167,7 @@ public class MyQueue {
     public static void priorityQueueImplementation() {
         final Map<String, Integer> map = createMap();
 
-        PriorityQueue<Node> pq = new PriorityQueue<>(10, new DecreasingOrderStockComparator());
+        PriorityQueue<Node> pq = new PriorityQueue<>(new DecreasingOrderStockComparator());
 
         map.forEach((k,v) -> pq.add(new Node(k,v)));
 

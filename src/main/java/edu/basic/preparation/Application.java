@@ -12,15 +12,16 @@ public class Application {
 
 //        dependencyService.binaryTreeFunctionality();
 
-        dependencyService.listFunctionality();
+//        dependencyService.listFunctionality();
 
-//        dependencyService.queueFunctionality();
+        dependencyService.queueFunctionality();
 
 //        dependencyService.stackFunctionality();
 
 //        dependencyService.stringFunctionality();
 
 //        dependencyService.graphFunctionality();
+
 
     }
 

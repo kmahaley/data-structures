@@ -1,7 +1,9 @@
 package edu.basic.preparation.stack;
 
+import java.util.Comparator;
 import java.util.LinkedList;
 import java.util.NoSuchElementException;
+import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.Stack;
 import java.util.stream.Collectors;
@@ -10,6 +12,62 @@ import java.util.stream.Collectors;
  * @author Kartik Mahaley
  */
 public class MyStack {
+
+    /**
+     * Stack using priority queue structure
+     */
+    public static class StackUsingPriorityQueue {
+
+        PriorityQueue<PriorityNode> priorityQueue = new PriorityQueue<>(new PriorityNodeComparator());
+
+        public void push(int data, int priority) {
+            PriorityNode node = new PriorityNode(data, priority);
+            priorityQueue.add(node);
+        }
+
+
+        public void pop() {
+            final PriorityNode poppedNode = priorityQueue.poll();
+            System.out.println("Data : " + poppedNode.data + " priority : " + poppedNode.priority);
+        }
+
+        public boolean isEmpty() {
+            return priorityQueue.isEmpty();
+        }
+
+        public int peek() {
+            if (!isEmpty()) {
+
+                return priorityQueue.peek().data;
+            }
+            return -1;
+        }
+
+    }
+
+    /**
+     * Node for priority queue
+     */
+    public static class PriorityNode {
+        int data;
+        int priority;
+
+        public PriorityNode(int data, int priority) {
+            this.data = data;
+            this.priority = priority;
+        }
+    }
+
+    /**
+     * comparator for PriorityNode
+     */
+    public static class PriorityNodeComparator implements Comparator<PriorityNode> {
+
+        @Override
+        public int compare(PriorityNode o1, PriorityNode o2) {
+            return o2.priority - o1.priority;
+        }
+    }
 
     public static class StackUsingTwoQueue {
 
@@ -59,7 +117,6 @@ public class MyStack {
      * @param a array
      */
     public static void nearestSmallerNumberOnLeft(int a[]) {
-        int size = a.length;
         Stack<Integer> stack = new Stack<>();
 
         for (int current : a) {

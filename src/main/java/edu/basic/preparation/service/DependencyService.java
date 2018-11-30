@@ -11,7 +11,7 @@ import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLef
 import edu.basic.preparation.data.Node;
 import static edu.basic.preparation.list.MyList.deleteAllOccurencesOfNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
-import edu.basic.preparation.queue.MyQueue;
+import edu.basic.preparation.stack.MyStack;
 import static edu.basic.preparation.stack.MyStack.deleteMiddleElement;
 import static edu.basic.preparation.string.StringUtilities.optimalUtilization;
 import org.springframework.stereotype.Service;
@@ -171,26 +171,38 @@ public class DependencyService {
 //        final int third = queueUsingTwoStacks.deQueue();
 //        final int four = queueUsingTwoStacks.deQueue();
 
-        MyQueue.QueueUsingOneStacks queueUsingOneStacks = new MyQueue.QueueUsingOneStacks();
-        queueUsingOneStacks.enQueue(10);
-        queueUsingOneStacks.enQueue(20);
-        queueUsingOneStacks.enQueue(30);
-        queueUsingOneStacks.enQueue(40);
-        queueUsingOneStacks.enQueue(50);
-
-        System.out.println(queueUsingOneStacks);
-        queueUsingOneStacks.deQueue();
-        System.out.println(queueUsingOneStacks);
+//        MyQueue.QueueUsingOneStacks queueUsingOneStacks = new MyQueue.QueueUsingOneStacks();
+//        queueUsingOneStacks.enQueue(10);
+//        queueUsingOneStacks.enQueue(20);
+//        queueUsingOneStacks.enQueue(30);
+//        queueUsingOneStacks.enQueue(40);
+//        queueUsingOneStacks.enQueue(50);
+//
+//        System.out.println(queueUsingOneStacks);
+//        queueUsingOneStacks.deQueue();
+//        System.out.println(queueUsingOneStacks);
 //
 //        System.out.println(Arrays.asList(first, second, third, four));
 //
 //        priorityQueue();
 //
-//        setImplementation();
+//        treeSet();
 //
 //        priorityQueueImplementation();
 //
 //        mapImplementation();
+
+        MyStack.StackUsingPriorityQueue stackUsingPriorityQueue = new MyStack.StackUsingPriorityQueue();
+        stackUsingPriorityQueue.push(6,10);
+        stackUsingPriorityQueue.push(3,7);
+        stackUsingPriorityQueue.push(4,8);
+        stackUsingPriorityQueue.push(2,5);
+        stackUsingPriorityQueue.push(1,2);
+        stackUsingPriorityQueue.push(5,9);
+
+        stackUsingPriorityQueue.pop();
+        stackUsingPriorityQueue.pop();
+        stackUsingPriorityQueue.pop();
 
     }
 
