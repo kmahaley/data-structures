@@ -205,45 +205,45 @@ public class MyStack {
     /**
      * Insert into sorted stack
      *
-     * @param st stack
+     * @param stack stack
      * @param x insert element in sorted stack
      */
-    private static void insertIntoSortedStack(Stack<Integer> st, int x) {
-        if (st.isEmpty() || x > st.peek()) {
-            st.push(x);
+    private static void insertIntoSortedStack(Stack<Integer> stack, int x) {
+        if (stack.isEmpty() || x > stack.peek()) {
+            stack.push(x);
         } else {
-            int a = st.pop();
-            insertIntoSortedStack(st, x);
-            st.push(a);
+            int a = stack.pop();
+            insertIntoSortedStack(stack, x);
+            stack.push(a);
         }
     }
 
     /**
      * Reverse stack using recursive option
      *
-     * @param st stack
+     * @param stack stack
      */
-    public static void reverseStack(Stack<Integer> st) {
-        if (!st.isEmpty()) {
-            int x = st.pop();
-            reverseStack(st);
-            insertAtBottom(st, x);
+    public static void reverseStack(Stack<Integer> stack) {
+        if (!stack.isEmpty()) {
+            int x = stack.pop();
+            reverseStack(stack);
+            insertAtBottom(stack, x);
         }
     }
 
     /**
      * Insert element at bottom
      *
-     * @param st stack
+     * @param stack stack
      * @param x insert current at bottom
      */
-    private static void insertAtBottom(Stack<Integer> st, int x) {
-        if (st.isEmpty()) {
-            st.push(x);
+    private static void insertAtBottom(Stack<Integer> stack, int x) {
+        if (stack.isEmpty()) {
+            stack.push(x);
         } else {
-            int a = st.pop();
-            insertAtBottom(st, x);
-            st.push(a);
+            int a = stack.pop();
+            insertAtBottom(stack, x);
+            stack.push(a);
         }
     }
 
@@ -296,4 +296,29 @@ public class MyStack {
             st.push(a);
         }
     }
+
+    /**
+     * Sort a stack using iteratively
+     *
+     * @param original stack
+     * @return stack
+     */
+    public static Stack<Integer> sortStackIteratively(Stack<Integer> original) {
+
+        if (original.isEmpty()) {
+            return original;
+        }
+
+        Stack<Integer> aux = new Stack<>();
+        while (!original.isEmpty()) {
+
+            final Integer current = original.pop();
+            while (!aux.isEmpty() && aux.peek() > current) {
+                original.push(aux.pop());
+            }
+            aux.push(current);
+        }
+        return aux;
+    }
+
 }

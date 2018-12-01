@@ -11,8 +11,7 @@ import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLef
 import edu.basic.preparation.data.Node;
 import static edu.basic.preparation.list.MyList.deleteAllOccurencesOfNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
-import edu.basic.preparation.stack.MyStack;
-import static edu.basic.preparation.stack.MyStack.deleteMiddleElement;
+import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.optimalUtilization;
 import org.springframework.stereotype.Service;
 
@@ -192,17 +191,20 @@ public class DependencyService {
 //
 //        mapImplementation();
 
-        MyStack.StackUsingPriorityQueue stackUsingPriorityQueue = new MyStack.StackUsingPriorityQueue();
-        stackUsingPriorityQueue.push(6,10);
-        stackUsingPriorityQueue.push(3,7);
-        stackUsingPriorityQueue.push(4,8);
-        stackUsingPriorityQueue.push(2,5);
-        stackUsingPriorityQueue.push(1,2);
-        stackUsingPriorityQueue.push(5,9);
+//        MyStack.StackUsingPriorityQueue stackUsingPriorityQueue = new MyStack.StackUsingPriorityQueue();
+//        stackUsingPriorityQueue.push(6,10);
+//        stackUsingPriorityQueue.push(3,7);
+//        stackUsingPriorityQueue.push(4,8);
+//        stackUsingPriorityQueue.push(2,5);
+//        stackUsingPriorityQueue.push(1,2);
+//        stackUsingPriorityQueue.push(5,9);
+//
+//        stackUsingPriorityQueue.pop();
+//        stackUsingPriorityQueue.pop();
+//        stackUsingPriorityQueue.pop();
 
-        stackUsingPriorityQueue.pop();
-        stackUsingPriorityQueue.pop();
-        stackUsingPriorityQueue.pop();
+//        final List<Integer> splitQueue = splitQueue(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+//        System.out.println(splitQueue);
 
     }
 
@@ -226,11 +228,12 @@ public class DependencyService {
 //        System.out.println("********* next nearest greater number *******");
 //        nextGreatestElement(input);
 
-//        System.out.println("********* sort a stack using recursion stack *******");
-//        final Stack<Integer> stack = basicStack();
-//        System.out.println(stack);
+        System.out.println("********* sort a stack using recursion stack *******");
+        final Stack<Integer> stack = basicStack();
+        System.out.println(stack);
 //        sortStack(stack);
 //        System.out.println(stack);
+        System.out.println(sortStackIteratively(stack));
 //
 //        System.out.println("********* Reverse stack using recursion *******");
 //        final Stack<Integer> stackOriginal = basicStack();
@@ -242,11 +245,11 @@ public class DependencyService {
 //        int size = longestParenthesisString(")()())");
 //        System.out.println(size);
 
-        System.out.println("********* Longest parenthesis sequence *******");
-        final Stack<Integer> integerStack = basicStack();
-        System.out.println(integerStack);
-        deleteMiddleElement(integerStack, integerStack.size(), integerStack.size()-1);
-        System.out.println(integerStack);
+//        System.out.println("********* Longest parenthesis sequence *******");
+//        final Stack<Integer> integerStack = basicStack();
+//        System.out.println(integerStack);
+//        deleteMiddleElement(integerStack, integerStack.size(), integerStack.size()-1);
+//        System.out.println(integerStack);
     }
 
 

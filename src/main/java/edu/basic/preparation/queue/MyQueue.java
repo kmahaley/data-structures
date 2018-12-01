@@ -263,4 +263,32 @@ public class MyQueue {
             return o1.length() - o2.length();
         }
     }
+
+    /**
+     *
+     * @param list list of elements
+     */
+    public static List<Integer> splitQueue(List<Integer> list) {
+
+        final int size = list.size();
+        int mid = size / 2;
+
+        Stack<Integer> stack = new Stack<>();
+
+        for (int i = mid - 1; i >= 0; i--) {
+            stack.push(list.get(i));
+        }
+        boolean isStack = true;
+
+        for (int i = 0; i < size; i++) {
+            if (!stack.isEmpty() && isStack) {
+                list.set(i, stack.pop());
+                isStack = false;
+            } else {
+                list.set(i, list.get(mid++));
+                isStack = true;
+            }
+        }
+        return list;
+    }
 }
