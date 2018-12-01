@@ -147,12 +147,107 @@ public class BinaryTree {
     }
 
     // add nodes to determine size of the tree
-    public static int sizeOfTree(TreeNode start) {
+    public static int sizeOfTreeRecursive(TreeNode start) {
         if (start == null) {
             return 0;
         }
-        return sizeOfTree(start.left) + 1 + sizeOfTree(start.right);
+        return sizeOfTreeRecursive(start.left) + 1 + sizeOfTreeRecursive(start.right);
     }
+
+    //Size of tree iterative
+    public static int sizeOfTreeIterative(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int count =0;
+        while (!queue.isEmpty()){
+            final TreeNode current = queue.remove();
+            count++;
+            if(current.left != null){
+                queue.add(current.left);
+            }
+            if (current.right != null){
+                queue.add(current.right);
+            }
+        }
+        return count;
+    }
+
+    //Height of the tree recursive
+    public static int heightOfTreeRecursive(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        int lh = heightOfTreeRecursive(root.left);
+        int rh = heightOfTreeRecursive(root.right);
+
+        return lh > rh ? lh + 1 : rh + 1;
+    }
+
+    // height of the tree iterative
+    public static int heightOfTreeIterative(TreeNode root) {
+        if(root == null)
+            return 0;
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int count =0;
+        while (!queue.isEmpty()){
+            int size = queue.size();
+            count++;
+            for (int i = 0; i < size; i++) {
+                final TreeNode current = queue.remove();
+                if(current.left != null){
+                    queue.add(current.left);
+                }
+                if (current.right != null){
+                    queue.add(current.right);
+                }
+            }
+
+        }
+        return count;
+    }
+
+
+    //count number of leaf nodes iterative
+    public static int countNumberOfLeafNodesIterative(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int count = 0;
+        while (!queue.isEmpty()) {
+            final TreeNode current = queue.remove();
+
+            if (current.left == null && current.right == null) {
+                count++;
+            } else {
+                if (current.left != null) {
+                    queue.add(current.left);
+                }
+                if (current.right != null) {
+                    queue.add(current.right);
+                }
+            }
+        }
+        return count;
+    }
+
+    //count number of leaf nodes recursive
+    public static int countNumberOfLeafNodesRecursive(TreeNode root) {
+        if(root == null){
+            return 0;
+        }
+        if (root.left == null && root.right == null) {
+            return 1;
+        }
+        return countNumberOfLeafNodesRecursive(root.left) + countNumberOfLeafNodesRecursive(root.right);
+    }
+
 
     //Maximum in the tree
     public static int findMax(TreeNode current) {
@@ -414,7 +509,7 @@ public class BinaryTree {
      */
     public static void isCompleteBinaryTreeRecursive(TreeNode root) {
 
-        final int sizeOfTree = sizeOfTree(root);
+        final int sizeOfTree = sizeOfTreeRecursive(root);
         if (isCompleteBinaryTreeRecursiveHelper(root, 0, sizeOfTree)) {
             System.out.println("Tree is complete");
         } else {
@@ -440,4 +535,37 @@ public class BinaryTree {
                 && isCompleteBinaryTreeRecursiveHelper(root.right, 2 * index + 2, numberOfNodes));
 
     }
+
+    /**
+     * Get lowest key in binary search tree
+     *
+     * @param node node
+     */
+    public static void getLowestNodeInBST(TreeNode node){
+        System.out.println("Iterative : "+findLowestInBinarySearchTreeIterative(node));
+        System.out.println("Recursive : "+findLowestInBinarySearchTreeRecursive(node));
+    }
+
+    public static int findLowestInBinarySearchTreeIterative(TreeNode root){
+        if(root == null){
+            return -1;
+        } else {
+            TreeNode curr = root;
+            while (curr.left != null){
+                curr = curr.left;
+            }
+            return curr.key;
+        }
+
+    }
+    public static int findLowestInBinarySearchTreeRecursive(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        if (root.left == null && root.right == null) {
+            return root.key;
+        }
+        return findLowestInBinarySearchTreeRecursive(root.left);
+    }
+
 }

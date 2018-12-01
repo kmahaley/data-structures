@@ -12,7 +12,12 @@ public abstract class Animal {
     }
 
     public boolean isOlderThan(Animal animal) {
-        return this.getOrder() > animal.getOrder();
+        return this.getOrder() < animal.getOrder();
+    }
+
+    @Override
+    public String toString() {
+        return "Animal{" + name + ", order=" + order + "}";
     }
 }
 

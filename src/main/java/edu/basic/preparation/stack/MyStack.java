@@ -321,4 +321,29 @@ public class MyStack {
         return aux;
     }
 
+
+    /**
+     * reverse a number
+     * @param no number
+     * @return reverse number
+     */
+    public static int reverseNumber(int no) {
+        if (no < 10) {
+            return no;
+        }
+        Stack<Integer> stack = new Stack<>();
+
+        while (no > 0) {
+            stack.push(no % 10);
+            no = no / 10;
+        }
+
+        int rev = 0, digitMultiplier = 1;
+        while (!stack.isEmpty()) {
+            rev = rev + stack.pop() * digitMultiplier;
+            digitMultiplier = digitMultiplier * 10;
+        }
+        return rev;
+    }
+
 }

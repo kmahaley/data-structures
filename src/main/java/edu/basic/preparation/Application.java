@@ -8,15 +8,16 @@ import edu.basic.preparation.service.DependencyService;
 public class Application {
 
     public static void main(String[] args) {
+
         final DependencyService dependencyService = new DependencyService();
 
-//        dependencyService.binaryTreeFunctionality();
+        dependencyService.binaryTreeFunctionality();
 
 //        dependencyService.listFunctionality();
 
 //        dependencyService.queueFunctionality();
 
-        dependencyService.stackFunctionality();
+//        dependencyService.stackFunctionality();
 
 //        dependencyService.stringFunctionality();
 

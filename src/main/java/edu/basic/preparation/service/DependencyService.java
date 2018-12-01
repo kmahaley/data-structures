@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Stack;
 
 import static edu.basic.preparation.data.DataUtilities.basicStack;
+import static edu.basic.preparation.data.DataUtilities.constructTree;
 import static edu.basic.preparation.data.DataUtilities.getDuplicatedNodesList;
 import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
 import edu.basic.preparation.data.Node;
@@ -13,6 +14,8 @@ import static edu.basic.preparation.list.MyList.deleteAllOccurencesOfNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.optimalUtilization;
+import static edu.basic.preparation.tree.BinaryTree.countNumberOfLeafNodesIterative;
+import static edu.basic.preparation.tree.BinaryTree.countNumberOfLeafNodesRecursive;
 import org.springframework.stereotype.Service;
 
 /**
@@ -261,7 +264,18 @@ public class DependencyService {
 //        System.out.println("********* is tree BST *******");
 //        System.out.println(isBST(constructTree(), Integer.MIN_VALUE, Integer.MAX_VALUE));
 //        System.out.println("********* Size of the tree *******");
-//        System.out.println(sizeOfTree(constructTree()));
+//        System.out.println(sizeOfTreeRecursive(constructTree()));
+//        System.out.println(sizeOfTreeIterative(constructTree()));
+
+//        System.out.println("********* height of the tree *******");
+//        System.out.println(heightOfTreeRecursive(constructTree()));
+//        System.out.println(heightOfTreeIterative(constructTree()));
+
+        System.out.println("********* count Leaf nodes of the tree *******");
+        System.out.println(countNumberOfLeafNodesRecursive(constructTree()));
+        System.out.println(countNumberOfLeafNodesIterative(constructTree()));
+
+
 //        System.out.println("********* find maximum of the tree *******");
 //        System.out.println(findMax(constructTree()));
 //
@@ -281,6 +295,9 @@ public class DependencyService {
 
 //        System.out.println("********* All paths from root with given sum *******");
 //        allPathsFromRootWithGivenSum(constructTreeWithSumPath(), 0, 38, new ArrayList<Integer>(), 0);
+
+//        System.out.println("********* Lowest in binary search tree *******");
+//        getLowestNodeInBST(constructTree());
     }
 
 
