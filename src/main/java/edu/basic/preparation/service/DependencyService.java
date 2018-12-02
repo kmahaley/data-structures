@@ -14,7 +14,8 @@ import static edu.basic.preparation.list.MyList.deleteAllOccurencesOfNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.optimalUtilization;
-import static edu.basic.preparation.tree.BinaryTree.isPerfectBinaryTree;
+import static edu.basic.preparation.tree.BinaryTree.isPerfectBinaryTreeIterative;
+import static edu.basic.preparation.tree.BinaryTree.isPerfectBinaryTreeRecursive;
 import org.springframework.stereotype.Service;
 
 /**
@@ -275,7 +276,8 @@ public class DependencyService {
 //        System.out.println(countNumberOfLeafNodesIterative(constructTree()));
 
         System.out.println("********* is tree perfect binary tree? *******");
-        System.out.println(isPerfectBinaryTree(isTreePerfectBinaryTree()));
+        System.out.println(isPerfectBinaryTreeIterative(isTreePerfectBinaryTree()));
+        System.out.println(isPerfectBinaryTreeRecursive(isTreePerfectBinaryTree()));
 
 //        System.out.println("********* find maximum of the tree *******");
 //        System.out.println(findMax(constructTree()));
