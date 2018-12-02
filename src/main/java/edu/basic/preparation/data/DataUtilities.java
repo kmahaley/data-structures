@@ -123,6 +123,20 @@ public final class DataUtilities {
         return root;
     }
 
+    public static TreeNode isTreePerfectBinaryTree() {
+
+        TreeNode root = new TreeNode(20);
+        root.left = new TreeNode(15);
+        root.right = new TreeNode(25);
+        root.left.left = new TreeNode(10);
+        root.left.right = new TreeNode(18);
+//        root.right.left = new TreeNode(16);
+//        root.right.right = new TreeNode(19);
+//        root.left.right.left.right = new TreeNode(17);
+
+        return root;
+    }
+
     public static TreeNode constructDiagonalTraversal() {
         TreeNode root = new TreeNode(8);
         root.left = new TreeNode(3);

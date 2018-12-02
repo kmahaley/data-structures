@@ -568,4 +568,73 @@ public class BinaryTree {
         return findLowestInBinarySearchTreeRecursive(root.left);
     }
 
+    /**
+     * Is tree prefect binary tree or not
+     *
+     * @param root node
+     * @return boolean
+     */
+    public static boolean isPerfectBinaryTreeIterative(TreeNode root) {
+        if (root == null) {
+            return true;
+        }
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean isPerfect = false;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+
+            //children on diff level
+            if (isPerfect && size > 0) {
+                return false;
+            }
+            //iterate for same level
+            for (int i = 0; i < size; i++) {
+                final TreeNode curr = queue.poll();
+
+                if (curr.left != null && curr.right != null) {
+                    queue.add(curr.left);
+                    queue.add(curr.right);
+                } else if (curr.left != null || curr.right != null) {
+                    return false;
+                }
+
+                // found leaf
+                if (curr.left == null && curr.right == null) {
+                    isPerfect = true;
+                }
+            }
+        }
+        return isPerfect;
+    }
+
+    public static boolean isPerfectBinaryTreeRecursive(TreeNode root){
+        final int height = heightOfTreeRecursive(root);
+        return isPerfectBinaryTreeRecursiveHelper(root, height, 1);
+    }
+    /**
+     * All leaf node should be at same level and other nodes should be filled(2 nodes)
+     * @param root node
+     * @param depth depth of the tree
+     * @param level current level
+     * @return boolean
+     */
+    public static boolean isPerfectBinaryTreeRecursiveHelper(TreeNode root, int depth, int level) {
+
+        if (root == null) {
+            return true;
+        }
+
+        //leaf found and if depth is equal to level
+        if (root.left == null && root.right == null) {
+            return depth == level;
+        }
+
+        if (root.left == null || root.right == null) {
+            return false;
+        }
+
+        return isPerfectBinaryTreeRecursiveHelper(root.left, depth, level + 1) &&
+                isPerfectBinaryTreeRecursiveHelper(root.right, depth, level + 1);
+    }
 }
