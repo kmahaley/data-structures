@@ -5,18 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import static edu.basic.preparation.data.DataUtilities.basicStack;
-import static edu.basic.preparation.data.DataUtilities.getDuplicatedNodesList;
-import static edu.basic.preparation.data.DataUtilities.isTreePerfectBinaryTree;
-import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
 import edu.basic.preparation.data.Node;
+import org.springframework.stereotype.Service;
+
+import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.list.MyList.deleteAllOccurencesOfNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.optimalUtilization;
-import static edu.basic.preparation.tree.BinaryTree.isPerfectBinaryTreeIterative;
-import static edu.basic.preparation.tree.BinaryTree.isPerfectBinaryTreeRecursive;
-import org.springframework.stereotype.Service;
 
 /**
  * @author Kartik Mahaley
@@ -275,9 +271,9 @@ public class DependencyService {
 //        System.out.println(countNumberOfLeafNodesRecursive(constructTree()));
 //        System.out.println(countNumberOfLeafNodesIterative(constructTree()));
 
-        System.out.println("********* is tree perfect binary tree? *******");
-        System.out.println(isPerfectBinaryTreeIterative(isTreePerfectBinaryTree()));
-        System.out.println(isPerfectBinaryTreeRecursive(isTreePerfectBinaryTree()));
+//        System.out.println("********* is tree perfect binary tree? *******");
+//        System.out.println(isPerfectBinaryTreeIterative(isTreePerfectBinaryTree()));
+//        System.out.println(isPerfectBinaryTreeRecursive(isTreePerfectBinaryTree()));
 
 //        System.out.println("********* find maximum of the tree *******");
 //        System.out.println(findMax(constructTree()));
@@ -301,6 +297,22 @@ public class DependencyService {
 
 //        System.out.println("********* Lowest in binary search tree *******");
 //        getLowestNodeInBST(constructTree());
+
+//        System.out.println("********* search in a tree *******");
+//        System.out.println(searchTree(constructTree(), 20));
+//
+//        System.out.println("********* find closet in a tree *******");
+//        System.out.println(getFloorOfTheNodes(constructTree(), 18));
+
+//        System.out.println("********* are trees symmetric *******");
+//        System.out.println(areSymmetricTrees(node1(), node2()));
+//
+//        TODO:
+//        int [] inorder = new int[] {4,2,5,1,3,6};
+//        int [] preOrder = new int[] {1,2,4,5,3,6};
+//        int [] postOrder = new int[] {4,5,2,6,3,1};
+//        System.out.println("********* Tree from preorder and postorder *******");
+//        postOrderTraversal(constructTreeFromInorderAndPreorder(inorder, preOrder, 0, inorder.length, 0));
     }
 
 

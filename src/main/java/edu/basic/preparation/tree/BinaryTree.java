@@ -15,6 +15,8 @@ import edu.basic.preparation.data.TreeNode;
  */
 public class BinaryTree {
 
+//    static int preIndex = 0;
+
     public static List<Integer> inOrderList = new ArrayList<>();
 
     public static List<Integer> preOrderList = new ArrayList<>();
@@ -46,6 +48,15 @@ public class BinaryTree {
             postOrder(start.left);
             postOrder(start.right);
             postOrderList.add(start.key);
+        }
+    }
+
+    public static void postOrderTraversal(TreeNode start) {
+
+        if (start != null) {
+            postOrder(start.left);
+            postOrder(start.right);
+            System.out.println(start.key);
         }
     }
 
@@ -637,4 +648,116 @@ public class BinaryTree {
         return isPerfectBinaryTreeRecursiveHelper(root.left, depth, level + 1) &&
                 isPerfectBinaryTreeRecursiveHelper(root.right, depth, level + 1);
     }
+
+    /**
+     *  Search node in tree
+     */
+    public static boolean searchTree(TreeNode root, int x) {
+        if (root == null) {
+            return false;
+        }
+
+        if (root.key == x) {
+            return true;
+        }
+        if (root.key < x) {
+            return searchTree(root.right, x);
+        }
+        if (root.key > x) {
+            return searchTree(root.left, x);
+        }
+        return false;
+    }
+
+    /**
+     * Get nearest or closet to given in tree
+     */
+    public static int getFloorOfTheNodes(TreeNode root, int x) {
+        int minDiff = Integer.MAX_VALUE;
+        int value = -1;
+
+        if (root == null) {
+            return value;
+        }
+
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            final TreeNode poll = queue.poll();
+            int newMinDiff = Math.abs(poll.key - x);
+            if (newMinDiff < minDiff) {
+                minDiff = newMinDiff;
+                value = poll.key;
+            }
+            if (poll.left != null) {
+                queue.add(poll.left);
+            }
+            if (poll.right != null) {
+                queue.add(poll.right);
+            }
+        }
+        return value;
+    }
+
+
+    /**
+     * if tree is mirror image or not
+     *
+     * @param n1 tree node 1
+     * @param n2 tree node 2
+     * @return boolean
+     */
+    public static boolean isMirror(TreeNode n1, TreeNode n2) {
+        if (n1 == null && n2 == null) {
+            return true;
+        }
+        if (n1 == null || n2 == null) {
+            return false;
+        }
+        return n1.key == n2.key && isMirror(n1.left, n2.right) && isMirror(n1.right, n2.left);
+
+    }
+
+    /**
+     * if trees are symmetric
+     *
+     * @param n1 tree node 1
+     * @param n2 tree node 2
+     * @return boolean
+     */
+    public static boolean areSymmetricTrees(TreeNode n1, TreeNode n2) {
+        if (n1 == null && n2 == null) {
+            return true;
+        }
+        if (n1 == null || n2 == null) {
+            return false;
+        }
+        return isMirror(n1.left, n2.right) && isMirror(n1.right, n2.left);
+
+    }
+//TODO:
+//    public static TreeNode constructTreeFromInorderAndPreorder(int[] inorder, int[] preorder, int start, int end, int preIndex) {
+//
+//        if (start > end) {
+//            return null;
+//        }
+//
+//        int temp = preorder[preIndex];
+//        TreeNode root = new TreeNode(temp);
+//
+//        if (start == end) {
+//            return root;
+//        }
+//
+//        int mid = -1;
+//        for (int j = start; j < end; j++) {
+//            if (temp == inorder[j]) {
+//                mid = j;
+//            }
+//        }
+//        root.left = constructTreeFromInorderAndPreorder(inorder, preorder, start, mid-1, preIndex+1);
+//        root.right = constructTreeFromInorderAndPreorder(inorder, preorder, mid + 1, end, mid+1);
+//        return root;
+//
+//    }
 }

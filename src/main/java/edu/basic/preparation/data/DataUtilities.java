@@ -166,6 +166,27 @@ public final class DataUtilities {
         return root;
     }
 
+    public static TreeNode node1() {
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(28);
+        root.right = new TreeNode(13);
+
+        root.right.left = new TreeNode(14);
+        root.right.right = new TreeNode(15);
+
+        return root;
+    }
+
+    public static TreeNode node2() {
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(13);
+        root.right = new TreeNode(28);
+
+        root.left.left = new TreeNode(15);
+        root.left.right = new TreeNode(14);
+
+        return root;
+    }
 
     public static Map<Integer, List<Integer>> constructGraph(){
 
