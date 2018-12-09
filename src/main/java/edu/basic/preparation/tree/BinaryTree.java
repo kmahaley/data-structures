@@ -746,15 +746,54 @@ public class BinaryTree {
      * @param node node
      * @return boolean
      */
-    public static boolean isTreeBalanced(TreeNode node) {
+    public static boolean isBalancedTree(TreeNode node) {
         if (node == null) {
             return true;
         }
         int lh = heightOfTreeRecursive(node.left);
         int rh = heightOfTreeRecursive(node.right);
 
-        return Math.abs(lh - rh) <= 1 && isTreeBalanced(node.left) && isTreeBalanced(node.right);
+        return Math.abs(lh - rh) <= 1 && isBalancedTree(node.left) && isBalancedTree(node.right);
 
+    }
+
+    public static class Height{
+        int height;
+    }
+
+    //Optimized solution from geeks for geeks
+    boolean isBalancedTreeOptimized(TreeNode root, Height height) {
+        /* If tree is empty then return true */
+        if (root == null) {
+            height.height = 0;
+            return true;
+        }
+
+        /* Get heights of left and right sub trees */
+        Height lHeight = new Height(), rHeight = new Height();
+
+        boolean leftTree = isBalancedTreeOptimized(root.left, lHeight);
+        boolean rightTree = isBalancedTreeOptimized(root.right, rHeight);
+
+        int lh = lHeight.height;
+        int rh = rHeight.height;
+
+        /* Height of current node is max of heights of
+           left and right subtrees plus 1*/
+        height.height = (lh > rh ? lh : rh) + 1;
+
+        /* If difference between heights of left and right
+           subtrees is more than 2 then this node is not balanced
+           so return 0 */
+        if (Math.abs(lh - rh) >= 2) {
+            return false;
+        }
+
+        /* If this node is balanced and left and right subtrees
+           are balanced then return true */
+        else {
+            return leftTree && rightTree;
+        }
     }
 
     /**
@@ -763,7 +802,7 @@ public class BinaryTree {
      * @param root node
      * @param x1 node 1 value
      * @param x2 node 2 value
-     * @return
+     * @return node
      */
     public static TreeNode lowestCommonAncestor(TreeNode root, int x1, int x2) {
 
@@ -784,6 +823,28 @@ public class BinaryTree {
             return root;
         }
         return left != null ? left : right;
+    }
+
+
+    /**
+     * Longest path from one node to another
+     * O(n*n) solution.
+     * O(n) -> https://www.geeksforgeeks.org/diameter-of-a-binary-tree/
+     * @param root node
+     * @return diameter
+     */
+    public static int diameterOfTree(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+
+        int lh = heightOfTreeRecursive(root.left);
+        int rh = heightOfTreeRecursive(root.right);
+
+        int ld = diameterOfTree(root.left);
+        int rd = diameterOfTree(root.right);
+
+        return Math.max(lh + rh + 1, Math.max(ld, rd));
     }
 
 
