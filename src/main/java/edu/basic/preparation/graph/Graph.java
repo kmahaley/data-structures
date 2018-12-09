@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
+import java.util.Stack;
 
 public class Graph {
 
@@ -26,8 +27,7 @@ public class Graph {
             final Integer poll = queue.poll();
             System.out.println(poll);
 
-            final List<Integer> children = graph.get(poll);
-            for (Integer child : children) {
+            for (Integer child : graph.get(poll)) {
 
                 if (!visited.contains(child)) {
                     visited.add(child);
@@ -45,7 +45,8 @@ public class Graph {
      */
     public static void graphDFS(Map<Integer, List<Integer>> graph) {
 
-        graphDFSUtil(0, graph, new HashSet<>());
+        Set<Integer> visited = new HashSet<>();
+        graphDFSUtil(0, graph, visited);
     }
 
     /**
@@ -60,16 +61,17 @@ public class Graph {
         visited.add(current);
         System.out.println(current);
 
-        final List<Integer> children = graph.get(current);
-        for (Integer child : children) {
+        for (Integer child : graph.get(current)) {
+            if (!visited.contains(child)) {
 
-            graphDFSUtil(child, graph, visited);
+                graphDFSUtil(child, graph, visited);
+            }
 
         }
     }
 
     /**
-     * If direct graph contains cycle return true
+     * If directed graph contains cycle return true else false
      *
      * @param graph
      *
@@ -77,44 +79,131 @@ public class Graph {
      */
     public static boolean isCycleInDirectedGraph(Map<Integer, List<Integer>> graph) {
 
-
         final Set<Integer> toBeVisited = graph.keySet();
-        final Set<Integer> visited = new HashSet<>();
         final Set<Integer> inProcess = new HashSet<>();
+        final Set<Integer> visited = new HashSet<>();
 
-
-        while (! toBeVisited.isEmpty()) {
-//            toBeVisited.
-//            if (isCycleUtil(key, new HashSet<Integer>(), new HashSet<Integer>(), graph)) {
-//                return true;
-//            }
+        for (Integer key : graph.keySet()) {
+            toBeVisited.add(key);
         }
 
-        return false;
+        while (!toBeVisited.isEmpty()) {
+            final Integer key = toBeVisited.iterator().next();
 
-    }
-
-    private static boolean isCycleUtil(
-            Integer key,
-            HashSet<Integer> visited,
-            HashSet<Integer> ancestor,
-            Map<Integer, List<Integer>> graph) {
-
-        if (visited.contains(key)) {
-            return false;
-        }
-
-
-        visited.add(key);
-        ancestor.add(key);
-        final List<Integer> children = graph.get(key);
-        for (Integer child : children) {
-            if (isCycleUtil(child, visited, ancestor, graph)) {
+            if (isCycleInDirectedGraphDFS(key, toBeVisited, inProcess, visited, graph)) {
                 return true;
             }
         }
 
         return false;
 
+    }
+
+    private static boolean isCycleInDirectedGraphDFS(Integer key, Set<Integer> toBeVisited, Set<Integer> inProcess,
+            Set<Integer> visited,
+            Map<Integer, List<Integer>> graph) {
+
+        moveElementFromSetToSet(key, toBeVisited, inProcess);
+
+        for (Integer child : graph.get(key)) {
+            //visited node
+            if(visited.contains(child))
+                continue;
+
+            //cycle
+            if (inProcess.contains(child)) {
+                return true;
+            }
+
+            //check for child
+            if (isCycleInDirectedGraphDFS(child, toBeVisited, inProcess, visited, graph)) {
+                return true;
+            }
+        }
+
+        moveElementFromSetToSet(key, inProcess, visited);
+        return false;
+
+    }
+
+    private static void moveElementFromSetToSet(Integer key, Set<Integer> toBeVisited, Set<Integer> inProcess) {
+        toBeVisited.remove(key);
+        inProcess.add(key);
+    }
+
+    /**
+     * topological sort
+     *
+     * @param graph graph
+     * @return stack
+     */
+    public static Stack<Integer> topologicalSort(Map<Integer, List<Integer>> graph) {
+
+        final Set<Integer> visited = new HashSet<>();
+        final Stack<Integer> stack = new Stack<>();
+
+        for (Integer key : graph.keySet()) {
+            if (visited.contains(key)) {
+                continue;
+            }
+            isTopologicalSortDFS(key, visited, stack, graph);
+        }
+
+        return stack;
+
+    }
+
+    private static void isTopologicalSortDFS(Integer key, Set<Integer> visited, Stack<Integer> stack,
+            Map<Integer, List<Integer>> graph) {
+
+        visited.add(key);
+
+        for (Integer child : graph.get(key)) {
+            if (visited.contains(child)) {
+                continue;
+            }
+            isTopologicalSortDFS(child, visited, stack, graph);
+        }
+        stack.add(key);
+    }
+
+    /**
+     * if cycle exists in undirected graph then true else false
+     *
+     * @param graph graph
+     * @return boolean
+     */
+    public static boolean isCycleInUnDirectedGraph(Map<Integer, List<Integer>> graph) {
+        final Set<Integer> visited = new HashSet<>();
+        for (Integer key:graph.keySet()) {
+            if (visited.contains(key))
+                continue;
+            if(isCycleInUnDirectedGraphDFS(key, null, visited, graph)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isCycleInUnDirectedGraphDFS(Integer key, Integer parent, Set<Integer> visited,
+            Map<Integer, List<Integer>> graph) {
+
+        visited.add(key);
+        for (Integer child : graph.get(key)) {
+
+            if (child == parent) {
+                continue;
+            }
+
+            if (visited.contains(child)) {
+                return true;
+            }
+
+            if (isCycleInUnDirectedGraphDFS(child, key, visited, graph)) {
+                return true;
+            }
+
+        }
+        return false;
     }
 }
