@@ -1,5 +1,6 @@
 package edu.basic.preparation.graph;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -79,7 +80,7 @@ public class Graph {
      */
     public static boolean isCycleInDirectedGraph(Map<Integer, List<Integer>> graph) {
 
-        final Set<Integer> toBeVisited = graph.keySet();
+        final Set<Integer> toBeVisited = new HashSet<>();
         final Set<Integer> inProcess = new HashSet<>();
         final Set<Integer> visited = new HashSet<>();
 
@@ -205,5 +206,116 @@ public class Graph {
 
         }
         return false;
+    }
+
+    /**
+     * find if path exists from start to end
+     *
+     * @param start start node
+     * @param end end node
+     * @param graph graph
+     * @return boolean
+     */
+    public static boolean isPathExists(int start, int end, Map<Integer, List<Integer>> graph){
+
+        Set<Integer> visited = new HashSet<>();
+        return isPathExistsDFS(start, end, visited, graph);
+    }
+
+    private static boolean isPathExistsDFS(int start, int end, Set<Integer> visited, Map<Integer, List<Integer>> graph) {
+
+        visited.add(start);
+
+        for (Integer child : graph.get(start)) {
+            if(visited.contains(child))
+                continue;
+
+            if(child == end)
+                return true;
+
+            if(isPathExistsDFS(child, end, visited, graph))
+                return true;
+        }
+        return false;
+    }
+
+
+    /**
+     * Print path from start to end node
+     * @param start start node
+     * @param end end node
+     * @param graph graph
+     */
+    public static void getPathFromSourceToDest(int start, int end, Map<Integer, List<Integer>> graph){
+
+        Set<Integer> visited = new HashSet<>();
+        List<Integer> path = new ArrayList<>();
+        int index = 0;
+
+        getPathFromSourceToDestDFS(start, end, visited, path, index, graph);
+    }
+
+    private static void getPathFromSourceToDestDFS(int start, int end, Set<Integer> visited,
+            List<Integer> path, int index,
+            Map<Integer, List<Integer>> graph) {
+
+        visited.add(start);
+        path.add(index, start);
+        index++;
+
+        if(start == end){
+            printPath(path, index);
+        } else {
+            for (Integer child : graph.get(start)) {
+                if(visited.contains(child))
+                    continue;
+
+                getPathFromSourceToDestDFS(child, end, visited, path, index, graph);
+            }
+        }
+
+    }
+
+    private static void printPath(List<Integer> path, int index) {
+        for (int i = 0; i < index; i++) {
+            System.out.print(path.get(i)+" - ");
+        }
+        System.out.println();
+    }
+
+
+    /**
+     * Print path from start to end node
+     * @param start start node
+     * @param graph graph
+     */
+    public static void getAllPathFromSource(int start, Map<Integer, List<Integer>> graph){
+
+        Set<Integer> visited = new HashSet<>();
+        List<Integer> path = new ArrayList<>();
+        int index = 0;
+
+        getAllPathFromSourceDFS(start, visited, path, index, graph);
+    }
+
+    private static void getAllPathFromSourceDFS(
+            int start, Set<Integer> visited, List<Integer> path, int index,
+            Map<Integer, List<Integer>> graph) {
+
+        visited.add(start);
+        path.add(index, start);
+        index++;
+
+        final List<Integer> children = graph.get(start);
+        if (children.isEmpty()) {
+            printPath(path, index);
+        } else {
+            for (Integer child : children) {
+                if (visited.contains(child)) {
+                    continue;
+                }
+                getAllPathFromSourceDFS(child, visited, path, index, graph);
+            }
+        }
     }
 }

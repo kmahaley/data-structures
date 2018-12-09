@@ -9,6 +9,7 @@ import edu.basic.preparation.data.Node;
 import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.data.DataUtilities.*;
+import static edu.basic.preparation.graph.Graph.getAllPathFromSource;
 import static edu.basic.preparation.list.MyList.deleteAllOccurencesOfNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
@@ -336,5 +337,23 @@ public class DependencyService {
 
 //        System.out.println("********* Cycle in directed graph *******");
 //        System.out.println(isCycleInDirectedGraph(constructDirectedCyclicGraph()));
+
+//        System.out.println("********* topological sort in directed graph *******");
+//        final Stack<Integer> stack = topologicalSort(constructGraph());
+//        printStack(stack);
+//        System.out.println();
+
+//        System.out.println("********* Path exist from start to end node *******");
+//        System.out.println(isPathExists(2, 5, constructGraph()));
+//        getPathFromSourceToDest(2, 5, constructGraph());
+
+        System.out.println("********* Get all path from start node *******");
+        getAllPathFromSource(0, constructGraph());
+    }
+
+    private void printStack(Stack<Integer> stack) {
+        while (!stack.isEmpty()) {
+            System.out.print(stack.pop() +" - ");
+        }
     }
 }
