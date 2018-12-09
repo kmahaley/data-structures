@@ -12,7 +12,7 @@ import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.list.MyList.deleteAllOccurencesOfNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
-import static edu.basic.preparation.string.StringUtilities.optimalUtilization;
+import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
 
 /**
  * @author Kartik Mahaley
@@ -128,9 +128,16 @@ public class DependencyService {
 //        final List<String> strings = transformString("a1b2");
 //        System.out.println(strings);
 
+//        final List<List<Integer>> lists = optimalUtilization(23, foregrd(), backgrd());
+//        System.out.println(lists);
 
-        final List<List<Integer>> lists = optimalUtilization(23, foregrd(), backgrd());
-        System.out.println(lists);
+//        System.out.println(" -------------Find 1 missing element in 1 to n-------------- ");
+//        int[] arr = new int[] {1,2,4,5,6};
+//        System.out.println(findMissingElement(arr, 5));
+
+        System.out.println(" -------------Find 1 missing element in duplicate element array in 1 to n-------------- ");
+        int[] oneDuplicate = new int[] {1,2,4,5,2};
+        System.out.println(findMissingElementInDuplicate(oneDuplicate));
 
     }
 
@@ -285,7 +292,7 @@ public class DependencyService {
 //        System.out.println("********* Diagonal Traversal of Binary Tree *********");
 //        diagonalPrint(constructDiagonalTraversal());
 //        System.out.println("********* Sum of longest path to leaf *******");
-//        System.out.println(longRootToLeafPath(constructTree()));
+//        System.out.println(maximumWeightedRootToLeafPath(longestPathTree()));
 
 //        System.out.println("********* is path from root to leaf exists with sum *******");
 //        System.out.println(isPathExistsWithSum(constructTree(), 86));
@@ -306,13 +313,14 @@ public class DependencyService {
 
 //        System.out.println("********* are trees symmetric *******");
 //        System.out.println(areSymmetricTrees(node1(), node2()));
+
 //
 //        TODO:
-//        int [] inorder = new int[] {4,2,5,1,3,6};
-//        int [] preOrder = new int[] {1,2,4,5,3,6};
-//        int [] postOrder = new int[] {4,5,2,6,3,1};
+        int [] inorder = new int[] {4,2,5,1,3,6};
+        int [] preOrder = new int[] {1,2,4,5,3,6};
+        int [] postOrder = new int[] {4,5,2,6,3,1};
 //        System.out.println("********* Tree from preorder and postorder *******");
-//        postOrderTraversal(constructTreeFromInorderAndPreorder(inorder, preOrder, 0, inorder.length, 0));
+//        postOrderTraversal(constructTreeFromInorderAndPreorder(inorder, preOrder, 0, inorder.length-1));
     }
 
 

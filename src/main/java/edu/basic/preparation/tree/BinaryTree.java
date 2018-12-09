@@ -15,7 +15,7 @@ import edu.basic.preparation.data.TreeNode;
  */
 public class BinaryTree {
 
-//    static int preIndex = 0;
+    static int preIndex = 0;
 
     public static List<Integer> inOrderList = new ArrayList<>();
 
@@ -60,6 +60,17 @@ public class BinaryTree {
         }
     }
 
+    //to keep track of horizontal distance of the node
+    public static class DistanceTreeNode {
+        TreeNode node;
+        int dis;
+
+        public DistanceTreeNode(TreeNode node, int dis) {
+            this.node = node;
+            this.dis = dis;
+        }
+    }
+
     /**
      * horizontal distance of nodes from root
      *
@@ -101,6 +112,14 @@ public class BinaryTree {
 
     }
 
+    // Print diagonal traversal of given binary tree
+    public static void diagonalPrint(TreeNode root) {
+        // create a map of vectors to store Diagonal elements
+        HashMap<Integer, Vector<Integer>> diagonalPrint = new HashMap<>();
+        diagonalPrintUtil(root, 0, diagonalPrint);
+
+        diagonalPrint.forEach((k, v) -> System.out.println(v));
+    }
 
     //Geek for geeks solution
     /**
@@ -133,15 +152,6 @@ public class BinaryTree {
 
         // Vertical slope remains same for right child
         diagonalPrintUtil(root.right, slope, diagonalPrint);
-    }
-
-    // Print diagonal traversal of given binary tree
-    public static void diagonalPrint(TreeNode root) {
-        // create a map of vectors to store Diagonal elements
-        HashMap<Integer, Vector<Integer>> diagonalPrint = new HashMap<>();
-        diagonalPrintUtil(root, 0, diagonalPrint);
-
-        diagonalPrint.forEach((k, v) -> System.out.println(v));
     }
 
     //is tree BST left < root < right
@@ -277,16 +287,6 @@ public class BinaryTree {
         }
     }
 
-    //to keep track of horizontal distance of the node
-    public static class DistanceTreeNode {
-        TreeNode node;
-        int dis;
-
-        public DistanceTreeNode(TreeNode node, int dis) {
-            this.node = node;
-            this.dis = dis;
-        }
-    }
 
     /**
      * Maximum sum to longest path to leaf
@@ -294,11 +294,11 @@ public class BinaryTree {
      * @param root tree node
      * @return max sum
      */
-    public static int longRootToLeafPath(TreeNode root) {
+    public static int maximumWeightedRootToLeafPath(TreeNode root) {
         int maxSum = Integer.MIN_VALUE;
         int maxLength = 0;
 
-        return longRootToLeafPathUtil(root, maxLength, maxSum, 0, 0);
+        return maximumWeightedRootToLeafPathUtil(root, maxLength, maxSum, 0, 0);
 
     }
 
@@ -313,7 +313,7 @@ public class BinaryTree {
      *
      * @return max sum
      */
-    public static int longRootToLeafPathUtil(
+    public static int maximumWeightedRootToLeafPathUtil(
             TreeNode root,
             int maxLength,
             int maxSum,
@@ -330,8 +330,8 @@ public class BinaryTree {
             }
             return maxSum;
         }
-        int left = longRootToLeafPathUtil(root.left, maxLength, maxSum, len + 1, sum + root.key);
-        int right = longRootToLeafPathUtil(root.right, maxLength, maxSum, len + 1, sum + root.key);
+        int left = maximumWeightedRootToLeafPathUtil(root.left, maxLength, maxSum, len + 1, sum + root.key);
+        int right = maximumWeightedRootToLeafPathUtil(root.right, maxLength, maxSum, len + 1, sum + root.key);
 
         return left > right ? left : right;
     }
@@ -470,7 +470,7 @@ public class BinaryTree {
 
     /**
      * 1. left == null && right != null  --> false
-     * 2. all nodes first after half filled or leaf node should be leaf node
+     * 2. all nodes after first half filled or leaf node should be leaf node
      * 3. else all true
      *
      * @param root node
@@ -487,6 +487,7 @@ public class BinaryTree {
 
             final TreeNode poll = queue.poll();
 
+            //all node should just be leaf node else return false
             if (isNonCompleteNode && (poll.left != null || poll.right != null)) {
                 return false;
             }
@@ -513,7 +514,7 @@ public class BinaryTree {
 
     /**
      * Get number of nodes in a binary tree.
-     * every leftNodeIndex = 2*index+1 and rightNodeIndex = 2*index+2
+     * every leftNodeIndex = 2*index+1 and rightNodeIndex = 2*index+2 just as heap
      * index of node should always be less than number of nodes in binary tree
      *
      * @param root node
@@ -580,7 +581,7 @@ public class BinaryTree {
     }
 
     /**
-     * Is tree prefect binary tree or not
+     * Is tree prefect binary tree or not (complete and full)
      *
      * @param root node
      * @return boolean
@@ -650,7 +651,7 @@ public class BinaryTree {
     }
 
     /**
-     *  Search node in tree
+     *  Search node in binary search tree. BST
      */
     public static boolean searchTree(TreeNode root, int x) {
         if (root == null) {
@@ -735,29 +736,78 @@ public class BinaryTree {
         return isMirror(n1.left, n2.right) && isMirror(n1.right, n2.left);
 
     }
+
+
+    /**
+     * Difference in height of left and right tree is at max 1
+     * O(n*n)
+     * check O(n) solution at link https://www.geeksforgeeks.org/how-to-determine-if-a-binary-tree-is-balanced/
+     *
+     * @param node node
+     * @return boolean
+     */
+    public static boolean isTreeBalanced(TreeNode node) {
+        if (node == null) {
+            return true;
+        }
+        int lh = heightOfTreeRecursive(node.left);
+        int rh = heightOfTreeRecursive(node.right);
+
+        return Math.abs(lh - rh) <= 1 && isTreeBalanced(node.left) && isTreeBalanced(node.right);
+
+    }
+
+    /**
+     * find LCA
+     *
+     * @param root node
+     * @param x1 node 1 value
+     * @param x2 node 2 value
+     * @return
+     */
+    public static TreeNode lowestCommonAncestor(TreeNode root, int x1, int x2) {
+
+        if (root == null) {
+            return null;
+        }
+        if (root.key == x1 || root.key == x2) {
+            return root;
+        }
+
+        TreeNode left = lowestCommonAncestor(root.left, x1, x2);
+        TreeNode right = lowestCommonAncestor(root.right, x1, x2);
+        if (left == null && right == null) {
+            return null;
+        }
+
+        if (left != null && right != null) {
+            return root;
+        }
+        return left != null ? left : right;
+    }
+
+
 //TODO:
-//    public static TreeNode constructTreeFromInorderAndPreorder(int[] inorder, int[] preorder, int start, int end, int preIndex) {
-//
-//        if (start > end) {
-//            return null;
-//        }
-//
-//        int temp = preorder[preIndex];
-//        TreeNode root = new TreeNode(temp);
-//
-//        if (start == end) {
-//            return root;
-//        }
-//
-//        int mid = -1;
-//        for (int j = start; j < end; j++) {
-//            if (temp == inorder[j]) {
-//                mid = j;
-//            }
-//        }
-//        root.left = constructTreeFromInorderAndPreorder(inorder, preorder, start, mid-1, preIndex+1);
-//        root.right = constructTreeFromInorderAndPreorder(inorder, preorder, mid + 1, end, mid+1);
-//        return root;
-//
-//    }
+    public static TreeNode constructTreeFromInorderAndPreorder(int[] inorder, int[] preorder, int start, int end) {
+
+
+        int temp = preorder[preIndex];
+        TreeNode root = new TreeNode(temp);
+
+        preIndex++;
+        if (start == end ) {
+            return root;
+        }
+
+        int element = - 1;
+        for (int j = start; j <= end; j++) {
+            if (temp == inorder[j]) {
+                element = j;
+            }
+        }
+        root.left = constructTreeFromInorderAndPreorder(inorder, preorder, start, element-1);
+        root.right = constructTreeFromInorderAndPreorder(inorder, preorder, element + 1, end);
+        return root;
+
+    }
 }

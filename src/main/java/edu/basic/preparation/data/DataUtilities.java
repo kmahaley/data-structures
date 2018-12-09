@@ -123,6 +123,19 @@ public final class DataUtilities {
         return root;
     }
 
+    public static TreeNode longestPathTree() {
+
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(20);
+        root.right = new TreeNode(15);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(10);
+        root.left.left.left = new TreeNode(2);
+
+        return root;
+    }
+
+
     public static TreeNode isTreePerfectBinaryTree() {
 
         TreeNode root = new TreeNode(20);

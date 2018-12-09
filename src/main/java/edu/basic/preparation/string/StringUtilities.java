@@ -989,6 +989,105 @@ public final class StringUtilities {
         }
         transformStringHelper(index + 1, oldString, set);
     }
+
+
+    /**
+     * given array = 1,2,4,5,6
+     * XOR of given array and XOR of 1 to n+1
+     *
+     * @param a array
+     * @param n length of array
+     * @return missing element
+     */
+    public static int findMissingElement(int[] a, int n) {
+
+        int x1 = a[0];
+        for (int i = 1; i < n; i++) {
+            x1 = x1 ^ a[i];
+        }
+
+        int x2 = 1;
+        for (int k = 2; k <= n+1; k++) {
+            x2 = x2 ^ k;
+        }
+        return  x1^x2;
+    }
+
+    /**
+     * find missing element in 1 to n, {1,2,4,5,2}, one element is duplicate
+     *
+     * @param a array
+     * @return missing element
+     */
+    public static int findMissingElementInDuplicate(int[] a) {
+
+        int x1 = a[0];
+        for (int i = 1; i < a.length; i++) {
+            x1 = x1 ^ a[i];
+        }
+
+        return  x1;
+    }
+
+    /*
+        List<String> wizards = new ArrayList<>();
+        wizards.add("1 2");
+        wizards.add("1 3");
+        wizards.add("1 2 3");
+        wizards.add("6");
+        wizards.add("1 2 3");
+        wizards.add("1 2 3");
+        wizards.add("9");
+        wizards.add("1 2 3");
+        wizards.add("1 2 3");
+        wizards.add("1 4");
+        meet(wizards);
+
+            static List<Integer> meet(List<String> wizards) {
+        List<Integer> path = new ArrayList<>();
+        path.add(0);
+        final Map<Integer, List<Integer>> map = createMap(wizards);
+//        System.out.println(map);
+        final ArrayList<Integer> objects = new ArrayList<>();
+        allPaths(0, 0,  wizards.size()-1,objects, 0, map);
+
+        return path;
+    }
+
+    public static void allPaths(Integer curr, int sum, int top, List<Integer> list, int index, Map<Integer, List<Integer>> map) {
+        Math.abs()
+        sum = sum +;
+        list.add(index, root.key);
+        index++;
+
+        //condition for maxSum
+        if (curr == top) {
+            printList(list, index);
+        }
+
+        allPathsFromRootWithGivenSum(root.left, sum, maxSum,list, index);
+        allPathsFromRootWithGivenSum(root.right, sum, maxSum,list, index);
+    }
+
+    private static void printList(List<Integer> list, int index) {
+    }
+
+    public static Map<Integer, List<Integer>> createMap(List<String> wizards) {
+        Map<Integer, List<Integer>> map = new HashMap<>();
+        for (int i = 0; i < wizards.size(); i++) {
+            final List<String> strings = Arrays.asList(wizards
+                    .get(i)
+                    .split(" "));
+            List<Integer> connects = new ArrayList<>();
+            for (int j = 0; j < strings.size(); j++) {
+                connects.add(Integer.valueOf(strings.get(j)));
+
+            }
+            map.put(i, connects);
+        }
+        return map;
+    }
+    */
 }
 
 
