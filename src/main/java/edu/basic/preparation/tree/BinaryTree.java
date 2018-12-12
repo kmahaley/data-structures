@@ -581,7 +581,7 @@ public class BinaryTree {
     }
 
     /**
-     * Is tree prefect binary tree or not (complete and full)
+     * Is tree prefect binary tree or not (complete and full).all leaf nodes are at same level
      *
      * @param root node
      * @return boolean

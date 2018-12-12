@@ -8,6 +8,7 @@ import java.util.Stack;
 import edu.basic.preparation.data.Node;
 import org.springframework.stereotype.Service;
 
+import static edu.basic.preparation.array.Array.longestCommonIncreasingSubSequence;
 import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.graph.Graph.getAllPathFromSource;
 import static edu.basic.preparation.list.MyList.deleteAllOccurencesOfNode;
@@ -355,5 +356,11 @@ public class DependencyService {
         while (!stack.isEmpty()) {
             System.out.print(stack.pop() +" - ");
         }
+    }
+
+    public void arrayFunctionality(){
+        int[] a = new int[] {3,4,-1,0,6,2,3};
+        System.out.println("********* longest common sub sequence *******");
+        System.out.println(longestCommonIncreasingSubSequence(a));
     }
 }
