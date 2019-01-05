@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import static edu.basic.preparation.array.Array.longestCommonIncreasingSubSequence;
 import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.graph.Graph.getAllPathFromSource;
-import static edu.basic.preparation.list.MyList.deleteAllOccurencesOfNode;
+import static edu.basic.preparation.list.MyList.deleteNode;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
@@ -36,11 +36,11 @@ public class DependencyService {
 //        System.out.println("********* get nth node from last ***********");
 //        System.out.println(getNthNodeFromLinkedList(getListForPairwiseSwap(), 5));
 
-        System.out.println("********* delete all occurences from list ***********");
-        final Node duplicatedNodesList = getDuplicatedNodesList();
-        printFromNode(duplicatedNodesList);
-        final Node newHead = deleteAllOccurencesOfNode(duplicatedNodesList, 10);
-        printFromNode(newHead);
+//        System.out.println("********* delete all occurences from list ***********");
+//        final Node duplicatedNodesList = getDuplicatedNodesList();
+//        printFromNode(duplicatedNodesList);
+//        final Node newHead = deleteAllOccurencesOfNode(duplicatedNodesList, 10);
+//        printFromNode(newHead);
 
 //        System.out.println("********* search in list ***********");
 //        System.out.println(getElementIndexPosition(getListForPairwiseSwap(), 12, 1));
@@ -79,6 +79,17 @@ public class DependencyService {
 //        printFromNode(listForPairwiseSwap);
 //        final Node pairwiseSwapNode = reverseListInPairs(listForPairwiseSwap);
 //        printFromNode(pairwiseSwapNode);
+
+        Node head = new Node(4);
+        head.setNext(new Node(5));
+        head.getNext().setNext(new Node(1));
+        head.getNext().getNext().setNext(new Node(9));
+//        head.getNext().getNext().getNext().setNext(new Node(80));
+//        head.getNext().getNext().getNext().getNext().setNext(new Node(60));
+        printFromNode(head);
+        deleteNode(head.next);
+        printFromNode(head);
+
     }
 
     public void stringFunctionality() {

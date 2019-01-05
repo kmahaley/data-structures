@@ -8,9 +8,9 @@ import lombok.Data;
 @Data
 public class Node {
 
-    private int key;
+    public int key;
 
-    private Node next;
+    public Node next;
 
     public Node(int key) {
         this.key = key;
