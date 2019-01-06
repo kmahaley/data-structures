@@ -50,6 +50,17 @@ public final class DataUtilities {
         return head;
     }
 
+    public static Node getDuplicatedNodesList_ToKeepUniqueNodes(){
+        Node head = new Node(1);
+        head.setNext(new Node(1));
+        head.getNext().setNext(new Node(2));
+        head.getNext().getNext().setNext(new Node(3));
+        head.getNext().getNext().getNext().setNext(new Node(3));
+        head.getNext().getNext().getNext().getNext().setNext(new Node(4));
+
+        return head;
+    }
+
     public static List<Node> getTwoSortedList(){
 
 

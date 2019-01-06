@@ -1,6 +1,8 @@
 package edu.basic.preparation.list;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import edu.basic.preparation.data.Node;
@@ -587,6 +589,75 @@ public class MyList {
         }
         return x;
 
+    }
+
+    /**
+     * Remove duplicate elements from the list
+     *
+     * Input: 1->1->2->3->3
+     * Output: 1->2->3
+     */
+    public Node deleteDuplicates(Node head) {
+
+        if(head == null || head.next == null){
+            return head;
+        }
+        Node prev = head, curr = head.next;
+        while(curr != null){
+
+            if(prev.key == curr.key){
+                prev.next = curr.next;
+            }else {
+                prev = curr;
+            }
+            curr = curr.next;
+        }
+
+        return head;
+    }
+
+    /**
+     * Keep unique element in the list
+     *
+     * Input: 1->1->1->2->3
+     * Output: 2->3
+     *
+     * @param head head
+     * @return head
+     */
+    public static Node keepUniqueNodes(Node head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        Node curr = head, prev = null;
+        Map<Integer, Integer> map = new HashMap<>();
+        while(curr != null) {
+            int element = curr.key;
+            if(map.containsKey(element)) {
+                map.put(element, map.get(element)+1);
+            } else {
+                map.put(element,1);
+            }
+            curr = curr.next;
+        }
+
+        curr = head;
+        while(curr != null) {
+            Node next = curr.next;
+            int ele = curr.key;
+
+            if(map.get(ele) > 1) {
+                if(curr == head) {
+                    head = next;
+                } else {
+                    prev.next = next;
+                }
+            } else {
+                prev = curr;
+            }
+            curr = next;
+        }
+        return head;
     }
 
 }
