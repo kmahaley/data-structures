@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import static edu.basic.preparation.array.Array.longestCommonIncreasingSubSequence;
 import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.graph.Graph.getAllPathFromSource;
-import static edu.basic.preparation.list.MyList.deleteNode;
+import static edu.basic.preparation.list.MyList.mergeTwoLists;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
@@ -80,15 +80,17 @@ public class DependencyService {
 //        final Node pairwiseSwapNode = reverseListInPairs(listForPairwiseSwap);
 //        printFromNode(pairwiseSwapNode);
 
-        Node head = new Node(4);
-        head.setNext(new Node(5));
-        head.getNext().setNext(new Node(1));
-        head.getNext().getNext().setNext(new Node(9));
-//        head.getNext().getNext().getNext().setNext(new Node(80));
-//        head.getNext().getNext().getNext().getNext().setNext(new Node(60));
-        printFromNode(head);
-        deleteNode(head.next);
-        printFromNode(head);
+//        Node head = new Node(4);
+//        head.setNext(new Node(5));
+//        head.getNext().setNext(new Node(1));
+//        head.getNext().getNext().setNext(new Node(9));
+//        printFromNode(head);
+//        deleteNode(head.next);
+//        printFromNode(head);
+
+        final List<Node> twoSortedList = getTwoSortedList();
+        final Node mergeTwoLists = mergeTwoLists(twoSortedList.get(0), twoSortedList.get(1));
+        printFromNode(mergeTwoLists);
 
     }
 

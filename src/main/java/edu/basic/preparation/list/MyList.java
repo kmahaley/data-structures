@@ -1,6 +1,7 @@
 package edu.basic.preparation.list;
 
 import java.util.List;
+import java.util.Stack;
 
 import edu.basic.preparation.data.Node;
 import lombok.Data;
@@ -444,18 +445,26 @@ public class MyList {
 
     }
 
+    /**
+     * Merge two sorted list
+     *
+     * @param l1 list 1
+     * @param l2 list 2
+     * @return start of new list
+     */
+    public static Node mergeTwoLists(Node l1, Node l2) {
 
-    public Node mergeTwoLists(Node l1, Node l2) {
-
-        if(l1 == null)
+        if (l1 == null) {
             return l2;
-        if( l2== null)
-            return l2;
+        }
+        if (l2 == null) {
+            return l1;
+        }
 
         Node newList = null;
         Node first = l1, second = l2;
 
-        if(first.key <= second.key) {
+        if (first.key <= second.key) {
             newList = new Node(first.key);
             first = first.next;
         } else {
@@ -465,28 +474,77 @@ public class MyList {
 
         Node curr = newList;
 
-        while(first != null && second != null) {
+        while (first != null && second != null) {
 
-            if(first.key <= second.key) {
+            if (first.key <= second.key) {
                 curr.next = new Node(first.key);
                 first = first.next;
             } else {
                 curr.next = new Node(second.key);
                 second = second.next;
             }
+            curr = curr.next;
         }
 
-        while(first != null){
+        while (first != null) {
             curr.next = new Node(first.key);
             first = first.next;
+            curr = curr.next;
         }
 
-        while(second != null){
+        while (second != null) {
             curr.next = new Node(second.key);
             second = second.next;
+            curr = curr.next;
         }
 
         return newList;
+    }
+
+    /**
+     * Check if list contain a palindrome number
+     */
+    public boolean isPalindrome(Node head) {
+
+        if(head == null) {
+            return true;
+        }
+
+        int count =1;
+        Node curr = head;
+//      Get count
+        while(curr.next != null) {
+            count++;
+            curr= curr.next;
+        }
+
+        int mid = count/2;
+        curr = head;
+        for(int i=0; i<mid; i++){
+            curr= curr.next;
+        }
+//      Check or even or odd
+        if(count%2 != 0){
+            curr = curr.next;
+        }
+//      save second half in stack
+        Stack<Integer> st = new Stack<>();
+        while(curr != null){
+            st.push(curr.key);
+            curr= curr.next;
+        }
+
+        Node start = head;
+
+        for(int j=0; j<mid; j++) {
+            int top = st.pop();
+            if(start.key != top) {
+                return false;
+            }
+            start= start.next;
+        }
+
+        return true;
     }
 
 }

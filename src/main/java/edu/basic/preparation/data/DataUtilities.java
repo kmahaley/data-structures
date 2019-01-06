@@ -50,6 +50,20 @@ public final class DataUtilities {
         return head;
     }
 
+    public static List<Node> getTwoSortedList(){
+
+
+        Node head1 = new Node(1);
+        head1.setNext(new Node(2));
+        head1.getNext().setNext(new Node(4));
+
+        Node head2 = new Node(1);
+        head2.setNext(new Node(3));
+        head2.getNext().setNext(new Node(4));
+
+        return Arrays.asList(head1, head2);
+    }
+
     public static  MyList getListForBasicOperation(){
         MyList myList = new MyList();
         myList.add(10);
