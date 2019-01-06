@@ -547,4 +547,46 @@ public class MyList {
         return true;
     }
 
+    /**
+     * Detect cycle, if cycle exists return start node of the cycle else return null.
+     *
+     */
+    public Node detectCycle(Node head) {
+
+        if(head == null){
+            return null;
+        }
+        Node slow= head, fast= head;
+        while(fast != null && fast.next!= null) {
+            slow = slow.next;
+            fast = fast.next.next;
+            if(slow == fast) {
+                break;
+            }
+        }
+        if(fast == null || fast.next == null) {
+            return null;
+        }
+
+        Node start = fast;
+        int count =1;
+        while(start.next != fast) {
+            start = start.next;
+            count ++;
+        }
+        int i=1;
+        Node x= head, y= head;
+        while(i<= count) {
+            x = x.next;
+            i++;
+        }
+
+        while(x !=  y) {
+            x= x.next;
+            y= y.next;
+        }
+        return x;
+
+    }
+
 }
