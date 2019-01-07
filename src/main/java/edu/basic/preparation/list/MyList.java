@@ -660,4 +660,167 @@ public class MyList {
         return head;
     }
 
+    /**
+     * Reverse list between two pointers
+     *
+     * Input: 1->2->3->4->5->NULL, m = 2, n = 4
+     * Output: 1->4->3->2->5->NULL
+     *  faster solution is in method reverseBetweenOptimized
+     *
+     * @param head head
+     * @param m start
+     * @param n end
+     * @return start
+     */
+    public Node reverseBetween(Node head, int m, int n) {
+
+        if(head == null || head.next == null || m >= n){
+            return head;
+        }
+
+        int c = 1;
+        Node curr = head;
+        Stack<Integer> st = new Stack<>();
+
+        while(curr !=null && c <= n) {
+            if(c >= m && c <= n) {
+                st.push(curr.key);
+            }
+            c++;
+            curr = curr.next;
+        }
+        c=1;
+        curr = head;
+        while(curr !=null && c <= n) {
+            if(c >= m && c <= n) {
+                curr.key = st.pop();
+            }
+            c++;
+            curr = curr.next;
+        }
+        return head;
+    }
+
+    /**
+     * Reverse list between two pointers
+     *
+     * Input: 1->2->3->4->5->NULL, m = 2, n = 4
+     * Output: 1->4->3->2->5->NULL
+     *
+     * @param head head
+     * @param m start
+     * @param n end
+     * @return start
+     */
+    public static Node reverseBetweenOptimized(Node head, int m, int n) {
+
+        if(head == null || head.next == null || m >= n){
+            return head;
+        }
+
+        int c = 1;
+        Node curr = head, start=null, end=null, before= null, after= null;
+
+        while(curr !=null && c <= n+1) {
+            Node next = curr.next;
+            if(c == m-1) {
+                before = curr;
+                before.next = null;
+            }
+            if(c == m) {
+                start = curr;
+            }
+            if(c == n) {
+                end = curr;
+                end.next= null;
+            }
+            if(c == n+1) {
+                after = curr;
+            }
+            c++;
+            curr = next;
+        }
+
+        Node reverse = reverse(start);
+        Node endOfReverseList = endOfReverseList(start);
+
+        if (after != null) {
+            endOfReverseList.next = after;
+        }
+
+        if (before != null) {
+            before.next = reverse;
+            return head;
+        } else {
+            return reverse;
+        }
+    }
+
+    public static Node reverse(Node node) {
+        Node prev = null, current = node, next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
+    }
+
+    public static Node endOfReverseList(Node node) {
+        Node curr = node;
+        while(curr.next != null){
+            curr = curr.next;
+        }
+        return curr;
+    }
+
+
+    /**
+     * group all odd nodes together followed by the even nodes. odd and even based on indexes.
+     *
+     * Input: 2->1->3->5->6->4->7->NULL
+     * Output: 2->3->6->7->1->5->4->NULL
+     *
+     * @param head head
+     * @return head
+     */
+    public Node oddEvenList(Node head) {
+
+        if(head == null || head.next == null) {
+            return head;
+        }
+        Node odd =null, oddStart = null, even= null, evenStart=null;
+        Node curr= head, next = null;
+        boolean oddFlag = true;
+        while(curr !=null) {
+            next = curr.next;
+
+            if(oddFlag) {
+                if(oddStart == null) {
+                    oddStart = curr;
+                    odd = curr;
+                } else {
+                    odd.next = curr;
+                    odd = odd.next;
+                }
+                oddFlag= false;
+            } else {
+                if(evenStart == null) {
+                    evenStart = curr;
+                    even = curr;
+                } else {
+                    even.next = curr;
+                    even = even.next;
+                }
+                oddFlag = true;
+            }
+            curr = next;
+        }
+
+        odd.next = evenStart;
+        even.next = null;
+        return head;
+
+    }
 }

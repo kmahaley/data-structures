@@ -11,8 +11,8 @@ import org.springframework.stereotype.Service;
 import static edu.basic.preparation.array.Array.longestCommonIncreasingSubSequence;
 import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.graph.Graph.getAllPathFromSource;
-import static edu.basic.preparation.list.MyList.keepUniqueNodes;
 import static edu.basic.preparation.list.MyList.printFromNode;
+import static edu.basic.preparation.list.MyList.reverseBetweenOptimized;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
 
@@ -92,10 +92,15 @@ public class DependencyService {
 //        final Node mergeTwoLists = mergeTwoLists(twoSortedList.get(0), twoSortedList.get(1));
 //        printFromNode(mergeTwoLists);
 
-        final Node node1 = getDuplicatedNodesList_ToKeepUniqueNodes();
-        printFromNode(node1);
-        Node start = keepUniqueNodes(node1);
-        printFromNode(start);
+//        final Node node1 = getDuplicatedNodesList_ToKeepUniqueNodes();
+//        printFromNode(node1);
+//        Node start = keepUniqueNodes(node1);
+//        printFromNode(start);
+
+        final Node node = getListForPairwiseSwap();
+        printFromNode(node);
+        final Node reverseBetween1 = reverseBetweenOptimized(node, 2, 4);
+        printFromNode(reverseBetween1);
 
     }
 
