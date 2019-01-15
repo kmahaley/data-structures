@@ -1,6 +1,9 @@
 package edu.basic.preparation.array;
 
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Array {
 
     /**
@@ -19,7 +22,7 @@ public class Array {
         int newsum = a[0];
         int max = a[0];
 
-//      sub array last index
+//      sub array last index, then you can subtract max - a[position] and position-1 till max==0
         int position = 0;
 
         for (int i = 1; i < a.length; i++) {
@@ -64,5 +67,30 @@ public class Array {
 
         }
         return max;
+    }
+
+
+    /**
+     *
+     * Given nums = [2, 7, 11, 15], target = 9,
+     *
+     * Because nums[0] + nums[1] = 2 + 7 = 9,
+     * return [0, 1].
+     */
+    public int[] twoSum(int[] nums, int target) {
+
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for(int i=0; i< nums.length ;i++) {
+            int curr = nums[i];
+            int req = target - curr;
+
+            if(map.containsKey(curr)) {
+                return new int[]{map.get(curr),i};
+            }
+            map.put(req, i);
+        }
+
+        throw new IllegalArgumentException("No two sum solution");
     }
 }

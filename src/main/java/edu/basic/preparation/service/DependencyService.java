@@ -15,6 +15,7 @@ import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.list.MyList.reverseBetweenOptimized;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
+import static edu.basic.preparation.tree.BinaryTree.getLowestNodeInBST;
 
 /**
  * @author Kartik Mahaley
@@ -327,8 +328,8 @@ public class DependencyService {
 //        System.out.println("********* All paths from root with given sum *******");
 //        allPathsFromRootWithGivenSum(constructTreeWithSumPath(), 0, 38, new ArrayList<Integer>(), 0);
 
-//        System.out.println("********* Lowest in binary search tree *******");
-//        getLowestNodeInBST(constructTree());
+        System.out.println("********* Lowest in binary search tree *******");
+        getLowestNodeInBST(constructTree());
 
 //        System.out.println("********* search in a tree *******");
 //        System.out.println(searchTree(constructTree(), 20));

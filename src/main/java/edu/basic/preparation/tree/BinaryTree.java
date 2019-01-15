@@ -570,13 +570,16 @@ public class BinaryTree {
         }
 
     }
+
     public static int findLowestInBinarySearchTreeRecursive(TreeNode root) {
         if (root == null) {
             return -1;
         }
-        if (root.left == null && root.right == null) {
+        //if left child empty then current node is lowest in binary tree
+        if (root.left == null && (root.right == null || root.right != null)) {
             return root.key;
         }
+
         return findLowestInBinarySearchTreeRecursive(root.left);
     }
 
