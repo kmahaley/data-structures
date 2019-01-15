@@ -205,7 +205,7 @@ public final class DataUtilities {
     }
 
     public static TreeNode node1() {
-        TreeNode root = new TreeNode(10);
+        TreeNode root = new TreeNode(20);
         root.left = new TreeNode(28);
         root.right = new TreeNode(13);
 

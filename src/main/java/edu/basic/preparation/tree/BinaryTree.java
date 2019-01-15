@@ -610,7 +610,7 @@ public class BinaryTree {
                 if (curr.left != null && curr.right != null) {
                     queue.add(curr.left);
                     queue.add(curr.right);
-                } else if (curr.left != null || curr.right != null) {
+                } else if (curr.left != null || curr.right != null) { //Non full node in tree
                     return false;
                 }
 
@@ -723,7 +723,7 @@ public class BinaryTree {
     }
 
     /**
-     * if trees are symmetric
+     * if trees are symmetric. check current node and then check isMirror() for left and right child
      *
      * @param n1 tree node 1
      * @param n2 tree node 2
@@ -736,7 +736,8 @@ public class BinaryTree {
         if (n1 == null || n2 == null) {
             return false;
         }
-        return isMirror(n1.left, n2.right) && isMirror(n1.right, n2.left);
+        //check root node and then children
+        return n1.key == n2.key && isMirror(n1.left, n2.right) && isMirror(n1.right, n2.left);
 
     }
 
