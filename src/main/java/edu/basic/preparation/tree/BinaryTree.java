@@ -2,6 +2,7 @@ package edu.basic.preparation.tree;
 
 import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -746,6 +747,7 @@ public class BinaryTree {
      * Difference in height of left and right tree is at max 1
      * O(n*n)
      * check O(n) solution at link https://www.geeksforgeeks.org/how-to-determine-if-a-binary-tree-is-balanced/
+     * or check isBalancedTreeOptimized function
      *
      * @param node node
      * @return boolean
@@ -851,28 +853,79 @@ public class BinaryTree {
         return Math.max(lh + rh + 1, Math.max(ld, rd));
     }
 
-
-//TODO:
-    public static TreeNode constructTreeFromInorderAndPreorder(int[] inorder, int[] preorder, int start, int end) {
-
-
-        int temp = preorder[preIndex];
-        TreeNode root = new TreeNode(temp);
-
-        preIndex++;
-        if (start == end ) {
-            return root;
+    /**
+     * Given a binary tree, return the zigzag level order traversal of its nodes' values.
+     * ie, from left to right, then right to left
+     */
+    public static List<List<Integer>> zigzagLevelOrder(TreeNode root) {
+        if(root == null){
+            return null;
         }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean fromLeft = true;
+        List<List<Integer>> toReturn = new LinkedList<>();
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            LinkedList<Integer> list = new LinkedList<>();
 
-        int element = - 1;
-        for (int j = start; j <= end; j++) {
-            if (temp == inorder[j]) {
-                element = j;
+            while (size > 0) {
+                final TreeNode poll = queue.poll();
+
+                if(poll.left != null) {
+                    queue.add(poll.left);
+                }
+                if(poll.right != null) {
+                    queue.add(poll.right);
+                }
+
+                if(fromLeft) {
+                    list.add(poll.key);
+                } else {
+                    list.addFirst(poll.key);
+                }
+                size--;
             }
+            toReturn.add(list);
+            fromLeft = !fromLeft;
         }
-        root.left = constructTreeFromInorderAndPreorder(inorder, preorder, start, element-1);
-        root.right = constructTreeFromInorderAndPreorder(inorder, preorder, element + 1, end);
-        return root;
 
+        return toReturn;
+
+    }
+
+    /**
+     * Given a binary tree, return the bottom-up level order traversal of its nodes' values.
+     * (ie, from left to right, level by level from leaf to root).
+     * https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
+     */
+    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+        List<List<Integer>> toReturn = new LinkedList<>();
+        if(root == null){
+            return toReturn;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            LinkedList<Integer> list = new LinkedList<>();
+
+            while (size > 0) {
+                final TreeNode poll = queue.poll();
+                if(poll.left != null) {
+                    queue.add(poll.left);
+                }
+                if(poll.right != null) {
+                    queue.add(poll.right);
+                }
+                list.add(poll.key);
+                size--;
+            }
+            toReturn.add(list);
+
+        }
+        Collections.reverse(toReturn);
+        return toReturn;
     }
 }

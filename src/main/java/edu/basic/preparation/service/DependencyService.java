@@ -15,7 +15,7 @@ import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.list.MyList.reverseBetweenOptimized;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
-import static edu.basic.preparation.tree.BinaryTree.areSymmetricTrees;
+import static edu.basic.preparation.tree.BinaryTree.zigzagLevelOrder;
 
 /**
  * @author Kartik Mahaley
@@ -338,8 +338,11 @@ public class DependencyService {
 //        System.out.println(getFloorOfTheNodes(constructTree(), 18));
 
 //        System.out.println("********* are trees symmetric *******");
-        System.out.println(areSymmetricTrees(node1(), node2()));
+//        System.out.println(areSymmetricTrees(node1(), node2()));
 
+        System.out.println("********* zigzag level order traversal *******");
+        final List<List<Integer>> lists = zigzagLevelOrder(constructTree());
+        System.out.println(lists);
 //
 //        TODO:
         int [] inorder = new int[] {4,2,5,1,3,6};
