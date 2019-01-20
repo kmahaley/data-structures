@@ -93,4 +93,66 @@ public class Array {
 
         throw new IllegalArgumentException("No two sum solution");
     }
+
+
+    /**
+     *
+     * Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
+     * An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically.
+     * You may assume all four edges of the grid are all surrounded by water.
+     * Input:
+     * 11000
+     * 11000
+     * 00100
+     * 00011
+     *
+     * Output: 3
+     */
+    public static int numIslands(char[][] grid) {
+
+        int count = 0;
+        if(grid == null || grid.length == 0) {
+            return count;
+        }
+        boolean[][] visited = new boolean[grid.length][grid[0].length];
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[0].length; j++) {
+
+                if (!visited[i][j] && grid[i][j] == '1') {
+                    dfs(i, j, grid, visited);
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
+    /**
+     *
+     * @param i row
+     * @param j col
+     * @param grid matrix
+     * @param visited visited matrix
+     */
+    private static void dfs(int i, int j, char[][] grid, boolean[][] visited) {
+
+        if (isValidInGrid(i, j, grid, visited) && !visited[i][j] && grid[i][j] == '1') {
+            visited[i][j] = true;
+            dfs(i + 1, j, grid, visited); //below
+            dfs(i - 1, j, grid, visited); //above
+            dfs(i, j + 1, grid, visited); //right
+            dfs(i, j - 1, grid, visited); //left
+        } else {
+            return;
+        }
+
+    }
+
+    /**
+     * Check if item belows to matrix
+     */
+    private static boolean isValidInGrid(int i, int j, char[][] grid, boolean[][] visited) {
+        return i >= 0 && i < grid.length &&
+                j >= 0 && j < grid[0].length;
+    }
 }

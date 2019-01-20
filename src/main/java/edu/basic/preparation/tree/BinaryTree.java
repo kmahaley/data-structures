@@ -899,7 +899,7 @@ public class BinaryTree {
      * (ie, from left to right, level by level from leaf to root).
      * https://leetcode.com/problems/binary-tree-level-order-traversal-ii/
      */
-    public List<List<Integer>> levelOrderBottom(TreeNode root) {
+    public static List<List<Integer>> levelOrderBottom(TreeNode root) {
         List<List<Integer>> toReturn = new LinkedList<>();
         if(root == null){
             return toReturn;
@@ -928,4 +928,123 @@ public class BinaryTree {
         Collections.reverse(toReturn);
         return toReturn;
     }
+
+    /**
+     * Given a binary tree, imagine yourself standing on the right side of it, return the values of the
+     * nodes you can see ordered from top to bottom.
+     */
+    public static List<Integer> rightSideView(TreeNode root) {
+        List<Integer> toReturn = new ArrayList<>();
+        if (root == null) {
+            return toReturn;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+
+            int size = queue.size();
+            while (size > 0) {
+                final TreeNode poll = queue.poll();
+                if(poll.left != null) {
+                    queue.add(poll.left);
+                }
+                if(poll.right != null) {
+                    queue.add(poll.right);
+                }
+                if(size == 1) {
+                    toReturn.add(poll.key);
+                }
+                size--;
+            }
+
+        }
+        return toReturn;
+    }
+
+    /**
+     * Given a binary tree, find the leftmost value in the last row of the tree.
+     *      2
+     *     /\
+     *    1 3
+     * answer : 1
+     */
+    public static int findBottomLeftValue(TreeNode root) {
+
+        if (root.left == null && root.right == null) {
+            return root.key;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int lastValue = 0;
+        while (!queue.isEmpty()) {
+
+            int size = queue.size();
+            for (int i =0; i < size ;i++) {
+                final TreeNode poll = queue.poll();
+                if(poll.left != null) {
+                    queue.add(poll.left);
+                }
+                if(poll.right != null) {
+                    queue.add(poll.right);
+                }
+                if(i == 0) {
+                    lastValue = poll.key;
+                }
+            }
+
+        }
+        return lastValue;
+
+    }
+
+    /**
+     * Given a binary tree, find its minimum depth.
+     *
+     * The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf
+     * node.
+     */
+    public static int minDepth(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        return minDepthDFSHelper(root, 1);
+    }
+
+    public static int minDepthDFSHelper(TreeNode node, int depth) {
+        if (node.left == null && node.right == null) {
+            return depth;
+        }
+        if (node.left == null) {
+            return minDepthDFSHelper(node.right, depth + 1);
+        }
+        if (node.right == null) {
+            return minDepthDFSHelper(node.left, depth + 1);
+        }
+        return Math.min(
+                minDepthDFSHelper(node.left, depth + 1),
+                minDepthDFSHelper(node.right, depth + 1));
+    }
+
+    /**
+     * Given a binary tree, find its minimum depth.
+     *
+     * The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf
+     * node.
+     */
+    public static int minDepthVersion_2(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        if (root.left == null) {
+            return minDepthVersion_2(root.right) + 1;
+        }
+        if (root.right == null) {
+            return minDepthVersion_2(root.left) + 1;
+        }
+
+        return Math.min(minDepthVersion_2(root.left), minDepthVersion_2(root.right)) + 1;
+    }
+
+
+
 }
