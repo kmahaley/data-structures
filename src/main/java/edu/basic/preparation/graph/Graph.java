@@ -1,6 +1,7 @@
 package edu.basic.preparation.graph;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -320,43 +321,6 @@ public class Graph {
     }
 
 
-
-    /////////////////////////////////////
-//    class Solution {
-//        public boolean canFinish(int numCourses, int[][] prerequisites) {
-//            int[] indegrees = new int[numCourses];
-//            int[][] adj = new int[numCourses][numCourses];
-//            int count = 0;
-//            for(int i = 0; i < prerequisites.length; i++) {
-//                adj[prerequisites[i][0]][prerequisites[i][1]] = 1;
-//                indegrees[prerequisites[i][1]]++;
-//            }
-//            Queue<Integer> queue = new LinkedList<>();
-//            for(int i = 0; i < indegrees.length; i++) {
-//                if(indegrees[i] == 0) {
-//                    queue.add(i);
-//                }
-//            }
-//            while(!queue.isEmpty()) {
-//                int size = queue.size();
-//                for(int i = 0; i < size; i++) {
-//                    int course = queue.poll();
-//                    count++;
-//                    for(int j = 0; j < adj[course].length; j++) {
-//                        if(adj[course][j] == 1) {
-//                            adj[course][j]--;
-//                            indegrees[j]--;
-//                            if(indegrees[j] == 0) {
-//                                queue.add(j);
-//                            }
-//                        }
-//                    }
-//                }
-//            }
-//            return count == numCourses;
-//        }
-//    }
-
     /**
      *
      * Given a 2d grid map of '1's (land) and '0's (water), count the number of islands.
@@ -485,6 +449,75 @@ public class Graph {
             dfsSolveBoard(row, col-1, board);//left
             dfsSolveBoard(row, col+1, board);//right
         }
+    }
+
+
+    /**
+     * There are a total of n courses you have to take, labeled from 0 to n-1.
+     * Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is
+     * expressed as a pair: [0,1]
+     *
+     * Input: 2, [[1,0],[0,1]]
+     * Output: false
+     * topological sort and graph cycle.
+     */
+    public static boolean canFinish(int numCourses, int[][] prerequisites) {
+        if(numCourses <= 1) {
+            return true;
+        }
+        if(prerequisites == null || prerequisites.length == 0) {
+            return true;
+        }
+        final Map<Integer, Set<Integer>> map = new HashMap<>();
+
+        for (int[] edges : prerequisites) {
+
+            if(map.containsKey(edges[0])) {
+                map.get(edges[0]).add(edges[1]);
+            } else {
+               Set<Integer> set = new HashSet<>();
+               set.add(edges[1]);
+               map.put(edges[0], set);
+            }
+        }
+        LinkedList<Integer> queue = new LinkedList<>();
+        Set<Integer> visited = new HashSet<>();
+
+        for(Integer key : map.keySet()) {
+            if(dfsCycleCheck(key, queue, visited, map, numCourses)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static boolean dfsCycleCheck(
+            Integer key, LinkedList<Integer> queue, Set<Integer> visited,
+            Map<Integer, Set<Integer>> map, int numCourses) {
+
+        if (queue.contains(key)) {
+            return true;
+        }
+        queue.add(key);
+        final Set<Integer> children = map.get(key);
+        if (children != null && !children.isEmpty()) {
+
+            for (Integer val : children) {
+                if(visited.contains(val)) {
+                    continue;
+                }
+                if (dfsCycleCheck(val, queue, visited, map, numCourses)) {
+                    return true;
+                }
+            }
+        }
+
+        visited.add(key);
+        queue.remove(key);
+        if (visited.size() > numCourses) {
+            return true;
+        }
+        return false;
     }
 
 }

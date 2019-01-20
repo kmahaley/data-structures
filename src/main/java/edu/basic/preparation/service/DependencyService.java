@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.longestCommonIncreasingSubSequence;
 import static edu.basic.preparation.data.DataUtilities.*;
-import static edu.basic.preparation.graph.Graph.getAllPathFromSource;
+import static edu.basic.preparation.graph.Graph.canFinish;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.list.MyList.reverseBetweenOptimized;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
@@ -375,8 +375,11 @@ public class DependencyService {
 //        System.out.println(isPathExists(2, 5, constructGraph()));
 //        getPathFromSourceToDest(2, 5, constructGraph());
 
-        System.out.println("********* Get all path from start node *******");
-        getAllPathFromSource(0, constructGraph());
+//        System.out.println("********* Get all path from start node *******");
+//        getAllPathFromSource(0, constructGraph());
+
+        int[][] array = { {1,0}, {2,0} };
+        System.out.println(canFinish(3, array));
     }
 
     private void printStack(Stack<Integer> stack) {
