@@ -119,7 +119,7 @@ public class Array {
             for (int j = 0; j < grid[0].length; j++) {
 
                 if (!visited[i][j] && grid[i][j] == '1') {
-                    dfs(i, j, grid, visited);
+                    dfsNumIslands(i, j, grid, visited);
                     count++;
                 }
             }
@@ -134,14 +134,14 @@ public class Array {
      * @param grid matrix
      * @param visited visited matrix
      */
-    private static void dfs(int i, int j, char[][] grid, boolean[][] visited) {
+    private static void dfsNumIslands(int i, int j, char[][] grid, boolean[][] visited) {
 
-        if (isValidInGrid(i, j, grid, visited) && !visited[i][j] && grid[i][j] == '1') {
+        if (isValidInMatrix(i, j, grid) && !visited[i][j] && grid[i][j] == '1') {
             visited[i][j] = true;
-            dfs(i + 1, j, grid, visited); //below
-            dfs(i - 1, j, grid, visited); //above
-            dfs(i, j + 1, grid, visited); //right
-            dfs(i, j - 1, grid, visited); //left
+            dfsNumIslands(i + 1, j, grid, visited); //below
+            dfsNumIslands(i - 1, j, grid, visited); //above
+            dfsNumIslands(i, j + 1, grid, visited); //right
+            dfsNumIslands(i, j - 1, grid, visited); //left
         } else {
             return;
         }
@@ -151,8 +151,74 @@ public class Array {
     /**
      * Check if item belows to matrix
      */
-    private static boolean isValidInGrid(int i, int j, char[][] grid, boolean[][] visited) {
-        return i >= 0 && i < grid.length &&
-                j >= 0 && j < grid[0].length;
+    private static boolean isValidInMatrix(int i, int j, char[][] matrix) {
+        return i >= 0 && i < matrix.length &&
+                j >= 0 && j < matrix[0].length;
+    }
+
+    /**
+     * Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
+     *
+     * A region is captured by flipping all 'O's into 'X's in that surrounded region.
+     * Example:
+     *
+     * X X X X
+     * X O O X
+     * X X O X
+     * X O X X
+     * After running your function, the board should be:
+     *
+     * X X X X
+     * X X X X
+     * X X X X
+     * X O X X
+     */
+    public static void solve(char[][] board) {
+
+        if( board == null || board.length == 0){
+            return;
+        }
+        int length = board.length, width = board[0].length;
+
+//        find border 'O', row by row
+        for (int i = 0; i < length ; i++) {
+            if(board[i][0] == 'O') {
+                dfsSolveBoard(i,0, board);//first column
+            }
+            if(board[i][width-1] == 'O') {
+                dfsSolveBoard(i, width-1, board);// last column
+            }
+        }
+
+        for (int j = 0; j < width; j++) {
+            if(board[0][j] == 'O') {
+                dfsSolveBoard(0, j, board);// first row
+            }
+            if(board[length-1][j] == 'O') {
+                dfsSolveBoard(length-1, j, board);// last row
+            }
+        }
+
+        for (int i = 0; i < length ; i++) {
+            for (int j = 0; j < width; j++) {
+                if(board[i][j] == 'O') {
+                    board[i][j] = 'X';
+                }
+                if(board[i][j] == '#') {
+                    board[i][j] = 'O';
+                }
+            }
+        }
+    }
+
+    private static void dfsSolveBoard(int row, int col, char[][] board) {
+
+        if(isValidInMatrix(row, col, board) && board[row][col] == 'O') {
+            board[row][col] = '#';
+            dfsSolveBoard(row-1, col, board);//above
+            dfsSolveBoard(row+1, col, board);//below
+            dfsSolveBoard(row, col-1, board);//left
+            dfsSolveBoard(row, col+1, board);//right
+        }
     }
 }
