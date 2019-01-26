@@ -2,7 +2,9 @@ package edu.basic.preparation.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 import java.util.Stack;
 
 import edu.basic.preparation.data.Node;
@@ -10,12 +12,12 @@ import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.longestCommonIncreasingSubSequence;
 import static edu.basic.preparation.data.DataUtilities.*;
-import static edu.basic.preparation.graph.Graph.canFinish;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.list.MyList.reverseBetweenOptimized;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
-import static edu.basic.preparation.tree.BinaryTree.zigzagLevelOrder;
+import static edu.basic.preparation.tree.BinaryTree.horizontalDistance;
+import static edu.basic.preparation.tree.BinaryTree.horizontalDistanceByDFS;
 
 /**
  * @author Kartik Mahaley
@@ -311,9 +313,13 @@ public class DependencyService {
 //        System.out.println("********* find maximum of the tree *******");
 //        System.out.println(findMax(constructTree()));
 //
-//        System.out.println("********* Horizontal distance *******");
-//        final Map<Integer, LinkedList<Integer>> integerListMap = horizontalDistance(constructDiagonalTraversal());
-//        integerListMap.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
+        System.out.println("********* Horizontal distance *******");
+        final Map<Integer, LinkedList<Integer>> integerListMap = horizontalDistance(constructDiagonalTraversal());
+        integerListMap.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
+
+        System.out.println("********* Horizontal distance DFS *******");
+        final Map<Integer, LinkedList<Integer>> integerListMapDFS = horizontalDistanceByDFS(constructDiagonalTraversal());
+        integerListMapDFS.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
 //
 //        System.out.println("********* Diagonal Traversal of Binary Tree *********");
 //        diagonalPrint(constructDiagonalTraversal());
@@ -340,9 +346,9 @@ public class DependencyService {
 //        System.out.println("********* are trees symmetric *******");
 //        System.out.println(areSymmetricTrees(node1(), node2()));
 
-        System.out.println("********* zigzag level order traversal *******");
-        final List<List<Integer>> lists = zigzagLevelOrder(constructTree());
-        System.out.println(lists);
+//        System.out.println("********* zigzag level order traversal *******");
+//        final List<List<Integer>> lists = zigzagLevelOrder(constructTree());
+//        System.out.println(lists);
 //
 //        TODO:
         int [] inorder = new int[] {4,2,5,1,3,6};
@@ -378,8 +384,29 @@ public class DependencyService {
 //        System.out.println("********* Get all path from start node *******");
 //        getAllPathFromSource(0, constructGraph());
 
-        int[][] array = { {1,0}, {2,0} };
-        System.out.println(canFinish(3, array));
+//        int[][] array = { {1,0}, {2,0} ,{0,1}};
+////        System.out.println(canFinish(3, array));
+//        System.out.println(canFinishVersion2(4, array));
+
+//        final int[] order = findOrder(2, array);
+//        for (int i = 0; i < order.length; i++) {
+//            System.out.print(order[i]+" ");
+//        }
+//        Graph.Employee emp1 = new Graph.Employee();
+//        emp1.importance =5;
+//        emp1.id=1;
+//        emp1.subordinates = Arrays.asList(2,3);
+//
+//        Graph.Employee emp2 = new Graph.Employee();
+//        emp2.importance =3;
+//        emp2.id=2;
+//        emp2.subordinates = new ArrayList<>();
+//
+//        Graph.Employee emp3 = new Graph.Employee();
+//        emp3.importance =3;
+//        emp3.id=3;
+//        emp3.subordinates = new ArrayList<>();
+//        System.out.println(getImportance(Arrays.asList(emp1,emp2,emp3), 1));
     }
 
     private void printStack(Stack<Integer> stack) {

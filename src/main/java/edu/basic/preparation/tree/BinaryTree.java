@@ -113,6 +113,36 @@ public class BinaryTree {
 
     }
 
+    public static Map<Integer, LinkedList<Integer>> horizontalDistanceByDFS(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        Map<Integer, LinkedList<Integer>> map = new HashMap<>();
+
+        horizontalDistanceByDFSHelper(root, 0, map);
+        return map;
+
+    }
+
+    private static void horizontalDistanceByDFSHelper(TreeNode current, int dis, Map<Integer, LinkedList<Integer>> map) {
+
+        if (map.containsKey(dis)) {
+            final LinkedList<Integer> nodeList = map.get(dis);
+            nodeList.add(current.key);
+            map.put(dis, nodeList);
+        } else {
+            final LinkedList<Integer> list = new LinkedList<>();
+            list.add(current.key);
+            map.put(dis, list);
+        }
+        if (current.left != null) {
+            horizontalDistanceByDFSHelper(current.left, dis-1, map);
+        }
+        if (current.right != null) {
+            horizontalDistanceByDFSHelper(current.right, dis+1, map);
+        }
+    }
+
     // Print diagonal traversal of given binary tree
     public static void diagonalPrint(TreeNode root) {
         // create a map of vectors to store Diagonal elements

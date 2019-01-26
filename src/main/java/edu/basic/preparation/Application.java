@@ -11,7 +11,7 @@ public class Application {
 
         final DependencyService dependencyService = new DependencyService();
 
-//        dependencyService.binaryTreeFunctionality();
+        dependencyService.binaryTreeFunctionality();
 
 //        dependencyService.listFunctionality();
 
@@ -21,10 +21,9 @@ public class Application {
 
 //        dependencyService.stringFunctionality();
 
-        dependencyService.graphFunctionality();
+//        dependencyService.graphFunctionality();
 
 //        dependencyService.arrayFunctionality();
-
 
     }
 

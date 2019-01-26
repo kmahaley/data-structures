@@ -520,4 +520,149 @@ public class Graph {
         return false;
     }
 
+    /**
+     * There are a total of n courses you have to take, labeled from 0 to n-1.
+     * Some courses may have prerequisites, for example to take course 0 you have to first take course 1, which is
+     * expressed as a pair: [0,1]
+     *
+     * Input: 2, [[1,0],[0,1]]
+     * Output: [], return list of courses students should take
+     * topological sort and graph cycle.
+     */
+    public static int[] findOrder(int numCourses, int[][] prerequisites) {
+        int[] courses = new int[numCourses];
+
+        for(int i=0; i< numCourses ;i++) {
+            courses[i] =i;
+        }
+        if(numCourses <= 1) {
+            return courses;
+        }
+        if(prerequisites == null || prerequisites.length == 0) {
+            return courses;
+        }
+        final Map<Integer, Set<Integer>> map = new HashMap<>();
+        for(int i =0 ;i<numCourses ;i++) {
+            map.put(i, new HashSet<Integer>());
+        }
+
+        for (int[] edges : prerequisites) {
+            map.get(edges[0]).add(edges[1]);
+        }
+        LinkedList<Integer> queue = new LinkedList<>();
+        Stack<Integer> visited = new Stack<>();
+
+        for(Integer key : map.keySet()) {
+            if(visited.contains(key)) {
+                continue;
+            }
+            if(dfsfindOrder(key, queue, visited, map, numCourses)) {
+                return new int[0];
+            }
+        }
+        int i= numCourses-1;
+        while(!visited.isEmpty()) {
+            courses[i] = visited.pop();
+            i--;
+        }
+        return courses;
+    }
+
+    public static boolean dfsfindOrder(
+            Integer key, LinkedList<Integer> queue, Stack<Integer> visited,
+            Map<Integer, Set<Integer>> map, int numCourses) {
+
+        if (queue.contains(key)) {
+            return true;
+        }
+        queue.add(key);
+        final Set<Integer> children = map.get(key);
+        if (children != null && !children.isEmpty()) {
+
+            for (Integer val : children) {
+                if(visited.contains(val)) {
+                    continue;
+                }
+                if (dfsfindOrder(val, queue, visited, map, numCourses)) {
+                    return true;
+                }
+            }
+        }
+
+        visited.push(key);
+        queue.remove(key);
+        if (visited.size() > numCourses) {
+            return true;
+        }
+        return false;
+    }
+
+
+
+    public static boolean canFinishVersion2(int numCourses, int[][] prerequisites) {
+        if (numCourses <= 0)
+            return false;
+        Queue<Integer> queue = new LinkedList<>();
+        int[] inDegree = new int[numCourses];
+        for (int i = 0; i < prerequisites.length; i++) {
+            inDegree[prerequisites[i][1]]++;
+        }
+        for (int i = 0; i < inDegree.length; i++) {
+            if (inDegree[i] == 0)
+                queue.offer(i);
+        }
+        while (!queue.isEmpty()) {
+            int x = queue.poll();
+            for (int i = 0; i < prerequisites.length; i++) {
+                if (x == prerequisites[i][0]) {
+                    inDegree[prerequisites[i][1]]--;
+                    if (inDegree[prerequisites[i][1]] == 0)
+                        queue.offer(prerequisites[i][1]);
+                }
+            }
+        }
+        for (int i = 0; i < inDegree.length; i++) {
+            if (inDegree[i] != 0)
+                return false;
+        }
+        return true;
+    }
+
+
+    public static class Employee {
+        public int id;
+        // the importance value of this employee
+        public int importance;
+        // the id of direct subordinates
+        public List<Integer> subordinates;
+    }
+
+    /**
+     * Importance of manager and all its subordinates
+     *
+     * Input: [[1, 5, [2, 3]], [2, 3, []], [3, 3, []]], 1
+     * Output: 11
+     * @param employees [[1, 5, [2, 3]], [2, 3, []], [3, 3, []]]
+     * @param id 1
+     * @return 11
+     */
+    public static int getImportance(List<Employee> employees, int id) {
+
+        Map<Integer, Employee> map = new HashMap<>();
+        employees.forEach( e -> map.put(e.id, e));
+
+        return getImportanceOfManager(id, map);
+
+    }
+
+    private static int getImportanceOfManager(Integer id, Map<Integer, Employee> map) {
+
+        int imp = map.get(id).importance;
+
+        for(Integer i : map.get(id).subordinates) {
+            imp += getImportanceOfManager(i, map);
+        }
+
+        return imp;
+    }
 }
