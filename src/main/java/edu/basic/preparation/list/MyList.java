@@ -25,7 +25,7 @@ public class MyList {
             while (current.next != null) {
                 current = current.next;
             }
-            current.setNext(newNode);
+            current.next = newNode;
         }
 
     }
@@ -35,7 +35,7 @@ public class MyList {
         if (head == null) {
             head = newNode;
         } else {
-            newNode.setNext(head);
+            newNode.next = head;
             head = newNode;
         }
 
@@ -50,8 +50,8 @@ public class MyList {
             for (int i = 1; i < afterLocation; i++) {
                 current = current.next;
             }
-            newNode.setNext(current.next);
-            current.setNext(newNode);
+            newNode.next = current.next;
+            current.next = newNode;
         }
     }
 
@@ -64,7 +64,7 @@ public class MyList {
             Node next = null;
             while (current != null) {
                 next = current.next;
-                current.setNext(prev);
+                current.next = prev;
                 prev = current;
                 current = next;
             }
@@ -75,7 +75,7 @@ public class MyList {
     public void print() {
         Node current = head;
         while (current != null) {
-            System.out.print(current.getKey() + " - ");
+            System.out.print(current.key + " - ");
             current = current.next;
         }
         System.out.println();
@@ -84,7 +84,7 @@ public class MyList {
     public static void printFromNode(Node start) {
         Node current = start;
         while (current != null) {
-            System.out.print(current.getKey() + " - ");
+            System.out.print(current.key + " - ");
             current = current.next;
         }
         System.out.println();
@@ -101,7 +101,7 @@ public class MyList {
             return;
         }
         //if element is first to be deleted
-        if(head.getKey() == value){
+        if(head.key == value){
             head = head.next;
             return;
         }
@@ -110,17 +110,43 @@ public class MyList {
         Node prev = null;
         while (current != null) {
 
-            if (current.getKey() != value) {
+            if (current.key != value) {
                 prev = current;
                 current = current.next;
             } else {
-                prev.setNext(current.next);
-                current.setNext(null);
+                prev.next = current.next;
+                current.next = null;
                 current = prev.next;
                 break;
             }
         }
 
+    }
+
+    /**
+     * Delete node with value given by function
+     */
+    public static Node deleteNode(Node head, int x) {
+        if (head == null) {
+            return head;
+        }
+        if (head.key == x) {
+            head = head.next;
+        } else {
+            Node p = head, prev = null;
+            while (p != null) {
+
+                if (p.key == x) {
+                    prev.next = p.next;
+                    p = null;
+                } else {
+                    prev = p;
+                    p = p.next;
+                }
+            }
+        }
+
+        return head;
     }
 
     /**
@@ -135,13 +161,13 @@ public class MyList {
             return;
         }
 
-        if(head.getKey() == element){
+        if(head.key == element){
             head = head.next;
             return;
         }
         Node temp = head, prev = null;
         //Search until you get the element
-        while (temp != null && temp.getKey() != element){
+        while (temp != null && temp.key != element){
             prev = temp;
             temp = temp.next;
         }
@@ -149,8 +175,7 @@ public class MyList {
         if(temp == null)
             return;
 
-        prev.setNext(temp.next);
-
+        prev.next = temp.next;
     }
 
     public Node middleElement() {
@@ -167,25 +192,6 @@ public class MyList {
         }
     }
 
-    public static void removeDuplicates(Node head) {
-        if (head == null) {
-            return;
-        }
-        Node prev = head, current = head.next;
-        Node next;
-        while (current != null) {
-            if (prev.getKey() == current.getKey()) {
-                next = current.next;
-                current.setNext(null);
-                current = next;
-                prev.setNext(current);
-            } else {
-                prev = prev.next;
-                current = current.next;
-            }
-        }
-        printFromNode(head);
-    }
 
     /**
      * Intersection of two linked list
@@ -260,16 +266,16 @@ public class MyList {
     }
 
     public static Node reverseListInPairs(Node head) {
-        if (head == null) {
-            return null;
+        if (head == null || head.next == null) {
+            return head;
         }
         Node temp = head;
 
         while (temp != null && temp.next != null) {
-            int k = temp.getKey();
+            int k = temp.key;
             temp.setKey(temp
                     .next
-                    .getKey());
+                    .key);
             temp
                     .next
                     .setKey(k);
@@ -283,7 +289,7 @@ public class MyList {
             return prev;
 
         final Node next = head.next;
-        head.setNext(prev);
+        head.next = prev;
         prev = head;
         head = next;
         return recursiveReverseLinkedList(head, prev);
@@ -293,7 +299,7 @@ public class MyList {
         if (head == null) {
             return false;
         }
-        if (head.getKey() == data) {
+        if (head.key == data) {
             return true;
         }
         return searchRecursive(head.next, data);
@@ -305,7 +311,7 @@ public class MyList {
         if (head == null) {
             return -1;
         }
-        if (head.getKey() == data) {
+        if (head.key == data) {
             return index;
         }
         return getElementIndexPosition(head.next, data, index + 1);
@@ -341,7 +347,7 @@ public class MyList {
             slow = slow.next;
             fast = fast.next;
         }
-        return slow.getKey();
+        return slow.key;
 
     }
 
@@ -354,15 +360,15 @@ public class MyList {
         Node prev = null, curr = head;
 
         while (curr != null) {
-            if (curr.getKey() == element) {
+            if (curr.key == element) {
                 Node next = curr.next;
                 //if first node is to be deleted
                 if(prev == null){
-                    curr.setNext(null);
+                    curr.next = null;
                     curr = next;
                     head = curr;
                 } else {
-                    prev.setNext(next);
+                    prev.next = next;
                     curr = next;
                 }
 
@@ -592,7 +598,30 @@ public class MyList {
     }
 
     /**
-     * Remove duplicate elements from the list
+     * Keep unique elements. refer deleteDuplicates function.
+     */
+    public static void removeDuplicates(Node head) {
+        if (head == null) {
+            return;
+        }
+        Node prev = head, current = head.next;
+        Node next;
+        while (current != null) {
+            if (prev.key == current.key) {
+                next = current.next;
+                current.next = null;
+                current = next;
+                prev.next = current;
+            } else {
+                prev = prev.next;
+                current = current.next;
+            }
+        }
+        printFromNode(head);
+    }
+
+    /**
+     * Remove duplicate elements from the list. keep unique elements
      *
      * Input: 1->1->2->3->3
      * Output: 1->2->3
