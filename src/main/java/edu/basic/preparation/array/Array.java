@@ -65,13 +65,12 @@ public class Array {
             lengthArray[i] = 1;
         }
 //      if j=4 then k =0 to 3
-        int j = 1, max = a[j];
+        int j = 1, max = lengthArray[j];
         while (j < a.length) {
 
             for (int k = 0; k < j; k++) {
                 if (a[j] > a[k]) {
                     lengthArray[j] = lengthArray[k] + 1;
-                    k++;
                     if (max < lengthArray[j]) {
                         max = lengthArray[j];
                     }
@@ -143,6 +142,55 @@ public class Array {
         public int compare(Integer o1, Integer o2) {
             return o2-o1;
         }
+    }
+
+
+    /**
+     * arr[] = [1, 2, 3, 4, 5, 6, 7], d = 2
+     * return = [3, 4, 5, 6, 7, 1, 2]
+     *
+     * @param array [1, 2, 3, 4, 5, 6, 7]
+     * @param d rotate array by number
+     */
+    public static void rotateArrayAntiClockWise(int[] array, int d) {
+
+        final int length = array.length;
+        for (int i = 0; i < d; i++) {
+            int temp = array[0];
+
+            for (int j = 0; j < length - 1; j++) {
+                array[j] = array[j + 1];
+            }
+            array[length - 1] = temp;
+        }
+    }
+
+    /**
+     * arr[] = {1, 2, 3, 4, 5}, d = 1
+     * return = {5, 1, 2, 3, 4}
+     *
+     * @param array
+     * @param d rotate array by number
+     */
+    public static void rotateArrayClockWise(int[] array, int d) {
+
+        final int length = array.length;
+        for (int i = 0; i < d; i++) {
+            int temp = array[length-1];
+
+            for (int j = length-1; j > 0; j--) {
+                array[j] = array[j-1];
+            }
+            array[0] = temp;
+        }
+    }
+
+    public static void printArray(int[] a) {
+
+        for (int i = 0; i < a.length; i++) {
+            System.out.print(a[i]+" - ");
+        }
+        System.out.println();
     }
 
     /**

@@ -10,7 +10,7 @@ import java.util.Stack;
 import edu.basic.preparation.data.Node;
 import org.springframework.stereotype.Service;
 
-import static edu.basic.preparation.array.Array.longestCommonIncreasingSubSequence;
+import static edu.basic.preparation.array.Array.*;
 import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.list.MyList.addTwoNumbers;
 import static edu.basic.preparation.list.MyList.printFromNode;
@@ -424,8 +424,16 @@ public class DependencyService {
     }
 
     public void arrayFunctionality(){
-        int[] a = new int[] {3,4,-1,0,6,2,3};
-        System.out.println("********* longest common sub sequence *******");
-        System.out.println(longestCommonIncreasingSubSequence(a));
+//        int[] a = new int[] {3,4,-1,0,6,2,3};
+//        System.out.println("********* longest common sub sequence *******");
+//        System.out.println(longestCommonIncreasingSubSequence(a));
+
+        int[] array = new int[] {1,2,3,4,5,6,7};
+        rotateArrayClockWise(array, 2);
+        printArray(array);
+
+        int[] array2 = new int[] {1,2,3,4,5,6,7};
+        rotateArrayAntiClockWise(array2, 2);
+        printArray(array2);
     }
 }
