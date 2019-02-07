@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 import java.util.Set;
+import java.util.Stack;
 import java.util.TreeMap;
 
 /**
@@ -1088,6 +1089,50 @@ public final class StringUtilities {
         return map;
     }
     */
+
+
+    public boolean isStringBalanced(String str) {
+
+        Stack<Character> stack = new Stack();
+        final char[] chars = str.toCharArray();
+        for (int i = 0; i < str.length(); i++) {
+
+            if (chars[i] == '{' || chars[i] == '(' || chars[i] == '[') {
+                stack.push(chars[i]);
+            }
+
+            if (chars[i] == '}' || chars[i] == ')' || chars[i] == ']') {
+                if (stack.isEmpty()) {
+                    return false;
+                }
+
+                if (!isBalanced(stack.pop(), chars[i])) {
+                    return false;
+                }
+            }
+        }
+        if (stack.isEmpty()) {
+            return true;
+        } else {
+            return false;
+        }
+
+    }
+
+    public static boolean isBalanced(char c1, char c2) {
+
+        if (c1 == '(' && c2 == ')') {
+            return true;
+        }
+        if (c1 == '{' && c2 == '}') {
+            return true;
+        }
+        if (c1 == '[' && c2 == ']') {
+            return true;
+        }
+
+        return false;
+    }
 }
 
 

@@ -12,7 +12,8 @@ import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.longestCommonIncreasingSubSequence;
 import static edu.basic.preparation.data.DataUtilities.*;
-import static edu.basic.preparation.list.MyList.*;
+import static edu.basic.preparation.list.MyList.addTwoNumbers;
+import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
 import static edu.basic.preparation.tree.BinaryTree.horizontalDistance;
@@ -83,19 +84,16 @@ public class DependencyService {
 //        final Node pairwiseSwapNode = reverseListInPairs(listForPairwiseSwap);
 //        printFromNode(pairwiseSwapNode);
 
-        Node head = new Node(4);
-        head.setNext(new Node(5));
-        head.getNext().setNext(new Node(1));
-        head.getNext().getNext().setNext(new Node(8));
-        head.getNext().getNext().getNext().setNext(new Node(8));
-        head.getNext().getNext().getNext().getNext().setNext(new Node(9));
+//        Node head = new Node(4);
+//        head.setNext(new Node(5));
+//        head.getNext().setNext(new Node(1));
+//        head.getNext().getNext().setNext(new Node(8));
+//        head.getNext().getNext().getNext().setNext(new Node(8));
+//        head.getNext().getNext().getNext().getNext().setNext(new Node(9));
 //        printFromNode(head);
 //        deleteNode(head.next);
 //        deleteNode(head, 8);
-
-        printFromNode(head);
-
-
+//        printFromNode(head);
 
 //        final List<Node> twoSortedList = getTwoSortedList();
 //        final Node mergeTwoLists = mergeTwoLists(twoSortedList.get(0), twoSortedList.get(1));
@@ -111,6 +109,10 @@ public class DependencyService {
 //        final Node reverseBetween1 = reverseBetweenOptimized(node, 2, 4);
 //        printFromNode(reverseBetween1);
 
+        Node l1 = new Node(5);
+        Node l2 = new Node(5);
+        final Node head = addTwoNumbers(l1, l2);
+        printFromNode(head);
     }
 
     public void stringFunctionality() {

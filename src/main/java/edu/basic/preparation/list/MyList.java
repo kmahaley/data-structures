@@ -852,4 +852,48 @@ public class MyList {
         return head;
 
     }
+
+
+    /**
+     * Sum of two numbers
+     *
+     * Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
+     * Output: 7 -> 0 -> 8
+     * Explanation: 342 + 465 = 807.
+     *
+     * Add every thing in carry and continue in loop
+     *
+     * @param l1 number one
+     * @param l2 number 2
+     * @return added number head
+     */
+    public static Node addTwoNumbers(Node l1, Node l2) {
+
+        if(l1 == null) {
+            return l2;
+        }
+        if(l2 == null) {
+            return l1;
+        }
+
+        int carry= 0;
+        Node headStart = new Node(0);
+        Node p = headStart;
+
+        while(l1 != null || l2 != null || carry != 0) {
+            if(l1 != null) {
+                carry = carry+ l1.key;
+                l1=l1.next;
+            }
+            if(l2 != null) {
+                carry = carry+ l2.key;
+                l2=l2.next;
+            }
+            p.next = new Node(carry%10);
+            carry = carry/10;
+            p=p.next;
+        }
+
+        return headStart.next;
+    }
 }
