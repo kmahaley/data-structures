@@ -1,7 +1,10 @@
 package edu.basic.preparation.stack;
 
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -163,7 +166,7 @@ public class MyStack {
     }
 
     /**
-     * Find next smallest number
+     * Find next greatest number
      * example {1, 3, 0, 2, 5}
      * ANS => 1->3, 3->5, 0->-2 ...
      *
@@ -269,6 +272,42 @@ public class MyStack {
         }
         return newStr.length();
     }
+
+
+    /**
+     * is valid parenthesis
+     *
+     * @param str "()[{[]}]"
+     * @return boolean
+     */
+    public static boolean isValidParenthesis(String str) {
+
+        final char[] toCharArray = str.toCharArray();
+        Stack<Character> st = new Stack<>();
+        final List<Character> opening = Arrays.asList(')', '}', ']');
+        final List<Character> closing = Arrays.asList('(', '{', '[');
+
+        HashMap<Character, Character> map = new HashMap<Character, Character>();
+        map.put('(', ')');
+        map.put('[', ']');
+        map.put('{', '}');
+
+        for (int i = 0; i < str.length(); i++) {
+
+            final char curr = toCharArray[i];
+            if(map.entrySet().contains(curr)) {
+                st.push(curr);
+            } else if (map.values().contains(curr)) {
+                if(!st.empty() && map.get(st.peek()) == curr){
+                    st.pop();
+                } else {
+                    return false;
+                }
+            }
+        }
+        return st.empty();
+    }
+
 
     /**
      * recursively remove middle element

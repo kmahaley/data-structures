@@ -23,10 +23,7 @@ public class Application {
 
 //        dependencyService.graphFunctionality();
 
-        dependencyService.arrayFunctionality();
+//        dependencyService.arrayFunctionality();
 
     }
-
-
-
 }

@@ -158,6 +158,7 @@ public class Array {
         for (int i = 0; i < d; i++) {
             int temp = array[0];
 
+            //should iterate less till one less than last element.
             for (int j = 0; j < length - 1; j++) {
                 array[j] = array[j + 1];
             }

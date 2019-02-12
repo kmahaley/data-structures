@@ -210,7 +210,7 @@ public class Graph {
     }
 
     /**
-     * find if path exists from start to end
+     * find if path exists from start to end undirected graph
      *
      * @param start start node
      * @param end end node
@@ -386,6 +386,8 @@ public class Graph {
      * Given a 2D board containing 'X' and 'O' (the letter O), capture all regions surrounded by 'X'.
      *
      * A region is captured by flipping all 'O's into 'X's in that surrounded region.
+     * leave the border 0's untouched and its all connecting 0's
+     *
      * Example:
      *
      * X X X X
@@ -542,7 +544,7 @@ public class Graph {
             return courses;
         }
         final Map<Integer, Set<Integer>> map = new HashMap<>();
-        for(int i =0 ;i<numCourses ;i++) {
+        for(int i =0 ; i < numCourses ; i++) {
             map.put(i, new HashSet<Integer>());
         }
 
@@ -598,7 +600,12 @@ public class Graph {
     }
 
 
-
+    /**
+     * Optimized solution referred from leet code
+     * @param numCourses
+     * @param prerequisites
+     * @return
+     */
     public static boolean canFinishVersion2(int numCourses, int[][] prerequisites) {
         if (numCourses <= 0)
             return false;
