@@ -16,6 +16,8 @@ import edu.basic.preparation.data.TreeNode;
  */
 public class BinaryTree {
 
+    public static int diameterGlobal = -1;
+
     static int preIndex = 0;
 
     public static List<Integer> inOrderList = new ArrayList<>();
@@ -881,6 +883,24 @@ public class BinaryTree {
         int rd = diameterOfTree(root.right);
 
         return Math.max(lh + rh + 1, Math.max(ld, rd));
+    }
+
+    /**
+     * Get height of the node and compare with global diameter variable.
+     * set global diameter variable to the max value
+     *
+     * @param root node
+     * @return return height of the node
+     */
+    public static int diameterOfTreeWithGlobalVariable(TreeNode root) {
+        if(root == null) return 0;
+
+        int left = diameterOfTreeWithGlobalVariable(root.left);
+        int right = diameterOfTreeWithGlobalVariable(root.right);
+        diameterGlobal = Math.max(diameterGlobal, left+right+1);
+
+        int heightAt = Math.max(left+1, right+1);
+        return heightAt;
     }
 
     /**

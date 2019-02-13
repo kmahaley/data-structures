@@ -2,9 +2,7 @@ package edu.basic.preparation.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map;
 import java.util.Stack;
 
 import edu.basic.preparation.data.Node;
@@ -16,8 +14,7 @@ import static edu.basic.preparation.list.MyList.addTwoNumbers;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
-import static edu.basic.preparation.tree.BinaryTree.horizontalDistance;
-import static edu.basic.preparation.tree.BinaryTree.horizontalDistanceByDFS;
+import static edu.basic.preparation.tree.BinaryTree.*;
 
 /**
  * @author Kartik Mahaley
@@ -314,6 +311,10 @@ public class DependencyService {
 //        System.out.println(countNumberOfLeafNodesRecursive(constructTree()));
 //        System.out.println(countNumberOfLeafNodesIterative(constructTree()));
 
+        System.out.println(diameterOfTree(constructTree()));
+        diameterOfTreeWithGlobalVariable(constructTree());
+        System.out.println(diameterGlobal);
+
 //        System.out.println("********* is tree perfect binary tree? *******");
 //        System.out.println(isPerfectBinaryTreeIterative(isTreePerfectBinaryTree()));
 //        System.out.println(isPerfectBinaryTreeRecursive(isTreePerfectBinaryTree()));
@@ -321,13 +322,13 @@ public class DependencyService {
 //        System.out.println("********* find maximum of the tree *******");
 //        System.out.println(findMax(constructTree()));
 //
-        System.out.println("********* Horizontal distance *******");
-        final Map<Integer, LinkedList<Integer>> integerListMap = horizontalDistance(constructDiagonalTraversal());
-        integerListMap.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
-
-        System.out.println("********* Horizontal distance DFS *******");
-        final Map<Integer, LinkedList<Integer>> integerListMapDFS = horizontalDistanceByDFS(constructDiagonalTraversal());
-        integerListMapDFS.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
+//        System.out.println("********* Horizontal distance *******");
+//        final Map<Integer, LinkedList<Integer>> integerListMap = horizontalDistance(constructDiagonalTraversal());
+//        integerListMap.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
+//
+//        System.out.println("********* Horizontal distance DFS *******");
+//        final Map<Integer, LinkedList<Integer>> integerListMapDFS = horizontalDistanceByDFS(constructDiagonalTraversal());
+//        integerListMapDFS.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
 //
 //        System.out.println("********* Diagonal Traversal of Binary Tree *********");
 //        diagonalPrint(constructDiagonalTraversal());

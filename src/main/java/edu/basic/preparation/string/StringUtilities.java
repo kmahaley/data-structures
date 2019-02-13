@@ -347,7 +347,6 @@ public final class StringUtilities {
             if (s1[i].equals(s2[j])) {
                 j++;
                 i++;
-                continue;
             } else {
                 list.add(s1[i]);
                 i++;
