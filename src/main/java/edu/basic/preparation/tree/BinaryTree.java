@@ -678,7 +678,7 @@ public class BinaryTree {
             return -1;
         }
         //if left child empty then current node is lowest in binary tree
-        if (root.left == null && (root.right == null || root.right != null)) {
+        if (root.left == null) {
             return root.key;
         }
 
@@ -865,7 +865,8 @@ public class BinaryTree {
     }
 
     public static class Height{
-        int height;
+        public int height;
+        public int diameter;
     }
 
     //Optimized solution from geeks for geeks
@@ -894,13 +895,36 @@ public class BinaryTree {
            so return 0 */
         if (Math.abs(lh - rh) >= 2) {
             return false;
-        }
-
-        /* If this node is balanced and left and right subtrees
-           are balanced then return true */
-        else {
+        } else { /* If this node is balanced and left and right subtrees are balanced then return true */
             return leftTree && rightTree;
         }
+    }
+
+
+    public static void getDiameterOfTheTreeByHeightNode(TreeNode root, Height height) {
+        /* If tree is empty then return true */
+        if (root == null) {
+            height.height = 0;
+            height.diameter = 0;
+            return;
+        }
+
+        /* Get heights of left and right sub trees */
+        Height lHeight = new Height(), rHeight = new Height();
+
+        getDiameterOfTheTreeByHeightNode(root.left, lHeight);
+        getDiameterOfTheTreeByHeightNode(root.right, rHeight);
+
+        int lh = lHeight.height;
+        int rh = rHeight.height;
+
+        int ld = lHeight.diameter;
+        int rd = rHeight.diameter;
+
+        /* Height of current node is max of heights of
+           left and right subtrees plus 1*/
+        height.height = (lh > rh ? lh : rh) + 1;
+        height.diameter = Math.max(Math.max(ld, rd), lh + rh + 1);
     }
 
     /**
@@ -1051,6 +1075,8 @@ public class BinaryTree {
     /**
      * Given a binary tree, imagine yourself standing on the right side of it, return the values of the
      * nodes you can see ordered from top to bottom.
+     *
+     * in same fashion you can solve left side view
      */
     public static List<Integer> rightSideView(TreeNode root) {
         List<Integer> toReturn = new ArrayList<>();
@@ -1081,11 +1107,13 @@ public class BinaryTree {
     }
 
     /**
-     * Given a binary tree, find the leftmost value in the last row of the tree.
+     * Given a binary tree, find the leftmost value in the last level of the tree.
      *      2
      *     /\
      *    1 3
      * answer : 1
+     *
+     * in same fashion you can find out right most element in the last level
      */
     public static int findBottomLeftValue(TreeNode root) {
 
@@ -1169,7 +1197,7 @@ public class BinaryTree {
      * Search in binary tree using DFS,
      * search left tree is value is found then don't check in right tree, else check in right right.
      *
-     * you can solve this problem by BFS too. mainatain queue and if you find value return.
+     * you can solve this problem by BFS too. maintain queue and if you find value return.
      *
      * @param root node
      * @param x value to search

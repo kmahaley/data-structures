@@ -148,6 +148,19 @@ public final class DataUtilities {
         return root;
     }
 
+    public static TreeNode constructDiameterTree() {
+
+        TreeNode root = new TreeNode(1);
+        root.left = new TreeNode(2);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(4);
+        root.left.right.left = new TreeNode(6);
+        root.left.left.left = new TreeNode(5);
+        root.left.left.left.left = new TreeNode(8);
+
+        return root;
+    }
+
     public static TreeNode longestPathTree() {
 
         TreeNode root = new TreeNode(10);

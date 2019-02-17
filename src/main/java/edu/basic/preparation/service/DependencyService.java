@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Stack;
 
 import edu.basic.preparation.data.Node;
+import edu.basic.preparation.tree.BinaryTree;
 import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.*;
@@ -14,8 +15,7 @@ import static edu.basic.preparation.list.MyList.addTwoNumbers;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
-import static edu.basic.preparation.tree.BinaryTree.allPathsFromRootToLeaf;
-import static edu.basic.preparation.tree.BinaryTree.allPathsFromRootToLeafWithGivenSum;
+import static edu.basic.preparation.tree.BinaryTree.*;
 
 /**
  * @author Kartik Mahaley
@@ -312,10 +312,13 @@ public class DependencyService {
 //        System.out.println(countNumberOfLeafNodesRecursive(constructTree()));
 //        System.out.println(countNumberOfLeafNodesIterative(constructTree()));
 
-//        System.out.println("********* diameter of the binary tree dfs *******");
-//        System.out.println(diameterOfTree(constructTree()));
-//        diameterOfTreeWithGlobalVariable(constructTree());
-//        System.out.println(diameterGlobal);
+        System.out.println("********* diameter of the binary tree dfs *******");
+        System.out.println(diameterOfTree(constructDiameterTree()));
+        diameterOfTreeWithGlobalVariable(constructDiameterTree());
+        System.out.println(diameterGlobal);
+        final BinaryTree.Height rootHeight = new BinaryTree.Height();
+        getDiameterOfTheTreeByHeightNode(constructDiameterTree(), rootHeight);
+        System.out.println(rootHeight.diameter);
 
 //        System.out.println("********* search in binary tree dfs *******");
 //        System.out.println(searchInBinaryTreeRecursive(constructTree(), 18));
@@ -346,10 +349,12 @@ public class DependencyService {
 
 //        System.out.println("********* is path from root to leaf exists with sum *******");
 //        System.out.println(isPathExistsWithSum(constructTree(), 86));
-        System.out.println("********* All paths from root to leaf *******");
-        allPathsFromRootToLeaf(constructTree(), new ArrayList<Integer>(), 0);
-        System.out.println("********* All paths from root to leaf with given sum *******");
-        allPathsFromRootToLeafWithGivenSum(constructTree(), 45, new ArrayList<Integer>(), 0);
+
+//        System.out.println("********* All paths from root to leaf *******");
+//        allPathsFromRootToLeaf(constructTree(), new ArrayList<Integer>(), 0);
+
+//        System.out.println("********* All paths from root to leaf with given sum *******");
+//        allPathsFromRootToLeafWithGivenSum(constructTree(), 45, new ArrayList<Integer>(), 0);
 
 //        System.out.println("********* All paths from root with given sum *******");
 //        allPathsFromRootWithGivenSum(constructTreeWithSumPath(), 0, 38, new ArrayList<Integer>(), 0);
@@ -369,6 +374,8 @@ public class DependencyService {
 //        System.out.println("********* zigzag level order traversal *******");
 //        final List<List<Integer>> lists = zigzagLevelOrder(constructTree());
 //        System.out.println(lists);
+
+
 //
 //        TODO:
         int [] inorder = new int[] {4,2,5,1,3,6};
