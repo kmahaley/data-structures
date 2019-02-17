@@ -19,8 +19,8 @@ public class DeadlockApplication {
 //        t1.join();
 //        t2.join();
         final ExecutorService executorService = Executors.newFixedThreadPool(4);
-        executorService.submit(() ->deadlock.method1());
-        executorService.submit(() ->deadlock.method2());
+        executorService.submit(() -> deadlock.method1());
+        executorService.submit(() -> deadlock.method2());
 
         executorService.shutdown();
     }

@@ -20,6 +20,10 @@ public class BinaryTree {
 
     static int preIndex = 0;
 
+//  used in function  weightOfLongestPathFromRootToLeaf
+    public static int ROOT_TO_LEAF_MAX_SUM = -1;
+    public static int ROOT_TO_LEAF_MAX_LEN = -1;
+
     public static List<Integer> inOrderList = new ArrayList<>();
 
     public static List<Integer> preOrderList = new ArrayList<>();
@@ -318,6 +322,10 @@ public class BinaryTree {
         } else {
             return maxRight;
         }
+//        Or you can do below
+//        int max = Math.max(maxLeft, maxRight);
+//        max = Math.max(max, current.key);
+//        return max;
     }
 
 
@@ -336,7 +344,7 @@ public class BinaryTree {
     }
 
     /**
-     * evaluate maximum sum
+     * evaluate maximum sum from root to any leaf node
      *
      * @param root node
      * @param maxLength max length
@@ -356,7 +364,6 @@ public class BinaryTree {
         if (root == null) {
             if (len > maxLength) {
                 maxSum = sum;
-                maxLength = len;
 
             } else if (maxLength == len && sum > maxSum) {
                 maxSum = sum;
@@ -367,6 +374,39 @@ public class BinaryTree {
         int right = maximumWeightedRootToLeafPathUtil(root.right, maxLength, maxSum, len + 1, sum + root.key);
 
         return left > right ? left : right;
+    }
+
+    /**
+     * Find maximum sum of longest path to leaf node.
+     * @param root node
+     */
+    public static void weightOfLongestPathFromRootToLeaf(TreeNode root) {
+
+
+        weightOfLongestPathFromRootToLeafHelper(root, 0, 0);
+    }
+
+    /**
+     * compare len and sum with global variable
+     *
+     * @param root current node
+     * @param sum current sum
+     * @param len current len
+     */
+    private static void weightOfLongestPathFromRootToLeafHelper(TreeNode root, int sum, int len) {
+        if (root == null) {
+            if (ROOT_TO_LEAF_MAX_LEN < len) {
+                ROOT_TO_LEAF_MAX_LEN = len;
+
+                if (ROOT_TO_LEAF_MAX_SUM < sum) {
+                    ROOT_TO_LEAF_MAX_SUM = sum;
+                }
+            }
+        } else {
+
+            weightOfLongestPathFromRootToLeafHelper(root.left, sum + root.key, len + 1);
+            weightOfLongestPathFromRootToLeafHelper(root.right, sum + root.key, len + 1);
+        }
     }
 
     /**
@@ -394,6 +434,9 @@ public class BinaryTree {
         }
 
         return isExists;
+//        OR
+//        boolean isExists = isPathExistsWithSum(root.left, sum);
+//        return isExists || isPathExistsWithSum(root.right, sum);
     }
 
 
@@ -418,6 +461,32 @@ public class BinaryTree {
 
         allPathsFromRootToLeaf(root.left, list, index);
         allPathsFromRootToLeaf(root.right, list, index);
+    }
+
+    /**
+     * Print all paths from root to leaf with given sum
+     *
+     * @param root node
+     * @param sum given sum
+     * @param list list to keep path
+     * @param index index at which element will be added
+     */
+    public static void allPathsFromRootToLeafWithGivenSum(TreeNode root, int sum, List<Integer> list, int index) {
+        if (root == null) {
+            return;
+        }
+
+        list.add(index, root.key);
+        index++;
+        sum = sum - root.key;
+
+        //condition for leaf node and sum
+        if (root.left == null && root.right == null && sum == 0) {
+            printList(list, index);
+        }
+
+        allPathsFromRootToLeafWithGivenSum(root.left, sum, list, index);
+        allPathsFromRootToLeafWithGivenSum(root.right, sum, list, index);
     }
 
     /**
@@ -1096,5 +1165,29 @@ public class BinaryTree {
     }
 
 
+    /**
+     * Search in binary tree using DFS,
+     * search left tree is value is found then don't check in right tree, else check in right right.
+     *
+     * you can solve this problem by BFS too. mainatain queue and if you find value return.
+     *
+     * @param root node
+     * @param x value to search
+     * @return boolean
+     */
+    public static boolean searchInBinaryTreeRecursive(TreeNode root, int x) {
+
+        if(root == null){
+            return false;
+        }
+        if(root.key == x) {
+            return true;
+        }
+        boolean isPresent = searchInBinaryTreeRecursive(root.left, x);
+        if(!isPresent) {
+            isPresent = searchInBinaryTreeRecursive(root.right, x);
+        }
+        return isPresent;
+    }
 
 }

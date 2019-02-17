@@ -14,7 +14,8 @@ import static edu.basic.preparation.list.MyList.addTwoNumbers;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
-import static edu.basic.preparation.tree.BinaryTree.*;
+import static edu.basic.preparation.tree.BinaryTree.allPathsFromRootToLeaf;
+import static edu.basic.preparation.tree.BinaryTree.allPathsFromRootToLeafWithGivenSum;
 
 /**
  * @author Kartik Mahaley
@@ -311,9 +312,13 @@ public class DependencyService {
 //        System.out.println(countNumberOfLeafNodesRecursive(constructTree()));
 //        System.out.println(countNumberOfLeafNodesIterative(constructTree()));
 
-        System.out.println(diameterOfTree(constructTree()));
-        diameterOfTreeWithGlobalVariable(constructTree());
-        System.out.println(diameterGlobal);
+//        System.out.println("********* diameter of the binary tree dfs *******");
+//        System.out.println(diameterOfTree(constructTree()));
+//        diameterOfTreeWithGlobalVariable(constructTree());
+//        System.out.println(diameterGlobal);
+
+//        System.out.println("********* search in binary tree dfs *******");
+//        System.out.println(searchInBinaryTreeRecursive(constructTree(), 18));
 
 //        System.out.println("********* is tree perfect binary tree? *******");
 //        System.out.println(isPerfectBinaryTreeIterative(isTreePerfectBinaryTree()));
@@ -332,13 +337,19 @@ public class DependencyService {
 //
 //        System.out.println("********* Diagonal Traversal of Binary Tree *********");
 //        diagonalPrint(constructDiagonalTraversal());
-//        System.out.println("********* Sum of longest path to leaf *******");
+//        System.out.println("********* Maximum weighted path from root to leaf *******");
 //        System.out.println(maximumWeightedRootToLeafPath(longestPathTree()));
+//
+//        System.out.println("********* Weight of longest path from root to leaf *******");
+//        weightOfLongestPathFromRootToLeaf(longestPathTree());
+//        System.out.println(ROOT_TO_LEAF_MAX_LEN + " : " + ROOT_TO_LEAF_MAX_SUM);
 
 //        System.out.println("********* is path from root to leaf exists with sum *******");
 //        System.out.println(isPathExistsWithSum(constructTree(), 86));
-//        System.out.println("********* All paths from root to leaf *******");
-//        allPathsFromRootToLeaf(constructTree(), new ArrayList<Integer>(), 0);
+        System.out.println("********* All paths from root to leaf *******");
+        allPathsFromRootToLeaf(constructTree(), new ArrayList<Integer>(), 0);
+        System.out.println("********* All paths from root to leaf with given sum *******");
+        allPathsFromRootToLeafWithGivenSum(constructTree(), 45, new ArrayList<Integer>(), 0);
 
 //        System.out.println("********* All paths from root with given sum *******");
 //        allPathsFromRootWithGivenSum(constructTreeWithSumPath(), 0, 38, new ArrayList<Integer>(), 0);
