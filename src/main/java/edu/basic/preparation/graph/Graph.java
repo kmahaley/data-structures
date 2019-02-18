@@ -35,7 +35,6 @@ public class Graph {
                     visited.add(child);
                     queue.add(child);
                 }
-
             }
         }
     }
@@ -131,6 +130,56 @@ public class Graph {
     private static void moveElementFromSetToSet(Integer key, Set<Integer> toBeVisited, Set<Integer> inProcess) {
         toBeVisited.remove(key);
         inProcess.add(key);
+    }
+
+
+    /**
+     * Keep stack as path from first element and add child if parent exists in stack while exploring children
+     * then cycle exists
+     *
+     * @param graph graph
+     * @return boolean
+     */
+    public static boolean isCycleInDirectedGraphVersion2(Map<Integer, List<Integer>> graph) {
+
+        Stack<Integer> st = new Stack<>();
+        Set<Integer> visited = new HashSet<>();
+
+        for (Integer ele : graph.keySet()) {
+
+            if(visited.contains(ele)) {
+                continue;
+            }
+            if(isCycleInDirectedGraphVersion2Helper(ele, st, visited, graph)) {
+                System.out.println(st);
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private static boolean isCycleInDirectedGraphVersion2Helper(
+            Integer ele,
+            Stack<Integer> st, Set<Integer> visited, Map<Integer, List<Integer>> graph) {
+
+        st.push(ele);
+        visited.add(ele);
+
+        for (Integer child : graph.get(ele)) {
+            if (st.contains(child)) {
+                return true;
+            }
+
+            if (visited.contains(child)) {
+                continue;
+            }
+
+            if (isCycleInDirectedGraphVersion2Helper(child, st, visited, graph)) {
+                return true;
+            }
+        }
+        st.remove(ele);
+        return false;
     }
 
     /**

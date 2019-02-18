@@ -6,16 +6,16 @@ import java.util.List;
 import java.util.Stack;
 
 import edu.basic.preparation.data.Node;
-import edu.basic.preparation.tree.BinaryTree;
 import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.*;
 import static edu.basic.preparation.data.DataUtilities.*;
+import static edu.basic.preparation.graph.Graph.isCycleInDirectedGraph;
+import static edu.basic.preparation.graph.Graph.isCycleInDirectedGraphVersion2;
 import static edu.basic.preparation.list.MyList.addTwoNumbers;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
-import static edu.basic.preparation.tree.BinaryTree.*;
 
 /**
  * @author Kartik Mahaley
@@ -312,13 +312,15 @@ public class DependencyService {
 //        System.out.println(countNumberOfLeafNodesRecursive(constructTree()));
 //        System.out.println(countNumberOfLeafNodesIterative(constructTree()));
 
-        System.out.println("********* diameter of the binary tree dfs *******");
-        System.out.println(diameterOfTree(constructDiameterTree()));
-        diameterOfTreeWithGlobalVariable(constructDiameterTree());
-        System.out.println(diameterGlobal);
-        final BinaryTree.Height rootHeight = new BinaryTree.Height();
-        getDiameterOfTheTreeByHeightNode(constructDiameterTree(), rootHeight);
-        System.out.println(rootHeight.diameter);
+//        System.out.println("********* diameter of the binary tree dfs *******");
+//        System.out.println(diameterOfTree(constructDiameterTree()));
+//
+//        diameterOfTreeWithGlobalVariable(constructDiameterTree());
+//        System.out.println(diameterGlobal);
+//
+//        final BinaryTree.Height rootHeight = new BinaryTree.Height();
+//        getDiameterOfTheTreeByHeightNode(constructDiameterTree(), rootHeight);
+//        System.out.println(rootHeight.diameter);
 
 //        System.out.println("********* search in binary tree dfs *******");
 //        System.out.println(searchInBinaryTreeRecursive(constructTree(), 18));
@@ -393,8 +395,9 @@ public class DependencyService {
 //        System.out.println("********* DFS traversal in graph *******");
 //        graphDFS(constructGraph());
 
-//        System.out.println("********* Cycle in directed graph *******");
-//        System.out.println(isCycleInDirectedGraph(constructGraph()));
+        System.out.println("********* Cycle in directed graph *******");
+        System.out.println(isCycleInDirectedGraph(constructDirectedCyclicGraph2()));
+        System.out.println(isCycleInDirectedGraphVersion2(constructDirectedCyclicGraph2()));
 
 //        System.out.println("********* Cycle in directed graph *******");
 //        System.out.println(isCycleInDirectedGraph(constructDirectedCyclicGraph()));
