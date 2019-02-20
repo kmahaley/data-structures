@@ -158,6 +158,7 @@ public class Graph {
         return false;
     }
 
+//  Helper method
     private static boolean isCycleInDirectedGraphVersion2Helper(
             Integer ele,
             Stack<Integer> st, Set<Integer> visited, Map<Integer, List<Integer>> graph) {
