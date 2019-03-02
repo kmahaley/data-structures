@@ -6,15 +6,16 @@ import java.util.List;
 import java.util.Stack;
 
 import edu.basic.preparation.data.Node;
+import edu.basic.preparation.stack.MyStack;
 import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.*;
-import static edu.basic.preparation.data.DataUtilities.*;
+import static edu.basic.preparation.data.DataUtilities.constructDirectedCyclicGraph2;
+import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
 import static edu.basic.preparation.graph.Graph.isCycleInDirectedGraph;
 import static edu.basic.preparation.graph.Graph.isCycleInDirectedGraphVersion2;
 import static edu.basic.preparation.list.MyList.addTwoNumbers;
 import static edu.basic.preparation.list.MyList.printFromNode;
-import static edu.basic.preparation.stack.MyStack.sortStackIteratively;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
 
 /**
@@ -268,12 +269,12 @@ public class DependencyService {
 //        System.out.println("********* next nearest greater number *******");
 //        nextGreatestElement(input);
 
-        System.out.println("********* sort a stack using recursion stack *******");
-        final Stack<Integer> stack = basicStack();
-        System.out.println(stack);
+//        System.out.println("********* sort a stack using recursion stack *******");
+//        final Stack<Integer> stack = basicStack();
+//        System.out.println(stack);
 //        sortStack(stack);
 //        System.out.println(stack);
-        System.out.println(sortStackIteratively(stack));
+//        System.out.println(sortStackIteratively(stack));
 //
 //        System.out.println("********* Reverse stack using recursion *******");
 //        final Stack<Integer> stackOriginal = basicStack();
@@ -290,6 +291,20 @@ public class DependencyService {
 //        System.out.println(integerStack);
 //        deleteMiddleElement(integerStack, integerStack.size(), integerStack.size()-1);
 //        System.out.println(integerStack);
+
+        MyStack.MaxStackClass maxStackClass = new MyStack.MaxStackClass();
+        maxStackClass.push(8);
+        maxStackClass.push(7);
+        maxStackClass.push(4);
+        maxStackClass.push(3);
+        maxStackClass.push(9);
+        System.out.println(maxStackClass);
+        System.out.println(maxStackClass.getMax().data);
+        final MyStack.MaxClassNode pop1 = maxStackClass.pop();
+        System.out.println(pop1.data);
+        System.out.println(maxStackClass.getMax().data);
+        final MyStack.MaxClassNode pop2 = maxStackClass.pop();
+        System.out.println(pop2.data);
     }
 
 

@@ -17,14 +17,13 @@ public class Application {
 
 //        dependencyService.queueFunctionality();
 
-//        dependencyService.stackFunctionality();
+        dependencyService.stackFunctionality();
 
 //        dependencyService.stringFunctionality();
 
 //        dependencyService.graphFunctionality();
 
 //        dependencyService.arrayFunctionality();
-
 
     }
 }

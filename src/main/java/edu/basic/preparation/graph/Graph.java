@@ -418,8 +418,6 @@ public class Graph {
             dfsNumIslands(i - 1, j, grid, visited); //above
             dfsNumIslands(i, j + 1, grid, visited); //right
             dfsNumIslands(i, j - 1, grid, visited); //left
-        } else {
-            return;
         }
 
     }
@@ -536,6 +534,9 @@ public class Graph {
         Set<Integer> visited = new HashSet<>();
 
         for(Integer key : map.keySet()) {
+            if(visited.contains(key)) {
+                continue;
+            }
             if(dfsCycleCheck(key, queue, visited, map, numCourses)) {
                 return false;
             }
@@ -632,7 +633,7 @@ public class Graph {
         if (children != null && !children.isEmpty()) {
 
             for (Integer val : children) {
-                if(visited.contains(val)) {
+                if (visited.contains(val)) {
                     continue;
                 }
                 if (dfsfindOrder(val, queue, visited, map, numCourses)) {
@@ -641,7 +642,6 @@ public class Graph {
             }
         }
 
-        visited.push(key);
         queue.remove(key);
         if (visited.size() > numCourses) {
             return true;
@@ -652,6 +652,7 @@ public class Graph {
 
     /**
      * Optimized solution referred from leet code
+     *
      * @param numCourses
      * @param prerequisites
      * @return
@@ -696,6 +697,8 @@ public class Graph {
 
     /**
      * Importance of manager and all its subordinates
+     *
+     * mid, importance, list of subordinates
      *
      * Input: [[1, 5, [2, 3]], [2, 3, []], [3, 3, []]], 1
      * Output: 11

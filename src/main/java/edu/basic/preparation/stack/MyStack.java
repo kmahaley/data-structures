@@ -385,4 +385,67 @@ public class MyStack {
         return rev;
     }
 
+    /**
+     * Max stack implementation
+     * input : {8,7,4,3,9}
+     * linked list implementation : 9|9 -> 3|8 -> 4|8 -> 7|8-> 8|8
+     */
+    public static class MaxStackClass {
+
+        public MaxClassNode head;
+        public MaxClassNode max;
+
+        public void push(int data) {
+
+            MaxClassNode node = new MaxClassNode(data);
+            node.oldMaxNode = max;
+            if(max == null || max.data < data) {
+                max = node;
+            }
+            node.next = head;
+            head = node;
+        }
+
+        public MaxClassNode pop() {
+            MaxClassNode popped = null;
+            if(head != null) {
+                popped = head;
+                head = head.next;
+                max = head.oldMaxNode;
+            }
+            return popped;
+        }
+
+        public MaxClassNode getMax() {
+            return max;
+        }
+
+        @Override
+        public String toString() {
+
+            StringBuilder builder = new StringBuilder();
+            if (head != null) {
+                MaxClassNode temp = head;
+                while (temp != null) {
+                    builder.append(temp.data + " - ");
+                    temp = temp.next;
+                }
+            }
+            return builder.toString();
+        }
+    }
+
+    /**
+     * Class to keep track of maximum node and next node in linked list
+     */
+    public static class MaxClassNode {
+        public int data;
+        public MaxClassNode next;
+        public MaxClassNode oldMaxNode;
+
+        public MaxClassNode(int data) {
+            this.data = data;
+        }
+
+    }
 }
