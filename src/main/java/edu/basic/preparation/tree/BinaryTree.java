@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Vector;
 
+import edu.basic.preparation.data.Node;
 import edu.basic.preparation.data.TreeNode;
 
 /**
@@ -1218,4 +1219,72 @@ public class BinaryTree {
         return isPresent;
     }
 
+    /**
+     * Input: Linked List 4->2->5->1->6->3->7
+     * Output: A Balanced Binary tree
+     *
+     * BFS  print = 1,2,3,4,5,6,7
+     * @param head head of linked list
+     * @param start start
+     * @param end end
+     *
+     * @return root tree node
+     */
+    public static TreeNode listToBalancedBinaryTree(Node head, int start, int end) {
+//      Initial condition to stop recursive call
+        if (head == null || start > end) {
+            return null;
+        }
+
+        Node slow = head, fast = head;
+        int count = start, middle = (start + end) / 2;
+        while (count < middle) {
+            fast = fast.next.next;
+            slow = slow.next;
+            count++;
+        }
+
+        TreeNode root = new TreeNode(slow.key);
+        root.left = listToBalancedBinaryTree(head, start, count - 1);
+        root.right = listToBalancedBinaryTree(slow.next, count + 1, end);
+
+        return root;
+    }
+
+    /**
+     * BFS print
+     */
+    public static void BFSPrint(TreeNode root) {
+        if (root == null) {
+            System.out.println("tree empty");
+        }
+
+        LinkedList<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            TreeNode polled = queue.poll();
+            System.out.print(polled.key + " - ");
+
+            if (polled.left != null) {
+                queue.add(polled.left);
+            }
+            if (polled.right != null) {
+                queue.add(polled.right);
+            }
+
+        }
+        System.out.println();
+    }
+
+    /**
+     * DFS Print
+     */
+    public static void DFSPrint(TreeNode root) {
+        if(root == null) {
+            return;
+        }
+        System.out.print(root.key +" - ");
+        DFSPrint(root.left);
+        DFSPrint(root.right);
+    }
 }

@@ -6,14 +6,10 @@ import java.util.List;
 import java.util.Stack;
 
 import edu.basic.preparation.data.Node;
-import edu.basic.preparation.stack.MyStack;
 import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.*;
-import static edu.basic.preparation.data.DataUtilities.constructDirectedCyclicGraph2;
 import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
-import static edu.basic.preparation.graph.Graph.isCycleInDirectedGraph;
-import static edu.basic.preparation.graph.Graph.isCycleInDirectedGraphVersion2;
 import static edu.basic.preparation.list.MyList.addTwoNumbers;
 import static edu.basic.preparation.list.MyList.printFromNode;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
@@ -292,19 +288,19 @@ public class DependencyService {
 //        deleteMiddleElement(integerStack, integerStack.size(), integerStack.size()-1);
 //        System.out.println(integerStack);
 
-        MyStack.MaxStackClass maxStackClass = new MyStack.MaxStackClass();
-        maxStackClass.push(8);
-        maxStackClass.push(7);
-        maxStackClass.push(4);
-        maxStackClass.push(3);
-        maxStackClass.push(9);
-        System.out.println(maxStackClass);
-        System.out.println(maxStackClass.getMax().data);
-        final MyStack.MaxClassNode pop1 = maxStackClass.pop();
-        System.out.println(pop1.data);
-        System.out.println(maxStackClass.getMax().data);
-        final MyStack.MaxClassNode pop2 = maxStackClass.pop();
-        System.out.println(pop2.data);
+//        MyStack.MaxStackClass maxStackClass = new MyStack.MaxStackClass();
+//        maxStackClass.push(8);
+//        maxStackClass.push(7);
+//        maxStackClass.push(4);
+//        maxStackClass.push(3);
+//        maxStackClass.push(9);
+//        System.out.println(maxStackClass);
+//        System.out.println(maxStackClass.getMax().data);
+//        final MyStack.MaxClassNode pop1 = maxStackClass.pop();
+//        System.out.println(pop1.data);
+//        System.out.println(maxStackClass.getMax().data);
+//        final MyStack.MaxClassNode pop2 = maxStackClass.pop();
+//        System.out.println(pop2.data);
     }
 
 
@@ -392,6 +388,12 @@ public class DependencyService {
 //        final List<List<Integer>> lists = zigzagLevelOrder(constructTree());
 //        System.out.println(lists);
 
+//        int[] array = new int[] {4,2,5,1,6,3,7};
+//        final TreeNode treeNode = listToBalancedBinaryTree(createListFromArray(array), 0, 7);
+//        BFSPrint(treeNode);
+//        DFSPrint(treeNode);
+
+
 
 //
 //        TODO:
@@ -410,9 +412,9 @@ public class DependencyService {
 //        System.out.println("********* DFS traversal in graph *******");
 //        graphDFS(constructGraph());
 
-        System.out.println("********* Cycle in directed graph *******");
-        System.out.println(isCycleInDirectedGraph(constructDirectedCyclicGraph2()));
-        System.out.println(isCycleInDirectedGraphVersion2(constructDirectedCyclicGraph2()));
+//        System.out.println("********* Cycle in directed graph *******");
+//        System.out.println(isCycleInDirectedGraph(constructDirectedCyclicGraph2()));
+//        System.out.println(isCycleInDirectedGraphVersion2(constructDirectedCyclicGraph2()));
 
 //        System.out.println("********* Cycle in directed graph *******");
 //        System.out.println(isCycleInDirectedGraph(constructDirectedCyclicGraph()));

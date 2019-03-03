@@ -307,4 +307,37 @@ public class Array {
             }
         }
     }
+
+    /**
+     * Judge in town. Judge trusts no one and every one trusts judge
+     *
+     * @param N no of people
+     * @param trust trust matrix
+     * @return number
+     *
+     * Input: N = 4, trust = [[1,3],[1,4],[2,3],[2,4],[4,3]]
+     * Output: 3
+     *
+     * Judge will have inDegree  = N-1 and outDegree = 0
+     */
+    public static int findJudge(int N, int[][] trust) {
+
+        int[] inDegree = new int[N+1];
+        int[] outDegree = new int[N+1];
+
+        for(int i=0; i < trust.length ; i++) {
+            inDegree[trust[i][1]]++;
+            outDegree[trust[i][0]]++;
+        }
+
+        int judge = -1;
+
+        for(int i= 0; i < N+1 ; i++) {
+            if(inDegree[i] == N-1 && outDegree[i] == 0) {
+                judge= i;
+            }
+        }
+        return judge;
+
+    }
 }

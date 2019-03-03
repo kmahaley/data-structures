@@ -23,6 +23,18 @@ public final class DataUtilities {
         return "tactomac";
     }
 
+    public static Node createListFromArray(int[] array) {
+        Node head = new Node(array[0]);
+        Node temp = head;
+
+        for (int i = 1; i < array.length ; i++) {
+            temp.next = new Node(array[i]);
+            temp = temp.next;
+        }
+
+        return head;
+    }
+
     public static MyList getDuplicatedElementList(){
         MyList myList = new MyList();
         myList.add(11);

@@ -11,13 +11,13 @@ public class Application {
 
         final DependencyService dependencyService = new DependencyService();
 
-//        dependencyService.binaryTreeFunctionality();
+        dependencyService.binaryTreeFunctionality();
 
 //        dependencyService.listFunctionality();
 
 //        dependencyService.queueFunctionality();
 
-        dependencyService.stackFunctionality();
+//        dependencyService.stackFunctionality();
 
 //        dependencyService.stringFunctionality();
 

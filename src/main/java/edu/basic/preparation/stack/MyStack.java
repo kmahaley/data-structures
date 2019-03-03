@@ -387,6 +387,7 @@ public class MyStack {
 
     /**
      * Max stack implementation
+     *
      * input : {8,7,4,3,9}
      * linked list implementation : 9|9 -> 3|8 -> 4|8 -> 7|8-> 8|8
      */
