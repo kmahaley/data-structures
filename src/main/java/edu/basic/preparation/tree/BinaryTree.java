@@ -962,6 +962,7 @@ public class BinaryTree {
      * Longest path from one node to another
      * O(n*n) solution.
      * O(n) -> https://www.geeksforgeeks.org/diameter-of-a-binary-tree/
+     *
      * @param root node
      * @return diameter
      */

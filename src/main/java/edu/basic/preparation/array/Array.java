@@ -24,6 +24,8 @@ public class Array {
      * Same solution can be applied to maximum/ minimum sum in an array.
      * also minimum/ maximum product in an array.
      *
+     * MAX(max+ a[i], a[i])
+     *
      * @param a array  {-2, -3, 4, -1, -2, 1, 5, -3}
      * @return maximum 7
      *
@@ -51,11 +53,64 @@ public class Array {
         return max;
     }
 
+
+    /**
+     * Similar to find maximum sub array, use same technique to find minimum subarray.
+     * example = {3, -4, 2, -3, -1, 7, -5}
+     * ans = -6
+     * {-4, 2, -3, -1}
+     *
+     * @param a
+     * @return min
+     */
+    public static int findMinimumSubArrayInArray(int[] a) {
+        int newMin = a[0];
+        int min = a[0];
+
+//      sub array last index, then you can subtract max - a[position] and position-1 till max==0
+        int position = 0;
+
+        for (int i = 1; i < a.length; i++) {
+            newMin = Math.min(newMin + a[i], a[i]);
+            min = Math.min(min, newMin);
+
+        }
+        return min;
+    }
+
+
+    /**
+     * Largest sum contiguous increasing subarray
+     * if [i+1] > [i] add them else current = [i+1]
+     *
+     * {2, 1, 4, 7, 3, 6}
+     * {1, 4, 7} = 12
+     *
+     * https://www.geeksforgeeks.org/largest-sum-contiguous-increasing-subarray/
+     *
+     * @param a
+     * @return
+     */
+    public static int largestSumContiguousArray(int[] a) {
+
+        int maxSum = a[0];
+        int newSum = a[0];
+        for (int i = 1; i < a.length; i++) {
+            if(a[i] > a[i-1]) {
+                newSum = newSum + a[i];
+                maxSum = Math.max(maxSum, newSum);
+            } else {
+                newSum = a[i];
+            }
+        }
+        return maxSum;
+    }
+
     /**
      * find longest increasing sub sequence in an array
      * @param a array {3,4,-1,0,6,2,3}
      *
-     * @return length =4
+     * @return length = 4
      * and sub sequence is {-1,0,2,3}
      */
     public static int longestCommonIncreasingSubSequence(int[] a) {
@@ -339,5 +394,27 @@ public class Array {
         }
         return judge;
 
+    }
+
+    /**
+     * Find maximum profit when you can buy and sell stock only once
+     * Start with first element of the stock array, keep track of profit and minimum stock price
+     *
+     * https://www.programcreek.com/2014/02/leetcode-best-time-to-buy-and-sell-stock-java/
+     */
+    public static int maximumProfit(int[] stock) {
+
+        int result = 0;
+        if(stock == null || stock.length == 0) {
+            return result;
+        }
+        int min = stock[0];
+
+        for (int i = 1; i < stock.length; i++) {
+            result = Math.max(result, stock[i] - min);
+            min = Math.min(min, stock[i]);
+
+        }
+        return result;
     }
 }
