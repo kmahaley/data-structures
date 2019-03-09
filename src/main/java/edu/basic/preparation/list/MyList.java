@@ -179,8 +179,8 @@ public class MyList {
     }
 
     public Node middleElement() {
-        if (head == null) {
-            return null;
+        if (head == null || head.next == null) {
+            return head;
         } else {
             Node fast = head;
             Node slow = head;
