@@ -265,6 +265,13 @@ public class MyList {
         return 1 + getLengthRecursive2(temp.next);
     }
 
+    /**
+     * 1 - 2 - 3 - 4 - 5 -
+     * 2 - 1 - 4 - 3 - 5 -
+     *
+     * @param head start
+     * @return head
+     */
     public static Node reverseListInPairs(Node head) {
         if (head == null || head.next == null) {
             return head;
@@ -391,42 +398,42 @@ public class MyList {
         for (int i = 1; i < n && fast != null; i++) {
             fast = fast.next;
         }
-
+//      n is more than length of the linked list
+        if(fast == null) {
+            return null;
+        }
         while (fast != null && fast.next != null) {
             prev = slow;
             slow = slow.next;
             fast = fast.next;
         }
-
+//      removing first element from list
         if (prev == slow) {
             head = head.next;
         } else {
             prev.next = slow.next;
         }
 
-
         return head;
-
     }
 
 
     /**
      * Delete current node from the list
      */
-    public static void deleteNode(Node node) {
+    public static void deleteNode(Node toDelete) {
 
-        if(node == null){
+        if(toDelete == null) {
             return;
         }
-        Node curr = node;
-
-        while(node.next.next != null) {
-            node.key = node.next.key;
-            node = node.next;
-
+        Node prev = toDelete, curr = toDelete;
+        while (curr != null && curr.next != null) {
+            curr.key = curr.next.key;
+            prev = curr;
+            curr = curr.next;
         }
-        node.key = node.next.key;
-        node.next = null;
+
+        prev.next = curr.next;
 
     }
 

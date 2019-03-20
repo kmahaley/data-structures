@@ -8,10 +8,10 @@ import java.util.Stack;
 import edu.basic.preparation.data.Node;
 import org.springframework.stereotype.Service;
 
-import static edu.basic.preparation.array.Array.largestSumContiguousArray;
-import static edu.basic.preparation.data.DataUtilities.nearestSmallerNumberOnLeftData;
-import static edu.basic.preparation.list.MyList.addTwoNumbers;
+import static edu.basic.preparation.array.Array.getAllCombinations;
+import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.list.MyList.printFromNode;
+import static edu.basic.preparation.list.MyList.reverseListInPairs;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
 
 /**
@@ -29,7 +29,8 @@ public class DependencyService {
 //        printFromNode(getListForPairwiseSwap());
 //        final int lengthRecursive = getLengthRecursive(getListForPairwiseSwap(), 0);
 //        final int length = length(getListForPairwiseSwap());
-//        System.out.println(length +" - "+ lengthRecursive);
+//        final int lengthRecursive2 = getLengthRecursive2(getListForPairwiseSwap());
+//        System.out.println(length +" - "+ lengthRecursive +" - "+lengthRecursive2);
 
 //        System.out.println("********* get nth node from last ***********");
 //        System.out.println(getNthNodeFromLinkedList(getListForPairwiseSwap(), 5));
@@ -73,11 +74,11 @@ public class DependencyService {
 //            printFromNode(intersection);
 //        }
 //
-//        System.out.println("********* pairwise swap of node in list *******");
-//        final Node listForPairwiseSwap = getListForPairwiseSwap();
-//        printFromNode(listForPairwiseSwap);
-//        final Node pairwiseSwapNode = reverseListInPairs(listForPairwiseSwap);
-//        printFromNode(pairwiseSwapNode);
+        System.out.println("********* pairwise swap of node in list *******");
+        final Node listForPairwiseSwap = getListForPairwiseSwap();
+        printFromNode(listForPairwiseSwap);
+        final Node pairwiseSwapNode = reverseListInPairs(listForPairwiseSwap);
+        printFromNode(pairwiseSwapNode);
 
 //        Node head = new Node(4);
 //        head.setNext(new Node(5));
@@ -104,10 +105,10 @@ public class DependencyService {
 //        final Node reverseBetween1 = reverseBetweenOptimized(node, 2, 4);
 //        printFromNode(reverseBetween1);
 
-        Node l1 = new Node(5);
-        Node l2 = new Node(5);
-        final Node head = addTwoNumbers(l1, l2);
-        printFromNode(head);
+//        Node l1 = new Node(5);
+//        Node l2 = new Node(5);
+//        final Node head = addTwoNumbers(l1, l2);
+//        printFromNode(head);
     }
 
     public void stringFunctionality() {
@@ -471,8 +472,8 @@ public class DependencyService {
 //        System.out.println(findMinimumSubArrayInArray(subArrayMinSum));
 
 
-        int[] maxContiguousSumArray = new int[] {2, 1, 4, 7, 3, 6};
-        System.out.println(largestSumContiguousArray(maxContiguousSumArray));
+//        int[] maxContiguousSumArray = new int[] {2, 1, 4, 7, 3, 6};
+//        System.out.println(largestSumContiguousArray(maxContiguousSumArray));
 
 
 //        int[] a = new int[] {3,4,-1,0,6,2,3};
@@ -486,5 +487,13 @@ public class DependencyService {
 //        int[] array2 = new int[] {1,2,3,4,5,6,7};
 //        rotateArrayAntiClockWise(array2, 2);
 //        printArray(array2);
+
+
+        List<List<String>> result = getAllCombinations(listOfList(), 3);
+
+        System.out.println("--Result list--");
+        for (int i = 0 ; i < result.size();i++) {
+            System.out.println(result.get(i));
+        }
     }
 }

@@ -1,5 +1,6 @@
 package edu.basic.preparation.data;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -292,6 +293,23 @@ public final class DataUtilities {
         graph.put(6, Arrays.asList(1));
 
         return graph;
+    }
+
+    public static List<List<String>> listOfList() {
+        List<List<String>> input = new ArrayList<List<String>>();
+        List<String> list1 = new ArrayList<String>();
+        list1.add("1");
+        list1.add("2");
+        list1.add("3");
+        input.add(list1);
+        List<String> list2 = new ArrayList<String>();
+        list2.add("1");
+        input.add(list2);
+        List<String> list3 = new ArrayList<String>();
+        list3.add("0");
+        list3.add("0");
+        input.add(list3);
+        return input;
     }
 
     private DataUtilities() {

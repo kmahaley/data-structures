@@ -417,4 +417,77 @@ public class Array {
         }
         return result;
     }
+
+    /**
+     * Sample Example input: {{1, 2, 3}, {1}, {0, 0}}
+     *
+     * Output for the above input: {{1,1,0}, {1,1,0}, {2,1,0}, {2,1,0}, {3,1,0}, {3,1,0}}
+     *
+     * {{1,2} ,{3}, {4,5}
+     *
+     * 0
+     * {1}
+     *     1
+     *     {1,3}
+     *             2
+     *             {1,3,4}
+     *                     3 == termination
+     *                     {1,3,4}
+     *                         2
+     *             {1,3,5}
+     *                     3 == termination
+     *                     {1,3,5}
+     *
+     * 0
+     * {2}
+     *     1
+     *     {2,3}
+     *             2
+     *             {2,3,4}
+     *                    3 == term
+     *                    {2,3,4}
+     *             2
+     *             {2,3,5}
+     *                    3 == term
+     *                    {2,3,5}
+     *
+     * @param input array
+     * @param n size
+     * @param <T> type
+     *
+     * @return combinations
+     */
+    public static <T> List<List<T>> getAllCombinations(List<List<T>> input,int n){
+        List<List<T>> resultList = new ArrayList<>();
+        // Your implementation here
+
+        int totalSize = input.size();
+        List<T> ans = new ArrayList<T>();
+        combinations(0, input, totalSize , ans, resultList );
+
+        System.out.println("Total number of combinations:" + resultList.size());
+        return resultList;
+    }
+
+    private static <T> void combinations(int listNo, List<List<T>> input, int totalSize, List<T> ans, List<List<T>> resultList) {
+
+        if(listNo == totalSize) {
+            List<T> newList = new ArrayList<>();
+            for (int i = 0; i < listNo; i++) {
+                newList.add(ans.get(i));
+            }
+            resultList.add(newList);
+
+        } else {
+            List<T> curr = input.get(listNo);
+
+            for(int i = 0; i< curr.size() ; i++ ) {
+//                System.out.println(listNo+ "   -----    "+ curr.get(i));
+                ans.add(listNo, curr.get(i));
+
+                combinations(listNo+1, input, totalSize, ans, resultList);
+
+            }
+        }
+    }
 }
