@@ -114,9 +114,9 @@ public class MyStack {
 
     /**
      * Find nearest smaller number in left of the array
-     * example {1, 3, 0, 2, 5}
-     * ANS => _, 1, _, 0, 2,
      *
+     * {1, 6, 4, 10, 2, 5}
+     * {_, 1, 1,  4, 1, 2}
      * @param a array
      */
     public static void nearestSmallerNumberOnLeft(int a[]) {
@@ -140,6 +140,8 @@ public class MyStack {
     }
 
     /**
+     * Nearest smallest and nearest greatest element on right will use same logic
+     *
      * Find next smallest number
      * example {1, 3, 0, 2, 5}
      * ANS => 1->0, 3->0, 0->-1 ...
@@ -295,7 +297,7 @@ public class MyStack {
         for (int i = 0; i < str.length(); i++) {
 
             final char curr = toCharArray[i];
-            if(map.entrySet().contains(curr)) {
+            if(map.keySet().contains(curr)) {
                 st.push(curr);
             } else if (map.values().contains(curr)) {
                 if(!st.empty() && map.get(st.peek()) == curr){
