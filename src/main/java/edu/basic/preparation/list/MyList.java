@@ -47,7 +47,7 @@ public class MyList {
             head = newNode;
         } else {
             Node current = head;
-            for (int i = 1; i < afterLocation; i++) {
+            for (int i = 1; i < afterLocation && current.next != null ; i++) {
                 current = current.next;
             }
             newNode.next = current.next;
@@ -92,6 +92,7 @@ public class MyList {
 
     /**
      * This will delete node with given value
+     * will delete all occurrences of value
      *
      * @param value value
      */
@@ -125,27 +126,30 @@ public class MyList {
 
     /**
      * Delete node with value given by function
+     * will delete all occurrences of x
+     *
+     * Input:  1->2->6->3->4->5->6, val = 6
+     * Output: 1->2->3->4->5
+     *
+     * 1-1 => []
      */
     public static Node deleteNode(Node head, int x) {
         if (head == null) {
             return head;
         }
-        if (head.key == x) {
-            head = head.next;
-        } else {
-            Node p = head, prev = null;
-            while (p != null) {
-
-                if (p.key == x) {
-                    prev.next = p.next;
-                    p = null;
+        Node p = head, prev = null;
+        while (p != null) {
+            if (p.key == x) {
+                if (head == p) {
+                    head = head.next;
                 } else {
-                    prev = p;
-                    p = p.next;
+                    prev.next = p.next;
                 }
+            } else {
+                prev = p;
             }
+            p = p.next;
         }
-
         return head;
     }
 
@@ -155,27 +159,28 @@ public class MyList {
      * @param head head
      * @param element to be deleted
      */
-    public static void deleteOneNode(Node head, int element){
+    public static Node deleteOneNode(Node head, int element){
 
         if(head == null){
-            return;
+            return head;
         }
 
         if(head.key == element){
             head = head.next;
-            return;
+            return head;
         }
-        Node temp = head, prev = null;
+        Node p = head, prev = null;
         //Search until you get the element
-        while (temp != null && temp.key != element){
-            prev = temp;
-            temp = temp.next;
+        while (p != null && p.key != element){
+            prev = p;
+            p = p.next;
         }
         //element not in the list
-        if(temp == null)
-            return;
+        if(p == null)
+            return head;
 
-        prev.next = temp.next;
+        prev.next = p.next;
+        return head;
     }
 
     public Node middleElement() {
@@ -266,13 +271,16 @@ public class MyList {
     }
 
     /**
+     * Given a linked list, swap every two adjacent nodes and return its head.
      * 1 - 2 - 3 - 4 - 5 -
      * 2 - 1 - 4 - 3 - 5 -
+     *
+     * Modifying the data
      *
      * @param head start
      * @return head
      */
-    public static Node reverseListInPairs(Node head) {
+    public static Node swapPairsUsingData(Node head) {
         if (head == null || head.next == null) {
             return head;
         }
@@ -289,6 +297,39 @@ public class MyList {
             temp = temp.next.next;
         }
         return head;
+    }
+
+    /**
+     * Given a linked list, swap every two adjacent nodes and return its head.
+     * 1 - 2 - 3 - 4 - 5 -
+     * 2 - 1 - 4 - 3 - 5 -
+     *
+     * Modifying the pointers and not data.
+     *
+     * @param head start
+     * @return head
+     */
+    public Node swapPairsUsingPointers(Node head) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        Node prev = head, p = head.next, next = null;
+        Node newHead = head.next;
+
+        while(p != null) {
+            next = p.next;
+            p.next = prev;
+
+            if(next == null || next.next == null) {
+                prev.next = next;
+                break;
+            }
+
+            prev.next = next.next;
+            p = next.next;
+            prev = next;
+        }
+        return newHead;
     }
 
     public static Node recursiveReverseLinkedList(Node head, Node prev){
@@ -606,6 +647,9 @@ public class MyList {
 
     /**
      * Keep unique elements. refer deleteDuplicates function.
+     *
+     * Input: 1->1->2->3->3
+     * Output: 1->2->3
      */
     public static void removeDuplicates(Node head) {
         if (head == null) {

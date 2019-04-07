@@ -20,7 +20,7 @@ public class BookMain {
         ExecutorService executorService = Executors.newFixedThreadPool(3);
         for (int i = 1; i <= 5 ; i++) {
             final Book book = new Book(i);
-            final Future<List<Integer>> submit = executorService.submit(() -> book.lists());
+            final Future<List<Integer>> submit = executorService.submit(() -> book.getListOfIntegers());
             futures.add(submit);
         }
 

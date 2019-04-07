@@ -16,7 +16,7 @@ public class Book implements Callable<Long> {
         this.i = i;
     }
 
-    public List<Integer> lists() {
+    public List<Integer> getListOfIntegers() {
         final List<Integer> integers = Arrays.asList(1, 2);
         return integers.stream().map(x -> x*i).collect(Collectors.toList());
     }
