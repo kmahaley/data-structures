@@ -131,6 +131,17 @@ public final class DataUtilities {
         return myList.getHead();
     }
 
+    public static  Node partitionList(){
+        MyList myList = new MyList();
+        myList.add(1);
+        myList.add(4);
+        myList.add(3);
+        myList.add(2);
+        myList.add(5);
+        myList.add(2);
+        return myList.getHead();
+    }
+
     public static int[] nearestSmallerNumberOnLeftData(){
         return new int[] {1,3,0,2,5};
     }

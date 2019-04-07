@@ -309,7 +309,7 @@ public class MyList {
      * @param head start
      * @return head
      */
-    public Node swapPairsUsingPointers(Node head) {
+    public static Node swapPairsUsingPointers(Node head) {
         if(head == null || head.next == null) {
             return head;
         }
@@ -947,4 +947,151 @@ public class MyList {
 
         return headStart.next;
     }
+
+    /**
+     * Input: 1->2->3->4->5->NULL, k = 2
+     * Output: 4->5->1->2->3->NULL
+     * Explanation:
+     * rotate 1 steps to the right: 5->1->2->3->4->NULL
+     * rotate 2 steps to the right: 4->5->1->2->3->NULL
+     *
+     * @return head
+     * O(n) solution
+     */
+    public static Node rotateRight(Node head, int k) {
+        if(head == null || head.next == null) {
+            return head;
+        }
+        int len = length(head);
+        k = k%len;
+        if(k == 0) {
+            return head;
+        } else {
+            Map<String, Node> map = getKthNodesFromList(head, k);
+            Node last = map.get("last");
+            last.next = null;
+            Node newHead = map.get("newHead");
+            Node p = newHead;
+            while(p.next != null) {
+                p = p.next;
+            }
+            p.next =head;
+            return newHead;
+        }
+
+    }
+
+    /**
+     * Find Kth node in the list logic
+     *
+     * 1->2->3->4->5->NULL
+     * [last = 3, newHead = 4]
+     */
+    public static Map<String, Node> getKthNodesFromList(Node head, int k) {
+        Node slow = head, fast = head;
+        int i = 0;
+
+        while (fast != null && i < k) {
+            fast = fast.next;
+            i++;
+        }
+
+        //move fast and slow step by steps
+        while (fast.next != null) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+        Map<String, Node> map = new HashMap<>();
+        map.put("last", slow);
+        map.put("newHead", slow.next);
+
+        return map;
+    }
+
+    /**
+     * Partition list into small and big elements
+     *
+     * Input: head = 1->4->3->2->5->2, x = 3
+     * Output: 1->2->2->4->3->5
+     *
+     * @return head
+     */
+    public static Node partition(Node head, int x) {
+        if(head == null || head.next == null){
+            return head;
+        }
+        Node p = head, smallHead = new Node(0), bigHead = new Node(0);
+        Node small = smallHead, big = bigHead;
+
+        while (p!=null) {
+            if(p.key < x) {
+                small.next = p;
+                small = small.next;
+            } else {
+                big.next = p;
+                big = big.next;
+            }
+            p = p.next;
+        }
+
+        big.next = null;
+        small.next = bigHead.next;
+        return smallHead.next;
+    }
+
+    /**
+     * Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+     * reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+     *
+     * Given 1->2->3->4, reorder it to 1->4->2->3.
+     * Given 1->2->3->4->5, reorder it to 1->5->2->4->3.
+     *
+     */
+    public static void reorderList(Node head) {
+        if (head == null || head.next == null) {
+            return;
+        }
+        final Map<String, Node> nodeMap = middleElementMap(head);
+        Node middle = nodeMap.get("middle");
+        Node reverseHead = reverse(middle);
+        Node prev = nodeMap.get("prev");
+        prev.next = null;
+
+        boolean flag = true;
+        Node start = head, p = new Node(0);
+        head = p;
+        while (p != null && (start != null || reverseHead != null) ) {
+            if (flag) {
+                if(start != null) {
+                    p.next = start;
+                    start = start.next;
+                    p = p.next;
+                }
+                flag = false;
+            } else {
+                if(reverseHead != null) {
+                    p.next = reverseHead;
+                    reverseHead = reverseHead.next;
+                    p = p.next;
+                }
+                flag = true;
+            }
+        }
+        head = head.next;
+    }
+
+    public static Map<String, Node> middleElementMap(Node head) {
+        Node fast = head;
+        Node slow = head, prev = null;
+        while (fast != null && fast.next != null) {
+            prev = slow;
+            fast = fast.next.next;
+            slow = slow.next;
+        }
+        Map<String, Node> map = new HashMap<>();
+        map.put("middle", slow);
+        map.put("prev", prev);
+        return map;
+    }
 }
+

@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import static edu.basic.preparation.array.Array.getAllCombinations;
 import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.list.MyList.printFromNode;
-import static edu.basic.preparation.list.MyList.reverseListInPairs;
+import static edu.basic.preparation.list.MyList.reorderList;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
 
 /**
@@ -74,11 +74,11 @@ public class DependencyService {
 //            printFromNode(intersection);
 //        }
 //
-        System.out.println("********* pairwise swap of node in list *******");
-        final Node listForPairwiseSwap = getListForPairwiseSwap();
-        printFromNode(listForPairwiseSwap);
-        final Node pairwiseSwapNode = reverseListInPairs(listForPairwiseSwap);
-        printFromNode(pairwiseSwapNode);
+//        System.out.println("********* pairwise swap of node in list *******");
+//        final Node listForPairwiseSwap = getListForPairwiseSwap();
+//        printFromNode(listForPairwiseSwap);
+//        final Node pairwiseSwapNode = swapPairsUsingPointers(listForPairwiseSwap);
+//        printFromNode(pairwiseSwapNode);
 
 //        Node head = new Node(4);
 //        head.setNext(new Node(5));
@@ -109,6 +109,21 @@ public class DependencyService {
 //        Node l2 = new Node(5);
 //        final Node head = addTwoNumbers(l1, l2);
 //        printFromNode(head);
+
+//        final Node initialState = getListForPairwiseSwap();
+//        printFromNode(initialState);
+//        final Node rotatedNode = rotateRight(initialState, 2);
+//        printFromNode(rotatedNode);
+
+//        final Node partitionFromListNode = partitionList();
+//        printFromNode(partitionFromListNode);
+//        final Node partitionedList = partition(partitionFromListNode, 3);
+//        printFromNode(partitionedList);
+
+        final Node initialState = getListForPairwiseSwap();
+        printFromNode(initialState);
+        reorderList(initialState);
+        printFromNode(initialState);
     }
 
     public void stringFunctionality() {
