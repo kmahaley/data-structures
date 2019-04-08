@@ -1,10 +1,8 @@
 package edu.basic.preparation.stack;
 
-import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.Queue;
@@ -113,7 +111,45 @@ public class MyStack {
     }
 
     /**
-     * Find nearest smaller number in left of the array
+     * Stack using single queue. Add elements in queue in front.
+     */
+    public static class StackUsingSingleQueue {
+
+        LinkedList<Integer> queue;
+
+        public StackUsingSingleQueue() {
+            this.queue = new LinkedList<>();
+        }
+
+        public void push(int val) {
+            queue.addFirst(val);
+        }
+
+        public int pop() {
+            if(!queue.isEmpty()) {
+                return queue.remove();
+            }
+            throw new NoSuchElementException("Stack empty");
+        }
+
+        public int peek() {
+            if(!queue.isEmpty()) {
+                return queue.peek();
+            }
+            throw new NoSuchElementException("Stack empty");
+        }
+
+        @Override
+        public String toString() {
+            return queue.toString();
+
+        }
+    }
+
+    /**
+     * Find nearest smaller number in left of the array.
+     *
+     * Part 2: Same logic can be used to find  nearest greater number in left of the array
      *
      * {1, 6, 4, 10, 2, 5}
      * {_, 1, 1,  4, 1, 2}
@@ -170,7 +206,7 @@ public class MyStack {
     /**
      * Find next greatest number
      * example {1, 3, 0, 2, 5}
-     * ANS => 1->3, 3->5, 0->-2 ...
+     * ANS => 1->3, 3->5, 0->2 ...
      *
      * @param a array
      */
@@ -266,10 +302,11 @@ public class MyStack {
         String newStr = "";
 
         for (int i = 0; i < str.length(); i++) {
-            if (!st.isEmpty() && st.peek() == '(' && toCharArray[i] == ')') {
-                newStr = newStr + st.pop() + toCharArray[i];
+            final char curr = toCharArray[i];
+            if (!st.isEmpty() && st.peek() == '(' && curr == ')') {
+                newStr = newStr + st.pop() + curr;
             } else {
-                st.push(toCharArray[i]);
+                st.push(curr);
             }
         }
         return newStr.length();
@@ -286,8 +323,10 @@ public class MyStack {
 
         final char[] toCharArray = str.toCharArray();
         Stack<Character> st = new Stack<>();
-        final List<Character> opening = Arrays.asList(')', '}', ']');
-        final List<Character> closing = Arrays.asList('(', '{', '[');
+
+//        Map keySet and values will have these characters
+//        final List<Character> opening = Arrays.asList(')', '}', ']');
+//        final List<Character> closing = Arrays.asList('(', '{', '[');
 
         HashMap<Character, Character> map = new HashMap<Character, Character>();
         map.put('(', ')');

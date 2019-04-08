@@ -5,13 +5,11 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import edu.basic.preparation.data.Node;
+import edu.basic.preparation.stack.MyStack;
 import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.getAllCombinations;
-import static edu.basic.preparation.data.DataUtilities.*;
-import static edu.basic.preparation.list.MyList.printFromNode;
-import static edu.basic.preparation.list.MyList.reorderList;
+import static edu.basic.preparation.data.DataUtilities.listOfList;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
 
 /**
@@ -120,10 +118,10 @@ public class DependencyService {
 //        final Node partitionedList = partition(partitionFromListNode, 3);
 //        printFromNode(partitionedList);
 
-        final Node initialState = getListForPairwiseSwap();
-        printFromNode(initialState);
-        reorderList(initialState);
-        printFromNode(initialState);
+//        final Node initialState = getListForPairwiseSwap();
+//        printFromNode(initialState);
+//        reorderList(initialState);
+//        printFromNode(initialState);
     }
 
     public void stringFunctionality() {
@@ -271,7 +269,17 @@ public class DependencyService {
 //        System.out.println(stackUsingTwoQueue.toString());
 //        System.out.println(stackUsingTwoQueue.pop() +" - "+stackUsingTwoQueue.pop());
 
-        final int[] input = nearestSmallerNumberOnLeftData();
+        MyStack.StackUsingSingleQueue stackUsingSingleQueue = new MyStack.StackUsingSingleQueue();
+        stackUsingSingleQueue.push(1);
+        stackUsingSingleQueue.push(2);
+        stackUsingSingleQueue.push(3);
+        stackUsingSingleQueue.push(4);
+        System.out.println(stackUsingSingleQueue);
+        System.out.println(stackUsingSingleQueue.pop());
+        System.out.println(stackUsingSingleQueue.pop());
+        System.out.println(stackUsingSingleQueue);
+
+//        final int[] input = nearestSmallerNumberOnLeftData();
 
 //        System.out.println("Input array : " + Arrays.toString(input));
 //        System.out.println("********* nearest smaller number on left *******");
