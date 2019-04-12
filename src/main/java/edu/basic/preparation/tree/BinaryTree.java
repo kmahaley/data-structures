@@ -19,6 +19,8 @@ public class BinaryTree {
 
     public static int diameterGlobal = -1;
 
+    public static int maxNodeValue = Integer.MIN_VALUE;
+
     static int preIndex = 0;
 
 //  used in function  weightOfLongestPathFromRootToLeaf
@@ -329,9 +331,25 @@ public class BinaryTree {
 //        return max;
     }
 
+    public static void findMaxRecursive(TreeNode curr) {
+        if(curr == null) {
+            return;
+        }
+        if(maxNodeValue < curr.key) {
+            maxNodeValue = curr.key;
+        }
+        if(curr.left != null) {
+            findMaxRecursive(curr.left);
+        }
+        if (curr.right != null) {
+            findMaxRecursive(curr.right);
+        }
+    }
+
 
     /**
      * Maximum sum to longest path to leaf
+     * sum based to length to the leaf node
      *
      * @param root tree node
      * @return max sum

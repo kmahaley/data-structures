@@ -9,8 +9,10 @@ import edu.basic.preparation.stack.MyStack;
 import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.getAllCombinations;
-import static edu.basic.preparation.data.DataUtilities.listOfList;
+import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
+import static edu.basic.preparation.tree.BinaryTree.diagonalPrint;
+import static edu.basic.preparation.tree.BinaryTree.maximumWeightedRootToLeafPath;
 
 /**
  * @author Kartik Mahaley
@@ -365,7 +367,9 @@ public class DependencyService {
 //        System.out.println(isPerfectBinaryTreeRecursive(isTreePerfectBinaryTree()));
 
 //        System.out.println("********* find maximum of the tree *******");
-//        System.out.println(findMax(constructTree()));
+//        System.out.println(findMax(constructTreeForMaxNodeValue()));
+//        findMaxRecursive(constructTreeForMaxNodeValue());
+//        System.out.println(BinaryTree.maxNodeValue);
 //
 //        System.out.println("********* Horizontal distance *******");
 //        final Map<Integer, LinkedList<Integer>> integerListMap = horizontalDistance(constructDiagonalTraversal());
@@ -375,10 +379,10 @@ public class DependencyService {
 //        final Map<Integer, LinkedList<Integer>> integerListMapDFS = horizontalDistanceByDFS(constructDiagonalTraversal());
 //        integerListMapDFS.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
 //
-//        System.out.println("********* Diagonal Traversal of Binary Tree *********");
-//        diagonalPrint(constructDiagonalTraversal());
-//        System.out.println("********* Maximum weighted path from root to leaf *******");
-//        System.out.println(maximumWeightedRootToLeafPath(longestPathTree()));
+        System.out.println("********* Diagonal Traversal of Binary Tree *********");
+        diagonalPrint(constructDiagonalTraversal());
+        System.out.println("********* Maximum weighted path from root to leaf *******");
+        System.out.println(maximumWeightedRootToLeafPath(longestPathTree()));
 //
 //        System.out.println("********* Weight of longest path from root to leaf *******");
 //        weightOfLongestPathFromRootToLeaf(longestPathTree());

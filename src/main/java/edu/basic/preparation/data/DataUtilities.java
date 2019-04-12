@@ -172,6 +172,20 @@ public final class DataUtilities {
         return root;
     }
 
+    public static TreeNode constructTreeForMaxNodeValue() {
+
+        TreeNode root = new TreeNode(20);
+        root.left = new TreeNode(15);
+        root.right = new TreeNode(25);
+        root.left.left = new TreeNode(10);
+        root.left.right = new TreeNode(21);
+        root.left.right.left = new TreeNode(16);
+        root.left.right.right = new TreeNode(19);
+        root.left.right.left.right = new TreeNode(22);
+
+        return root;
+    }
+
     public static TreeNode constructDiameterTree() {
 
         TreeNode root = new TreeNode(1);

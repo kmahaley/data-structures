@@ -25,8 +25,5 @@ public class Application {
 
 //        dependencyService.arrayFunctionality();
 
-
     }
-
-
 }

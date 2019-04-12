@@ -12,12 +12,14 @@ public class ProcessorsBlockingQueue {
     final int CAPACITY = 11;
 
     final int EMPTY = 0;
+
     /**
      * Thread safe class
      */
     BlockingQueue<Integer> list = new ArrayBlockingQueue<>(CAPACITY);
 
     public void produce() {
+
         try {
             int value = 1;
             while (true) {
