@@ -1,6 +1,5 @@
-package edu.basic.preparation.multithread.latchandbarrier;
+package edu.basic.preparation.multithread.lockdemo;
 
-import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -8,23 +7,22 @@ import java.util.concurrent.TimeUnit;
 /**
  * TODO : add description
  */
-public class LatchApplication {
-
+public class LockApplication {
 
     public static void main(String[] args) {
 
-        CountDownLatch latch = new CountDownLatch(2);
-        CountDownLatchDemo latchDemo = new CountDownLatchDemo(latch);
+        LockDemo lockDemo = new LockDemo();
 
         final ExecutorService executorService = Executors.newFixedThreadPool(3);
-        executorService.submit(() -> latchDemo.first());
-        executorService.submit(() -> latchDemo.second());
-        executorService.submit(() -> latchDemo.third());
+        for (int i = 0; i < 50; i++) {
+
+            executorService.submit(() -> lockDemo.getSeats());
+        }
+
 
         executorService.shutdown();
         try {
             executorService.awaitTermination(5, TimeUnit.SECONDS);
-            System.out.println("Terminated application");
         } catch (InterruptedException e) {
             e.printStackTrace();
         }

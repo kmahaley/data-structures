@@ -1,8 +1,4 @@
-package edu.basic.preparation.multithread.thread;/*
- * -----------------------------------------------------------------------------
- *  Copyright 2019 NCR Corporation
- * -----------------------------------------------------------------------------
- */
+package edu.basic.preparation.multithread.thread;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;

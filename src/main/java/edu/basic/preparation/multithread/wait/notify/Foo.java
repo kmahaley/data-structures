@@ -1,8 +1,4 @@
-package edu.basic.preparation.multithread.wait.notify;/*
- * -----------------------------------------------------------------------------
- *  Copyright 2018 NCR Corporation
- * -----------------------------------------------------------------------------
- */
+package edu.basic.preparation.multithread.wait.notify;
 
 import java.util.Random;
 

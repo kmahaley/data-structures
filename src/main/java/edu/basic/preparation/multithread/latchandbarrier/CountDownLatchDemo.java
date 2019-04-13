@@ -19,6 +19,7 @@ public class CountDownLatchDemo {
             Thread.sleep(2000);
             System.out.println("first count down end");
             latch.countDown();
+            System.out.println("count down 1 done");
         } catch (InterruptedException ex ) {
 
         }
@@ -30,6 +31,7 @@ public class CountDownLatchDemo {
             Thread.sleep(100);
             System.out.println("second count down end");
             latch.countDown();
+            System.out.println("count down 2 done");
         } catch (InterruptedException ex ) {
 
         }

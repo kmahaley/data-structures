@@ -13,6 +13,7 @@ public class SemaphoresDemo implements Runnable {
     public SemaphoresDemo() {
         try {
             sem1.acquire();
+            sem2.acquire();
         } catch (Exception ex) {}
     }
 
@@ -86,8 +87,8 @@ public class SemaphoresDemo implements Runnable {
 
         try {
             sem1.acquire();
-            sem2.acquire();
             System.out.println("------------- second");
+            sem1.release();
             sem2.release();
         } catch (Exception ex) {}
 
@@ -97,34 +98,6 @@ public class SemaphoresDemo implements Runnable {
         try {
             sem2.acquire();
             System.out.println("------------- third");
-            sem2.release();
-        } catch (Exception ex) {}
-
-    }
-
-
-    public void fourth() {
-
-        System.out.println("------------- fourth");
-        sem1.release();
-
-    }
-
-    public void fifth() {
-
-        try {
-            sem1.acquire();
-            sem2.acquire();
-            System.out.println("------------- fifth");
-            sem2.release();
-        } catch (Exception ex) {}
-
-    }
-
-    public void sixth() {
-        try {
-            sem2.acquire();
-            System.out.println("------------- sixth");
             sem2.release();
         } catch (Exception ex) {}
 
