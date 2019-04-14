@@ -1,6 +1,5 @@
 package edu.basic.preparation.queue;
 
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +8,6 @@ import java.util.NoSuchElementException;
 import java.util.PriorityQueue;
 import java.util.Set;
 import java.util.Stack;
-import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -112,7 +110,7 @@ public class MyQueue {
 
     public static void priorityQueue() {
         // Creating empty priority queue
-        PriorityQueue<String> pQueue = new PriorityQueue<String>();
+        PriorityQueue<String> pQueue = new PriorityQueue<>();
 
         // Adding items to the pQueue using add()
         pQueue.add("C");
@@ -145,7 +143,7 @@ public class MyQueue {
 
         // Getting objects from the queue using toArray()
         // in an array and print the array
-        String[] arr = (String[]) pQueue.toArray();
+        String[] arr = pQueue.toArray(new String[pQueue.size()]);
         System.out.println ( "Value in array: ");
         for (int i = 0; i<arr.length; i++)
             System.out.println ( "Value: " + arr[i]) ;
@@ -163,7 +161,12 @@ public class MyQueue {
         set.forEach(x -> System.out.println(x));
     }
 
-    //Priority queue implementation
+
+    /**
+     * Stock value problem. Keep stock from high to low value
+     *
+     * Priority queue implementation
+     */
     public static void priorityQueueImplementation() {
         final Map<String, Integer> map = createMap();
 
@@ -212,40 +215,6 @@ public class MyQueue {
         return map;
     }
 
-    //Stock with
-    public static void mapImplementation() {
-        Map<String, Integer> map = createMap();
-
-        Map<Integer, List<String>> treeMap = new TreeMap<>(new AscendingIntegerComparator());
-        map.forEach((name,stock) -> {
-            if(treeMap.containsKey(stock)){
-                final List<String> strings = treeMap.get(stock);
-                strings.add(name);
-                treeMap.put(stock, strings);
-
-            } else {
-                List<String> list = new ArrayList<>();
-                list.add(name);
-                treeMap.put(stock, list);
-            }
-        });
-
-        System.out.println(treeMap);
-        int count = 0;
-
-        for (Map.Entry<Integer, List<String>> entry : treeMap.entrySet()){
-            if(count < 3){
-                final List<String> value = entry.getValue();
-                for (String s : value){
-                    if(count < 3){
-                        System.out.println(s);
-                    }
-                    count++;
-                }
-            }
-        }
-    }
-
     //Compare integer decreasing order
     public static class AscendingIntegerComparator implements Comparator<Integer>{
 
@@ -265,6 +234,7 @@ public class MyQueue {
     }
 
     /**
+     * Not sure what was the problem
      *
      * @param list list of elements
      */

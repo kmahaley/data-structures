@@ -15,7 +15,7 @@ public class Application {
 
 //        dependencyService.listFunctionality();
 
-//        dependencyService.queueFunctionality();
+        dependencyService.queueFunctionality();
 
 //        dependencyService.stackFunctionality();
 

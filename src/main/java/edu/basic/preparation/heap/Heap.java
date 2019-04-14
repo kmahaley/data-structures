@@ -67,6 +67,12 @@ public class Heap {
             return items[0];
         }
 
+        /**
+         * remove 0th element and replace 0th element with last element
+         * do heapifyDown
+         *
+         * @return
+         */
         public int poll() {
             if (size == 0) {
                 throw new IllegalStateException("empty heap");
@@ -78,6 +84,9 @@ public class Heap {
             return value;
         }
 
+        /**
+         * compare 0th element with left or right index which ever is smaller
+         */
         private void heapifyDown() {
             int index = 0;
 
@@ -97,7 +106,5 @@ public class Heap {
                 index = smallerIndex;
             }
         }
-
     }
-
 }

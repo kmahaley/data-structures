@@ -5,13 +5,14 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Stack;
 
-import edu.basic.preparation.stack.MyStack;
 import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.getAllCombinations;
-import static edu.basic.preparation.data.DataUtilities.*;
+import static edu.basic.preparation.data.DataUtilities.isPathExistsTree;
+import static edu.basic.preparation.data.DataUtilities.listOfList;
+import static edu.basic.preparation.queue.MyQueue.*;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
-import static edu.basic.preparation.tree.BinaryTree.*;
+import static edu.basic.preparation.tree.BinaryTree.isPathExistsWithSum;
 
 /**
  * @author Kartik Mahaley
@@ -237,11 +238,11 @@ public class DependencyService {
 //
 //        priorityQueue();
 //
-//        treeSet();
-//
-//        priorityQueueImplementation();
-//
-//        mapImplementation();
+        treeSet();
+
+        priorityQueueImplementation();
+
+        mapImplementation();
 
 //        MyStack.StackUsingPriorityQueue stackUsingPriorityQueue = new MyStack.StackUsingPriorityQueue();
 //        stackUsingPriorityQueue.push(6,10);
@@ -270,15 +271,15 @@ public class DependencyService {
 //        System.out.println(stackUsingTwoQueue.toString());
 //        System.out.println(stackUsingTwoQueue.pop() +" - "+stackUsingTwoQueue.pop());
 
-        MyStack.StackUsingSingleQueue stackUsingSingleQueue = new MyStack.StackUsingSingleQueue();
-        stackUsingSingleQueue.push(1);
-        stackUsingSingleQueue.push(2);
-        stackUsingSingleQueue.push(3);
-        stackUsingSingleQueue.push(4);
-        System.out.println(stackUsingSingleQueue);
-        System.out.println(stackUsingSingleQueue.pop());
-        System.out.println(stackUsingSingleQueue.pop());
-        System.out.println(stackUsingSingleQueue);
+//        MyStack.StackUsingSingleQueue stackUsingSingleQueue = new MyStack.StackUsingSingleQueue();
+//        stackUsingSingleQueue.push(1);
+//        stackUsingSingleQueue.push(2);
+//        stackUsingSingleQueue.push(3);
+//        stackUsingSingleQueue.push(4);
+//        System.out.println(stackUsingSingleQueue);
+//        System.out.println(stackUsingSingleQueue.pop());
+//        System.out.println(stackUsingSingleQueue.pop());
+//        System.out.println(stackUsingSingleQueue);
 
 //        final int[] input = nearestSmallerNumberOnLeftData();
 
