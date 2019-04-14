@@ -242,8 +242,6 @@ public class DependencyService {
 
         priorityQueueImplementation();
 
-        mapImplementation();
-
 //        MyStack.StackUsingPriorityQueue stackUsingPriorityQueue = new MyStack.StackUsingPriorityQueue();
 //        stackUsingPriorityQueue.push(6,10);
 //        stackUsingPriorityQueue.push(3,7);
