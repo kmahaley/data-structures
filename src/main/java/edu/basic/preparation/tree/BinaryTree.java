@@ -976,36 +976,6 @@ public class BinaryTree {
     }
 
     /**
-     * find LCA
-     *
-     * @param root node
-     * @param x1 node 1 value
-     * @param x2 node 2 value
-     * @return node
-     */
-    public static TreeNode lowestCommonAncestor(TreeNode root, int x1, int x2) {
-
-        if (root == null) {
-            return null;
-        }
-        if (root.key == x1 || root.key == x2) {
-            return root;
-        }
-
-        TreeNode left = lowestCommonAncestor(root.left, x1, x2);
-        TreeNode right = lowestCommonAncestor(root.right, x1, x2);
-        if (left == null && right == null) {
-            return null;
-        }
-
-        if (left != null && right != null) {
-            return root;
-        }
-        return left != null ? left : right;
-    }
-
-
-    /**
      * Longest path from one node to another
      * O(n*n) solution.
      * O(n) -> https://www.geeksforgeeks.org/diameter-of-a-binary-tree/
@@ -1035,14 +1005,45 @@ public class BinaryTree {
      * @return return height of the node
      */
     public static int diameterOfTreeWithGlobalVariable(TreeNode root) {
-        if(root == null) return 0;
+        if (root == null) {
+            return 0;
+        }
 
         int left = diameterOfTreeWithGlobalVariable(root.left);
         int right = diameterOfTreeWithGlobalVariable(root.right);
-        diameterGlobal = Math.max(diameterGlobal, left+right+1);
+        diameterGlobal = Math.max(diameterGlobal, left + right + 1);
 
-        int heightAt = Math.max(left+1, right+1);
-        return heightAt;
+        // Height of the node
+        return Math.max(left, right) + 1;
+    }
+
+    /**
+     * find LCA
+     *
+     * @param root node
+     * @param x1 node 1 value
+     * @param x2 node 2 value
+     * @return node
+     */
+    public static TreeNode lowestCommonAncestor(TreeNode root, int x1, int x2) {
+
+        if (root == null) {
+            return null;
+        }
+        if (root.key == x1 || root.key == x2) {
+            return root;
+        }
+
+        TreeNode left = lowestCommonAncestor(root.left, x1, x2);
+        TreeNode right = lowestCommonAncestor(root.right, x1, x2);
+        if (left == null && right == null) {
+            return null;
+        }
+
+        if (left != null && right != null) {
+            return root;
+        }
+        return left != null ? left : right;
     }
 
     /**
@@ -1273,8 +1274,8 @@ public class BinaryTree {
      *
      * BFS  print = 1,2,3,4,5,6,7
      * @param head head of linked list
-     * @param start start
-     * @param end end
+     * @param start start, 0
+     * @param end end, size of list
      *
      * @return root tree node
      */

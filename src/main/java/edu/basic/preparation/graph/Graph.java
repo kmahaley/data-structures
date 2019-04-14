@@ -653,6 +653,10 @@ public class Graph {
     /**
      * Optimized solution referred from leet code
      *
+     * create in degree array for the elements. If all element have in degree more than 0 then there are cycles
+     * and course can't be completed. start with in degree zero and find all courses needed to complete that course.
+     * Decrease dependent course indegree.
+     *
      * @param numCourses
      * @param prerequisites
      * @return
@@ -673,9 +677,10 @@ public class Graph {
             int x = queue.poll();
             for (int i = 0; i < prerequisites.length; i++) {
                 if (x == prerequisites[i][0]) {
-                    inDegree[prerequisites[i][1]]--;
-                    if (inDegree[prerequisites[i][1]] == 0)
-                        queue.offer(prerequisites[i][1]);
+                    final int dependentOnCourse = prerequisites[i][1];
+                    inDegree[dependentOnCourse]--;
+                    if (inDegree[dependentOnCourse] == 0)
+                        queue.offer(dependentOnCourse);
                 }
             }
         }

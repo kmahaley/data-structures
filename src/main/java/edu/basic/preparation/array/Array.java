@@ -17,6 +17,7 @@ import java.util.Map;
 import java.util.PriorityQueue;
 
 import com.google.gson.Gson;
+import org.apache.commons.collections4.CollectionUtils;
 
 public class Array {
 
@@ -489,5 +490,37 @@ public class Array {
 
             }
         }
+    }
+
+    /**
+     * Create subsets of the set
+     * [1,2] -> {[], [1], [2], [1,2]}
+     *
+     * 2 raise to n subset. 3 elements -> subset size = 6, 4 elements -> subset size = 16
+     * include element or not include element
+     *
+     * @param start list
+     */
+    public static void subset(List<Integer> start) {
+
+        if(CollectionUtils.isEmpty(start)) {
+            return;
+        }
+        List<List<Integer>> results = new ArrayList<>();
+        helper(start, results, new ArrayList<Integer>(), 0);
+        System.out.println(results);
+    }
+
+    private static void helper(List<Integer> list, List<List<Integer>> results, List<Integer> initial, int index) {
+
+        if(index == list.size()) {
+            results.add(initial);
+        } else {
+            helper(list, results, new ArrayList<>(initial), index+1);
+            final ArrayList<Integer> addTo = new ArrayList<>(initial);
+            addTo.add(list.get(index));
+            helper(list, results, addTo, index+1);
+        }
+
     }
 }
