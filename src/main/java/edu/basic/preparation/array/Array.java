@@ -22,7 +22,7 @@ import org.apache.commons.collections4.CollectionUtils;
 public class Array {
 
     /**
-     * Same solution can be applied to maximum/ minimum sum in an array.
+     * Same solution can be applied to maximum/ minimum sub array sum in an array.
      * also minimum/ maximum product in an array.
      *
      * MAX(max+ a[i], a[i])
@@ -97,7 +97,7 @@ public class Array {
         int maxSum = a[0];
         int newSum = a[0];
         for (int i = 1; i < a.length; i++) {
-            if(a[i] > a[i-1]) {
+            if (a[i] > a[i - 1]) {
                 newSum = newSum + a[i];
                 maxSum = Math.max(maxSum, newSum);
             } else {
@@ -196,7 +196,7 @@ public class Array {
 
         @Override
         public int compare(Integer o1, Integer o2) {
-            return o2-o1;
+            return o2 - o1;
         }
     }
 
@@ -212,6 +212,7 @@ public class Array {
 
         final int length = array.length;
         for (int i = 0; i < d; i++) {
+            //Save first element
             int temp = array[0];
 
             //should iterate less till one less than last element.
@@ -367,39 +368,41 @@ public class Array {
     /**
      * Judge in town. Judge trusts no one and every one trusts judge
      *
-     * @param N no of people
+     * @param no no of people
      * @param trust trust matrix
      * @return number
      *
-     * Input: N = 4, trust = [[1,3],[1,4],[2,3],[2,4],[4,3]]
+     * Input: no = 4, trust = [[1,3],[1,4],[2,3],[2,4],[4,3]]
+     * [1,3] -> 1 trust 3
      * Output: 3
      *
-     * Judge will have inDegree  = N-1 and outDegree = 0
+     * Judge will have inDegree  = no-1 and outDegree = 0
      */
-    public static int findJudge(int N, int[][] trust) {
+    public static int findJudge(int no, int[][] trust) {
 
-        int[] inDegree = new int[N+1];
-        int[] outDegree = new int[N+1];
+        int[] inDegree = new int[no + 1];
+        int[] outDegree = new int[no + 1];
 
-        for(int i=0; i < trust.length ; i++) {
+        for (int i = 0; i < trust.length; i++) {
             inDegree[trust[i][1]]++;
             outDegree[trust[i][0]]++;
         }
 
         int judge = -1;
-
-        for(int i= 0; i < N+1 ; i++) {
-            if(inDegree[i] == N-1 && outDegree[i] == 0) {
-                judge= i;
+        for (int i = 0; i < no + 1; i++) {
+            if (inDegree[i] == no - 1 && outDegree[i] == 0) {
+                judge = i;
             }
         }
         return judge;
-
     }
 
     /**
      * Find maximum profit when you can buy and sell stock only once
      * Start with first element of the stock array, keep track of profit and minimum stock price
+     *
+     * [15, 25, 30, 5, 25]
+     * profit = 20
      *
      * https://www.programcreek.com/2014/02/leetcode-best-time-to-buy-and-sell-stock-java/
      */
@@ -472,7 +475,7 @@ public class Array {
 
     private static <T> void combinations(int listNo, List<List<T>> input, int totalSize, List<T> ans, List<List<T>> resultList) {
 
-        if(listNo == totalSize) {
+        if (listNo == totalSize) {
             List<T> newList = new ArrayList<>();
             for (int i = 0; i < listNo; i++) {
                 newList.add(ans.get(i));
@@ -482,11 +485,11 @@ public class Array {
         } else {
             List<T> curr = input.get(listNo);
 
-            for(int i = 0; i< curr.size() ; i++ ) {
+            for (int i = 0; i < curr.size(); i++) {
 //                System.out.println(listNo+ "   -----    "+ curr.get(i));
                 ans.add(listNo, curr.get(i));
 
-                combinations(listNo+1, input, totalSize, ans, resultList);
+                combinations(listNo + 1, input, totalSize, ans, resultList);
 
             }
         }
@@ -522,5 +525,34 @@ public class Array {
             helper(list, results, addTo, index+1);
         }
 
+    }
+
+
+    /**
+     * Same as above but using array and index of the array
+     */
+    public static void subsetArray(int[] start) {
+        if(start.length == 0) {
+            return;
+        }
+        helperArray(start, new int[]{-1,-1}, 0);
+    }
+
+    private static void helperArray(int[] input, int[] initial, int index) {
+
+        if (index == input.length) {
+            for (int i = 0; i < input.length; i++) {
+                System.out.print(initial[i] + " , ");
+            }
+            System.out.println();
+        } else {
+            // Don't add element
+            initial[index] = -1;
+            helperArray(input, initial, index + 1);
+
+            //Add element
+            initial[index] = input[index];
+            helperArray(input, initial, index + 1);
+        }
     }
 }

@@ -37,9 +37,10 @@ public final class StringUtilities {
 
             int distinctCount = 0;
             for (int i = k; i < k + windowSize; i++) {
-                if(!map.containsKey(a[i])){
+
+                if (!map.containsKey(a[i])) {
                     distinctCount++;
-                    map.put(a[i],1);
+                    map.put(a[i], 1);
                 }
             }
             map.clear();
@@ -48,7 +49,6 @@ public final class StringUtilities {
                 break;
             }
         }
-
     }
 
     /**
@@ -85,6 +85,7 @@ public final class StringUtilities {
 //            }
 //        }
 
+        // Method 3 : use map
         if (isUnique) {
             System.out.println("String has unique characters");
         } else {
@@ -105,13 +106,13 @@ public final class StringUtilities {
         int spaceCounter = 0;
         //count spaces
         for (int i = 0; i < length; i++) {
-            if (charArray[i] == ' ') {
+            if (charArray[i] == ' ') { //Character.isSpaceChar(' ')
                 spaceCounter++;
             }
         }
         //remove trailing spaces
         for (int i = length - 1; i >= trueLength; i--) {
-            if (charArray[i] == ' ') {
+            if (charArray[i] == ' ') { //str.trim()
                 spaceCounter--;
             }
         }
@@ -142,24 +143,25 @@ public final class StringUtilities {
      *
      * @param str String value
      */
-    public static void isPermutationPalindrome(String str){
+    public static void isPermutationPalindrome(String str) {
 
         Map<Character, Integer> map = new HashMap<>();
-        for(int i =0;i< str.length();i++){
-            if(map.containsKey(str.charAt(i))){
-                map.put(str.charAt(i),map.get(str.charAt(i))+1);
+        for (int i = 0; i < str.length(); i++) {
+            if (map.containsKey(str.charAt(i))) {
+                map.put(str.charAt(i), map.get(str.charAt(i)) + 1);
             } else {
-                map.put(str.charAt(i),1);
+                map.put(str.charAt(i), 1);
             }
         }
 
         System.out.println(map);
-        int count =0;
-        for (Map.Entry<Character, Integer> entry : map.entrySet()){
-            if(entry.getValue()%2 ==1)
+        int count = 0;
+        for (Map.Entry<Character, Integer> entry : map.entrySet()) {
+            if (entry.getValue() % 2 == 1) {
                 count++;
+            }
         }
-        System.out.println("permutation of string is palindrome : "+ (count<=1));
+        System.out.println("permutation of string is palindrome : " + (count <= 1));
     }
 
 
