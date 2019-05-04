@@ -1,6 +1,5 @@
 package edu.basic.preparation;
 
-import edu.basic.preparation.array.Array;
 import edu.basic.preparation.service.DependencyService;
 
 /**
@@ -26,6 +25,7 @@ public class Application {
 
 //        dependencyService.arrayFunctionality();
 
-        Array.subsetArray(new int[] {1,2});
     }
+
+
 }

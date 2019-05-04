@@ -17,9 +17,9 @@ public class LatchApplication {
         CountDownLatchDemo latchDemo = new CountDownLatchDemo(latch);
 
         final ExecutorService executorService = Executors.newFixedThreadPool(3);
+        executorService.submit(() -> latchDemo.third());
         executorService.submit(() -> latchDemo.first());
         executorService.submit(() -> latchDemo.second());
-        executorService.submit(() -> latchDemo.third());
 
         executorService.shutdown();
         try {

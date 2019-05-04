@@ -278,7 +278,6 @@ public final class StringUtilities {
             }
         }
 
-
         return toReturnIndexList;
 
     }
@@ -406,6 +405,14 @@ public final class StringUtilities {
     }
 
     /**
+     * Swap two numbers
+     */
+    public static void swapInteger(int[] a, int i, int j) {
+        int temp = a[i];
+        a[i] = a[j];
+        a[j] = temp;
+    }
+    /**
      * Array to list
      */
     public static ArrayList<Integer> arrayToList(int[] array) {
@@ -415,15 +422,6 @@ public final class StringUtilities {
             list.add(array[i]);
         }
         return list;
-    }
-
-    /**
-     * Swap two numbers
-     */
-    public static void swapInteger(int[] a, int i, int j) {
-        int temp = a[i];
-        a[i] = a[j];
-        a[j] = temp;
     }
 
     /**
@@ -752,17 +750,19 @@ public final class StringUtilities {
 
     /**
      * Reverse string using recursion
+     * 1) can use stack
+     * 2) can use two pointers i =0 and j = len-1, i++ and j--
      *
      * @param reverse reverse string
      * @param initial original string
      */
-    public static void reverseString(String reverse, String initial){
+    public static void reverseString(String reverse, String initial) {
         if (initial.length() == 0) {
             System.out.println(reverse);
             return;
         }
 
-        reverseString(reverse + initial.charAt(initial.length()-1), initial.substring(0,initial.length()-1));
+        reverseString(reverse + initial.charAt(initial.length() - 1), initial.substring(0, initial.length() - 1));
     }
 
     /**
@@ -801,7 +801,7 @@ public final class StringUtilities {
     }
 
     /**
-     * Start permutation with intial index
+     * Start permutation with initial index
      *
      * @param integerList list of integers
      * @param start start index
@@ -952,6 +952,23 @@ public final class StringUtilities {
     /**
      * Permutation of string
      *
+     * Use method like subset of integers. index =0 1) make capitol or not make capital
+     *
+     * a1b2 -
+     *          0
+     *          a1b2
+     *                  1=no skip   2
+     *                              a1b1
+     *                              a1B2
+     *                                      3=no skip   4==length
+     *
+     *          0
+     *          A1b2
+     *                  1=no skip   2
+     *                              A1b2
+     *                              A1B2
+     *                                      3=no skip   4==length
+     *
      * @param str a1b1
      * @return [a1b2, a1B2, A1b2, A1B2]
      */
@@ -996,6 +1013,8 @@ public final class StringUtilities {
     /**
      * given array = 1,2,4,5,6
      * XOR of given array and XOR of 1 to n+1
+     * 1) take sum of all number(1 to n) and subtract array elements
+     *
      *
      * @param a array
      * @param n length of array

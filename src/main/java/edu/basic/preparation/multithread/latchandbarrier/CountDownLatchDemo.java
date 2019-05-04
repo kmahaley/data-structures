@@ -41,7 +41,7 @@ public class CountDownLatchDemo {
         try {
             System.out.println("waiting");
             latch.await();
-            System.out.println("executed");
+            System.out.println("third executed");
         } catch (InterruptedException ex ) {
 
         }

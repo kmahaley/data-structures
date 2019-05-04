@@ -10,14 +10,18 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
+import java.util.Set;
 
 import com.google.gson.Gson;
 import org.apache.commons.collections4.CollectionUtils;
+
+import static edu.basic.preparation.string.StringUtilities.swapInteger;
 
 public class Array {
 
@@ -553,6 +557,135 @@ public class Array {
             //Add element
             initial[index] = input[index];
             helperArray(input, initial, index + 1);
+        }
+    }
+
+    /**
+     * Input: "abcabcbb"
+     * Output: 3
+     * Explanation: The answer is "abc", with the length of 3.
+     *
+     * Input: "bbbbb"
+     * Output: 1
+     * Explanation: The answer is "b", with the length of 1.
+     *
+     * @param s string
+     */
+    public static int lengthOfLongestSubstring(String s) {
+
+        int count = 0;
+        if (s.isEmpty()) {
+            return count;
+        }
+        int maxCount = 1;
+        for (int i = 1; i < s.length(); i++) {
+            Set<Character> set = new HashSet<>();
+            final char c = s.charAt(i);
+            set.add(c);
+            count = 1;
+            for (int j = i - 1; j >= 0; j--) {
+                final char prev = s.charAt(j);
+                if (!set.contains(prev)) {
+                    set.add(prev);
+                    count++;
+                    if (count > maxCount) {
+                        maxCount = count;
+                    }
+                } else {
+                    count = 0;
+                    set.clear();
+                    break;
+                }
+            }
+        }
+        return maxCount;
+
+    }
+
+    /**
+     * reverse an signed integer and number should be beyond integer range.
+     * x can be +ve or -ve
+     */
+    public static int reverse(int x) {
+
+        long reverse = 0;
+        while (x != 0) {
+            int rem = x % 10;
+            reverse = reverse * 10 + rem;
+            x = x / 10;
+        }
+        //  integers within the 32-bit signed integer range: [−2^31,  2^31 − 1].
+        if(reverse > Integer.MAX_VALUE || reverse < Integer.MIN_VALUE) {
+            return 0;
+        }
+        return (int) reverse;
+    }
+
+    /**
+     * Given a sorted array nums, remove the duplicates in-place such that each element appear only once and return the new length.
+     * array should contain unique elements at the start.
+     * @param nums
+     * @return
+     */
+    public static int removeDuplicates(int[] nums) {
+        int i = 0, j = 1;
+        while (j < nums.length) {
+            if(nums[i] == nums[j]) {
+                j++;
+            } else {
+                nums[i+1] = nums[j];
+                i++;
+                j++;
+            }
+        }
+        return i+1;
+    }
+
+    /**
+     * Permutation of all quadruplets of array elements whose sum is target element
+     *
+     * Given array nums = [1, 0, -1, 0, -2, 2], and target = 0.
+     *
+     * @return permutations of array  eg. [-2,0,0,2],[-2,2,0,0],[0,0,-2,2],[0,2,-2,0]]
+     */
+    public static List<List<Integer>> fourSum(int[] nums, int target) {
+
+        int start = 0;
+        List<List<Integer>> result = new ArrayList<>();
+
+        fourSumRecursive(nums, start, target, result);
+
+        return result;
+    }
+
+    public static void fourSumRecursive(int[] nums, int start, int target, List<List<Integer>> result) {
+
+        //if number of array elements are less than 4 (base condition)
+        if (start == nums.length) {
+            return;
+        }
+        // limiting number of elements to 4
+        if (start == 4) {
+            int sum = 0;
+            final ArrayList<Integer> list = new ArrayList<>();
+
+            for (int i = 0; i < 4; i++) {
+                sum = sum + nums[i];
+                list.add(nums[i]);
+            }
+
+            if (sum == target) {
+                if (!result.contains(list)) {
+                    result.add(list);
+                }
+            }
+        } else {
+            //generating permutation
+            for (int i = start; i < nums.length; i++) {
+                swapInteger(nums, start, i);
+                fourSumRecursive(nums, start + 1, target, result);
+                swapInteger(nums, start, i);
+            }
         }
     }
 }
