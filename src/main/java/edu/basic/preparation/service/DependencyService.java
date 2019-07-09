@@ -7,10 +7,12 @@ import java.util.Stack;
 
 import org.springframework.stereotype.Service;
 
-import static edu.basic.preparation.array.Array.getAllCombinations;
+import static edu.basic.preparation.array.Array.find3Numbers;
+import static edu.basic.preparation.array.Array.maxSlidingWindow;
+import static edu.basic.preparation.array.Array.maxSlidingWindow_Optimized;
 import static edu.basic.preparation.data.DataUtilities.isPathExistsTree;
-import static edu.basic.preparation.data.DataUtilities.listOfList;
-import static edu.basic.preparation.queue.MyQueue.*;
+import static edu.basic.preparation.queue.MyQueue.priorityQueueImplementation;
+import static edu.basic.preparation.queue.MyQueue.treeSet;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
 import static edu.basic.preparation.tree.BinaryTree.isPathExistsWithSum;
 
@@ -497,10 +499,8 @@ public class DependencyService {
 //        int[] subArrayMinSum = new int[] {3, -4, 2, -3, -1, 7, -5};
 //        System.out.println(findMinimumSubArrayInArray(subArrayMinSum));
 
-
 //        int[] maxContiguousSumArray = new int[] {2, 1, 4, 7, 3, 6};
 //        System.out.println(largestSumContiguousArray(maxContiguousSumArray));
-
 
 //        int[] a = new int[] {3,4,-1,0,6,2,3};
 //        System.out.println("********* longest common sub sequence *******");
@@ -515,11 +515,24 @@ public class DependencyService {
 //        printArray(array2);
 
 
-        List<List<String>> result = getAllCombinations(listOfList(), 3);
+//        List<List<String>> result = getAllCombinations(listOfList(), 3);
+//
+//        System.out.println("--Result list--");
+//        for (int i = 0 ; i < result.size();i++) {
+//            System.out.println(result.get(i));
+//        }
 
-        System.out.println("--Result list--");
-        for (int i = 0 ; i < result.size();i++) {
-            System.out.println(result.get(i));
-        }
+        int[] slidingWindow = {1,3,-1,-3,5,3,6,7};
+        final List<Integer> ints = maxSlidingWindow(slidingWindow, 3);
+        System.out.println(ints);
+        final List<Integer> ints_optimized = maxSlidingWindow_Optimized(slidingWindow, 3);
+        System.out.println(ints_optimized);
+
+        int array[] = {-1, 0, 1, 2, -1, -4};
+        int sum = 0;
+        List<List<Integer>> result = new ArrayList<>();
+        find3Numbers(array, array.length, sum, result);
+        System.out.println(result);
+
     }
 }

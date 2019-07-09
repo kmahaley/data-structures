@@ -7,8 +7,11 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -17,6 +20,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
 import org.apache.commons.collections4.CollectionUtils;
@@ -641,6 +645,35 @@ public class Array {
         return i+1;
     }
 
+    public static void find3Numbers(int[] a, int length, int sum, List<List<Integer>> result) {
+
+        for (int i = 0; i < length; i++) {
+            // first element
+            int first = a[i];
+            //remaining sum
+            int currSum = sum - first;
+            Map<Integer, Integer> map = new HashMap<>();
+            Set<Integer> set = new HashSet<>();
+
+            // find 2 element's sum which equals currSum
+            for (int j = i + 1; j < length; j++) {
+                int second = a[j];
+                int remainder = currSum - second;
+
+                if (map.containsKey(second)) {
+                    final List<Integer> integerList = Arrays.asList(first, second, remainder);
+                    System.out.println(set);
+                    if(!set.containsAll(integerList)) {
+                        set.addAll(integerList);
+                        result.add(integerList);
+                    }
+                } else {
+                    map.put(remainder, second);
+                }
+            }
+        }
+    }
+
     /**
      * Permutation of all quadruplets of array elements whose sum is target element
      *
@@ -688,4 +721,81 @@ public class Array {
             }
         }
     }
+
+    /**
+     * Input: nums = [1,3,-1,-3,5,3,6,7], and k = 3
+     * Output: [3,3,5,5,6,7]
+     *
+     * Sliding Window Maximum problem
+     */
+    public static List<Integer> maxSlidingWindow(int[] nums, int k) {
+
+        if(nums.length == 0 || k <= 0) {
+            return new ArrayList<>();
+        }
+        //return size array
+        int[] maxArray = new int[nums.length - k + 1];
+        for (int i = 0; i < nums.length - k + 1; i++) {
+            int limit = i + k - 1;
+            int maxNumber = nums[i];
+
+            for (int j = i; j <= limit ; j++) {
+
+                int curr = nums[j];
+                if(curr > maxNumber) {
+                    maxNumber = curr;
+                }
+            }
+            maxArray[i] = maxNumber;
+        }
+
+        return Arrays.stream(maxArray)
+                .boxed()
+                .collect(Collectors.toList());
+    }
+
+    /**
+     * Sliding Window Maximum optimized solution
+     * queue saves index
+     * list saves maximum element
+     * 1) first window
+     * 2) start from second window to end of the array
+     */
+    public static List<Integer> maxSlidingWindow_Optimized(int[] nums, int k) {
+
+        if (nums.length == 0 || k <= 0) {
+            return new ArrayList<>();
+        }
+        // index of the nums to compare window size
+        Deque<Integer> queue = new ArrayDeque<>();
+        // first window of the array
+        for (int i = 0; i < k; i++) {
+            int curr = nums[i];
+            // remove all elements from back when curr element is bigger
+            while (!queue.isEmpty() && queue.peekLast() < curr) {
+                queue.removeLast();
+            }
+            //add curr in queue
+            queue.add(i);
+        }
+        List<Integer> list = new ArrayList<>();
+        // start from second window ie. k
+        for (int i = k; i < nums.length; i++) {
+            int curr = nums[i];
+            list.add(nums[queue.peek()]);
+
+            // maintain current windows size
+            while (!queue.isEmpty() && queue.peek() < i - k + 1) {
+                queue.remove();
+            }
+            while (!queue.isEmpty() && nums[queue.peekLast()] < curr) {
+                queue.remove();
+            }
+            // add current index
+            queue.add(i);
+        }
+        list.add(nums[queue.peek()]);
+        return list;
+    }
+
 }
