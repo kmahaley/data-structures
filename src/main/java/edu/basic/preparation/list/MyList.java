@@ -50,6 +50,7 @@ public class MyList {
             for (int i = 1; i < afterLocation && current.next != null ; i++) {
                 current = current.next;
             }
+            // preserve list after inserting in middle
             newNode.next = current.next;
             current.next = newNode;
         }
@@ -288,12 +289,12 @@ public class MyList {
 
         while (temp != null && temp.next != null) {
             int k = temp.key;
-            temp.setKey(temp
+            temp.key = temp
                     .next
-                    .key);
+                    .key;
             temp
                     .next
-                    .setKey(k);
+                    .key = k;
             temp = temp.next.next;
         }
         return head;
