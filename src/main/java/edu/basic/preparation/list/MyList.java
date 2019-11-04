@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Stack;
 
+import edu.basic.preparation.data.ListNodePosition;
 import edu.basic.preparation.data.Node;
 import lombok.Data;
 
@@ -277,44 +278,9 @@ public class MyList {
         }
     }
 
-
-    /**
-     * Intersection of two linked list
-     *
-     * @param twoIntersectedList list with two nodes
-     * @return intersecting node
-     */
-    public static Node findIntersectedNode(List<Node> twoIntersectedList) {
-        Node big = twoIntersectedList.get(0), small = twoIntersectedList.get(1);
-        if(big == null || small == null){
-            return null;
-        }
-        int lengthOne = length(big);
-        int lengthTwo = length(small);
-
-
-        int diff = lengthOne - lengthTwo;
-        if (diff < 0) {
-            big = twoIntersectedList.get(1);
-            small = twoIntersectedList.get(0);
-        }
-        for (int i = 1; i <= Math.abs(diff); i++) {
-            big = big.next;
-        }
-
-        while (big != null && small != null) {
-            if (big == small) {
-                return big;
-            }
-            small = small.next;
-            big = big.next;
-        }
-
-        return null;
-    }
-
     /**
      * Length of the linked list
+     * Non recursive
      */
     public static int length(Node temp) {
         if (temp == null) {
@@ -348,6 +314,32 @@ public class MyList {
             return 0;
         }
         return 1 + getLengthRecursive2(temp.next);
+    }
+
+
+    /**
+     * Reverse list using given head pointer
+     */
+    public static Node reverse(Node head) {
+        Node prev = null, current = head, next = null;
+        while (current != null) {
+            next = current.next;
+            current.next = prev;
+            prev = current;
+            current = next;
+        }
+        return prev;
+    }
+
+    public static Node recursiveReverseLinkedList(Node head, Node prev){
+        if(head == null)
+            return prev;
+
+        final Node next = head.next;
+        head.next = prev;
+        prev = head;
+        head = next;
+        return recursiveReverseLinkedList(head, prev);
     }
 
     /**
@@ -412,17 +404,44 @@ public class MyList {
         return newHead;
     }
 
-    public static Node recursiveReverseLinkedList(Node head, Node prev){
-        if(head == null)
-            return prev;
+    /**
+     * Intersection of two linked list
+     *
+     * @param twoIntersectedList list with two nodes
+     * @return intersecting node
+     */
+    public static Node findIntersectedNode(List<Node> twoIntersectedList) {
+        Node big = twoIntersectedList.get(0), small = twoIntersectedList.get(1);
+        if(big == null || small == null){
+            return null;
+        }
+        int lengthOne = length(big);
+        int lengthTwo = length(small);
 
-        final Node next = head.next;
-        head.next = prev;
-        prev = head;
-        head = next;
-        return recursiveReverseLinkedList(head, prev);
+
+        int diff = lengthOne - lengthTwo;
+        if (diff < 0) {
+            big = twoIntersectedList.get(1);
+            small = twoIntersectedList.get(0);
+        }
+        for (int i = 1; i <= Math.abs(diff); i++) {
+            big = big.next;
+        }
+
+        while (big != null && small != null) {
+            if (big == small) {
+                return big;
+            }
+            small = small.next;
+            big = big.next;
+        }
+
+        return null;
     }
 
+    /**
+     * Search element in the linked list recursively
+     */
     public static boolean searchRecursive(Node head, int data) {
         if (head == null) {
             return false;
@@ -434,6 +453,9 @@ public class MyList {
 
     }
 
+    /**
+     * Find element in the linked list recursively with index position
+     */
     public static int getElementIndexPosition(Node head, int data, int index) {
 
         if (head == null) {
@@ -445,8 +467,22 @@ public class MyList {
         return getElementIndexPosition(head.next, data, index + 1);
     }
 
+    /**
+     * Same logic as above. flag and position of the node
+     */
+    public static ListNodePosition getElementIndexPositionVersionTwo(Node head, int data, int index) {
+        if(head == null) {
+            return new ListNodePosition(false, -1);
+        }
+        if (head.key == data) {
+            return new ListNodePosition(true, index);
+        }
+        return  getElementIndexPositionVersionTwo(head.next, data, index+1);
+    }
 
     /**
+     * Get Nth node from last of the linked list
+     * with 2 pointer mechanism
      *
      * @param head start
      * @param pos nth node from last
@@ -457,15 +493,12 @@ public class MyList {
         if (head == null) {
             return -1;
         }
-
         Node slow = head, fast = head;
         int i = 1;
-
         while (fast != null && i < pos) {
             fast = fast.next;
             i++;
         }
-
         //pos is greater than length of the linked list
         if (fast == null) {
             return -1;
@@ -482,7 +515,7 @@ public class MyList {
     //Remove Nth Node From End of List.
     public Node removeNthFromEnd(Node head, int n) {
         if (head == null) {
-            return null;
+            return head;
         }
 
         Node fast = head, slow = head, prev = head;
@@ -492,7 +525,7 @@ public class MyList {
         }
 //      n is more than length of the linked list
         if(fast == null) {
-            return null;
+            return head;
         }
         while (fast != null && fast.next != null) {
             prev = slow;
@@ -885,17 +918,6 @@ public class MyList {
         } else {
             return reverse;
         }
-    }
-
-    public static Node reverse(Node node) {
-        Node prev = null, current = node, next = null;
-        while (current != null) {
-            next = current.next;
-            current.next = prev;
-            prev = current;
-            current = next;
-        }
-        return prev;
     }
 
     public static Node endOfReverseList(Node node) {

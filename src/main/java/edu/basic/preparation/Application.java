@@ -13,7 +13,7 @@ public class Application {
 
 //        dependencyService.binaryTreeFunctionality();
 
-//        dependencyService.listFunctionality();
+        dependencyService.listFunctionality();
 
 //        dependencyService.queueFunctionality();
 

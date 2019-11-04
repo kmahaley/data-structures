@@ -10,7 +10,10 @@ import org.springframework.stereotype.Service;
 import static edu.basic.preparation.array.Array.find3Numbers;
 import static edu.basic.preparation.array.Array.maxSlidingWindow;
 import static edu.basic.preparation.array.Array.maxSlidingWindow_Optimized;
+import static edu.basic.preparation.data.DataUtilities.getListForPairwiseSwap;
 import static edu.basic.preparation.data.DataUtilities.isPathExistsTree;
+import static edu.basic.preparation.list.MyList.getElementIndexPosition;
+import static edu.basic.preparation.list.MyList.getElementIndexPositionVersionTwo;
 import static edu.basic.preparation.queue.MyQueue.priorityQueueImplementation;
 import static edu.basic.preparation.queue.MyQueue.treeSet;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
@@ -44,7 +47,8 @@ public class DependencyService {
 //        printFromNode(newHead);
 
 //        System.out.println("********* search in list ***********");
-//        System.out.println(getElementIndexPosition(getListForPairwiseSwap(), 12, 1));
+        System.out.println(getElementIndexPosition(getListForPairwiseSwap(), 3, 1));
+        System.out.println(getElementIndexPositionVersionTwo(getListForPairwiseSwap(), 3, 1));
 //        System.out.println(searchRecursive(getListForPairwiseSwap(), 1));
 
 //        final Node middleElement = listForBasicOperation.middleElement();
