@@ -93,65 +93,32 @@ public class MyList {
 
     /**
      * This will delete node with given value
-     * will delete all occurrences of value
      *
      * @param value value
      */
-    public void delete(int value) {
+    public void deleteOneNodeVersionOne(int value) {
 
         if (head == null) {
             return;
         }
         //if element is first to be deleted
-        if(head.key == value){
+        if (head.key == value) {
             head = head.next;
             return;
         }
 
         Node current = head;
         Node prev = null;
-        while (current != null) {
-
-            if (current.key != value) {
-                prev = current;
-                current = current.next;
-            } else {
-                prev.next = current.next;
-                current.next = null;
-                current = prev.next;
-                break;
-            }
+        //delete just one node beacuse of second condition in the loop
+        while (current != null && current.key != value) {
+            prev = current;
+            current = current.next;
         }
-
-    }
-
-    /**
-     * Delete node with value given by function
-     * will delete all occurrences of x
-     *
-     * Input:  1->2->6->3->4->5->6, val = 6
-     * Output: 1->2->3->4->5
-     *
-     * 1-1 => []
-     */
-    public static Node deleteNode(Node head, int x) {
-        if (head == null) {
-            return head;
+        //element not in the list
+        if(current == null) {
+            return;
         }
-        Node p = head, prev = null;
-        while (p != null) {
-            if (p.key == x) {
-                if (head == p) {
-                    head = head.next;
-                } else {
-                    prev.next = p.next;
-                }
-            } else {
-                prev = p;
-            }
-            p = p.next;
-        }
-        return head;
+        prev.next = current.next;
     }
 
     /**
@@ -160,7 +127,7 @@ public class MyList {
      * @param head head
      * @param element to be deleted
      */
-    public static Node deleteOneNode(Node head, int element){
+    public static Node deleteOneNodeVersionTwo(Node head, int element){
 
         if(head == null){
             return head;
@@ -184,13 +151,125 @@ public class MyList {
         return head;
     }
 
-    public Node middleElement() {
+    /**
+     * This will delete all nodes with given value with given value
+     * Using above logic but in loop
+     *
+     * @param value value
+     */
+    public static Node deleteAllOccurencesOfNodeVersionOne(Node head, int value) {
+
+        if (head == null) {
+            return head;
+        }
+        //if element is first to be deleted eg. 10->10->10->20, delete 10
+        while (head != null && head.key == value){
+            head = head.next;
+        }
+
+        Node current = head;
+        Node prev = null;
+        while (current != null) {
+            if (current.key != value) { // current is not deletable node
+                prev = current;
+                current = current.next;
+            } else { // keep deleting
+                prev.next = current.next;
+                current = current.next;
+            }
+        }
+        return head;
+    }
+
+    /**
+     * delete all occurences of the element in the list
+     *
+     * @param head head
+     * @param element elemen to be deleted
+     * @return head of the current list
+     */
+    public static Node deleteAllOccurencesOfNodeVersionTwo(Node head, int element) {
+
+        if (head == null) {
+            return null;
+        }
+
+        Node prev = null, curr = head;
+        while (curr != null) {
+            if (curr.key == element) {
+                Node next = curr.next;
+                if (prev == null) { // head contains value to be deleted
+                    curr = next;
+                    head = next;
+                } else {
+                    prev.next = next;
+                    curr = next;
+                }
+
+            } else {
+                prev = curr;
+                curr = curr.next;
+            }
+        }
+        return head;
+    }
+
+    /**
+     * Delete node with value given by function
+     * will delete all occurrences of x
+     * version three is same as version two
+     *
+     * Input:  1->2->6->3->4->5->6, val = 6
+     * Output: 1->2->3->4->5
+     *
+     * 1-1 => []
+     */
+    public static Node deleteAllOccurencesOfNodeVersionThree(Node head, int x) {
+        if (head == null) {
+            return head;
+        }
+        Node p = head, prev = null;
+        while (p != null) {
+            if (p.key == x) {
+                if (head == p) {
+                    head = head.next;
+                } else {
+                    prev.next = p.next;
+                }
+            } else {
+                prev = p;
+            }
+            p = p.next;
+        }
+        return head;
+    }
+
+
+    /**
+     * Find middle using two pointers
+     * @return middle of the list
+     */
+    public Node middleElementVersionOne() {
         if (head == null || head.next == null) {
             return head;
         } else {
             Node fast = head;
             Node slow = head;
             while (fast.next.next != null && fast.next != null) {
+                fast = fast.next.next;
+                slow = slow.next;
+            }
+            return slow;
+        }
+    }
+
+    public Node middleElementVersionTwo() {
+        if (head == null) {
+            return head;
+        } else {
+            Node fast = head;
+            Node slow = head;
+            while (fast != null && fast.next != null) {
                 fast = fast.next.next;
                 slow = slow.next;
             }
@@ -398,35 +477,6 @@ public class MyList {
         }
         return slow.key;
 
-    }
-
-    public static Node deleteAllOccurencesOfNode(Node head, int element) {
-
-        if (head == null) {
-            return null;
-        }
-
-        Node prev = null, curr = head;
-
-        while (curr != null) {
-            if (curr.key == element) {
-                Node next = curr.next;
-                //if first node is to be deleted
-                if(prev == null){
-                    curr.next = null;
-                    curr = next;
-                    head = curr;
-                } else {
-                    prev.next = next;
-                    curr = next;
-                }
-
-            } else {
-                prev = curr;
-                curr = curr.next;
-            }
-        }
-        return head;
     }
 
     //Remove Nth Node From End of List.
