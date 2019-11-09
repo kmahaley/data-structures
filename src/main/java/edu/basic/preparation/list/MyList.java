@@ -564,6 +564,7 @@ public class MyList {
 
     /**
      * List contains cycle or not
+     * you can return boolean or node itself
      */
     public boolean hasCycle(Node head) {
 
@@ -693,37 +694,39 @@ public class MyList {
      */
     public Node detectCycle(Node head) {
 
-        if(head == null){
+        if (head == null) {
             return null;
         }
-        Node slow= head, fast= head;
-        while(fast != null && fast.next!= null) {
+        Node slow = head, fast = head;
+        while (fast != null && fast.next != null) {
             slow = slow.next;
             fast = fast.next.next;
-            if(slow == fast) {
+            if (slow == fast) {
                 break;
             }
         }
-        if(fast == null || fast.next == null) {
+        if (fast == null || fast.next == null) {
             return null;
         }
 
         Node start = fast;
-        int count =1;
-        while(start.next != fast) {
+        int count = 1;
+        //count the length of the loop
+        while (start.next != fast) {
             start = start.next;
-            count ++;
+            count++;
         }
-        int i=1;
-        Node x= head, y= head;
-        while(i<= count) {
+        // move one pointer "count" no of time ahead
+        int i = 1;
+        Node x = head, y = head;
+        while (i <= count) {
             x = x.next;
             i++;
         }
-
-        while(x !=  y) {
-            x= x.next;
-            y= y.next;
+        // move pointer together to find the start node of the list
+        while (x != y) {
+            x = x.next;
+            y = y.next;
         }
         return x;
 
@@ -1153,6 +1156,11 @@ public class MyList {
         head = head.next;
     }
 
+    /**
+     * F
+     * @param head
+     * @return
+     */
     public static Map<String, Node> middleElementMap(Node head) {
         Node fast = head;
         Node slow = head, prev = null;

@@ -10,14 +10,13 @@ import org.springframework.stereotype.Service;
 import static edu.basic.preparation.array.Array.find3Numbers;
 import static edu.basic.preparation.array.Array.maxSlidingWindow;
 import static edu.basic.preparation.array.Array.maxSlidingWindow_Optimized;
-import static edu.basic.preparation.data.DataUtilities.getListForPairwiseSwap;
-import static edu.basic.preparation.data.DataUtilities.isPathExistsTree;
+import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.list.MyList.getElementIndexPosition;
 import static edu.basic.preparation.list.MyList.getElementIndexPositionVersionTwo;
 import static edu.basic.preparation.queue.MyQueue.priorityQueueImplementation;
 import static edu.basic.preparation.queue.MyQueue.treeSet;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
-import static edu.basic.preparation.tree.BinaryTree.isPathExistsWithSum;
+import static edu.basic.preparation.tree.BinaryTree.*;
 
 /**
  * @author Kartik Mahaley
@@ -390,8 +389,8 @@ public class DependencyService {
 //        System.out.println(maximumWeightedRootToLeafPath(maxSumTree()));
 //        System.out.println(maximumWeightedRootToLeafPath(longestPathTree()));
 //        System.out.println("********* Weight of longest path from root to leaf *******");
-//        weightOfLongestPathFromRootToLeaf(longestPathTree());
-//        System.out.println("len= "+ROOT_TO_LEAF_MAX_LEN + " : weight= " + ROOT_TO_LEAF_MAX_SUM);
+        weightOfLongestPathFromRootToLeaf(longestPathTreeWithLeaf());
+        System.out.println("len= "+ROOT_TO_LEAF_MAX_LEN + " : weight= " + ROOT_TO_LEAF_MAX_SUM);
 
         System.out.println("********* is path from root to leaf exists with sum *******");
         System.out.println(isPathExistsWithSum(isPathExistsTree(), 6));

@@ -13,6 +13,7 @@ import java.util.Vector;
 import edu.basic.preparation.data.Node;
 import edu.basic.preparation.data.TreeNode;
 
+
 /**
  */
 public class BinaryTree {
@@ -309,8 +310,38 @@ public class BinaryTree {
         return countNumberOfLeafNodesRecursive(root.left) + countNumberOfLeafNodesRecursive(root.right);
     }
 
+    /**
+     * Find maximum using iterative method
+     * @param root node
+     * @return max node value
+     */
+    public static int findMaximumIterative(TreeNode root) {
+
+        if(root == null)
+            return 0;
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int max = root.key;
+        while (!queue.isEmpty()) {
+            TreeNode current = queue.poll();
+            if(current.key > max) {
+                max = current.key;
+            }
+            if (current.left != null) {
+                queue.add(current.left);
+            }
+            if (current.right != null) {
+                queue.add(current.right);
+            }
+        }
+        return max;
+    }
 
     //Maximum in the tree
+
+    /**
+     * This function will work only if nodes values >= 0
+     */
     public static int findMax(TreeNode current) {
         if (current == null) {
             return -1;
@@ -355,6 +386,9 @@ public class BinaryTree {
     }
 
     /**
+     * this is recursive solution you can use
+     * iterative solution if you keep track of node and its weight (1,1), (2,3) (-5, -2)
+     * initial value would be Integer.minvalue just like horizontal distance
      * Maximum sum from root to leaf node
      *          1
      *         /
@@ -387,7 +421,7 @@ public class BinaryTree {
     }
 
     /**
-     * TODO : DO NOUSE THIS FUNCTION, This function will fail when
+     * TODO : DO NOT USE THIS FUNCTION, This function will fail when
      *                1
      *               /
      *              2
@@ -425,6 +459,9 @@ public class BinaryTree {
 
     /**
      * compare len and sum with global variable
+     * we are considering root == null  because length of non leaf node will be
+     * less than leaf node hence ROOT_TO_LEAF_MAX_LEN and ROOT_TO_LEAF_MAX_SUM
+     * will be preserved
      *
      * @param root current node
      * @param sum current sum
