@@ -881,27 +881,27 @@ public class MyList {
      */
     public static Node reverseBetweenOptimized(Node head, int m, int n) {
 
-        if(head == null || head.next == null || m >= n){
+        if (head == null || head.next == null || m >= n) {
             return head;
         }
 
         int c = 1;
-        Node curr = head, start=null, end=null, before= null, after= null;
+        Node curr = head, start = null, end = null, before = null, after = null;
 
-        while(curr !=null && c <= n+1) {
+        while (curr != null && c <= n + 1) {
             Node next = curr.next;
-            if(c == m-1) {
+            if (c == m - 1) {
                 before = curr;
                 before.next = null;
             }
-            if(c == m) {
+            if (c == m) {
                 start = curr;
             }
-            if(c == n) {
+            if (c == n) {
                 end = curr;
-                end.next= null;
+                end.next = null;
             }
-            if(c == n+1) {
+            if (c == n + 1) {
                 after = curr;
             }
             c++;
@@ -1136,7 +1136,7 @@ public class MyList {
         boolean flag = true;
         Node start = head, p = new Node(0);
         head = p;
-        while (p != null && (start != null || reverseHead != null) ) {
+        while (start != null || reverseHead != null) {
             if (flag) {
                 if(start != null) {
                     p.next = start;
@@ -1157,9 +1157,10 @@ public class MyList {
     }
 
     /**
-     * F
-     * @param head
-     * @return
+     * Find middle and prev in one pass
+     *
+     * @param head node
+     * @return map with middle and prev node
      */
     public static Map<String, Node> middleElementMap(Node head) {
         Node fast = head;

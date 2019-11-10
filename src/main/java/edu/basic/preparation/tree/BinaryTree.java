@@ -153,6 +153,32 @@ public class BinaryTree {
         }
     }
 
+    /**
+     * Function to get bottom view of the binary tree
+     * same function can be used to get the top view of the binary tree too
+     *        2
+     *     /    \
+     *    1     3
+     *         / \
+     *       4    5
+     * answer : 1 4 3 5
+     * Find the horizontal distance of the node from the root node and maintain list
+     * of node at each horizontal distance
+     */
+    public static List<Integer> bottomViewBinaryTree(TreeNode root) {
+        List<Integer> toReturn = new ArrayList<>();
+        if (root == null) {
+            return toReturn;
+        }
+        final Map<Integer, LinkedList<Integer>> horizontalDistanceMap = horizontalDistance(root);
+        List<Integer> bottomView = new LinkedList<>();
+
+        // you can getFirst or getLast based on top or bottom view
+        horizontalDistanceMap.forEach((k,v) -> bottomView.add(v.getLast()));
+
+        return bottomView;
+    }
+
     // Print diagonal traversal of given binary tree
     public static void diagonalPrint(TreeNode root) {
         // create a map of vectors to store Diagonal elements
@@ -950,7 +976,9 @@ public class BinaryTree {
     }
 
     public static class Height{
+        // used in balance tree problem
         public int height;
+        // used in finding diameter of the tree problem
         public int diameter;
     }
 
@@ -973,7 +1001,7 @@ public class BinaryTree {
 
         /* Height of current node is max of heights of
            left and right subtrees plus 1*/
-        height.height = (lh > rh ? lh : rh) + 1;
+        height.height = Math.max(lh, rh) + 1;
 
         /* If difference between heights of left and right
            subtrees is more than 2 then this node is not balanced
@@ -1006,9 +1034,8 @@ public class BinaryTree {
         int ld = lHeight.diameter;
         int rd = rHeight.diameter;
 
-        /* Height of current node is max of heights of
-           left and right subtrees plus 1*/
-        height.height = (lh > rh ? lh : rh) + 1;
+        /* Height of current node is max of heights of left and right subtrees plus 1*/
+        height.height = Math.max(lh, rh) + 1;
         height.diameter = Math.max(Math.max(ld, rd), lh + rh + 1);
     }
 
@@ -1016,6 +1043,7 @@ public class BinaryTree {
      * Longest path from one node to another
      * O(n*n) solution.
      * O(n) -> https://www.geeksforgeeks.org/diameter-of-a-binary-tree/
+     * check above method
      *
      * @param root node
      * @return diameter
@@ -1043,15 +1071,16 @@ public class BinaryTree {
      */
     public static int diameterOfTreeWithGlobalVariable(TreeNode root) {
         if (root == null) {
-            return 0;
+            return 0; // returns height
         }
 
-        int left = diameterOfTreeWithGlobalVariable(root.left);
-        int right = diameterOfTreeWithGlobalVariable(root.right);
-        diameterGlobal = Math.max(diameterGlobal, left + right + 1);
+        int leftHeight = diameterOfTreeWithGlobalVariable(root.left);
+        int rightHeight = diameterOfTreeWithGlobalVariable(root.right);
 
-        // Height of the node
-        return Math.max(left, right) + 1;
+        diameterGlobal = Math.max(diameterGlobal, leftHeight + rightHeight + 1);
+
+        // Height of the current node
+        return Math.max(leftHeight, rightHeight) + 1;
     }
 
     /**
@@ -1121,7 +1150,42 @@ public class BinaryTree {
         }
 
         return toReturn;
+    }
 
+    public static List<List<Integer>> zigzagLevelOrderVersion2(TreeNode root) {
+        if (root == null) {
+            return null;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        boolean isReverse = false;
+        List<List<Integer>> toReturnList = new LinkedList<>();
+
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            LinkedList<Integer> levelList = new LinkedList<>();
+
+            for (int i = 0; i < size; i++) {
+                final TreeNode poll = queue.poll();
+                if (poll.left != null) {
+                    queue.add(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.add(poll.right);
+                }
+                levelList.add(poll.key);
+            }
+            // Add in return list depending on the flag
+            if (isReverse) {
+                Collections.reverse(levelList);
+                toReturnList.add(levelList);
+            } else {
+                toReturnList.add(levelList);
+            }
+            isReverse = !isReverse; // change flag for zigzag
+
+        }
+        return toReturnList;
     }
 
     /**
@@ -1194,6 +1258,38 @@ public class BinaryTree {
     }
 
     /**
+     * This function is optimized for left and right side view of the
+     * tree
+     */
+    public static List<Integer> rightSideViewVersion2(TreeNode root) {
+        List<Integer> toReturn = new ArrayList<>();
+        if (root == null) {
+            return toReturn;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+
+                final TreeNode poll = queue.poll();
+                if (poll.left != null) {
+                    queue.add(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.add(poll.right);
+                }
+                // condition for right view i == size-1 ie last element
+                // condition for left view is i == 0 ie first element
+                if (i == size - 1) {
+                    toReturn.add(poll.key);
+                }
+            }
+        }
+        return toReturn;
+    }
+
+    /**
      * Given a binary tree, find the leftmost value in the last level of the tree.
      *      2
      *     /\
@@ -1209,7 +1305,7 @@ public class BinaryTree {
         }
         Queue<TreeNode> queue = new LinkedList<>();
         queue.add(root);
-        int lastValue = 0;
+        int leftMostLastLevelValue = 0;
         while (!queue.isEmpty()) {
 
             int size = queue.size();
@@ -1221,13 +1317,13 @@ public class BinaryTree {
                 if(poll.right != null) {
                     queue.add(poll.right);
                 }
-                if(i == 0) {
-                    lastValue = poll.key;
+                //condition can be altered to get lemftmost of rightmost
+                if(i == 0) { // override the left most of right most value
+                    leftMostLastLevelValue = poll.key;
                 }
             }
-
         }
-        return lastValue;
+        return leftMostLastLevelValue;
 
     }
 

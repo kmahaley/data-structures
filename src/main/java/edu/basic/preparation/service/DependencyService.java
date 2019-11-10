@@ -1,9 +1,6 @@
 package edu.basic.preparation.service;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Stack;
+import java.util.*;
 
 import org.springframework.stereotype.Service;
 
@@ -374,9 +371,11 @@ public class DependencyService {
 //        findMaxRecursive(constructTreeForMaxNodeValue());
 //        System.out.println(BinaryTree.maxNodeValue);
 //
-//        System.out.println("********* Horizontal distance *******");
-//        final Map<Integer, LinkedList<Integer>> integerListMap = horizontalDistance(constructDiagonalTraversal());
-//        integerListMap.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
+        System.out.println("********* Horizontal distance *******");
+        final Map<Integer, LinkedList<Integer>> integerListMap = horizontalDistance(constructDiagonalTraversal());
+        integerListMap.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
+        System.out.println("********* bottom view of the tree *******");
+        System.out.println(bottomViewBinaryTree(constructDiagonalTraversal()));
 //
 //        System.out.println("********* Horizontal distance DFS *******");
 //        final Map<Integer, LinkedList<Integer>> integerListMapDFS = horizontalDistanceByDFS(constructDiagonalTraversal());
@@ -389,11 +388,11 @@ public class DependencyService {
 //        System.out.println(maximumWeightedRootToLeafPath(maxSumTree()));
 //        System.out.println(maximumWeightedRootToLeafPath(longestPathTree()));
 //        System.out.println("********* Weight of longest path from root to leaf *******");
-        weightOfLongestPathFromRootToLeaf(longestPathTreeWithLeaf());
-        System.out.println("len= "+ROOT_TO_LEAF_MAX_LEN + " : weight= " + ROOT_TO_LEAF_MAX_SUM);
+//        weightOfLongestPathFromRootToLeaf(longestPathTreeWithLeaf());
+//        System.out.println("len= "+ROOT_TO_LEAF_MAX_LEN + " : weight= " + ROOT_TO_LEAF_MAX_SUM);
 
-        System.out.println("********* is path from root to leaf exists with sum *******");
-        System.out.println(isPathExistsWithSum(isPathExistsTree(), 6));
+//        System.out.println("********* is path from root to leaf exists with sum *******");
+//        System.out.println(isPathExistsWithSum(isPathExistsTree(), 6));
 
 //        System.out.println("********* All paths from root to leaf *******");
 //        allPathsFromRootToLeaf(constructTree(), new ArrayList<Integer>(), 0);
