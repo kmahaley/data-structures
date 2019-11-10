@@ -1375,6 +1375,39 @@ public class BinaryTree {
         return Math.min(minDepthVersion_2(root.left), minDepthVersion_2(root.right)) + 1;
     }
 
+    /**
+     * Given a binary tree, find its minimum depth.
+     *
+     * The minimum depth is the number of nodes along the shortest path from the root node down to the nearest leaf
+     * node.
+     * BFS approach whic is faster than DFS
+     */
+    public static int minDepthIterativeVersion(TreeNode root) {
+        if (root == null) {
+            return 0;
+        }
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.add(root);
+        int depth = 1;
+        while (!queue.isEmpty()) {
+            int size = queue.size();
+            for (int i = 0; i < size; i++) {
+                final TreeNode poll = queue.poll();
+                if (poll.left == null && poll.right == null) {
+                    return depth;
+                }
+                if (poll.left != null) {
+                    queue.add(poll.left);
+                }
+                if (poll.right != null) {
+                    queue.add(poll.right);
+                }
+            }
+            depth++;
+        }
+        return depth;
+    }
+
 
     /**
      * Search in binary tree using DFS,
@@ -1395,6 +1428,7 @@ public class BinaryTree {
             return true;
         }
         boolean isPresent = searchInBinaryTreeRecursive(root.left, x);
+        // not found in left tree hence look for right tree
         if(!isPresent) {
             isPresent = searchInBinaryTreeRecursive(root.right, x);
         }

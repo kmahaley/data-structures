@@ -371,11 +371,15 @@ public class DependencyService {
 //        findMaxRecursive(constructTreeForMaxNodeValue());
 //        System.out.println(BinaryTree.maxNodeValue);
 //
-        System.out.println("********* Horizontal distance *******");
-        final Map<Integer, LinkedList<Integer>> integerListMap = horizontalDistance(constructDiagonalTraversal());
-        integerListMap.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
-        System.out.println("********* bottom view of the tree *******");
-        System.out.println(bottomViewBinaryTree(constructDiagonalTraversal()));
+//        System.out.println("********* Horizontal distance *******");
+//        final Map<Integer, LinkedList<Integer>> integerListMap = horizontalDistance(constructDiagonalTraversal());
+//        integerListMap.forEach((k, v) -> System.out.println("H distance from root: " + k + " nodes: " + v));
+//        System.out.println("********* bottom view of the tree *******");
+//        System.out.println(bottomViewBinaryTree(constructDiagonalTraversal()));
+
+        System.out.println("********* minimum depth of the tree *******");
+        System.out.println(minDepth(constructDiagonalTraversal()));
+        System.out.println(minDepthIterativeVersion(constructDiagonalTraversal()));
 //
 //        System.out.println("********* Horizontal distance DFS *******");
 //        final Map<Integer, LinkedList<Integer>> integerListMapDFS = horizontalDistanceByDFS(constructDiagonalTraversal());
