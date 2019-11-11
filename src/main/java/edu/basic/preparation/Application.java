@@ -2,6 +2,8 @@ package edu.basic.preparation;
 
 import edu.basic.preparation.service.DependencyService;
 
+import java.util.Stack;
+
 /**
  * @author kartik mahaley
  */
@@ -11,7 +13,7 @@ public class Application {
 
         final DependencyService dependencyService = new DependencyService();
 
-        dependencyService.binaryTreeFunctionality();
+//        dependencyService.binaryTreeFunctionality();
 
 //        dependencyService.listFunctionality();
 

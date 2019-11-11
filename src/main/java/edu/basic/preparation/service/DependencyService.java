@@ -10,8 +10,7 @@ import static edu.basic.preparation.array.Array.maxSlidingWindow_Optimized;
 import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.list.MyList.getElementIndexPosition;
 import static edu.basic.preparation.list.MyList.getElementIndexPositionVersionTwo;
-import static edu.basic.preparation.queue.MyQueue.priorityQueueImplementation;
-import static edu.basic.preparation.queue.MyQueue.treeSet;
+import static edu.basic.preparation.queue.MyQueue.*;
 import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
 import static edu.basic.preparation.tree.BinaryTree.*;
 
@@ -240,7 +239,7 @@ public class DependencyService {
 //
 //        priorityQueue();
 //
-        treeSet();
+//        treeSet();
 
         priorityQueueImplementation();
 

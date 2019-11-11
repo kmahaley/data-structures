@@ -61,13 +61,11 @@ public class Graph {
 
         visited.add(current);
         System.out.println(current);
-
         for (Integer child : graph.get(current)) {
-            if (!visited.contains(child)) {
 
+            if (!visited.contains(child)) {
                 graphDFSUtil(child, graph, visited);
             }
-
         }
     }
 
@@ -95,9 +93,7 @@ public class Graph {
                 return true;
             }
         }
-
         return false;
-
     }
 
     private static boolean isCycleInDirectedGraphDFS(Integer key, Set<Integer> toBeVisited, Set<Integer> inProcess,
@@ -185,6 +181,7 @@ public class Graph {
 
     /**
      * topological sort
+     * in u -> v, u comes before v
      *
      * @param graph graph
      * @return stack
@@ -200,11 +197,12 @@ public class Graph {
             }
             isTopologicalSortDFS(key, visited, stack, graph);
         }
-
         return stack;
-
     }
 
+    /**
+     * explode all children and then put parent in stack
+     */
     private static void isTopologicalSortDFS(Integer key, Set<Integer> visited, Stack<Integer> stack,
             Map<Integer, List<Integer>> graph) {
 
@@ -226,11 +224,12 @@ public class Graph {
      * @return boolean
      */
     public static boolean isCycleInUnDirectedGraph(Map<Integer, List<Integer>> graph) {
+
         final Set<Integer> visited = new HashSet<>();
-        for (Integer key:graph.keySet()) {
+        for (Integer key : graph.keySet()) {
             if (visited.contains(key))
                 continue;
-            if(isCycleInUnDirectedGraphDFS(key, null, visited, graph)){
+            if (isCycleInUnDirectedGraphDFS(key, null, visited, graph)) {
                 return true;
             }
         }
@@ -238,23 +237,18 @@ public class Graph {
     }
 
     private static boolean isCycleInUnDirectedGraphDFS(Integer key, Integer parent, Set<Integer> visited,
-            Map<Integer, List<Integer>> graph) {
-
+                                                       Map<Integer, List<Integer>> graph) {
         visited.add(key);
         for (Integer child : graph.get(key)) {
-
-            if (child == parent) {
+            if (child.equals(parent)) {
                 continue;
             }
-
             if (visited.contains(child)) {
                 return true;
             }
-
             if (isCycleInUnDirectedGraphDFS(child, key, visited, graph)) {
                 return true;
             }
-
         }
         return false;
     }
