@@ -29,6 +29,8 @@ public final class StringUtilities {
      *
      * @param a integer array
      * @param windowSize window size to find unique elements
+     *
+     * using set per window you can find unique or duplicate elements
      */
     public static void getDuplicateInArrayWindow(int a[], int windowSize) {
         Map<Integer, Integer> map = new HashMap<>();
@@ -39,7 +41,7 @@ public final class StringUtilities {
             for (int i = k; i < k + windowSize; i++) {
 
                 if (!map.containsKey(a[i])) {
-                    distinctCount++;
+                    distinctCount++;// this is getting unique element count
                     map.put(a[i], 1);
                 }
             }
@@ -142,6 +144,8 @@ public final class StringUtilities {
      * Permutation of string is palindrome or not
      *
      * @param str String value
+     *
+     * logic: count characters and find count of odd characters
      */
     public static void isPermutationPalindrome(String str) {
 
@@ -188,6 +192,7 @@ public final class StringUtilities {
             while((line = bufferedReader.readLine()) != null) {
                 final String[] strings = line.split(" ");
                 final String url = strings[0];
+
                 if(url != null && !url.isEmpty()){
                     if(map.containsKey(url)){
                         final Integer integer = map.get(url);
@@ -220,7 +225,7 @@ public final class StringUtilities {
 
     /**
      * Given a string and list of indexes then find the closest similar character.
-     * if similar character  not present in string then -1.
+     * if similar character not present in string then -1.
      * if two characters are same distance then take least index value [2,5] -> [2]
      *
      * apple ,list[1,4] -> [2,-1]
@@ -315,6 +320,7 @@ public final class StringUtilities {
         while (i < originalStrings.size()) {
             final String original = originalStrings.get(i);
 
+            // if subsequence is random then you can just to subsequence.contains(original)
             if (j < subSequenceString.size() && original.equals(subSequenceString.get(j))) {
                 i++;
                 j++;
@@ -353,6 +359,7 @@ public final class StringUtilities {
                 i++;
             }
         }
+        // if elements of subString are finished
         while (i < s1.length) {
             list.add(s1[i]);
             i++;
@@ -448,11 +455,11 @@ public final class StringUtilities {
      * @return boolean
      */
     private static boolean isParity(List<Integer> list) {
-        int j=0;
+        int j = 0;
         boolean isOdd = list.get(0) % 2 == 1;
-        for (int i = 1; i < list.size() && j< list.size() ;) {
-            if(isOdd){
-                if(isParityInOddNumberSeries(list.get(j), list.get(i))){
+        for (int i = 1; i < list.size() && j < list.size(); ) {
+            if (isOdd) {
+                if (isParityInOddNumberSeries(list.get(j), list.get(i))) {
                     i++;
                     j++;
                     isOdd = false;
@@ -460,10 +467,11 @@ public final class StringUtilities {
                     return false;
                 }
             } else {
-                if(isParityInEvenNumberSeries(list.get(j), list.get(i))){
+                if (isParityInEvenNumberSeries(list.get(j), list.get(i))) {
                     i++;
                     j++;
-                    isOdd = true;;
+                    isOdd = true;
+                    ;
                 } else {
                     return false;
                 }
@@ -475,23 +483,23 @@ public final class StringUtilities {
     /**
      * if number is odd and even
      *
-     * @param odd number
+     * @param odd  number
      * @param even number
      * @return boolean
      */
     private static boolean isParityInOddNumberSeries(Integer odd, Integer even) {
-        return odd %2 ==1 && even%2==0;
+        return odd % 2 == 1 && even % 2 == 0;
     }
 
     /**
      * if number are even and odd
      *
      * @param even number
-     * @param odd number
+     * @param odd  number
      * @return boolean
      */
     private static boolean isParityInEvenNumberSeries(Integer even, Integer odd) {
-        return odd %2 ==1 && even%2==0;
+        return odd % 2 == 1 && even % 2 == 0;
     }
 
     /**
@@ -808,16 +816,16 @@ public final class StringUtilities {
      */
     public static void permutationOfArray(List<Integer> integerList, int start) {
 
+        if (start == integerList.size() - 1) {
+            System.out.println(integerList);
+        }
+
         for (int i = start; i < integerList.size(); i++) {
 
             Collections.swap(integerList, i, start);
             permutationOfArray(integerList, start + 1);
             Collections.swap(integerList, start, i);
 
-        }
-
-        if (start == integerList.size() - 1) {
-            System.out.println(integerList);
         }
     }
 
@@ -928,8 +936,6 @@ public final class StringUtilities {
                             result.add(p, ids);
                         }
                     }
-
-
                 }
             }
         }
@@ -1111,7 +1117,7 @@ public final class StringUtilities {
     */
 
 
-    public boolean isStringBalanced(String str) {
+    public static boolean isStringBalanced(String str) {
 
         Stack<Character> stack = new Stack();
         final char[] chars = str.toCharArray();
