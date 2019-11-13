@@ -735,6 +735,9 @@ public final class StringUtilities {
 
     /**
      * Check if number is palindrome
+     * 1) using stack
+     * 2) convert integer to string
+     * 3) find remainder and divisible
      *
      * @param n number
      * @return boolean
@@ -765,16 +768,17 @@ public final class StringUtilities {
      * @param initial original string
      */
     public static void reverseString(String reverse, String initial) {
+
         if (initial.length() == 0) {
             System.out.println(reverse);
             return;
         }
-
         reverseString(reverse + initial.charAt(initial.length() - 1), initial.substring(0, initial.length() - 1));
     }
 
     /**
      * get permutation of strings
+     *
      * @param prefix permutation of string
      * @param original original string
      */
@@ -834,8 +838,7 @@ public final class StringUtilities {
      * 1. From list of all locations of steak houses, take one location at a time. Calculate the distance from origin
      * (0,0)
      * 2. Create the list of these distances in ascending order and maintain the list of locations of steak houses in
-     * similar way
-     * i.e nearestSteakHouses
+     * similar way i.e nearestSteakHouses
      * example: distances = {2,3,5,8,13}  and nearestSteakHouse ={{1,0}, {2,3}, {3,1}, {-1,-2}, {0,4} }
      * 3. After we analyse all steakhouse locations, select required number of steak house locations requested by the
      * user.
@@ -861,7 +864,7 @@ public final class StringUtilities {
                     closestSteakHouses.add(current);
 
                 } else {
-                    int p = 0;
+                    int p = 0;// get position where to add location
                     while (p < distances.size() && dist > distances.get(p)) {
                         p++;
                     }
@@ -872,7 +875,7 @@ public final class StringUtilities {
             }
 
         }
-
+        // user requested number of steakhouses
         List<List<Integer>> result = new ArrayList<>();
         for (int j = 0; j < numSteakhouses; j++) {
             result.add(closestSteakHouses.get(j));
@@ -883,10 +886,7 @@ public final class StringUtilities {
 
     /**
      * 1. From given list of foreground applications and list of background applications, get memory utilized by each
-     * combination
-     * of foreground and background application.
-     * memory utilized =10
-     * pair with id = {1,2}
+     * combination of foreground and background application. memory utilized =10 pair with id = {1,2}
      * 2. If total memory of each pair is less than or equal to device memory,
      * a. that pair's memory is added into a list in descending order
      * b. and the pair is maintained according to above order in another list
@@ -956,7 +956,7 @@ public final class StringUtilities {
 
 
     /**
-     * Permutation of string
+     * Permutation of string (Use transformStringVersion2 with better logic)
      *
      * Use method like subset of integers. index =0 1) make capitol or not make capital
      *
@@ -964,7 +964,7 @@ public final class StringUtilities {
      *          0
      *          a1b2
      *                  1=no skip   2
-     *                              a1b1
+     *                              a1b2
      *                              a1B2
      *                                      3=no skip   4==length
      *
@@ -989,7 +989,7 @@ public final class StringUtilities {
         } else {
             set.add(str);
         }
-        mainList.addAll(set);
+//        mainList.addAll(set);
         return mainList;
 
     }
@@ -1015,6 +1015,42 @@ public final class StringUtilities {
         transformStringHelper(index + 1, oldString, set);
     }
 
+    /**
+     * Same as above but different logic
+     */
+    public static List<String> transformStringVersion2(String str) {
+
+        Set<String> set = new HashSet<>();
+        List<String> mainList = new ArrayList<>();
+
+        transformStringVersion2Helper(str, 0, mainList);
+        return mainList;
+    }
+
+    /**
+     * 1) str length is reach add in list
+     * 2) if character is digit then increase index and continue
+     * 3) if character then have two recursion with and without uppercase
+     */
+    private static void transformStringVersion2Helper(String str, int ind, List<String> set) {
+
+        if (ind == str.length()) {
+            set.add(str);
+        } else {
+            final char curr = str.charAt(ind);
+
+            if (Character.isDigit(curr)) {
+                transformStringVersion2Helper(str, ind + 1, set);
+            } else {
+                transformStringVersion2Helper(str, ind + 1, set);
+                final char upperCase = Character.toUpperCase(curr);
+
+                final String withUpperCase = str.substring(0, ind) + upperCase + str.substring(ind + 1);
+                transformStringVersion2Helper(withUpperCase, ind + 1, set);
+            }
+        }
+    }
+
 
     /**
      * given array = 1,2,4,5,6
@@ -1028,11 +1064,13 @@ public final class StringUtilities {
      */
     public static int findMissingElement(int[] a, int n) {
 
+        //XOR of current elements
         int x1 = a[0];
         for (int i = 1; i < n; i++) {
             x1 = x1 ^ a[i];
         }
 
+        //XOR of actual elements
         int x2 = 1;
         for (int k = 2; k <= n+1; k++) {
             x2 = x2 ^ k;

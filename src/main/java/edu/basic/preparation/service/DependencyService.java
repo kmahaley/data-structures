@@ -11,7 +11,7 @@ import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.list.MyList.getElementIndexPosition;
 import static edu.basic.preparation.list.MyList.getElementIndexPositionVersionTwo;
 import static edu.basic.preparation.queue.MyQueue.*;
-import static edu.basic.preparation.string.StringUtilities.findMissingElementInDuplicate;
+import static edu.basic.preparation.string.StringUtilities.*;
 import static edu.basic.preparation.tree.BinaryTree.*;
 
 /**
@@ -172,9 +172,11 @@ public class DependencyService {
 //        System.out.println(" -------------Permutations of the array-------------- ");
 //        permutationOfArray(Arrays.asList(1,2,3,4), 0);
 
-//        System.out.println(" -------------Permutations of the string-------------- ");
-//        final List<String> strings = transformString("a1b2");
-//        System.out.println(strings);
+        System.out.println(" -------------Permutations of the string-------------- ");
+        final List<String> strings = transformString("a1b2");
+        System.out.println(strings);
+        final List<String> newList = transformStringVersion2("a1b2");
+        System.out.println(newList);
 
 //        final List<List<Integer>> lists = optimalUtilization(23, foregrd(), backgrd());
 //        System.out.println(lists);
