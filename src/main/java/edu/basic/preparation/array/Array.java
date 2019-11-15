@@ -7,19 +7,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayDeque;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.Deque;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.PriorityQueue;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import com.google.gson.Gson;
@@ -42,6 +30,7 @@ public class Array {
      * while (max!= 0) {
      *     (max - a[pos])
      * }
+     * maximum product in above array is 24, {-2,-3, 4}
      */
     public static int findMaximumSubArrayInArray(int[] a) {
         int newsum = a[0];
@@ -64,7 +53,7 @@ public class Array {
 
 
     /**
-     * Similar to find maximum sub array, use same technique to find minimum subarray.
+     * find minimum subarray. Similar to find maximum sub array, use same technique.
      * example = {3, -4, 2, -3, -1, 7, -5}
      * ans = -6
      * {-4, 2, -3, -1}
@@ -87,9 +76,30 @@ public class Array {
         return min;
     }
 
+    public static int findMaximumProductSubArrayInArray(int[] a) {
+        int newsum = a[0];
+        int max = a[0];
+
+//      sub array last index, then you can subtract max - a[position] and position-1 till max==0
+        int position = 0;
+
+        for (int i = 1; i < a.length; i++) {
+            newsum = Math.max(newsum * a[i], a[i]);
+            int newMax = Math.max(max, newsum);
+
+            if(newMax > max){
+                max = newMax;
+                position = i;
+            }
+        }
+        return max;
+    }
+
 
     /**
      * Largest sum contiguous increasing subarray
+     * increasing sub array is important here
+     *
      * if [i+1] > [i] add them else current = [i+1]
      *
      * {2, 1, 4, 7, 3, 6}
@@ -100,7 +110,7 @@ public class Array {
      * @param a
      * @return
      */
-    public static int largestSumContiguousArray(int[] a) {
+    public static int largestSumInIncreasingContiguousSubArray(int[] a) {
 
         int maxSum = a[0];
         int newSum = a[0];
@@ -153,6 +163,8 @@ public class Array {
      *
      * Because nums[0] + nums[1] = 2 + 7 = 9,
      * return [0, 1].
+     *
+     * you can maintain uniqueness by keeping set of integers which formed sum = 9
      */
     public int[] twoSum(int[] nums, int target) {
 
@@ -173,8 +185,9 @@ public class Array {
 
     /**
      * User picks 2 highest weighted stone,
-     * if weights are equal they disintegrates
-     * else smaller disintegrates and big one (big stone - small stone)
+     * conditions
+     * - if weights are equal they disintegrates
+     * - else smaller disintegrates and big one (big stone - small stone)
      *
      * 2,4,5 -> 1
      *
@@ -189,6 +202,7 @@ public class Array {
         while (! queue.isEmpty() && queue.size() != 1) {
             final Integer big = queue.poll();
             final Integer small = queue.poll();
+
             if(big == small) {
                 continue;
             } else {
@@ -297,13 +311,16 @@ public class Array {
         }
 
         movieList.sort(new MovieComparator());
+        //Collections.sort(movieList, new MovieComparator());
         List<String> titles = new LinkedList<>();
         movieList.forEach(m -> titles.add(m.Title));
         final String[] toArray = titles.toArray(new String[titles.size()]);
         return toArray;
     }
 
-
+    /**
+     * Code to read from restful json call
+     */
     public static PageResponse getData(String subStr, int page) {
         PageResponse pageResponse = new PageResponse();
         HttpURLConnection connection = null;
@@ -381,10 +398,11 @@ public class Array {
      * @return number
      *
      * Input: no = 4, trust = [[1,3],[1,4],[2,3],[2,4],[4,3]]
-     * [1,3] -> 1 trust 3
+     * [1,3] -> 1 trust 3, 1 --> 3
      * Output: 3
      *
      * Judge will have inDegree  = no-1 and outDegree = 0
+     * if numbers don't start as 1,2,3,4, create map<integer,integer[0,1]>
      */
     public static int findJudge(int no, int[][] trust) {
 
@@ -398,6 +416,7 @@ public class Array {
 
         int judge = -1;
         for (int i = 0; i < no + 1; i++) {
+            // all trust judge and judge don't trust anyone
             if (inDegree[i] == no - 1 && outDegree[i] == 0) {
                 judge = i;
             }
@@ -423,7 +442,8 @@ public class Array {
         int min = stock[0];
 
         for (int i = 1; i < stock.length; i++) {
-            result = Math.max(result, stock[i] - min);
+            int currentMax = stock[i] - min;
+            result = Math.max(result, currentMax);
             min = Math.min(min, stock[i]);
 
         }
@@ -522,15 +542,15 @@ public class Array {
         System.out.println(results);
     }
 
-    private static void helper(List<Integer> list, List<List<Integer>> results, List<Integer> initial, int index) {
+    private static void helper(List<Integer> input, List<List<Integer>> results, List<Integer> initial, int index) {
 
-        if(index == list.size()) {
+        if(index == input.size()) {
             results.add(initial);
         } else {
-            helper(list, results, new ArrayList<>(initial), index+1);
+            helper(input, results, new ArrayList<>(initial), index+1);
             final ArrayList<Integer> addTo = new ArrayList<>(initial);
-            addTo.add(list.get(index));
-            helper(list, results, addTo, index+1);
+            addTo.add(input.get(index));
+            helper(input, results, addTo, index+1);
         }
 
     }
@@ -563,6 +583,46 @@ public class Array {
             helperArray(input, initial, index + 1);
         }
     }
+
+//    public static void subsetArrayVersion2(List<Integer> start) {
+//        if(start.isEmpty()) {
+//            return;
+//        }
+//        List<List<Integer>> results = new ArrayList<>();
+//        int index = 0;
+//        Integer[] mid = new Integer[start.size()];
+//
+//        for (int i = 0; i < start.size(); i++) {
+//
+//            mid[index] = start.get(i);
+//            addInResults(index, mid, results);
+//            helperSubsetArrayVersion2(i+1, start, results, mid);
+//        }
+//        System.out.println(results);
+//    }
+//
+//    private static void helperSubsetArrayVersion2(
+//            int in, List<Integer> start, List<List<Integer>> results, Integer[] mid) {
+//        if(in == start.size()) {
+//            return;
+//        } else {
+//            mid[in] = start.get(in);
+//            addInResults(in, mid, results);
+//            helperSubsetArrayVersion2(in+1, start, results, mid);
+//        }
+//
+//    }
+//
+//
+//    private static void addInResults(int in, Integer[] mid, List<List<Integer>> results) {
+//        List<Integer> finalList = new ArrayList<>();
+//        for (int i = 0; i <= in; i++) {
+//            finalList.add(mid[i]);
+//        }
+//        results.add(finalList);
+//    }
+
+
 
     /**
      * Input: "abcabcbb"

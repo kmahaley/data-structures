@@ -4,9 +4,7 @@ import java.util.*;
 
 import org.springframework.stereotype.Service;
 
-import static edu.basic.preparation.array.Array.find3Numbers;
-import static edu.basic.preparation.array.Array.maxSlidingWindow;
-import static edu.basic.preparation.array.Array.maxSlidingWindow_Optimized;
+import static edu.basic.preparation.array.Array.*;
 import static edu.basic.preparation.data.DataUtilities.*;
 import static edu.basic.preparation.list.MyList.getElementIndexPosition;
 import static edu.basic.preparation.list.MyList.getElementIndexPositionVersionTwo;
@@ -502,12 +500,13 @@ public class DependencyService {
 
 //        int[] subArrayMaxSum = new int[] {-2, -3, 4, -1, -2, 1, 5, -3};
 //        System.out.println(findMaximumSubArrayInArray(subArrayMaxSum));
+//        System.out.println(findMaximumProductSubArrayInArray(subArrayMaxSum));
 
 //        int[] subArrayMinSum = new int[] {3, -4, 2, -3, -1, 7, -5};
 //        System.out.println(findMinimumSubArrayInArray(subArrayMinSum));
 
 //        int[] maxContiguousSumArray = new int[] {2, 1, 4, 7, 3, 6};
-//        System.out.println(largestSumContiguousArray(maxContiguousSumArray));
+//        System.out.println(largestSumInIncreasingContiguousSubArray(maxContiguousSumArray));
 
 //        int[] a = new int[] {3,4,-1,0,6,2,3};
 //        System.out.println("********* longest common sub sequence *******");
@@ -528,18 +527,19 @@ public class DependencyService {
 //        for (int i = 0 ; i < result.size();i++) {
 //            System.out.println(result.get(i));
 //        }
-
-        int[] slidingWindow = {1,3,-1,-3,5,3,6,7};
-        final List<Integer> ints = maxSlidingWindow(slidingWindow, 3);
-        System.out.println(ints);
-        final List<Integer> ints_optimized = maxSlidingWindow_Optimized(slidingWindow, 3);
-        System.out.println(ints_optimized);
-
-        int array[] = {-1, 0, 1, 2, -1, -4};
-        int sum = 0;
-        List<List<Integer>> result = new ArrayList<>();
-        find3Numbers(array, array.length, sum, result);
-        System.out.println(result);
+        final List<Integer> inputSubSet = Arrays.asList(1, 2, 3);
+        subset(inputSubSet);
+//        int[] slidingWindow = {1,3,-1,-3,5,3,6,7};
+//        final List<Integer> ints = maxSlidingWindow(slidingWindow, 3);
+//        System.out.println(ints);
+//        final List<Integer> ints_optimized = maxSlidingWindow_Optimized(slidingWindow, 3);
+//        System.out.println(ints_optimized);
+//
+//        int array[] = {-1, 0, 1, 2, -1, -4};
+//        int sum = 0;
+//        List<List<Integer>> result = new ArrayList<>();
+//        find3Numbers(array, array.length, sum, result);
+//        System.out.println(result);
 
     }
 }

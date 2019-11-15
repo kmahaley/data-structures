@@ -166,11 +166,9 @@ public class Graph {
             if (st.contains(child)) {
                 return true;
             }
-
             if (visited.contains(child)) {
                 continue;
             }
-
             if (isCycleInDirectedGraphVersion2Helper(child, st, visited, graph)) {
                 return true;
             }
@@ -207,7 +205,6 @@ public class Graph {
             Map<Integer, List<Integer>> graph) {
 
         visited.add(key);
-
         for (Integer child : graph.get(key)) {
             if (visited.contains(child)) {
                 continue;
