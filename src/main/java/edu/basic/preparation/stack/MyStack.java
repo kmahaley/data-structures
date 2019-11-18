@@ -153,6 +153,10 @@ public class MyStack {
      *
      * {1, 6, 4, 10, 2, 5}
      * {_, 1, 1,  4, 1, 2}
+     *
+     * bigger element on left
+     * {1, 6, 4, 10, 2, 5}
+     * {_, _, 6,  _, 10, 10}
      * @param a array
      */
     public static void nearestSmallerNumberOnLeft(int a[]) {
@@ -304,7 +308,7 @@ public class MyStack {
         for (int i = 0; i < str.length(); i++) {
             final char curr = toCharArray[i];
             if (!st.isEmpty() && st.peek() == '(' && curr == ')') {
-                newStr = newStr + st.pop() + curr;
+                newStr = newStr + st.pop() + curr;// you can use stringbuilder
             } else {
                 st.push(curr);
             }
@@ -336,10 +340,10 @@ public class MyStack {
         for (int i = 0; i < str.length(); i++) {
 
             final char curr = toCharArray[i];
-            if(map.keySet().contains(curr)) {
+            if (map.keySet().contains(curr)) {
                 st.push(curr);
             } else if (map.values().contains(curr)) {
-                if(!st.empty() && map.get(st.peek()) == curr){
+                if (!st.empty() && map.get(st.peek()) == curr) {
                     st.pop();
                 } else {
                     return false;
@@ -388,7 +392,6 @@ public class MyStack {
         if (original.isEmpty()) {
             return original;
         }
-
         Stack<Integer> aux = new Stack<>();
         while (!original.isEmpty()) {
 
@@ -417,7 +420,6 @@ public class MyStack {
             stack.push(no % 10);
             no = no / 10;
         }
-
         int rev = 0, digitMultiplier = 1;
         while (!stack.isEmpty()) {
             rev = rev + stack.pop() * digitMultiplier;

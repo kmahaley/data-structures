@@ -6,9 +6,11 @@ import org.springframework.stereotype.Service;
 
 import static edu.basic.preparation.array.Array.*;
 import static edu.basic.preparation.data.DataUtilities.*;
+import static edu.basic.preparation.graph.Graph.*;
 import static edu.basic.preparation.list.MyList.getElementIndexPosition;
 import static edu.basic.preparation.list.MyList.getElementIndexPositionVersionTwo;
 import static edu.basic.preparation.queue.MyQueue.*;
+import static edu.basic.preparation.stack.MyStack.longestParenthesisString;
 import static edu.basic.preparation.string.StringUtilities.*;
 import static edu.basic.preparation.tree.BinaryTree.*;
 
@@ -303,9 +305,9 @@ public class DependencyService {
 //        reverseStack(stackOriginal);
 //        System.out.println(stackOriginal);
 
-//        System.out.println("********* Longest parenthesis sequence *******");
-//        int size = longestParenthesisString(")()())");
-//        System.out.println(size);
+        System.out.println("********* Longest parenthesis sequence *******");
+        int size = longestParenthesisString(")()())");
+        System.out.println(size);
 
 //        System.out.println("********* Longest parenthesis sequence *******");
 //        final Stack<Integer> integerStack = basicStack();
@@ -465,14 +467,18 @@ public class DependencyService {
 //        System.out.println("********* Get all path from start node *******");
 //        getAllPathFromSource(0, constructGraph());
 
-//        int[][] array = { {1,0}, {2,0} ,{0,1}};
-////        System.out.println(canFinish(3, array));
-//        System.out.println(canFinishVersion2(4, array));
+        int[][] array = { {1,0}, {2,0} ,{0,1}};
+        System.out.println("********* can finish courses ? *******");
+        System.out.println(canFinish(3, array));
+        System.out.println(canFinishVersion2(4, array));
 
-//        final int[] order = findOrder(2, array);
-//        for (int i = 0; i < order.length; i++) {
-//            System.out.print(order[i]+" ");
-//        }
+        System.out.println("********* find order in which courses can be finished *******");
+        final int[] order = findOrder(2, array);
+        System.out.println(order.length);
+        for (int i = 0; i < order.length; i++) {
+            System.out.print(order[i]+" ");
+        }
+
 //        Graph.Employee emp1 = new Graph.Employee();
 //        emp1.importance =5;
 //        emp1.id=1;
@@ -520,6 +526,8 @@ public class DependencyService {
 //        rotateArrayAntiClockWise(array2, 2);
 //        printArray(array2);
 
+        System.out.println("********* remove duplicates from array *******");
+        System.out.println(removeDuplicates(new int[] {1,2,2,3,4,4,5,6}));
 
 //        List<List<String>> result = getAllCombinations(listOfList(), 3);
 //
@@ -527,8 +535,9 @@ public class DependencyService {
 //        for (int i = 0 ; i < result.size();i++) {
 //            System.out.println(result.get(i));
 //        }
-        final List<Integer> inputSubSet = Arrays.asList(1, 2, 3);
-        subset(inputSubSet);
+//        final List<Integer> inputSubSet = Arrays.asList(1, 2, 3);
+//        subset(inputSubSet);
+
 //        int[] slidingWindow = {1,3,-1,-3,5,3,6,7};
 //        final List<Integer> ints = maxSlidingWindow(slidingWindow, 3);
 //        System.out.println(ints);

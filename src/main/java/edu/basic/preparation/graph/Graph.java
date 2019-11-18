@@ -217,6 +217,9 @@ public class Graph {
     /**
      * if cycle exists in undirected graph then true else false
      *
+     * USe isCycleInDirectedGraphVersion2 method of stack and visited with additional
+     * check for is child != parent
+     *
      * @param graph graph
      * @return boolean
      */
@@ -500,7 +503,8 @@ public class Graph {
      *
      * Input: 2, [[1,0],[0,1]]
      * Output: false
-     * topological sort and graph cycle.
+     * similar logic as topological sort and graph cycle.
+     * topological sort you use stack while in this you can use list
      */
     public static boolean canFinish(int numCourses, int[][] prerequisites) {
         if(numCourses <= 1) {
@@ -509,8 +513,8 @@ public class Graph {
         if(prerequisites == null || prerequisites.length == 0) {
             return true;
         }
+        // create graph
         final Map<Integer, Set<Integer>> map = new HashMap<>();
-
         for (int[] edges : prerequisites) {
 
             if(map.containsKey(edges[0])) {
@@ -576,36 +580,40 @@ public class Graph {
     public static int[] findOrder(int numCourses, int[][] prerequisites) {
         int[] courses = new int[numCourses];
 
-        for(int i=0; i< numCourses ;i++) {
-            courses[i] =i;
+        for (int i = 0; i < numCourses; i++) {
+            courses[i] = i;
         }
-        if(numCourses <= 1) {
+        if (numCourses <= 1) {
             return courses;
         }
-        if(prerequisites == null || prerequisites.length == 0) {
+        if (prerequisites == null || prerequisites.length == 0) {
             return courses;
         }
+        //create graph
         final Map<Integer, Set<Integer>> map = new HashMap<>();
-        for(int i =0 ; i < numCourses ; i++) {
-            map.put(i, new HashSet<Integer>());
-        }
-
         for (int[] edges : prerequisites) {
-            map.get(edges[0]).add(edges[1]);
+
+            if(map.containsKey(edges[0])) {
+                map.get(edges[0]).add(edges[1]);
+            } else {
+                Set<Integer> set = new HashSet<>();
+                set.add(edges[1]);
+                map.put(edges[0], set);
+            }
         }
         LinkedList<Integer> queue = new LinkedList<>();
         Stack<Integer> visited = new Stack<>();
 
-        for(Integer key : map.keySet()) {
-            if(visited.contains(key)) {
+        for (Integer key : map.keySet()) {
+            if (visited.contains(key)) {
                 continue;
             }
-            if(dfsfindOrder(key, queue, visited, map, numCourses)) {
+            if (dfsfindOrder(key, queue, visited, map, numCourses)) {
                 return new int[0];
             }
         }
-        int i= numCourses-1;
-        while(!visited.isEmpty()) {
+        int i = numCourses - 1;
+        while (!visited.isEmpty()) {
             courses[i] = visited.pop();
             i--;
         }
@@ -634,6 +642,7 @@ public class Graph {
         }
 
         queue.remove(key);
+        visited.add(key);
         if (visited.size() > numCourses) {
             return true;
         }
@@ -643,9 +652,10 @@ public class Graph {
 
     /**
      * Optimized solution referred from leet code
-     *
+     * <p>
      * create in degree array for the elements. If all element have in degree more than 0 then there are cycles
-     * and course can't be completed. start with in degree zero and find all courses needed to complete that course.
+     * and course can't be completed.
+     * start with in degree zero and find all courses needed to complete that course.
      * Decrease dependent course indegree.
      *
      * @param numCourses
@@ -660,12 +670,15 @@ public class Graph {
         for (int i = 0; i < prerequisites.length; i++) {
             inDegree[prerequisites[i][1]]++;
         }
+        // start with course which is dependent on any indegree = 0
         for (int i = 0; i < inDegree.length; i++) {
             if (inDegree[i] == 0)
                 queue.offer(i);
         }
+
         while (!queue.isEmpty()) {
             int x = queue.poll();
+
             for (int i = 0; i < prerequisites.length; i++) {
                 if (x == prerequisites[i][0]) {
                     final int dependentOnCourse = prerequisites[i][1];

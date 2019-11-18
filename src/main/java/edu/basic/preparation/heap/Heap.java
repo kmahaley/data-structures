@@ -14,18 +14,21 @@ public class Heap {
 
         int size = 0;
 
+        // get parent left right index
         public int getParentIndex(int index) { return (index - 1) / 2; }
 
         public int getLeftChildIndex(int index) { return 2 * index + 1; }
 
         public int getRightChildIndex(int index) { return 2 * index + 2; }
 
+        // is parent left right exists
         public boolean hasParent(int index) {  return getParentIndex(index) >= 0; }
 
         public boolean hasLeftChild(int index) { return getLeftChildIndex(index) < size; }
 
         public boolean hasRightChild(int index) { return getRightChildIndex(index) < size; }
 
+        // get parent left right
         public int getParent(int index) {  return items[getParentIndex(index)]; }
 
         public int getLeftChild(int index) { return items[getLeftChildIndex(index)]; }
