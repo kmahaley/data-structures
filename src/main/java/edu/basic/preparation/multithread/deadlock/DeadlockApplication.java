@@ -1,6 +1,9 @@
 package edu.basic.preparation.multithread.deadlock;
 
 
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
