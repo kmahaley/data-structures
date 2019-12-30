@@ -18,6 +18,8 @@ import static edu.basic.preparation.string.StringUtilities.swapInteger;
 public class Array {
 
     /**
+     * Find maximum subarray value
+     *
      * Same solution can be applied to maximum/ minimum sub array sum in an array.
      * also minimum/ maximum product in an array.
      *
@@ -31,6 +33,7 @@ public class Array {
      *     (max - a[pos])
      * }
      * maximum product in above array is 24, {-2,-3, 4}
+     * another example  {2 ,-1, -3, 2, -1, 4, 3, -6},  maxSum= 8
      */
     public static int findMaximumSubArrayInArray(int[] a) {
         int newsum = a[0];
@@ -97,7 +100,7 @@ public class Array {
 
 
     /**
-     * Largest sum contiguous increasing subarray
+     * Largest sum contiguous INCREASING subarray
      * increasing sub array is important here
      *
      * if [i+1] > [i] add them else current = [i+1]
@@ -203,9 +206,7 @@ public class Array {
             final Integer big = queue.poll();
             final Integer small = queue.poll();
 
-            if(big == small) {
-                continue;
-            } else {
+            if(!big.equals(small)) {
                 int remaining = big - small;
                 queue.add(remaining);
             }
@@ -214,6 +215,9 @@ public class Array {
 
     }
 
+    /**
+     * Comparator in descending order
+     */
     public static class IntComparator implements Comparator<Integer> {
 
         @Override
@@ -505,6 +509,7 @@ public class Array {
 
         if (listNo == totalSize) {
             List<T> newList = new ArrayList<>();
+            // Collections.copy(ans, newList);
             for (int i = 0; i < listNo; i++) {
                 newList.add(ans.get(i));
             }
@@ -547,10 +552,10 @@ public class Array {
         if(index == input.size()) {
             results.add(initial);
         } else {
-            helper(input, results, new ArrayList<>(initial), index+1);
+            helper(input, results, new ArrayList<>(initial), index + 1);
             final ArrayList<Integer> addTo = new ArrayList<>(initial);
             addTo.add(input.get(index));
-            helper(input, results, addTo, index+1);
+            helper(input, results, addTo, index + 1);
         }
 
     }

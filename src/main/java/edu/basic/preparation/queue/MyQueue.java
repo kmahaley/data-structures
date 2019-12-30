@@ -143,10 +143,9 @@ public class MyQueue {
 
         // Getting objects from the queue using toArray()
         // in an array and print the array
-        String[] arr = pQueue.toArray(new String[pQueue.size()]);
+        String[] arr = pQueue.toArray(new String[0]);
         System.out.println ( "Value in array: ");
-        for (int i = 0; i<arr.length; i++)
-            System.out.println ( "Value: " + arr[i]) ;
+        for (String s : arr) System.out.println("Value: " + s);
     }
 
 

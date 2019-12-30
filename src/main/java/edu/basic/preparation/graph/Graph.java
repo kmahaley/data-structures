@@ -640,7 +640,6 @@ public class Graph {
                 }
             }
         }
-
         queue.remove(key);
         visited.add(key);
         if (visited.size() > numCourses) {

@@ -103,7 +103,6 @@ public class Heap {
                 if(items[index] < items[smallerIndex]){
                     break;
                 } else{
-
                     swapIndexValues(index, smallerIndex);
                 }
                 index = smallerIndex;

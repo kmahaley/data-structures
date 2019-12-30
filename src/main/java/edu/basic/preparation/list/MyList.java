@@ -250,20 +250,6 @@ public class MyList {
      * Find middle using two pointers
      * @return middle of the list
      */
-    public Node middleElementVersionOne() {
-        if (head == null || head.next == null) {
-            return head;
-        } else {
-            Node fast = head;
-            Node slow = head;
-            while (fast.next.next != null && fast.next != null) {
-                fast = fast.next.next;
-                slow = slow.next;
-            }
-            return slow;
-        }
-    }
-
     public Node middleElementVersionTwo() {
         if (head == null) {
             return head;

@@ -271,7 +271,7 @@ public class BinaryTree {
         int lh = heightOfTreeRecursive(root.left);
         int rh = heightOfTreeRecursive(root.right);
 
-        return lh > rh ? lh + 1 : rh + 1;
+        return Math.max(lh, rh) + 1;
     }
 
     // height of the tree iterative
@@ -364,7 +364,6 @@ public class BinaryTree {
     }
 
     //Maximum in the tree
-
     /**
      * This function will work only if nodes values >= 0
      */
@@ -398,8 +397,7 @@ public class BinaryTree {
 
 
     /**
-     * Maximum sum to longest path to leaf
-     * sum based to length to the leaf node
+     * Maximum sum to leaf node
      *
      * @param root tree node
      * @return max sum
@@ -465,7 +463,10 @@ public class BinaryTree {
             TreeNode root, int sum) {
 
         if (root == null) {
-            return sum;
+            return 0;
+        }
+        if(root.left == null && root.right == null) {
+            return sum + root.key;
         }
         int left = incorrectMaximumWeightedRootToLeafPathUtil2(root.left, sum + root.key);
         int right = incorrectMaximumWeightedRootToLeafPathUtil2(root.right, sum + root.key);
