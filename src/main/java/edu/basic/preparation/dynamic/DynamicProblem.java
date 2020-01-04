@@ -6,11 +6,12 @@ public class DynamicProblem {
     // 2) longest common sub sequence in two strings
     // 3) longest common substring in two strings
     // 4) subset sum problem, is there subset in array which forms given sum
+    // https://www.youtube.com/watch?v=s6FhG--P7z0&list=PLrmLmBdmIlpsHaNTPP_jHHDx_os9ItYXr&index=4
     // 5) can we form sum from given coins
     //    you can use subset sum problem logic where you can select a coin just once.
     // 6) given set of coin find minimum number of coins required to form sum problem(5)
     //    you can select coins n number of times
-    //https://www.youtube.com/watch?v=Y0ZqKpToTic&list=PLrmLmBdmIlpsHaNTPP_jHHDx_os9ItYXr&index=5
+    // https://www.youtube.com/watch?v=Y0ZqKpToTic&list=PLrmLmBdmIlpsHaNTPP_jHHDx_os9ItYXr&index=5
     // 7) longest increasing sub sequence  {3,4,-1,0,6,2,3}
     // 8) longest palindromic subsequence in a string
     // 9) cutting rod to maximize profit. very similar to 0/1 knapsack problem
