@@ -452,7 +452,8 @@ public class BinaryTree {
      *             /
      *            -5
      *
-     * evaluate maximum sum from root to any leaf node
+     * evaluate maximum sum from root to any leaf node. use this function only
+     * when data are positive
      *
      * @param root node
      * @param sum current sum
@@ -496,17 +497,33 @@ public class BinaryTree {
      */
     private static void weightOfLongestPathFromRootToLeafHelper(TreeNode root, int sum, int len) {
         if (root == null) {
-            if (ROOT_TO_LEAF_MAX_LEN < len) {
+            if (ROOT_TO_LEAF_MAX_LEN < len) { // as len is bigger assign sum to maxSum
                 ROOT_TO_LEAF_MAX_LEN = len;
-
-                if (ROOT_TO_LEAF_MAX_SUM < sum) {
-                    ROOT_TO_LEAF_MAX_SUM = sum;
-                }
+                ROOT_TO_LEAF_MAX_SUM = sum;
+            } else if(ROOT_TO_LEAF_MAX_LEN == len){
+                ROOT_TO_LEAF_MAX_SUM = Math.max(ROOT_TO_LEAF_MAX_SUM, sum);// lengths are equal
             }
         } else {
             weightOfLongestPathFromRootToLeafHelper(root.left, sum + root.key, len + 1);
             weightOfLongestPathFromRootToLeafHelper(root.right, sum + root.key, len + 1);
         }
+    }
+
+    /**
+     * is path exist from root to any children node(can be non leaf node too)
+     */
+    public static boolean isPathExistsWithSum(TreeNode root, int sum) {
+
+        if (root == null) {
+            return sum == 0;
+        }
+        sum = sum - root.key;
+        boolean isLeft = false, isRight = false;
+
+        isLeft = isPathExistsWithSum(root.left, sum);
+        isRight = isPathExistsWithSum(root.right, sum);
+
+        return isLeft || isRight;
     }
 
     /**
@@ -516,30 +533,25 @@ public class BinaryTree {
      * @param sum sum
      * @return true is path exists equals to sum
      */
-    public static boolean isPathExistsWithSum(TreeNode root, int sum) {
-        // Incase first node is null and sum is zero, else this condition is never called
+    public static boolean isPathExistsRootToLeafWithSum(TreeNode root, int sum) {
+        // In case first node is null and sum is zero, else this condition is never called
         if (root == null) {
             return sum == 0;
         }
         sum = sum - root.key;
-        boolean isExists = false;
         if (root.left == null && root.right == null) {
             return sum == 0;
         }
-        //as soon as you get true, compare with other part of the tree and return
+
+        boolean isLeft = false, isRight = false;
         if (root.left != null) {
-            isExists = isExists || isPathExistsWithSum(root.left, sum);
+            isLeft = isPathExistsWithSum(root.left, sum);
         }
         if (root.right != null) {
-            isExists = isExists || isPathExistsWithSum(root.right, sum);
+            isRight = isPathExistsWithSum(root.right, sum);
         }
-
-        return isExists;
-//        OR
-//        boolean isExists = isPathExistsWithSum(root.left, sum);
-//        return isExists || isPathExistsWithSum(root.right, sum);
+        return isLeft || isRight;
     }
-
 
     /**
      * Print all paths from root to leaf
@@ -766,7 +778,7 @@ public class BinaryTree {
             return -1;
         } else {
             TreeNode curr = root;
-            while (curr.left != null){
+            while (curr.left != null){ // linked list
                 curr = curr.left;
             }
             return curr.key;
@@ -854,37 +866,6 @@ public class BinaryTree {
 
         return isPerfectBinaryTreeRecursiveHelper(root.left, depth, level + 1) &&
                 isPerfectBinaryTreeRecursiveHelper(root.right, depth, level + 1);
-    }
-
-    /**
-     *  Search node in binary search tree. BST
-     */
-    public static boolean searchInBinarySearchTree(TreeNode root, int x) {
-        if (root == null) {
-            return false;
-        }
-        if (root.key == x) {
-            return true;
-        }
-        if (root.key < x) {
-            return searchInBinarySearchTree(root.right, x);
-        } else {
-            return searchInBinarySearchTree(root.left, x);
-        }
-
-    }
-
-    /**
-     *  Search node in binary tree.
-     */
-    public static boolean searchBinaryTree(TreeNode root, int x) {
-        if (root == null) {
-            return false;
-        }
-        if (root.key == x) {
-            return true;
-        }
-        return searchBinaryTree(root.left, x) || searchBinaryTree(root.right, x);
     }
 
     /**
@@ -1409,7 +1390,6 @@ public class BinaryTree {
         return depth;
     }
 
-
     /**
      * Search in binary tree using DFS,
      * search left tree is value is found then don't check in right tree, else check in right right.
@@ -1434,6 +1414,37 @@ public class BinaryTree {
             isPresent = searchInBinaryTreeRecursive(root.right, x);
         }
         return isPresent;
+    }
+
+    /**
+     *  Search node in binary tree. unoptimized solution use searchInBinaryTreeRecursive method
+     */
+    public static boolean searchBinaryTree(TreeNode root, int x) {
+        if (root == null) {
+            return false;
+        }
+        if (root.key == x) {
+            return true;
+        }
+        return searchBinaryTree(root.left, x) || searchBinaryTree(root.right, x);
+    }
+
+    /**
+     *  Search node in binary search tree. BST
+     */
+    public static boolean searchInBinarySearchTree(TreeNode root, int x) {
+        if (root == null) {
+            return false;
+        }
+        if (root.key == x) {
+            return true;
+        }
+        if (root.key < x) {
+            return searchInBinarySearchTree(root.right, x);
+        } else {
+            return searchInBinarySearchTree(root.left, x);
+        }
+
     }
 
     /**
