@@ -17,7 +17,6 @@ import static edu.basic.preparation.tree.BinaryTree.*;
 /**
  * @author Kartik Mahaley
  */
-@Service
 public class DependencyService {
 
     public void listFunctionality() {

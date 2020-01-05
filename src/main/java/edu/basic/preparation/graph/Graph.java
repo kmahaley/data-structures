@@ -256,6 +256,8 @@ public class Graph {
     /**
      * find if path exists from start to end undirected graph
      *
+     * you can add stack and remove element when you explore everything at last stack will contain path
+     *
      * @param start start node
      * @param end end node
      * @param graph graph
@@ -707,6 +709,8 @@ public class Graph {
      * Importance of manager and all its subordinates
      *
      * mid, importance, list of subordinates
+     * BFS = using queue of the employees
+     * DFS = return importance of subordinates
      *
      * Input: [[1, 5, [2, 3]], [2, 3, []], [3, 3, []]], 1
      * Output: 11
