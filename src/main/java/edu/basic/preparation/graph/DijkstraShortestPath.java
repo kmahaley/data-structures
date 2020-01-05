@@ -50,6 +50,25 @@ public class DijkstraShortestPath {
         System.out.println(distanceMap);
     }
 
+    /**
+     * initialize distance map with Integer.MAX_VALUE for vertices except source (source = 0).
+     * same goes for priority queue.
+     * pull smallest element from priority queue. get its destination nodes from graphWithWeightedDestination
+     * calculate new distance and put back to priority queue.
+     * do this until priority queue is not empty
+     * for each edge and for each node calculate new distance using, u -> v
+     * if( d[v] > [d(u) + weight(u,v)] ) {
+     *      d[v] = d(u) + weight(u,v)
+     * }
+     * @param start source node from which distance is calculated
+     * @param graphWithWeightedDestination graph with src and dest nodes and their weight
+     * @return distance map
+     * time complexity = |V| * |no of edges from that vertices|
+     * V=no of vertices
+     * In complete graph V = n, no of edges from each V = n-1
+     * time complexity = n (n-1)
+     * reference https://www.youtube.com/watch?v=XB4MIexjvY0
+     */
     private static Map<Integer, Integer> getDistanceFromSource(int start,
                                                                Map<Integer, Map<Integer, Integer>> graphWithWeightedDestination) {
 
