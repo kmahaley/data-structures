@@ -404,7 +404,6 @@ public class MyList {
         int lengthOne = length(big);
         int lengthTwo = length(small);
 
-
         int diff = lengthOne - lengthTwo;
         if (diff < 0) {
             big = twoIntersectedList.get(1);
@@ -421,7 +420,6 @@ public class MyList {
             small = small.next;
             big = big.next;
         }
-
         return null;
     }
 
@@ -513,7 +511,7 @@ public class MyList {
         if(fast == null) {
             return head;
         }
-        while (fast != null && fast.next != null) {
+        while (fast.next != null) {
             prev = slow;
             slow = slow.next;
             fast = fast.next;
@@ -538,7 +536,7 @@ public class MyList {
             return;
         }
         Node prev = toDelete, curr = toDelete;
-        while (curr != null && curr.next != null) {
+        while (curr.next != null) {
             curr.key = curr.next.key;
             prev = curr;
             curr = curr.next;
@@ -569,7 +567,49 @@ public class MyList {
             }
         }
         return false;
+    }
 
+    /**
+     * Detect cycle, if cycle exists return start node of the cycle else return null.
+     *
+     */
+    public Node detectCycle(Node head) {
+
+        if (head == null) {
+            return null;
+        }
+        Node slow = head, fast = head.next;
+        while (fast != null && fast.next != null) {
+            if (slow == fast) {
+                break;
+            }
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+        if (fast == null || fast.next == null) {
+            return null;
+        }
+
+        Node start = fast;
+        int count = 1;
+        //count the length of the loop
+        while (start.next != fast) {
+            start = start.next;
+            count++;
+        }
+        // move one pointer "count" no of time ahead
+        int i = 1;
+        Node x = head, y = head;
+        while (i <= count) {
+            x = x.next;
+            i++;
+        }
+        // move pointer together to find the start node of the list
+        while (x != y) {
+            x = x.next;
+            y = y.next;
+        }
+        return x;
     }
 
     /**
@@ -675,82 +715,12 @@ public class MyList {
     }
 
     /**
-     * Detect cycle, if cycle exists return start node of the cycle else return null.
-     *
-     */
-    public Node detectCycle(Node head) {
-
-        if (head == null) {
-            return null;
-        }
-        Node slow = head, fast = head;
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-            if (slow == fast) {
-                break;
-            }
-        }
-        if (fast == null || fast.next == null) {
-            return null;
-        }
-
-        Node start = fast;
-        int count = 1;
-        //count the length of the loop
-        while (start.next != fast) {
-            start = start.next;
-            count++;
-        }
-        // move one pointer "count" no of time ahead
-        int i = 1;
-        Node x = head, y = head;
-        while (i <= count) {
-            x = x.next;
-            i++;
-        }
-        // move pointer together to find the start node of the list
-        while (x != y) {
-            x = x.next;
-            y = y.next;
-        }
-        return x;
-
-    }
-
-    /**
-     * Keep unique elements. refer deleteDuplicates function.
-     *
-     * Input: 1->1->2->3->3
-     * Output: 1->2->3
-     */
-    public static void removeDuplicates(Node head) {
-        if (head == null) {
-            return;
-        }
-        Node prev = head, current = head.next;
-        Node next;
-        while (current != null) {
-            if (prev.key == current.key) {
-                next = current.next;
-                current.next = null;
-                current = next;
-                prev.next = current;
-            } else {
-                prev = prev.next;
-                current = current.next;
-            }
-        }
-        printFromNode(head);
-    }
-
-    /**
      * Remove duplicate elements from the list. keep unique elements
      *
      * Input: 1->1->2->3->3
      * Output: 1->2->3
      */
-    public Node deleteDuplicates(Node head) {
+    public Node removeDuplicatesVersion2(Node head) {
 
         if(head == null || head.next == null){
             return head;
@@ -765,7 +735,6 @@ public class MyList {
             }
             curr = curr.next;
         }
-
         return head;
     }
 
@@ -809,47 +778,6 @@ public class MyList {
                 prev = curr;
             }
             curr = next;
-        }
-        return head;
-    }
-
-    /**
-     * Reverse list between two pointers
-     *
-     * Input: 1->2->3->4->5->NULL, m = 2, n = 4
-     * Output: 1->4->3->2->5->NULL
-     *  faster solution is in method reverseBetweenOptimized
-     *
-     * @param head head
-     * @param m start
-     * @param n end
-     * @return start
-     */
-    public Node reverseBetween(Node head, int m, int n) {
-
-        if(head == null || head.next == null || m >= n){
-            return head;
-        }
-
-        int c = 1;
-        Node curr = head;
-        Stack<Integer> st = new Stack<>();
-
-        while(curr !=null && c <= n) {
-            if(c >= m && c <= n) {
-                st.push(curr.key);
-            }
-            c++;
-            curr = curr.next;
-        }
-        c=1;
-        curr = head;
-        while(curr !=null && c <= n) {
-            if(c >= m && c <= n) {
-                curr.key = st.pop();
-            }
-            c++;
-            curr = curr.next;
         }
         return head;
     }
@@ -917,7 +845,6 @@ public class MyList {
         return curr;
     }
 
-
     /**
      * group all odd nodes together followed by the even nodes. odd and even based on indexes.
      *
@@ -959,13 +886,10 @@ public class MyList {
             }
             curr = next;
         }
-
         odd.next = evenStart;
         even.next = null;
         return head;
-
     }
-
 
     /**
      * Sum of two numbers
@@ -1040,7 +964,6 @@ public class MyList {
             p.next =head;
             return newHead;
         }
-
     }
 
     /**
@@ -1162,4 +1085,3 @@ public class MyList {
         return map;
     }
 }
-
