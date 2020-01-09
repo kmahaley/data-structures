@@ -525,8 +525,8 @@ public class DependencyService {
 //        rotateArrayAntiClockWise(array2, 2);
 //        printArray(array2);
 
-        System.out.println("********* remove duplicates from array *******");
-        System.out.println(removeDuplicates(new int[] {1,2,2,3,4,4,5,6}));
+//        System.out.println("********* remove duplicates from array *******");
+//        System.out.println(removeDuplicates(new int[] {1,2,2,3,4,4,5,6}));
 
 //        List<List<String>> result = getAllCombinations(listOfList(), 3);
 //
@@ -534,8 +534,8 @@ public class DependencyService {
 //        for (int i = 0 ; i < result.size();i++) {
 //            System.out.println(result.get(i));
 //        }
-//        final List<Integer> inputSubSet = Arrays.asList(1, 2, 3);
-//        subset(inputSubSet);
+        final List<Integer> inputSubSet = Arrays.asList(1, 2, 3);
+        subset(inputSubSet);
 
 //        int[] slidingWindow = {1,3,-1,-3,5,3,6,7};
 //        final List<Integer> ints = maxSlidingWindow(slidingWindow, 3);
