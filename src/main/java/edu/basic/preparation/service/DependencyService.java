@@ -171,11 +171,11 @@ public class DependencyService {
 //        System.out.println(" -------------Permutations of the array-------------- ");
 //        permutationOfArray(Arrays.asList(1,2,3,4), 0);
 
-        System.out.println(" -------------Permutations of the string-------------- ");
-        final List<String> strings = transformString("a1b2");
-        System.out.println(strings);
-        final List<String> newList = transformStringVersion2("a1b2");
-        System.out.println(newList);
+//        System.out.println(" -------------Permutations of the string-------------- ");
+//        final List<String> strings = transformString("a1b2");
+//        System.out.println(strings);
+//        final List<String> newList = transformStringVersion2("a1b2");
+//        System.out.println(newList);
 
 //        final List<List<Integer>> lists = optimalUtilization(23, foregrd(), backgrd());
 //        System.out.println(lists);
@@ -184,9 +184,12 @@ public class DependencyService {
 //        int[] arr = new int[] {1,2,4,5,6};
 //        System.out.println(findMissingElement(arr, 5));
 
-        System.out.println(" -------------Find 1 missing element in duplicate element array in 1 to n-------------- ");
-        int[] oneDuplicate = new int[] {1,2,4,5,2};
-        System.out.println(findMissingElementInDuplicate(oneDuplicate));
+//        System.out.println(" -------------Find 1 missing element in duplicate element array in 1 to n-------------- ");
+//        int[] oneDuplicate = new int[] {1,2,4,5,2};
+//        System.out.println(findMissingElementInDuplicate(oneDuplicate));
+
+        String str = "abbabccccc";
+        System.out.println(compressString(str));
 
     }
 

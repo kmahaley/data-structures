@@ -105,13 +105,14 @@ public class Array {
      *
      * if [i+1] > [i] add them else current = [i+1]
      *
-     * {2, 1, 4, 7, 3, 6}
-     * {1, 4, 7} = 12
-     *
      * https://www.geeksforgeeks.org/largest-sum-contiguous-increasing-subarray/
      *
-     * @param a
-     * @return
+     * Input : arr[] = {2, 1, 4, 7, 3, 6}
+     * Output : 12
+     * Contiguous Increasing subarray {1, 4, 7} = 12
+     *
+     * Input : arr[] = {38, 7, 8, 10, 12}
+     * Output : 38
      */
     public static int largestSumInIncreasingContiguousSubArray(int[] a) {
 
@@ -639,6 +640,8 @@ public class Array {
      * Explanation: The answer is "b", with the length of 1.
      *
      * @param s string
+     *
+     * O(n*n)
      */
     public static int lengthOfLongestSubstring(String s) {
 
@@ -668,6 +671,38 @@ public class Array {
             }
         }
         return maxCount;
+    }
+
+    /**
+     * str= AABCDDBBBEA count= 3, BBB
+     * build int array of same size and initialize with 1
+     * iterate from 1 to size and compare prev character and update count in int array
+     *
+     * @param str string
+     * @return count
+     *
+     * O(n)
+     */
+    public static int getLongestConsecutiveCharacters(String str) {
+
+        if(str == null || str.isEmpty()) return 0;
+
+        final int[] intArray = new int[str.length()];
+        for (int i = 0; i < intArray.length; i++) {
+            intArray[i] = 1;
+        }
+        int max = 1;
+        for (int i = 1; i < str.length() ; i++) {
+            char prev = str.charAt(i-1);
+            char curr = str.charAt(i);
+            if(prev == curr) {
+                intArray[i] = intArray[i-1] + intArray[i];
+            }
+            if(intArray[i] > max){
+                max = intArray[i];
+            }
+        }
+        return max;
 
     }
 
@@ -864,4 +899,6 @@ public class Array {
         return list;
     }
 
+    //properties of XOR
+    //a^a = 0, a^0 = a,
 }

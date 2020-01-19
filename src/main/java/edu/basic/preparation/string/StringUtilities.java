@@ -25,6 +25,63 @@ import java.util.TreeMap;
 public final class StringUtilities {
 
     /**
+     * anagram of string means having same character in different permutation
+     * @return true if anagram
+     * example : apple, pplea
+     */
+    public static boolean isAnagram(String str1, String str2) {
+
+        if (str1.length() != str2.length()) return false;
+
+        str1 = str1.toLowerCase();
+        str2 = str2.toLowerCase();
+
+        int[] intArray = new int[26];
+
+        for (char c : str1.toCharArray()) {
+            intArray[c]++;
+        }
+
+        for (char c : str2.toCharArray()) {
+            intArray[c]--;
+        }
+
+        for (int i = 0; i < 26; i++) {
+            if (intArray[i] != 0) return false;
+        }
+        return true;
+    }
+
+    /**
+     * compress string with character and count of that character
+     * @param str aaabbbccd = a3b3c2d1
+     * @return string
+     * O(n)
+     */
+    public static String compressString(String str) {
+
+        if (str == null || str.isEmpty()) return str;
+
+        StringBuilder builder = new StringBuilder();
+        int count = 0;
+        char ch = '0';
+        int length = str.length();
+        for (int i = 0; i < length; i++) {
+            ch = str.charAt(i);
+            count++;
+
+            // you can optimize if-else or just reverse if stmt
+            if (i + 1 < length && ch == str.charAt(i + 1)) {
+                continue;
+            } else {
+                builder.append(ch).append(count);
+                count = 0;
+            }
+        }
+        return builder.toString();
+    }
+
+    /**
      * Find unique elements within window size
      *
      * @param a integer array
@@ -396,6 +453,8 @@ public final class StringUtilities {
      * @param num array
      * @param start start index
      * @param result permutations of array
+     * for array of size 4 permutations are 24
+     * time complexity is O(n!) = 4 * 3 * 2 * 1
      */
     public static void permutationOfArray(int[] num, int start, List<List<Integer>> result) {
 
