@@ -348,6 +348,8 @@ public class MyStack {
                 } else {
                     return false;
                 }
+            } else {
+                return false;
             }
         }
         return st.empty();

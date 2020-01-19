@@ -94,6 +94,7 @@ public class TrieStructure {
             boolean shouldDeleteNode = deleteHelper(index + 1, word, node);
             if (shouldDeleteNode) {
                 mapOfCharacters.remove(charAt);
+                //if no other character is present
                 return mapOfCharacters.size() == 0;
             }
         }

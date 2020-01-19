@@ -764,41 +764,6 @@ public class BinaryTree {
     }
 
     /**
-     * Get lowest key in binary search tree
-     *
-     * @param node node
-     */
-    public static void getLowestNodeInBST(TreeNode node){
-        System.out.println("Iterative : "+findLowestInBinarySearchTreeIterative(node));
-        System.out.println("Recursive : "+findLowestInBinarySearchTreeRecursive(node));
-    }
-
-    public static int findLowestInBinarySearchTreeIterative(TreeNode root){
-        if(root == null){
-            return -1;
-        } else {
-            TreeNode curr = root;
-            while (curr.left != null){ // linked list
-                curr = curr.left;
-            }
-            return curr.key;
-        }
-
-    }
-
-    public static int findLowestInBinarySearchTreeRecursive(TreeNode root) {
-        if (root == null) {
-            return -1;
-        }
-        //if left child empty then current node is lowest in binary tree
-        if (root.left == null) {
-            return root.key;
-        }
-
-        return findLowestInBinarySearchTreeRecursive(root.left);
-    }
-
-    /**
      * Is tree prefect binary tree or not (perfect == complete and full).all leaf nodes are at same level
      *
      * @param root node
@@ -866,6 +831,41 @@ public class BinaryTree {
 
         return isPerfectBinaryTreeRecursiveHelper(root.left, depth, level + 1) &&
                 isPerfectBinaryTreeRecursiveHelper(root.right, depth, level + 1);
+    }
+
+    /**
+     * Get lowest key in binary search tree
+     *
+     * @param node node
+     */
+    public static void getLowestNodeInBST(TreeNode node){
+        System.out.println("Iterative : "+findLowestInBinarySearchTreeIterative(node));
+        System.out.println("Recursive : "+findLowestInBinarySearchTreeRecursive(node));
+    }
+
+    public static int findLowestInBinarySearchTreeIterative(TreeNode root){
+        if(root == null){
+            return -1;
+        } else {
+            TreeNode curr = root;
+            while (curr.left != null){ // linked list
+                curr = curr.left;
+            }
+            return curr.key;
+        }
+
+    }
+
+    public static int findLowestInBinarySearchTreeRecursive(TreeNode root) {
+        if (root == null) {
+            return -1;
+        }
+        //if left child empty then current node is lowest in binary tree
+        if (root.left == null) {
+            return root.key;
+        }
+
+        return findLowestInBinarySearchTreeRecursive(root.left);
     }
 
     /**
@@ -1391,6 +1391,19 @@ public class BinaryTree {
     }
 
     /**
+     *  Search node in binary tree. unoptimized solution use searchInBinaryTreeRecursive method
+     */
+    public static boolean searchBinaryTree(TreeNode root, int x) {
+        if (root == null) {
+            return false;
+        }
+        if (root.key == x) {
+            return true;
+        }
+        return searchBinaryTree(root.left, x) || searchBinaryTree(root.right, x);
+    }
+
+    /**
      * Search in binary tree using DFS,
      * search left tree is value is found then don't check in right tree, else check in right right.
      *
@@ -1414,19 +1427,6 @@ public class BinaryTree {
             isPresent = searchInBinaryTreeRecursive(root.right, x);
         }
         return isPresent;
-    }
-
-    /**
-     *  Search node in binary tree. unoptimized solution use searchInBinaryTreeRecursive method
-     */
-    public static boolean searchBinaryTree(TreeNode root, int x) {
-        if (root == null) {
-            return false;
-        }
-        if (root.key == x) {
-            return true;
-        }
-        return searchBinaryTree(root.left, x) || searchBinaryTree(root.right, x);
     }
 
     /**

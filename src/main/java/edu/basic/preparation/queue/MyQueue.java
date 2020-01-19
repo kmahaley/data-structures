@@ -77,7 +77,6 @@ public class MyQueue {
         public void enQueue(int element) {
 
             stack.push(element);
-
         }
 
         /**

@@ -93,7 +93,6 @@ public final class StringUtilities {
         } else {
             System.out.println("String has no unique characters");
         }
-
     }
 
 
