@@ -6,18 +6,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
-import java.util.Stack;
-import java.util.TreeMap;
+import java.util.*;
 
 /**
  * @author Kartik Mahaley
@@ -81,6 +70,47 @@ public final class StringUtilities {
         return builder.toString();
     }
 
+    /**
+     * Given string and list of strings as dictionary find maximum length string exists in dictionary
+     * below link gets number of characters to be deleted, but Q is similar
+     * https://www.youtube.com/watch?v=A6fDK8Vc7-U&list=PLNmW52ef0uwuW5_1_K8ncp3DtLYBa0pA8&index=5
+     *              abc
+     *          /   |   \
+     *      bc     ac       ab
+     *     /\      /\       /\
+     *    b c     a c      a b
+     *
+     * @param query abc
+     * @param dictionary [a,aa,aaa,b]
+     * @return 1
+     */
+    public static int getStringLengthInDictionary(String query, List<String> dictionary) {
+        if(dictionary.isEmpty() || query.isEmpty()) return -1;
+
+        Queue<String> queue = new LinkedList<>();
+        Set<String> visited = new HashSet<>();
+
+        queue.add(query);
+        visited.add(query);
+
+        //BFS for generating substrings
+        while (!queue.isEmpty()) {
+            String polled = queue.poll();
+            //visited.remove(polled); you can remove visited bz nxt level has different strings
+
+            if(dictionary.contains(polled)) return polled.length();
+
+            for (int i = 0; i < polled.length(); i++) {
+                //from abc -> bc, ac, ab
+                String subString = polled.substring(0,i)+polled.substring(i+1);
+                if(!visited.contains(subString)) {
+                    queue.add(subString);
+                    visited.add(subString);
+                }
+            }
+        }
+        return -1;
+    }
     /**
      * Find unique elements within window size
      *

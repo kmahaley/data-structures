@@ -2,7 +2,6 @@ package edu.basic.preparation;
 
 import edu.basic.preparation.service.DependencyService;
 
-import java.util.*;
 
 /**
  * @author kartik mahaley
@@ -21,12 +20,10 @@ public class Application {
 
 //        dependencyService.stackFunctionality();
 
-        dependencyService.stringFunctionality();
+//        dependencyService.stringFunctionality();
 
 //        dependencyService.graphFunctionality();
 
 //        dependencyService.arrayFunctionality();
-
-
     }
 }
