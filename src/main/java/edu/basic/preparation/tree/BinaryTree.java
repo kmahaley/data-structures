@@ -294,7 +294,6 @@ public class BinaryTree {
                     queue.add(current.right);
                 }
             }
-
         }
         return count;
     }
@@ -445,39 +444,6 @@ public class BinaryTree {
     }
 
     /**
-     * TODO : DO NOT USE THIS FUNCTION, This function will fail when
-     *                1
-     *               /
-     *              2
-     *             /
-     *            -5
-     *
-     * evaluate maximum sum from root to any leaf node. use this function only
-     * when data are positive
-     *
-     * @param root node
-     * @param sum current sum
-     *
-     * @return max sum
-     */
-    public static int incorrectMaximumWeightedRootToLeafPathUtil2(
-            TreeNode root, int sum) {
-
-        if (root == null) {
-            return 0;
-        }
-        if(root.left == null && root.right == null) {
-            return sum + root.key;
-        }
-        int left = incorrectMaximumWeightedRootToLeafPathUtil2(root.left, sum + root.key);
-        int right = incorrectMaximumWeightedRootToLeafPathUtil2(root.right, sum + root.key);
-
-        return Math.max(left, right);
-    }
-
-
-
-    /**
      * Find maximum sum of longest path to leaf node.
      * @param root node
      */
@@ -489,7 +455,9 @@ public class BinaryTree {
      * compare len and sum with global variable
      * we are considering root == null  because length of non leaf node will be
      * less than leaf node hence ROOT_TO_LEAF_MAX_LEN and ROOT_TO_LEAF_MAX_SUM
-     * will be preserved
+     * will be preserved.
+     *
+     * weightOfLongestPathFromRootToLeafVersion2 function is easier to understand.
      *
      * @param root current node
      * @param sum current sum
@@ -506,6 +474,33 @@ public class BinaryTree {
         } else {
             weightOfLongestPathFromRootToLeafHelper(root.left, sum + root.key, len + 1);
             weightOfLongestPathFromRootToLeafHelper(root.right, sum + root.key, len + 1);
+        }
+    }
+
+    public static void weightOfLongestPathFromRootToLeafVersion2(TreeNode root) {
+        if(root == null) {
+            return;
+        }
+        weightOfLongestPathFromRootToLeafHelperVersion2(root, 0, 0);
+    }
+
+    private static void weightOfLongestPathFromRootToLeafHelperVersion2(TreeNode root, int len, int sum) {
+        sum = sum + root.key;
+        len++;
+
+        if(root.left == null && root.right ==  null) {
+            if(ROOT_TO_LEAF_MAX_LEN < len) {
+                ROOT_TO_LEAF_MAX_LEN = len;
+                ROOT_TO_LEAF_MAX_SUM = sum;
+            } else if(ROOT_TO_LEAF_MAX_LEN == len && ROOT_TO_LEAF_MAX_SUM < sum) {
+                ROOT_TO_LEAF_MAX_SUM = sum;
+            }
+        }
+        if(root.left != null) {
+            weightOfLongestPathFromRootToLeafHelperVersion2(root.left, len, sum);
+        }
+        if (root.right != null) {
+            weightOfLongestPathFromRootToLeafHelperVersion2(root.right, len, sum);
         }
     }
 
@@ -1514,5 +1509,32 @@ public class BinaryTree {
         System.out.print(root.key +" - ");
         DFSPrint(root.left);
         DFSPrint(root.right);
+    }
+
+    /**
+     * For every node, data value of that node must be equal to sum of data values in left and right children.
+     *          7 = true
+     *       /     \
+     *      3       4
+     *
+     * @param root node
+     */
+    public static boolean isChildrenSumProperty(TreeNode root) {
+        // if root is null or leaf node
+        if(root == null || (root.left == null && root.right == null)) {
+            return true;
+        }
+        int childrenSum = 0;
+        if(root.left != null) {
+            childrenSum = childrenSum + root.left.key;
+        }
+        if(root.right != null) {
+            childrenSum = childrenSum + root.right.key;
+        }
+        if(root.key == childrenSum) {
+            return isChildrenSumProperty(root.left) && isChildrenSumProperty(root.right);
+        } else {
+            return false;
+        }
     }
 }

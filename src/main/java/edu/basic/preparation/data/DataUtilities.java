@@ -172,6 +172,20 @@ public final class DataUtilities {
         return root;
     }
 
+    public static TreeNode constructTreeForChildrenSumProperty() {
+
+        TreeNode root = new TreeNode(10);
+        root.left = new TreeNode(8);
+        root.right = new TreeNode(2);
+        root.left.left = new TreeNode(3);
+        root.left.right = new TreeNode(5);
+        root.right.right = new TreeNode(2);
+//        root.left.right.right = new TreeNode(19);
+//        root.left.right.left.right = new TreeNode(17);
+
+        return root;
+    }
+
     public static TreeNode constructTreeForMaxNodeValue() {
 
         TreeNode root = new TreeNode(20);

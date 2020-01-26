@@ -380,9 +380,9 @@ public class DependencyService {
 //        System.out.println("********* bottom view of the tree *******");
 //        System.out.println(bottomViewBinaryTree(constructDiagonalTraversal()));
 
-        System.out.println("********* minimum depth of the tree *******");
-        System.out.println(minDepth(constructDiagonalTraversal()));
-        System.out.println(minDepthIterativeVersion(constructDiagonalTraversal()));
+//        System.out.println("********* minimum depth of the tree *******");
+//        System.out.println(minDepth(constructDiagonalTraversal()));
+//        System.out.println(minDepthIterativeVersion(constructDiagonalTraversal()));
 //
 //        System.out.println("********* Horizontal distance DFS *******");
 //        final Map<Integer, LinkedList<Integer>> integerListMapDFS = horizontalDistanceByDFS(constructDiagonalTraversal());
@@ -397,6 +397,8 @@ public class DependencyService {
 //        System.out.println("********* Weight of longest path from root to leaf *******");
 //        weightOfLongestPathFromRootToLeaf(longestPathTreeWithLeaf());
 //        System.out.println("len= "+ROOT_TO_LEAF_MAX_LEN + " : weight= " + ROOT_TO_LEAF_MAX_SUM);
+        weightOfLongestPathFromRootToLeafVersion2(longestPathTreeWithLeaf());
+        System.out.println("V2 len= "+ROOT_TO_LEAF_MAX_LEN + " : weight= " + ROOT_TO_LEAF_MAX_SUM);
 
 //        System.out.println("********* is path from root to leaf exists with sum *******");
 //        System.out.println(isPathExistsWithSum(isPathExistsTree(), 6));
@@ -431,7 +433,8 @@ public class DependencyService {
 //        BFSPrint(treeNode);
 //        DFSPrint(treeNode);
 
-
+//        System.out.println("********* Tree: children sum property? *******");
+//        System.out.println(isChildrenSumProperty(constructTreeForChildrenSumProperty()));
 
 //
 //        TODO:
@@ -537,8 +540,8 @@ public class DependencyService {
 //        for (int i = 0 ; i < result.size();i++) {
 //            System.out.println(result.get(i));
 //        }
-        final List<Integer> inputSubSet = Arrays.asList(1, 2, 3);
-        subset(inputSubSet);
+//        final List<Integer> inputSubSet = Arrays.asList(1, 2, 3);
+//        subset(inputSubSet);
 
 //        int[] slidingWindow = {1,3,-1,-3,5,3,6,7};
 //        final List<Integer> ints = maxSlidingWindow(slidingWindow, 3);
@@ -551,6 +554,8 @@ public class DependencyService {
 //        List<List<Integer>> result = new ArrayList<>();
 //        find3Numbers(array, array.length, sum, result);
 //        System.out.println(result);
+        int[] coins = new int[] {1,5,10,25};
+        System.out.println(getNumberOfCoins(9, coins));
 
     }
 }

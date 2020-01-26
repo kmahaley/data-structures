@@ -901,4 +901,37 @@ public class Array {
 
     //properties of XOR
     //a^a = 0, a^0 = a,
+
+
+    /**
+     * this is simple approach based on american coins system
+     * find maximum coin number and keep decrementing. This approach fails if coins system is random
+     * [1,3,4].Better approach is use of Dynamic programming
+     *
+     * @param amt 43
+     * @param coins [1,5,10,25]
+     * @return number of coins
+     */
+    public static int getNumberOfCoins(int amt, int[] coins) {
+        int c = 0;
+        while (amt > 0){
+            int minDiff = Integer.MAX_VALUE;
+            int curr = 0;
+            // find maximum coin amount
+            for (int i = 0; i < coins.length; i++) {
+                int diff = amt - coins[i];
+                if (diff < 0) {
+                    continue;
+                }
+                if (diff < minDiff) {
+                    minDiff = diff;
+                    curr = coins[i];
+                }
+            }
+            amt = amt - curr;
+//            System.out.println(amt);
+            c++;
+        }
+        return c;
+    }
 }
