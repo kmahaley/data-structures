@@ -934,4 +934,45 @@ public class Array {
         }
         return c;
     }
+
+    /**
+     * Count number of one in binary representation of a number
+     * x = 3, (3 & 1) => (11 & 01) => 01 => 1
+     * x = 4, (4 & 1) => (100 & 01) => 00 =>1
+     * @param x number
+     * @return count
+     */
+    public static int countOnesInNumber(int x) {
+        int c = 0;
+        while (x > 0) {
+            // bitwise & with last bit of the number
+            int lastBit = x & 1;;
+            c = c + lastBit;
+            x = x >> 1;
+        }
+        return c;
+    }
+    
+/*
+    XOR table:
+    B A Result
+    0 0 0
+    0 1 1
+    1 0 1
+    1 1 0
+
+    Bitwise AND "&" table:
+    B A Result
+    0 0 0
+    0 1 0
+    1 0 0
+    1 1 1
+
+    Bitwise OR "|" table
+    B A Result
+    0 0 0
+    0 1 1
+    1 0 1
+    1 1 1
+    */
 }

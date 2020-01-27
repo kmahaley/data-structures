@@ -17,6 +17,10 @@ public final class StringUtilities {
      * anagram of string means having same character in different permutation
      * @return true if anagram
      * example : apple, pplea
+     * you can use
+     * 1) sort string and equals?
+     * 2) map: add for one string, decrement for other if count < 0 =>false
+     * 3) array of count of characters like below
      */
     public static boolean isAnagram(String str1, String str2) {
 
@@ -68,6 +72,44 @@ public final class StringUtilities {
             }
         }
         return builder.toString();
+    }
+
+    /**
+     * Given a list of strings find string which have at least k occurrences
+     * @param stringList {"i","am","apple","banana","apple","am","am","i","i","i"}
+     * @param k number of occurrences {3}
+     * @return list of string {am, i}
+     */
+    public static List<String> kthMostFrequentString(List<String> stringList, int k) {
+
+        Map<String, Integer> map = new HashMap<>();
+        for (String s : stringList) {
+            if (map.containsKey(s)) {
+                final Integer no = map.get(s);
+                map.put(s, no + 1);
+            } else {
+                map.put(s, 1);
+            }
+        }
+
+        final List<Map.Entry<String, Integer>> entries = new LinkedList<>(map.entrySet());
+        Collections.sort(entries, new ValueComparator());
+
+        List<String> strings = new LinkedList<>();
+        for (Map.Entry<String, Integer> entry : entries) {
+            if (entry.getValue() >= k) {
+                strings.add(entry.getKey());
+            }
+        }
+        return strings;
+    }
+
+    public static class ValueComparator implements Comparator<Map.Entry<String, Integer>> {
+
+        @Override
+        public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {
+            return o2.getValue() - o1.getValue();
+        }
     }
 
     /**

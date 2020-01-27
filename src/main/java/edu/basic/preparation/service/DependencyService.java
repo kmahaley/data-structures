@@ -188,8 +188,10 @@ public class DependencyService {
 //        int[] oneDuplicate = new int[] {1,2,4,5,2};
 //        System.out.println(findMissingElementInDuplicate(oneDuplicate));
 
-        String str = "abbabccccc";
-        System.out.println(compressString(str));
+//        String str = "abbabccccc";
+//        System.out.println(compressString(str));
+        final List<String> asList = Arrays.asList("i","am","apple","banana","apple","am","am","i","i","i");
+        System.out.println(kthMostFrequentString(asList, 2));
 
     }
 
@@ -554,8 +556,13 @@ public class DependencyService {
 //        List<List<Integer>> result = new ArrayList<>();
 //        find3Numbers(array, array.length, sum, result);
 //        System.out.println(result);
-        int[] coins = new int[] {1,5,10,25};
-        System.out.println(getNumberOfCoins(9, coins));
+
+//        System.out.println("********* number of coins in american coin system *******");
+//        int[] coins = new int[] {1,5,10,25};
+//        System.out.println(getNumberOfCoins(9, coins));
+
+//        System.out.println("********* count number of one's *******");
+//        System.out.println(countOnesInNumber(6));
 
     }
 }

@@ -14,6 +14,15 @@ import java.util.stream.Collectors;
  */
 public class MyStack {
 
+    /*
+    MaxStack impl class: maintain linked list for normal stack to add in front.
+    and keep max Linked list to keep maximum of the stack
+    input=[8,10,4,5,10,11,1,0,11]
+    ll=     8-10-4-5-10-11-1-0-11
+    maxll=  8-10-10-11-11
+    modify push and pop to add in max linked list
+    */
+
     /**
      * Stack using priority queue structure
      */

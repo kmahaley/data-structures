@@ -222,6 +222,7 @@ public class BinaryTree {
     }
 
     //is tree BST left < root < right
+    // Runtime complexity = O(n)
     public static boolean isBST(TreeNode current, int min, int max) {
         if (current == null) {
             return true;
