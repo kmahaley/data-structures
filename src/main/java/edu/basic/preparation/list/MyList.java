@@ -110,7 +110,7 @@ public class MyList {
 
         Node current = head;
         Node prev = null;
-        //delete just one node beacuse of second condition in the loop
+        //delete just one node becuse of second condition in the loop
         while (current != null && current.key != value) {
             prev = current;
             current = current.next;
@@ -158,7 +158,7 @@ public class MyList {
      *
      * @param value value
      */
-    public static Node deleteAllOccurencesOfNodeVersionOne(Node head, int value) {
+    public static Node deleteAllOccurrencesOfNodeVersionOne(Node head, int value) {
 
         if (head == null) {
             return head;
@@ -225,7 +225,7 @@ public class MyList {
      *
      * 1-1 => []
      */
-    public static Node deleteAllOccurencesOfNodeVersionThree(Node head, int x) {
+    public static Node deleteAllOccurrencesOfNodeVersionThree(Node head, int x) {
         if (head == null) {
             return head;
         }
@@ -673,42 +673,42 @@ public class MyList {
      */
     public boolean isPalindrome(Node head) {
 
-        if(head == null) {
+        if (head == null) {
             return true;
         }
 
-        int count =1;
+        int count = 1;
         Node curr = head;
 //      Get count
-        while(curr.next != null) {
+        while (curr.next != null) {
             count++;
-            curr= curr.next;
+            curr = curr.next;
         }
 
-        int mid = count/2;
+        int mid = count / 2;
         curr = head;
-        for(int i=0; i<mid; i++){
-            curr= curr.next;
+        for (int i = 0; i < mid; i++) {
+            curr = curr.next;
         }
 //      Check or even or odd
-        if(count%2 != 0){
+        if (count % 2 != 0) {
             curr = curr.next;
         }
 //      save second half in stack
         Stack<Integer> st = new Stack<>();
-        while(curr != null){
+        while (curr != null) {
             st.push(curr.key);
-            curr= curr.next;
+            curr = curr.next;
         }
 
         Node start = head;
 
-        for(int j=0; j<mid; j++) {
+        for (int j = 0; j < mid; j++) {
             int top = st.pop();
-            if(start.key != top) {
+            if (start.key != top) {
                 return false;
             }
-            start= start.next;
+            start = start.next;
         }
 
         return true;

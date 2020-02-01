@@ -18,7 +18,7 @@ import static edu.basic.preparation.string.StringUtilities.swapInteger;
 public class Array {
 
     /**
-     * Find maximum subarray value
+     * Find maximum subarray sum in an array
      *
      * Same solution can be applied to maximum/ minimum sub array sum in an array.
      * also minimum/ maximum product in an array.
@@ -279,123 +279,6 @@ public class Array {
     }
 
     /**
-     * Get movie titles sorted by year and then titles alphabetically.
-     * select only those titles with poster "N/A"
-     *
-     * get movies from http get call and populate. use google gson library to map.
-     *
-     * @param substr
-     * @return
-     */
-    static String[] getMovieTitles(String substr) {
-
-        if (substr == null || substr.length() == 0) {
-            return new String[0];
-        }
-        final List<Movie> movieList = new ArrayList<>();
-        int start = 0, end = 0;
-        do {
-            start++;
-            final PageResponse pageResponse = getData(substr, start);
-            end = pageResponse.total_pages;
-            if(pageResponse.data.size() > 0) {
-                movieList.addAll(pageResponse.data);
-            } else {
-                break;
-            }
-
-        } while (start != end);
-
-        final Iterator<Movie> iterator = movieList.iterator();
-        while (iterator.hasNext()) {
-            Movie movie = iterator.next();
-
-            if (movie.Poster.equals("N/A")){
-                iterator.remove();
-            }
-        }
-
-        movieList.sort(new MovieComparator());
-        //Collections.sort(movieList, new MovieComparator());
-        List<String> titles = new LinkedList<>();
-        movieList.forEach(m -> titles.add(m.Title));
-        final String[] toArray = titles.toArray(new String[titles.size()]);
-        return toArray;
-    }
-
-    /**
-     * Code to read from restful json call
-     */
-    public static PageResponse getData(String subStr, int page) {
-        PageResponse pageResponse = new PageResponse();
-        HttpURLConnection connection = null;
-        String url = "https://jsonmock.hackerrank.com/api/movies/search/?Title="+subStr+"&page="+page;
-
-        try {
-            URL getUrl = new URL(url);
-            connection = (HttpURLConnection) getUrl.openConnection();
-            connection.setRequestMethod("GET");
-            StringBuilder content;
-
-            try (BufferedReader in = new BufferedReader(
-                    new InputStreamReader(connection.getInputStream()))) {
-
-                String line;
-                content = new StringBuilder();
-
-                while ((line = in.readLine()) != null) {
-                    content.append(line);
-                }
-            }
-            final String response = content.toString();
-            Gson gson = new Gson();
-            return gson.fromJson(response, PageResponse.class);
-
-        } catch (MalformedURLException ex) {
-            System.out.println("Url if incorrect "+url);
-        } catch (IOException ex) {
-            System.out.println("Enable to read the response from get call");
-        } finally {
-            connection.disconnect();
-        }
-        return pageResponse;
-    }
-
-    public static class PageResponse {
-        int page;
-        int per_page;
-        int total;
-        int total_pages;
-        List<Movie> data;
-
-        public PageResponse() {
-        }
-
-    }
-
-    public static class Movie {
-        String Title;
-        String Poster;
-        String Type;
-        int Year;
-        String imdbID;
-    }
-
-    public static class MovieComparator implements Comparator<Movie> {
-
-        @Override
-        public int compare(Movie m1, Movie m2) {
-
-            int yearCompare = m1.Year - m2.Year;
-            if (yearCompare != 0) {
-                return yearCompare;
-            } else {
-                return m1.Title.compareTo(m2.Title);
-            }
-        }
-    }
-
-    /**
      * Judge in town. Judge trusts no one and every one trusts judge
      *
      * @param no no of people
@@ -590,47 +473,8 @@ public class Array {
         }
     }
 
-//    public static void subsetArrayVersion2(List<Integer> start) {
-//        if(start.isEmpty()) {
-//            return;
-//        }
-//        List<List<Integer>> results = new ArrayList<>();
-//        int index = 0;
-//        Integer[] mid = new Integer[start.size()];
-//
-//        for (int i = 0; i < start.size(); i++) {
-//
-//            mid[index] = start.get(i);
-//            addInResults(index, mid, results);
-//            helperSubsetArrayVersion2(i+1, start, results, mid);
-//        }
-//        System.out.println(results);
-//    }
-//
-//    private static void helperSubsetArrayVersion2(
-//            int in, List<Integer> start, List<List<Integer>> results, Integer[] mid) {
-//        if(in == start.size()) {
-//            return;
-//        } else {
-//            mid[in] = start.get(in);
-//            addInResults(in, mid, results);
-//            helperSubsetArrayVersion2(in+1, start, results, mid);
-//        }
-//
-//    }
-//
-//
-//    private static void addInResults(int in, Integer[] mid, List<List<Integer>> results) {
-//        List<Integer> finalList = new ArrayList<>();
-//        for (int i = 0; i <= in; i++) {
-//            finalList.add(mid[i]);
-//        }
-//        results.add(finalList);
-//    }
-
-
-
     /**
+     * length of longest substring without repeating characters
      * Input: "abcabcbb"
      * Output: 3
      * Explanation: The answer is "abc", with the length of 3.
@@ -952,7 +796,7 @@ public class Array {
         }
         return c;
     }
-    
+
 /*
     XOR table:
     B A Result

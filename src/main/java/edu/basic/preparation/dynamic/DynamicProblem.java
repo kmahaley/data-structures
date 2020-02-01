@@ -13,6 +13,10 @@ public class DynamicProblem {
     //    you can select coins n number of times total= 11, coins=1,5,6,8
     // https://www.youtube.com/watch?v=Y0ZqKpToTic&list=PLrmLmBdmIlpsHaNTPP_jHHDx_os9ItYXr&index=5
     // 7) longest increasing sub sequence  {3,4,-1,0,6,2,3}
+    // 7 a) Bitonic sequence: increase to a point and then decrease.
+    // build two arrays and get longest increasing sub sequence from left and then from right.
+    // a[pos] = (left[pos] +right[pos] - 1) bz pos is considered twice
+    // https://www.youtube.com/watch?v=TWHytKnOPaQ
     // 8) maximum sum of increasing subsequence {3,4,-1,0,6,2,3}, {4,6,1,3,8,4,6}
     // very similar to find maximum length of increasing subsequence problem and weighted job
     // scheduling
