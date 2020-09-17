@@ -1,0 +1,8 @@
+Java14:
+NullPointerException:
+-   Add vm option -XX:+ShowCodeDetailsInExceptionMessages
+-   Switch expressions
+-   pattern matching for instanceOf
+-   Packaging tool incubator, no java required for client machine. Based on host OS package is generated windows ->
+exe/msi etc
+-   Garbage collection improvements
